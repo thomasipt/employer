@@ -1,0 +1,628 @@
+ERROR - 2024-02-05 05:14:39 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 05:14:39 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-05 05:15:07 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 05:15:07 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-05 05:17:29 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 05:17:29 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-05 05:17:33 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 05:17:33 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-05 05:17:33 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 05:17:33 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-05 05:17:34 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 05:17:34 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-05 05:40:16 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 05:40:16 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-05 06:21:40 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 06:21:40 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-05 06:23:43 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 06:23:43 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-05 06:55:16 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 06:55:16 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-05 07:19:47 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 07:19:47 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-05 07:21:45 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:185
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php(185): mysqli->real_connect('localhost', 'root', '', 'employer', 3306, '', 0)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#5 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/MySQLi/Connection.php:229
+Stack trace:
+#0 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 /home/kubuid/public_html/employer.kubu.id/app/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+#4 /home/kubuid/public_html/employer.kubu.id/app/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', NULL, Array)
+#5 /home/kubuid/public_html/employer.kubu.id/app/Controllers/Home.php(17): App\Models\Paket->getPaket(NULL, Array)
+#6 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(919): App\Controllers\Home->index()
+#7 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 /home/kubuid/public_html/employer.kubu.id/vendor/codeigniter4/framework/system/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/kubuid/public_html/employer.kubu.id/index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-05 07:21:45 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH/Database/BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employer_paket` `pT`
+ORDER BY `id` ASC', [], false)
+ 3 APPPATH/Models/BaseModel.php(202): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH/Models/Paket.php(47): App\Models\BaseModel->getData('employer_paket', null, [...])
+ 5 APPPATH/Controllers/Home.php(17): App\Models\Paket->getPaket(null, [...])
+ 6 SYSTEMPATH/CodeIgniter.php(919): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(494): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH/CodeIgniter.php(353): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH/index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-02-05 07:26:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:26:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:26:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:26:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:27:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:27:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:27:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:27:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:27:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:27:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:27:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:27:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:27:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:27:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:27:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:28:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:28:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:29:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:29:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:29:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:29:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:29:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:29:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:30:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:30:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:30:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:30:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:30:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:31:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:31:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:31:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:31:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:31:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:31:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:31:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:31:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:34:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:34:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:35:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:35:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:35:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:35:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:35:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:35:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:35:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:35:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:36:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:36:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:36:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:36:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:36:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:36:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:36:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:37:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:37:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:37:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:37:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:37:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:38:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:38:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:38:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:38:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:38:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:38:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:38:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:38:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:38:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:39:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:39:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:41:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:41:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:41:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:41:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:41:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:42:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:42:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:42:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:42:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:43:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:43:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:43:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:43:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:43:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:44:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:44:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:48:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:48:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:50:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:50:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:51:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:51:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:51:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:51:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:51:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 07:51:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:33:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:33:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:33:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:33:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:34:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:34:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:34:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:34:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:34:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:34:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:34:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:34:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:34:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:34:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-02-05 08:35:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
