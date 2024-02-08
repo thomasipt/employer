@@ -1,3 +1,4 @@
 app/Config/App.php
 app/Config/Database.php
 writable/
+/vendor

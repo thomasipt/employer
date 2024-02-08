@@ -18,7 +18,9 @@
                 <div class="card-body">
                     <h5 class='mb-3'><?=$namaPaket?> <span class="badge badge-info"><?=$codePaket?></span></h5>
                     <h6><b style='color: <?=$color?>'>Rp. <?=number_format($hargaPaket)?></b> / <small><?=$durasiPaket?> Hari</small></h6>
-                    <p class="text-sm text-muted mb-0 mt-3"><?=$keteranganPaket?></p>
+                    <?php if(!empty($keteranganPaket)){ ?>
+                        <p class="text-sm text-muted mb-0 mt-3"><?=$keteranganPaket?></p>
+                    <?php } ?>
                     <hr />
                     <a href='<?=site_url(mitraController('transaksi/checkout'))?>/<?=$codePaket?>' target='_blank'>
                         <button class="btn btn-success btn-block">
