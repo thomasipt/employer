@@ -1,5 +1,12 @@
 <?php
-    $transaksiModel  =   model('Transaksi');
+    $transaksiModel =   model('Transaksi');
+
+    $mitraToken     =   null;
+    if(isset($data)){
+        if(array_key_exists('mitraToken', $data)){
+            $mitraToken =   $data['mitraToken'];
+        } 
+    }
 ?>
 <div class="modal fade" id="modalUploadBuktiBayar" tabindex="-1" role="dialog" aria-labelledby="modalUploadBuktiBayarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -96,7 +103,10 @@
         serverSide: true,
         ajax: {
             url     :   _getListTransaksi,
-            dataSrc :   'listTransaksi'
+            dataSrc :   'listTransaksi',
+            headers :   {
+                "Authorization" : "Bearer <?=$mitraToken?>"
+            }
         },
         columns: [
             {

@@ -106,6 +106,8 @@
 
             $transaksiRoutes->get('pending', 'Transaksi::pending', $additionalOptions);
             $transaksiRoutes->post('approvement/(:num)', 'Transaksi::approvement/$1', $additionalOptions);
+            $transaksiRoutes->get('mitra', 'Transaksi::mitra', $additionalOptions);
+            $transaksiRoutes->get('mitra/(:num)', 'Transaksi::mitra/$1', $additionalOptions);
         });
     });
 

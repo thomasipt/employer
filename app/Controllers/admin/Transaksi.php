@@ -13,6 +13,7 @@
     #Library
     use App\Libraries\APIRespondFormat;
     use App\Libraries\Tabel;
+    use App\Libraries\MitraJWT;
 
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
@@ -145,6 +146,59 @@
             $arf        =   new APIRespondFormat($status, $message, $data);
             $respond    =   $arf->getRespond();
             return $this->respond($respond);
+        }
+        public function mitra($idMitra = null){
+            try{
+                $mitra      =   new Mitra();
+                $mitraExist =   !empty($idMitra);
+
+                if($mitraExist){
+                    $detailMitra    =    $mitra->getMitra($idMitra);
+                    if(empty($detailMitra)){
+                        throw new Exception('Tidak ditemukan mitra dengan pengenal '.$idMitra.'!');
+                    }
+                }
+
+                $data   =   [
+                    'view'      =>  ($mitraExist)? mitraView('transaksi/index') : adminView('transaksi/mitra'),
+                    'pageTitle' =>  'Transaksi Mitra',
+                    'pageDesc'  =>  ($mitraExist)? $detailMitra['nama'] : 'List Transaksi Mitra'
+                ];
+
+                if(!$mitraExist){
+                    $options    =   [
+                        'select'    =>  'id, nama'
+                    ];
+                    $listMitra  =   $mitra->getMitra(null, $options);
+
+                    $data['data']   =   ['listMitra' => $listMitra];
+                }else{
+                    $mitraJWT       =   new MitraJWT();
+
+                    $idMitra        =   $detailMitra['id'];
+
+                    $mitraPayload   =   [
+                        'iat'       =>  time(),
+                        'iss'       =>  base_url(),
+                        'mitra'     =>  [
+                            'id'    =>  $idMitra
+                        ]
+                    ];
+                    $mitraToken     =   $mitraJWT->encode($mitraPayload);
+
+                    $data['data']   =   [
+                        'mitraToken'    =>  $mitraToken
+                    ];
+                }
+
+                echo view(adminView('index'), $data);
+            }catch(Exception $e){
+                $data   =   [
+                    'judul'     =>  'Terjadi Kesalahan',
+                    'deskripsi' =>  $e->getMessage()
+                ];
+                echo view(adminView('error'), $data);
+            }
         }
     }
 ?>
