@@ -7,7 +7,7 @@
     $telepon    =   $mitra['telepon'];
     $createdAt  =   $mitra['createdAt'];
 ?>
-<div class="col-lg-2">
+<div class="col-lg-3">
     <div class="card">
         <div class="card-body text-center">
             <img src='<?=base_url(uploadGambarMitra('compress'))?>/<?=$foto?>' class='img-circle d-block m-auto' alt='<?=$nama?>'

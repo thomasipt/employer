@@ -182,13 +182,33 @@
             helper('CustomDate');
 
             $mitra                  =   new MitraModel();
-            $listMitraNeedApprove   =   $mitra->getMitraNeedApprove();
+            $request                =   request();
+
+            $mitraQueryString       =   $request->getGet('mitra');
+            $mitraQueryString       =   trim($mitraQueryString);
+            
+            $listMitraNeedApprove   =   [];
+            if(!empty($mitraQueryString)){
+                $options                =   [
+                    'likeGroup' =>  [
+                        'operator'  =>  $mitra->likeGroupOperator_or,
+                        'like'      =>  [
+                            ['nama'     =>  $mitraQueryString],
+                            ['alamat'   =>  $mitraQueryString],
+                            ['email'    =>  $mitraQueryString],
+                            ['telepon'  =>  $mitraQueryString]
+                        ]
+                    ]
+                ];
+                $listMitraNeedApprove   =   $mitra->getMitraNeedApprove($options);
+            }
 
             $data   =   [
                 'view'      =>  adminView('mitra/need-approve'),
                 'pageTitle' =>  'Approvement Mitra',
                 'pageDesc'  =>  'Mitra yang perlu Approvement',
                 'data'      =>  [
+                    'mitraSearch'           =>  $mitraQueryString,
                     'mitraModel'            =>  $mitra,
                     'listMitraNeedApprove'  =>  $listMitraNeedApprove
                 ]
