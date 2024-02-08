@@ -8,7 +8,7 @@ class App extends BaseConfig
 {
     public $appName         =   'Employer Kubu.id';
     public $appDescription  =   'Website Lowongan Pekerjaan';
-    
+
     public $appNickName     =   'employer';
     public $emailAccountUsername; #email address
     public $emailAccountPassword; #sandi aplikasi (bukan sandi email)
@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      *    http://example.com/
      */
-    public string $baseURL = 'http://localhost/employer/';
+    public string $baseURL = 'https://employer.kubu.id/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
