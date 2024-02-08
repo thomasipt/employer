@@ -390,5 +390,21 @@
                 return view(mitraView('error'), $data);
             }
         }
+        public function pilihanPaket(){
+            $paket      =   new Paket();
+
+            $listPaket  =   $paket->getPaket();
+
+            $data   =   [
+                'view'      =>  mitraView('transaksi/pilihan-paket'),
+                'pageTitle' =>  'Transaksi',
+                'pageDesc'  =>  'Pilihan Paket',
+                'data'  =>  [
+                    'paketModel'    =>  $paket,
+                    'listPaket'     =>  $listPaket
+                ]
+            ];
+            echo view(mitraView('index'), $data);
+        }
     }
 ?>

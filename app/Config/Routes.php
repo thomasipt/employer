@@ -174,6 +174,7 @@
             $transaksiRoutes->post('checkout/(:alpha)', 'Transaksi::processCheckout/$1', $additionalOptions);
             $transaksiRoutes->post('upload-bukti-bayar', 'Transaksi::uploadBuktiBayar', $additionalOptions);
             $transaksiRoutes->get('invoice/(:num)', 'Transaksi::invoice/$1', $additionalOptions);
+            $transaksiRoutes->get('pilihan-paket', 'Transaksi::pilihanPaket/$1', $additionalOptions);
         });
     });
 
