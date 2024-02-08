@@ -10,11 +10,17 @@
         <form>
             <label for="mitra">Cari Mitra</label>
             <input type="text" class="text form-control" name='mitra' id='mitra'
-                placeholder='Cari mitra dengan nama, alamat, nomor telepon atau email yang berkaitan dengan mitra tersebut' />
+                placeholder='Cari mitra dengan nama, alamat, nomor telepon atau email yang berkaitan dengan mitra tersebut'
+                value='<?=$mitraSearch?>' />
         </form>
     </div>
 </div>
-<hr />
+<br />
+<?php if(!empty($mitraSearch) && $exist){ ?>
+    <h6 class='mb-3'>
+        Ditemukan <b><?=number_format(count($listMitraNeedApprove))?> Mitra</b> dengan pencarian <b>"<?=$mitraSearch?>"</b>
+    </h6>
+<?php } ?>
 <div class="row">
     <?php if(!empty($mitraSearch)){ ?>
         <?php if($exist){ ?>
@@ -28,13 +34,15 @@
                 <?=view(adminComponents('mitra/mitra-card'), $dataMitraCard)?>
             <?php } ?>
         <?php }else{ ?>
-            <div class="col">
+            <div class="col mt-5">
                 <div class="d-flex justify-content-center align-middle">
                     <div class="text-center">
                         <img src="<?=base_url(assetsFolder('img/empty.png'))?>" alt="Empty" class='d-block m-auto' />
                         <br />
-                        <h5>Approvement Mitra</h5>
-                        <p class="text-sm text-muted">Belum ada mitra yang butuh approvement</p>
+                        <h5><?=(!empty($mitraSearch))? 'Hasil Pencarian' : 'Approvement Mitra'?></h5>
+                        <p class="text-sm text-muted">
+                            <?=(!empty($mitraSearch))? 'Tidak ditemukan mitra dengan pencarian "'.$mitraSearch.'"' : 'Belum ada mitra yang butuh approvement'?>
+                        </p>
                         <br />
                         <a href="<?=site_url(adminController())?>">
                             <button class="btn btn-default">Home</button>
