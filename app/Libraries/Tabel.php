@@ -13,7 +13,7 @@
         public $keranjang           =   'employer_keranjang'; 
         public $provinsi            =   'employer_provinsi'; 
         public $kota                =   'employer_kota';
-        public $kategori            =   'employer_kategori_loker'; 
-        public $jenis               =   'employer_jenis_loker';
+        public $kategori            =   'arif_sektor'; 
+        public $jenis               =   'arif_job_type';
     }
 ?>

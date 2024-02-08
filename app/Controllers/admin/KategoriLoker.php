@@ -39,7 +39,10 @@
 
         private function kategoriLokerChecking($idKategoriLoker){
             $kategoriLoker          =   new KategoriLokerModel();
-            $detailKategoriLoker    =   $kategoriLoker->getKategoriLoker($idKategoriLoker);
+            $options                =   [
+                'select'    =>  'sektor_id as id, name as nama'
+            ];
+            $detailKategoriLoker    =   $kategoriLoker->getKategoriLoker($idKategoriLoker, $options);
             if(empty($detailKategoriLoker)){
                 throw new Exception('Tidak ditemukan kategori loker dengan pengenal '.$idKategoriLoker.'!');
             }
@@ -70,6 +73,7 @@
             $search     =   $request->getGet('search');
 
             $options    =   [
+                'select'            =>  'sektor_id as id, name as nama',
                 'limit'             =>  $length,
                 'limitStartFrom'    =>  $start
             ];
@@ -80,7 +84,7 @@
                         $searchValue    =   $search['value'];
                         if(!empty($searchValue)){
                             $options['like']    =   [
-                                'column'    =>  ['nama', 'keterangan'],
+                                'column'    =>  ['name'],
                                 'value'     =>  $searchValue
                             ];
                         }
@@ -90,23 +94,18 @@
 
             $listKategoriLoker     =   $kategoriLoker->getKategoriLoker(null, $options);
             if(count($listKategoriLoker) >= 1){
-                $administrator  =   new Administrator();
 
                 foreach($listKategoriLoker as $indexData => $kategoriLokerItem){
                     $nomorUrut  =   $start + $indexData + 1;
-                    $createdBy  =   $kategoriLokerItem['createdBy'];
-
-                    $detailAdministrator    =   $administrator->getAdministrator($createdBy, ['select' => 'id, nama']);
 
                     $listKategoriLoker[$indexData]['nomorUrut']       =   $nomorUrut;
-                    $listKategoriLoker[$indexData]['administrator']   =   $detailAdministrator;
                 }
             }
 
             #Record Total
             $recordsTotalOptions    =   $options;
             $recordsTotalOptions['singleRow']   =   true;
-            $recordsTotalOptions['select']      =   'count(id) as jumlahData';
+            $recordsTotalOptions['select']      =   'count('.$kategoriLoker->tableId.') as jumlahData';
             unset($recordsTotalOptions['limit']);
             unset($recordsTotalOptions['limitStartFrom']);
 
@@ -167,16 +166,10 @@
     
                 if($this->validate($validationRules, $validationMessage)){
                     $nama       =   $request->getPost('nama');
-                    $keterangan =   $request->getPost('keterangan');
 
                     $dataKategoriLoker  =   [
-                        'nama'          =>  $nama,
-                        'createdBy'     =>  $this->loggedInIDAdministrator
+                        'name'  =>  $nama
                     ];
-
-                    if(!empty($keterangan)){
-                        $dataKategoriLoker['keterangan']   =   $keterangan;
-                    }
 
                     $saveKategoriLoker  =   $kategoriLokerModel->saveKategoriLoker($idKategoriLoker, $dataKategoriLoker);
 

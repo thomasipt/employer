@@ -10,12 +10,14 @@
     use App\Libraries\Tabel;
 
     class KategoriLoker extends BaseModel{
+        public $tableId     =   'sektor_id';
+        
         public function getKategoriLoker($id = null, $options = null){
             $d  =   new Database();
             $t  =   new Tabel();
 
             $this->connectedDatabase    =   $d->default;
-            $kategoriLoker              =   $this->getData($t->kategori, $id, $options);
+            $kategoriLoker              =   $this->getData($t->kategori, $id, $options, $this->tableId);
 
             return $kategoriLoker;
         }
@@ -26,7 +28,7 @@
             
             $kategoriLokerBuilder   =   $db->table($tabel->kategori);
             if(!empty($id)){
-                $kategoriLokerBuilder->where('id', $id);
+                $kategoriLokerBuilder->where($this->tableId, $id);
                 $saveKategoriLoker  =   $kategoriLokerBuilder->update($dataKategoriLoker);
             }else{                
                 $saveKategoriLoker  =   $kategoriLokerBuilder->insert($dataKategoriLoker);
@@ -42,7 +44,7 @@
             
             $kategoriLokerBuilder  =   $db->table($tabel->kategori);
 
-            $kategoriLokerBuilder->where('id', $id);
+            $kategoriLokerBuilder->where($this->tableId, $id);
             $deleteKategoriLoker   =   $kategoriLokerBuilder->delete();
 
             return $deleteKategoriLoker;

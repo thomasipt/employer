@@ -35,11 +35,6 @@
                                     <input type='text' class='form-control' placeholder='Misal: Kontrak, Purna Waktu, dsb'
                                         name='nama' id='nama' value='<?=(!empty($dJL))? $dJL['nama'] : '' ?>' required />
                                 </div>
-                                <div class="form-group">
-                                    <label for="benefit">Keterangan (Opsional)</label>
-                                    <textarea class='form-control' placeholder='Opsional, informasi lebih lanjut tentang jenis pekerjaan'
-                                        name='keterangan' id='keterangan'><?=(!empty($dJL))? $dJL['keterangan'] : '' ?></textarea>
-                                </div>
                                 <hr class='mb-4' />
                                 <button class="btn btn-success" type='submit' id='btnSubmit'>Simpan <?=($doesUpdate)? 'Perubahan' : ''?></button>
                                 <a href="<?=site_url(adminController('jenis-loker'))?>">
@@ -80,9 +75,5 @@
                 location.href   =   `<?=site_url(adminController('jenis-loker'))?>`;
             }
         })
-    });
-
-    $('.hirarki').on('change', function(){
-        hirarki(this);
     });
 </script>

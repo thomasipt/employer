@@ -141,10 +141,26 @@
                 $kategori       =   new KategoriLoker();
                 $jenis          =   new JenisLoker();
 
+                $kategoriOptions    =   [
+                    'select'    =>  'sektor_id as id, name as nama',
+                    'order_by'  =>  [
+                        'column'        =>  'nama',
+                        'orientation'   =>  'asc'
+                    ]  
+                ];
+
+                $jenisOptions   =   [
+                    'select'    =>  'id, job_type_name as nama',
+                    'order_by'  =>  [
+                        'column'        =>  'nama',
+                        'orientation'   =>  'asc'
+                    ]  
+                ];
+
                 $detailMitra    =   $mitra->getMitra($this->loggedInIDMitra);
                 $listProvinsi   =   $provinsi->getProvinsi(null, ['select' => 'id, nama']);
-                $listKategori   =   $kategori->getKategoriLoker(null, ['select' => 'id, nama']);
-                $listJenis      =   $jenis->getJenisLoker(null, ['select' => 'id, nama']);
+                $listKategori   =   $kategori->getKategoriLoker(null, $kategoriOptions);
+                $listJenis      =   $jenis->getJenisLoker(null, $jenisOptions);
 
                 $data   =   [
                     'pageTitle' =>  ($doesUpdate)? 'Update Loker' : 'Loker Baru',

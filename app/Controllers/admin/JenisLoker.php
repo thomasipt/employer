@@ -39,7 +39,7 @@
 
         private function jenisLokerChecking($idJenisLoker){
             $jenisLoker         =   new JenisLokerModel();
-            $detailJenisLoker   =   $jenisLoker->getJenisLoker($idJenisLoker);
+            $detailJenisLoker   =   $jenisLoker->getJenisLoker($idJenisLoker, ['select' => 'id, job_type_name as nama']);
             if(empty($detailJenisLoker)){
                 throw new Exception('Tidak ditemukan jenis loker dengan pengenal '.$idJenisLoker.'!');
             }
@@ -70,6 +70,7 @@
             $search     =   $request->getGet('search');
 
             $options    =   [
+                'select'    =>  'id, job_type_name as nama',
                 'limit'             =>  $length,
                 'limitStartFrom'    =>  $start
             ];
@@ -80,7 +81,7 @@
                         $searchValue    =   $search['value'];
                         if(!empty($searchValue)){
                             $options['like']    =   [
-                                'column'    =>  ['nama', 'keterangan'],
+                                'column'    =>  ['job_type_name'],
                                 'value'     =>  $searchValue
                             ];
                         }
@@ -90,16 +91,10 @@
 
             $listJenisLoker     =   $jenisLoker->getJenisLoker(null, $options);
             if(count($listJenisLoker) >= 1){
-                $administrator  =   new Administrator();
-
                 foreach($listJenisLoker as $indexData => $jenisLokerItem){
                     $nomorUrut  =   $start + $indexData + 1;
-                    $createdBy  =   $jenisLokerItem['createdBy'];
-
-                    $detailAdministrator    =   $administrator->getAdministrator($createdBy, ['select' => 'id, nama']);
 
                     $listJenisLoker[$indexData]['nomorUrut']       =   $nomorUrut;
-                    $listJenisLoker[$indexData]['administrator']   =   $detailAdministrator;
                 }
             }
 
@@ -167,16 +162,10 @@
     
                 if($this->validate($validationRules, $validationMessage)){
                     $nama       =   $request->getPost('nama');
-                    $keterangan =   $request->getPost('keterangan');
 
                     $dataJenisLoker  =   [
-                        'nama'          =>  $nama,
-                        'createdBy'     =>  $this->loggedInIDAdministrator
+                        'job_type_name' =>  $nama
                     ];
-
-                    if(!empty($keterangan)){
-                        $dataJenisLoker['keterangan']   =   $keterangan;
-                    }
 
                     $saveJenisLoker     =   $jenisLokerModel->saveJenisLoker($idJenisLoker, $dataJenisLoker);
 

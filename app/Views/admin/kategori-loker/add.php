@@ -34,11 +34,6 @@
                                     <input type='text' class='form-control' placeholder='Misal: Sekretaris, Rektor Universitas, Programmer, dsb'
                                         name='nama' id='nama' value='<?=(!empty($dKL))? $dKL['nama'] : '' ?>' required />
                                 </div>
-                                <div class="form-group">
-                                    <label for="benefit">Keterangan (Opsional)</label>
-                                    <textarea class='form-control' placeholder='Opsional, informasi lebih lanjut tentang kategori pekerjaan'
-                                        name='keterangan' id='keterangan'><?=(!empty($dKL))? $dKL['keterangan'] : '' ?></textarea>
-                                </div>
                                 <hr class='mb-4' />
                                 <button class="btn btn-success" type='submit' id='btnSubmit'>Simpan <?=($doesUpdate)? 'Perubahan' : ''?></button>
                                 <a href="<?=site_url(adminController('kategori-loker'))?>">

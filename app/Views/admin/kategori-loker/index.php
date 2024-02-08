@@ -23,8 +23,7 @@
                             <tr>
                                 <th class='text-center' width='75'>No.</th>
                                 <th>Nama</th>
-                                <th>Keterangan</th>
-                                <th class='text-center'>Action</th>
+                                <th class='text-center' style='width: 100px;'>Action</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -66,26 +65,8 @@
                 data: null,
                 render: function(data, type, row, meta) {
                     let _judul      =   data.nama;
-                    let _createdAt  =   data.createdAt;   
 
-                    let _administrator      =   data.administrator;
-                    let _namaAdministrator  =   _administrator.nama;
-
-                    return `<h6 class='mb-1'>${_judul}</h6>
-                            <span class='text-sm'>Oleh <b>${_namaAdministrator}</b> pada <b>${convertDateTime(_createdAt)}</b></span>`;
-                }
-            },
-            {
-                data: null,
-                render: function(data, type, row, meta) {
-                    let _keterangan =   data.keterangan;
-
-                    let _keteranganHTML =   `<i class='text-muted'>Tanpa Keterangan</i>`;
-                    if(_keterangan != null){
-                        _keteranganHTML =   _keterangan;
-                    }
-
-                    return `${_keteranganHTML}`;
+                    return `<h6 class='mb-1'>${_judul}</h6>`;
                 }
             },
             {
