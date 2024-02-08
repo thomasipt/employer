@@ -54,7 +54,7 @@ class AJAX extends BaseController{
             $kota       =   new Kota();
 
             $kotaOptions    =   [
-                'select'    =>  'id, nama',
+                'select'    =>  'kode as id, nama',
                 'order_by'  =>  [
                     'column'        =>  'nama',
                     'orientation'   =>  'asc'

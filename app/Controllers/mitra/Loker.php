@@ -157,8 +157,16 @@
                     ]  
                 ];
 
+                $provinsiOptions    =   [
+                    'select'    =>  'id, nama',
+                    'order_by'  =>  [
+                        'column'        =>  'nama',
+                        'orientation'   =>  'asc'
+                    ]
+                ];
+
                 $detailMitra    =   $mitra->getMitra($this->loggedInIDMitra);
-                $listProvinsi   =   $provinsi->getProvinsi(null, ['select' => 'id, nama']);
+                $listProvinsi   =   $provinsi->getProvinsi(null, $provinsiOptions);
                 $listKategori   =   $kategori->getKategoriLoker(null, $kategoriOptions);
                 $listJenis      =   $jenis->getJenisLoker(null, $jenisOptions);
 

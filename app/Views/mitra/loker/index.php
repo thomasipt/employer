@@ -65,13 +65,7 @@
                 data: null,
                 render: function(data, type, row, meta) {
                     let _judul      =   data.judul;
-                    let _createdAt  =   data.createdAt;   
-                    let _keterangan =   data.keterangan;
-
-                    let _keteranganHTML =   `<i class='text-muted'>Tanpa Keterangan</i>`;
-                    if(_keterangan != null){
-                        _keteranganHTML =   _keterangan;
-                    }
+                    let _createdAt  =   data.createdAt; 
 
                     let _batasAwalPendaftaran   =   data.batasAwalPendaftaran;
                     let _batasAkhirPendaftaran  =   data.batasAkhirPendaftaran;
@@ -80,7 +74,6 @@
                     let _namaMitra  =   _mitra.nama;
 
                     return `<h6 class='mb-1'>${_judul}</h6>
-                            <p class='text-sm text-muted mb-2' style='word-break: break-all !important;'>${_keteranganHTML}</p>
                             <p class='text-sm mb-1'>Oleh <b>${_namaMitra}</b> pada <b>${convertDateTime(_createdAt)}</b></p>
                             <p class='text-sm mb-2'>
                                 Periode <span class='badge badge-success'>${convertDateTime(_batasAwalPendaftaran)}</span> s/d 

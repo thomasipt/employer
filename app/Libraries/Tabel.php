@@ -11,8 +11,8 @@
         public $transaksi           =   'employer_transaksi';
         public $transaksiItem       =   'employer_transaksi_item';
         public $keranjang           =   'employer_keranjang'; 
-        public $provinsi            =   'employer_provinsi'; 
-        public $kota                =   'employer_kota';
+        public $provinsi            =   'arif_province'; 
+        public $kota                =   'arif_city';
         public $kategori            =   'arif_sektor'; 
         public $jenis               =   'arif_job_type';
     }

@@ -15,14 +15,14 @@
             $t  =   new Tabel();
 
             $this->connectedDatabase    =   $d->default;
-            $kota                       =   $this->getData($t->kota, $id, $options);
+            $kota                       =   $this->getData($t->kota, $id, $options, 'kode');
 
             return $kota;
         }
         public function getKotaPerProvinsi($idProvinsi, $kotaOptions = null){
             $options            =   [
                 'where' =>  [
-                    'idProvinsi'    =>  $idProvinsi
+                    'province'    =>  $idProvinsi
                 ]
             ];
 
