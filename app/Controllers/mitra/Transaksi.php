@@ -57,8 +57,6 @@
             return $detailPaket;
         }
         public function listTransaksi(){
-            $transaksi  =   new TransaksiModel();
-
             $data   =   [
                 'view'      =>  mitraView('transaksi/index'),
                 'pageTitle' =>  'Transaksi',

@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col">
                         <h5 class='mb-0'>History Transaksi</h5>
-                        <span class="text-sm text-muted">Hitory Transaksi Anda</span>
+                        <span class="text-sm text-muted">History Transaksi Anda</span>
                     </div>
                     <div class="col text-right">
                         
