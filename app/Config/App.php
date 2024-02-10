@@ -6,7 +6,7 @@ use CodeIgniter\Config\BaseConfig;
 
 class App extends BaseConfig
 {
-    public $appName         =   'Employer Kubu ID';
+    public $appName         =   'Employer Kubu.id';
     public $appDescription  =   'Website Lowongan Pekerjaan';
 
     public $appNickName     =   'employer';
