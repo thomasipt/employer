@@ -103,12 +103,17 @@
 
                 foreach($listLoker as $indexData => $lokerItem){
                     $nomorUrut  =   $start + $indexData + 1;
+                    $idLoker    =   $lokerItem['id'];
                     $createdBy  =   $lokerItem['createdBy'];
 
                     $detailMitra    =   $mitra->getMitra($createdBy, ['select' => 'id, nama']);
+                    $jumlahApplier  =   $loker->getJumlahApply($idLoker);
 
                     $listLoker[$indexData]['nomorUrut']     =   $nomorUrut;
                     $listLoker[$indexData]['mitra']         =   $detailMitra;
+                    $listLoker[$indexData]['more']          =   [
+                        'jumlahPelamar' =>  $jumlahApplier
+                    ];
                 }
             }
 

@@ -32,6 +32,7 @@
                                 <th class='text-center' width='75'>No.</th>
                                 <th style='max-width: 600px;'>Loker</th>
                                 <th>PIC</th>
+                                <th>Pelamar</th>
                                 <th class='text-center'>Act</th>
                             </tr>
                         </thead>
@@ -43,6 +44,7 @@
     </div>
 </div>
 <script src='<?= base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.js')) ?>'></script>
+<script src='<?= base_url(assetsFolder('plugins/numeral/numeral.js')) ?>'></script>
 <link rel="stylesheet" href="<?=base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.css'))?>" />
 
 <script src='<?=base_url(assetsFolder('custom/js/custom-alert.js'))?>'></script>
@@ -102,6 +104,21 @@
                             <p class='text-sm text-muted mb-1'>
                                 <a href='mailto:${_emailPIC}'>${_emailPIC}</a>
                             </p>`;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row, meta) {
+                    let _id             =   data.id;
+                    let _more           =   data.more;
+                    let _jumlahPelamar  =   _more.jumlahPelamar;
+
+                    return `<a href='<?=site_url(mitraController('loker/applier'))?>/${_id}'>
+                                <div class='text-left cp'>
+                                    <span class='far fa-user mr-1 text-muted'></span> 
+                                    <b class='text-success'>${numeral(_jumlahPelamar).format('0,0')}</b>
+                                </div>
+                            </a>`;
                 }
             },
             {
