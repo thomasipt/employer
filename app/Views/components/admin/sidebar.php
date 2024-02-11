@@ -151,6 +151,23 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item <?=($currentController == 'loker')? 'menu-is-opening menu-open' : ''?>">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-circle"></i>
+                        <p>
+                            Lowongan Pekerjaan
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('loker/mitra'))?>/" class="nav-link text-sm">
+                                <i class="fa fa-layer-group nav-icon text-info"></i>
+                                <p>Lowongan Kerja Mitra</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="<?=site_url(adminController('log'))?>" class="nav-link">
                         <i class="nav-icon fas fa-history"></i>

@@ -1,3 +1,11 @@
+<?php
+    $mitraToken     =   null;
+    if(isset($data)){
+        if(array_key_exists('mitraToken', $data)){
+            $mitraToken =   $data['mitraToken'];
+        } 
+    }
+?>
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -52,7 +60,10 @@
         serverSide: true,
         ajax: {
             url     :   _getListLoker,
-            dataSrc :   'listLoker'
+            dataSrc :   'listLoker',
+            headers :   {
+                "Authorization" : "Bearer <?=$mitraToken?>"
+            }
         },
         columns: [
             {

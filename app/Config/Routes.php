@@ -109,6 +109,17 @@
             $transaksiRoutes->get('mitra', 'Transaksi::mitra', $additionalOptions);
             $transaksiRoutes->get('mitra/(:num)', 'Transaksi::mitra/$1', $additionalOptions);
         });
+
+        #Loker
+        $adminRoutes->group('loker', static function($lokerRoutes){
+            $additionalOptions  =   [
+                'namespace' =>  'App\Controllers\admin',
+                'filter'    =>  'auth-filter'
+            ];
+
+            $lokerRoutes->get('mitra', 'Loker::mitra', $additionalOptions);
+            $lokerRoutes->get('mitra/(:num)', 'Loker::mitra/$1', $additionalOptions);
+        });
     });
 
     #Website
