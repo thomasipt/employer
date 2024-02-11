@@ -36,8 +36,19 @@
             return ($saveLoker)? $id : false;
         }
         public function getJumlahApply($idLoker){
-            //TODO belum ada tabel yang menyimpan data applier, sehingga data yang dihasilkan masih data mati
-            return ($idLoker % 2 == 0)? 3 : 0;
+            $lokerApply     =   new LokerApply();
+
+            $options            =   [
+                'singleRow' =>  true,
+                'select'    =>  'count('.$lokerApply->tableId.') as jumlahData',
+                'where' =>  [
+                    'loker' =>  $idLoker
+                ]
+            ];
+            $getJumlahApply     =   $lokerApply->getLokerApply(null, $options);
+            $jumlahApply        =   !empty($getJumlahApply)? $getJumlahApply['jumlahData'] : null;
+
+            return $jumlahApply;
         }
         public function deleteLoker($idLoker){
             $database   =   new Database();
