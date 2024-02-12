@@ -12,6 +12,8 @@
     use App\Models\Provinsi;
     use App\Models\Paket;
     use App\Models\MitraLog;
+    use App\Models\LokerApply;
+    use App\Models\Kandidat;
     
     #Library
     use App\Libraries\APIRespondFormat;
@@ -341,6 +343,57 @@
             $arf        =   new APIRespondFormat($status, $message, $data);
             $respond    =   $arf->getRespond();
             return $this->respond($respond);
+        }
+        public function applier($idLoker){
+            try{
+                $detailLoker    =   $this->lokerChecking($idLoker);
+
+                $judulLoker     =   $detailLoker['judul'];
+                $mitraLoker     =   $detailLoker['createdBy'];
+
+                $lokerApply     =   new LokerApply();
+                $kandidat       =   new Kandidat();
+                $mitra          =   new Mitra();
+
+                $listApplierOpptions    =   [
+                    'where' =>  [
+                        'loker' =>  $idLoker
+                    ]
+                ];
+                $listApplier    =   $lokerApply->getLokerApply(null, $listApplierOpptions);
+
+                $detailMitra    =   $mitra->getMitra($mitraLoker);
+
+                foreach($listApplier as $index => $applier){
+                    $applierKandidat    =   $applier['kandidat'];
+
+                    $kandidatOptions    =   [
+                        'select'    =>  'id, foto, nama, tanggalLahir, alamat, email, telepon'
+                    ];
+                    $detailApplier      =   $kandidat->getKandidat($applierKandidat, $kandidatOptions);
+                    $listApplier[$index]['kandidat']    =   $detailApplier;
+                }
+
+                $data   =   [
+                    'pageTitle' =>  'Pelamar Pekerjaan',
+                    'pageDesc'  =>  $judulLoker,
+                    'view'      =>  mitraView('loker/applier'),
+                    'data'  =>  [
+                        'detailLoker'   =>  $detailLoker,
+                        'detailMitra'   =>  $detailMitra,
+                        'listApplier'   =>  $listApplier
+                    ]
+                ];
+
+                echo view(mitraView('index'), $data);
+            }catch(Exception $e){
+                $data   =   [
+                    'judul'     =>  'Terjadi Kesalahan',
+                    'deskripsi' =>  $e->getMessage()
+                ];
+
+                echo view(mitraView('error'), $data);
+            }
         }
     }
 ?>

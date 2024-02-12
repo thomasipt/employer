@@ -172,6 +172,8 @@
             $lokerRoutes->post('save', 'Loker::saveLoker', $additionalOptions);
             $lokerRoutes->post('save/(:num)', 'Loker::saveLoker/$1', $additionalOptions);
             $lokerRoutes->post('delete/(:num)', 'Loker::deleteLoker/$1', $additionalOptions);
+
+            $lokerRoutes->get('applier/(:num)', 'Loker::applier/$1', $additionalOptions);
         });
 
         #transaksi

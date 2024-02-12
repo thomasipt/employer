@@ -16,5 +16,6 @@
         public $kategori            =   'arif_sektor'; 
         public $jenis               =   'arif_job_type';
         public $lokerApply          =   'loker_apply';
+        public $kandidat            =   'kandidat';
     }
 ?>
