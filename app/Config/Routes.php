@@ -124,8 +124,12 @@
 
     #Website
     $routes->group(websiteController(), static function($websiteRoutes){
-        $websiteRoutes->get('syarat-dan-ketentuan', 'Home::sk', ['namespace' =>  'App\Controllers\website']);
-        $websiteRoutes->get('kebijakan-privasi', 'Home::kebijakanPrivasi', ['namespace' =>  'App\Controllers\website']);
+        $options    =   ['namespace' =>  'App\Controllers\website'];
+
+        $websiteRoutes->get('syarat-dan-ketentuan', 'Home::sk', $options);
+        $websiteRoutes->get('kebijakan-privasi', 'Home::kebijakanPrivasi', $options);
+        $websiteRoutes->get('registrasi', 'Home::registrasi', $options);
+        $websiteRoutes->post('process-registrasi', 'Home::prosesRegistrasi', $options);
     });
 
     #Mitra Dashboard
