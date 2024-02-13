@@ -146,7 +146,7 @@
     </head>
     <body>
         <div class="container">
-            <table class="table-borderless m-0 p-0 w-100" border='1'>
+            <table class="table-borderless m-0 p-0 w-100">
                 <tr>
                     <td id='leftSide' class='vat' style='padding-right:10px;'>
                         <img src="<?=$fotoKandidat?>" alt="<?=$namaKandidat?>"
