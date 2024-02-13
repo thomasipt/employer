@@ -68,6 +68,10 @@
             50%{opacity: .5;}
             100%{opacity: 1;}
         }
+        .img-icon{
+            width: 20px;
+            height: 20px;
+        }
     </style>
     <script language='Javascript'>
         async function copy(stringToCopy){

@@ -17,5 +17,8 @@
         public $jenis               =   'arif_job_type';
         public $lokerApply          =   'loker_apply';
         public $kandidat            =   'kandidat';
+        public $education           =   'arif_education';
+        public $skill               =   'arif_skill';
+        public $experience          =   'arif_experience';
     }
 ?>

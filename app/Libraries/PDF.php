@@ -9,7 +9,7 @@
 
         public function __construct($codeIgniter){
             parent::__construct();
-            $this->fileName     =   'Invoice Belanja.pdf';
+            $this->fileName     =   'PDF.pdf';
             $this->ci           =   $codeIgniter;
         }
         public function loadView($viewPath, $viewData = []){
