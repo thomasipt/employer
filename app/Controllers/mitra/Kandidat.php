@@ -9,6 +9,7 @@
     
     #Library
     use App\Libraries\PDF;
+    use App\Libraries\Tabel;
 
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
@@ -34,10 +35,10 @@
             }
         }
 
-        private function kandidatChecking($idKandidat){
+        private function kandidatChecking($idKandidat, $options = null){
             $kandidat       =   new KandidatModel();
 
-            $detailKandidat =   $kandidat->getKandidat($idKandidat);
+            $detailKandidat =   $kandidat->getKandidat($idKandidat, $options);
             if(empty($detailKandidat)){
                 throw new Exception('Kandidat dengan pengenal '.$idKandidat.' tidak ditemukan!');
             }
@@ -47,13 +48,22 @@
 
         public function cv($idKandidat){
             try{
-                $detailKandidat =   $this->kandidatChecking($idKandidat);
+                $tabel          =   new Tabel();
+
+                $options        =   [
+                    'select'    =>  'pT.*, kota.nama as namaKota',
+                    'join'      =>  [
+                        ['table' => $tabel->kota.' kota', 'condition' => 'kota.kode=pT.kota']
+                    ]
+                ];
+                $detailKandidat =   $this->kandidatChecking($idKandidat, $options);
                 $idKandidat     =   $detailKandidat['id'];
                 $namaKandidat   =   $detailKandidat['nama'];
                 
                 $pdf            =   new PDF($this);
                 $options        =   new Options();
                 $options->setIsRemoteEnabled(true);
+                $options->setIsJavascriptEnabled(true);
                 
                 $kandidat       =   new KandidatModel();
 

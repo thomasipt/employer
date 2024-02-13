@@ -1,7 +1,27 @@
 <?php
     helper('CustomDate');
 
-    $namaKandidat   =   $detailKandidat['nama'];
+    $namaKandidat           =   $detailKandidat['nama'];
+    $fotoKandidat           =   $detailKandidat['foto'];
+    $alamatKandidat         =   $detailKandidat['alamat'];
+    $nomorTeleponKandidat   =   $detailKandidat['telepon'];
+    $emailKandidat          =   $detailKandidat['email'];
+    $namaKotaKandidat       =   $detailKandidat['namaKota'];
+
+    function circleIcon($index){
+        $circleImage    =   'red-circle.png';
+        if($index % 4 == 1){
+            $circleImage    =   'green-circle.png';
+        }
+        if($index % 4 == 2){
+            $circleImage    =   'blue-circle.png';
+        }
+        if($index % 4 == 3){
+            $circleImage    =   'yellow-circle.png';
+        }
+
+        return $circleImage;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,90 +105,154 @@
             .mt-0{
                 margin-top: 0px;
             }
+            .mb-0{
+                margin-bottom: 0px;
+            }
+            .m-0{
+                margin:0;
+            }
+            .p-0{
+                padding:0;
+            }
+            .foto-kandidat{
+                width: 250px;
+                border-radius: 10px;
+            }
+            @page{
+                margin: 0;
+            }
+            .img-20-20{
+                width: 20px;
+                height: 20px;
+            }
+            .img-15-15{
+                width: 15px;
+                height: 15px;
+            }
+            .divider{
+                height: .5px;
+                background-color: #6c757d;
+            }
+            .container{
+                margin: 25px;
+            }
+            .w-100{
+                width: 100%;
+            }
+            #leftSide{
+                width: 33.3%;
+            }
         </style>
     </head>
     <body>
-        <table class="table-borderless">
-            <tr>
-                <td id='leftSide'>
+        <div class="container">
+            <table class="table-borderless m-0 p-0 w-100">
+                <tr>
+                    <td id='leftSide' class='vat' style='padding-right:10px;'>
+                        <img src="<?=$fotoKandidat?>" alt="<?=$namaKandidat?>"
+                            class='foto-kandidat' onError='this.src="<?=base_url(assetsFolder('img/empty.png'))?>"' />
+                        <br />
+                        <p class="title mb-0" style='margin-bottom: 5px;'><?=$namaKandidat?></p>
+                        <p class='text-muted' style='font-size: .765rem;'><?=$namaKotaKandidat?></p>
+                        <div style='margin-top:10px; margin-bottom:10px;'></div>
+                        <p class="text-md">Alamat</p>
+                        <p class="text-sm text-muted"><?=$alamatKandidat?></p>
+                        <p class="text-md">Email</p>
+                        <p class="text-sm text-muted"><?=$emailKandidat?></p>
+                        <p class="text-md">Nomor Telepon</p>
+                        <p class="text-sm text-muted"><?=$nomorTeleponKandidat?></p>
+                        
 
-                </td>
-                <td id='rightSide'>
-                    <p class='title'>Pengalaman</p>
-                    <?php if(count($listExperience) >= 1){ ?>
-                        <table class="table-borderless">
-                            <?php foreach($listExperience as $index => $pengalaman){ ?>
-                                <?php
-                                    $pengalamanNamaPerusahaan   =   $pengalaman['experience_company'];
-                                    $pengalamanJobName          =   $pengalaman['experience_name'];
-                                    $pengalamanJobDescription   =   $pengalaman['experience_description'];
-                                    $pengalamanMulai            =   $pengalaman['experience_start_date'];
-                                    $pengalamanSampai           =   $pengalaman['experience_end_date'];
+                        <div class='divider' style='margin-top: 20px; margin-bottom: 20px;'></div>
+                        <p class='title mt-0'>Pendidikan</p>
+                        <?php if(count($listEducation) >= 1){ ?>
+                            <table class="table-borderless w-100 m-0">
+                                <?php foreach($listEducation as $index => $edukasi){ ?>
+                                    <?php
+                                        $namaLembagaPendidikan  =   $edukasi['school_name'];
+                                        $namaJurusan            =   $edukasi['faculty'];
+                                        $tahunTamat             =   $edukasi['end_date'];
 
-                                    $circleImage    =   'red-circle.png';
-                                    if($index % 4 == 1){
-                                        $circleImage    =   'green-circle.png';
-                                    }
-                                    if($index % 4 == 2){
-                                        $circleImage    =   'blue-circle.png';
-                                    }
-                                    if($index % 4 == 3){
-                                        $circleImage    =   'yellow-circle.png';
-                                    }
-                                ?>
-                                <tr>
-                                    <td style='padding-right:10px;' class='vat'>
-                                        <img src="<?=base_url(assetsFolder('img'))?>/<?=$circleImage?>" alt="<?=$pengalamanJobName?>"
-                                            style='width: 25px; height: 25px; padding: 0; margin: 0;' />
-                                    </td>
-                                    <td style='padding-left:10px;'>
-                                        <p class='text-md mt-0'><?=formattedDate($pengalamanMulai)?> - <?=formattedDate($pengalamanSampai)?></p>
-                                        <p class='text-md'><?=$pengalamanJobName?><?=(!empty($pengalamanNamaPerusahaan))? 'di '.$pengalamanNamaPerusahaan : ''?></p>
-                                        <p class="text-sm text-muted"><?=$pengalamanJobDescription?></p>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </table>
-                    <?php }else{ ?>
-                        <p class="text-sm text-muted">Belum ada pengalaman</p>
-                    <?php } ?>
-                    <hr style='border-collapse: collapse;' />
-                    <p class='title'>Skill</p>
-                    <?php if(count($listSkill) >= 1){ ?>
-                        <table class="table-borderless">
-                            <?php foreach($listSkill as $index => $skill){ ?>
-                                <?php
-                                    $skillName          =   $skill['skill_name'];
-                                    $skillDescription   =   $skill['skill_description'];
+                                        $circleImage    =   circleIcon($index);
+                                    ?>
+                                    <tr>
+                                        <td style='padding-right:10px;' class='vat'>
+                                            <img src="<?=base_url(assetsFolder('img'))?>/<?=$circleImage?>" alt="<?=$namaLembagaPendidikan?>"
+                                                class='img-15-15' />
+                                        </td>
+                                        <td style='padding-left:10px;'>
+                                            <p class='text-md mt-0 mb-0'><?=formattedDate($tahunTamat)?></p>
+                                            <p class='text-md'><?=$namaLembagaPendidikan?></p>
+                                            <?php if(!empty($namaJurusan)){ ?>
+                                                <p class="text-sm text-muted"><?=$namaJurusan?></p>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </table>
+                        <?php }else{ ?>
+                            <p class="text-sm text-muted">Belum ada pengalaman</p>
+                        <?php } ?>
+                    </td>
+                    <td id='rightSide' style='padding-left:10px;' style='padding-left:10px;'>
+                        <p class='title mt-0'>Pengalaman</p>
+                        <?php if(count($listExperience) >= 1){ ?>
+                            <table class="table-borderless w-100 m-0">
+                                <?php foreach($listExperience as $index => $pengalaman){ ?>
+                                    <?php
+                                        $pengalamanNamaPerusahaan   =   $pengalaman['experience_company'];
+                                        $pengalamanJobName          =   $pengalaman['experience_name'];
+                                        $pengalamanJobDescription   =   $pengalaman['experience_description'];
+                                        $pengalamanMulai            =   $pengalaman['experience_start_date'];
+                                        $pengalamanSampai           =   $pengalaman['experience_end_date'];
 
-                                    $circleImage    =   'red-circle.png';
-                                    if($index % 4 == 1){
-                                        $circleImage    =   'green-circle.png';
-                                    }
-                                    if($index % 4 == 2){
-                                        $circleImage    =   'blue-circle.png';
-                                    }
-                                    if($index % 4 == 3){
-                                        $circleImage    =   'yellow-circle.png';
-                                    }
-                                ?>
-                                <tr>
-                                    <td style='padding-right:10px;' class='vat'>
-                                        <img src="<?=base_url(assetsFolder('img'))?>/<?=$circleImage?>" alt="<?=$pengalamanJobName?>"
-                                            style='width: 25px; height: 25px; padding: 0; margin: 0;' />
-                                    </td>
-                                    <td style='padding-left:10px;'>
-                                        <p class='text-md mt-0'><?=$skillName?></p>
-                                        <p class="text-sm text-muted"><?=$skillDescription?></p>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </table>
-                    <?php }else{ ?>
-                        <p class="text-sm text-muted">Belum ada pengalaman</p>
-                    <?php } ?>
-                </td>
-            </tr>
-        </table>
+                                        $circleImage    =   circleIcon($index);
+                                    ?>
+                                    <tr>
+                                        <td style='padding-right:10px;' class='vat'>
+                                            <img src="<?=base_url(assetsFolder('img'))?>/<?=$circleImage?>" alt="<?=$pengalamanJobName?>"
+                                                class='img-20-20' />
+                                        </td>
+                                        <td style='padding-left:10px;'>
+                                            <p class='text-md mt-0 mb-0'><?=formattedDate($pengalamanMulai)?> - <?=formattedDate($pengalamanSampai)?></p>
+                                            <p class='text-md'><?=$pengalamanJobName?><?=(!empty($pengalamanNamaPerusahaan))? ' di '.$pengalamanNamaPerusahaan : ''?></p>
+                                            <p class="text-sm text-muted"><?=$pengalamanJobDescription?></p>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </table>
+                        <?php }else{ ?>
+                            <p class="text-sm text-muted">Belum ada pengalaman</p>
+                        <?php } ?>
+                        <div class='divider' style='margin-top: 10px; margin-bottom: 10px;'></div>
+                        <p class='title'>Skill</p>
+                        <?php if(count($listSkill) >= 1){ ?>
+                            <table class="table-borderless w-100">
+                                <?php foreach($listSkill as $index => $skill){ ?>
+                                    <?php
+                                        $skillName          =   $skill['skill_name'];
+                                        $skillDescription   =   $skill['skill_description'];
+
+                                        $circleImage    =   circleIcon($index);
+                                    ?>
+                                    <tr>
+                                        <td style='padding-right:10px;' class='vat'>
+                                            <img src="<?=base_url(assetsFolder('img'))?>/<?=$circleImage?>" alt="<?=$pengalamanJobName?>"
+                                                class='img-20-20' />
+                                        </td>
+                                        <td style='padding-left:10px;'>
+                                            <p class='text-md mt-0'><?=$skillName?></p>
+                                            <p class="text-sm text-muted"><?=$skillDescription?></p>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </table>
+                        <?php }else{ ?>
+                            <p class="text-sm text-muted">Belum ada pengalaman</p>
+                        <?php } ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </body>
 </html>
