@@ -181,7 +181,7 @@
                                                 class='img-15-15' />
                                         </td>
                                         <td style='padding-left:10px;'>
-                                            <p class='text-md mt-0 mb-0'><?=formattedDate($tahunTamat)?></p>
+                                            <p class='text-md mt-0 mb-0'>Tamat <?=formattedDate($tahunTamat)?></p>
                                             <p class='text-md'><?=$namaLembagaPendidikan?></p>
                                             <?php if(!empty($namaJurusan)){ ?>
                                                 <p class="text-sm text-muted"><?=$namaJurusan?></p>
