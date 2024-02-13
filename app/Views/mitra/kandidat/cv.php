@@ -146,7 +146,7 @@
     </head>
     <body>
         <div class="container">
-            <table class="table-borderless m-0 p-0 w-100">
+            <table class="table-borderless m-0 p-0 w-100" border='1'>
                 <tr>
                     <td id='leftSide' class='vat' style='padding-right:10px;'>
                         <img src="<?=$fotoKandidat?>" alt="<?=$namaKandidat?>"
@@ -194,7 +194,7 @@
                             <p class="text-sm text-muted">Belum ada pengalaman</p>
                         <?php } ?>
                     </td>
-                    <td id='rightSide' style='padding-left:10px;' style='padding-left:10px;'>
+                    <td id='rightSide' class='vat' style='padding-left:10px;'>
                         <p class='title mt-0'>Pengalaman</p>
                         <?php if(count($listExperience) >= 1){ ?>
                             <table class="table-borderless w-100 m-0">
