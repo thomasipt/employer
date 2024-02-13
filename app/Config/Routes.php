@@ -191,6 +191,16 @@
             $transaksiRoutes->get('invoice/(:num)', 'Transaksi::invoice/$1', $additionalOptions);
             $transaksiRoutes->get('pilihan-paket', 'Transaksi::pilihanPaket/$1', $additionalOptions);
         });
+
+        #Kandidat
+        $mitraRoutes->group('kandidat', static function($kandidatRoutes){
+            $additionalOptions  =   [
+                'namespace' =>  'App\Controllers\mitra',
+                'filter'    =>  'mitra-filter'
+            ];
+
+            $kandidatRoutes->get('cv/(:num)', 'Kandidat::cv/$1', $additionalOptions);
+        });
     });
 
     #Lainnya

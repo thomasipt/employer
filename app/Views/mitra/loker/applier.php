@@ -54,8 +54,9 @@
                                     <td class='text-left'>
                                         <div class="row">
                                             <a href="<?=$fotoKandidat?>">
-                                                <img src="<?=$fotoKandidat?>" class='img-50-50' alt="<?=$namaKandidat?>"
-                                                    onError='this.src="<?=base_url(assetsFolder('img/empty.png'))?>"' />
+                                                <img src="<?=$fotoKandidat?>" class='img-50-50 img-circle' alt="<?=$namaKandidat?>"
+                                                    onError='this.src="<?=base_url(assetsFolder('img/empty.png'))?>"'
+                                                    style='object-fit: cover;' />
                                             </a>
                                             <div class="col ml-2">
                                                 <h6 class='my-1'><?=$namaKandidat?></h6>
@@ -76,7 +77,10 @@
                                         </div>
                                     </td>
                                     <td class='text-center'>
-                                        -
+                                        <a href="<?=site_url(mitraController('kandidat/cv'))?>/<?=$idKandidat?>" target="_blank">
+                                            <img src="<?=base_url(assetsFolder('icon/download.svg'))?>" alt="<?=$namaKandidat?>"
+                                                title='Downlad CV <?=$namaKandidat?>' class='img-icon cp' />
+                                        </a>
                                     </td>
                                 </tr>
                             <?php } ?>
