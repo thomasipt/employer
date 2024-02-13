@@ -35,7 +35,7 @@
                 <a href="#" class="d-block">
                     <h5 class='mb-0 text-white'><?=$nama?></h5>
                 </a>
-                <p class="text-sm mb-0" style='color:#c8c8c8'><?=$username?></p>
+                <p class="text-sm mb-1" style='color:#c8c8c8'><?=$username?></p>
             </div>
         </div>
 
