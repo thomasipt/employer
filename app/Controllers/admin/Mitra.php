@@ -6,14 +6,13 @@
 
     #Model
     use App\Models\AdministratorLog as LogModel;
-    use App\Models\JenisLoker as JenisLokerModel;
     use App\Models\Administrator;
     use App\Models\Mitra as MitraModel;
 
     #Library
-    use App\Libraries\FormValidation;
     use App\Libraries\Tabel;
     use App\Libraries\APIRespondFormat;
+    use App\Libraries\EmailSender;
 
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
@@ -129,16 +128,23 @@
             $status     =   false;
             $message    =   'Gagal menjalankan approvement (penerimaan/penolakan) mitra!';
             $data       =   null;
+            
+            $mitra  =   new MitraModel();
+            $db     =   $mitra->db;
+
+            $db->transBegin();
 
             try{
-                $this->mitraChecking($idMitra);
+                $detailMitra    =   $this->mitraChecking($idMitra);
+                $idMitra        =   $detailMitra['id'];
+                $namaMitra      =   $detailMitra['nama'];
+                $emailMitra     =   $detailMitra['email'];
 
                 helper('CustomDate');
 
                 $request        =   $this->request;
                 $approvement    =   $request->getPost('approvement');
 
-                $mitra  =   new MitraModel();
                 if(!in_array($approvement, $mitra->approvement)){
                     throw new Exception('Approvement action tidak dikenal "'.$approvement.'"!');
                 }
@@ -155,18 +161,59 @@
 
                 $message    =   ($isApproved)? 'Gagal melakukan penyetujuan pendaftaran mitra!' : 'Gagal melakukan penolakan pendaftaran mitra!';
                 if($saveApprovementMitra){
-                    $status     =   true;
-                    $message    =   ($isApproved)? 'Berhasil menerima pendaftaran mitra!' : 'Berhasil menolak pendaftaran mitra!';
-                    $data       =   [
-                        'id'    =>  $idMitra
+                    $emailSender    =   new EmailSender();
+                    
+                    $passwordDefault    =   $mitra->passwordDefault;
+
+                    $subject    =   'Penerimaan Pendaftaran Mitra an '.$namaMitra;
+                    $body       =   '<div>
+                                        <p>
+                                        Selamat, pendaftaran anda <b style="color: green">diterima</b> oleh Administrator Employer. Silahkan login ke halaman  
+                                        <a href="'.site_url(mitraController('login')).'">Login Mitra</a> untuk mulai memposting lowongan pekerjaan dan mendapatkan kandidat perusahaan anda
+                                        </p>
+                                        <p><b>Akun Mitra</b></p>
+                                        <p>Username: '.$emailMitra.'</p>
+                                        <p>Password: '.$passwordDefault.'</p>
+                                        <br />
+                                        <p>
+                                            Anda tentunya bisa mengganti username dan password anda dengan dengan yang baru di halaman 
+                                            <a href="'.site_url(mitraController('profile')).'">ini</a>
+                                        </p>
+                                    </div>';
+                    if(!$isApproved){
+                        $subject    =   'Penolakan Pendaftaran Mitra an '.$namaMitra;
+                        $body       =   '<div>
+                                            Mohon maaf, pendaftaran anda <b style="color: red">ditolak</b> oleh Administrator Employer.
+                                        </div>';
+                    }
+
+                    $emailParams    =   [
+                        'subject'   =>  $subject,
+                        'body'      =>  $body,
+                        'receivers' =>  [
+                            ['email' => $emailMitra, 'name' => $namaMitra]
+                        ]
                     ];
+                    $sendEmail      =   $emailSender->sendEmail($emailParams);
+                    $statusSend     =   $sendEmail['statusSend'];
+                    if($statusSend){
+                        $status     =   true;
+                        $message    =   ($isApproved)? 'Berhasil menerima pendaftaran mitra!' : 'Berhasil menolak pendaftaran mitra!';
+                        $data       =   [
+                            'id'    =>  $idMitra
+                        ];
 
-                    $adminLog   =   new LogModel();
-                    $tabel      =   new Tabel();
+                        $adminLog   =   new LogModel();
+                        $tabel      =   new Tabel();
 
-                    $title      =   ($isApproved)? 'Menyetujui pendaftaran mitra' : 'Menolak pendaftaran mitra';
+                        $title      =   ($isApproved)? 'Menyetujui pendaftaran mitra' : 'Menolak pendaftaran mitra';
 
-                    $adminLog->saveAdministratorLogFromThisModule($tabel->mitra, $idMitra, $title);
+                        $adminLog->saveAdministratorLogFromThisModule($tabel->mitra, $idMitra, $title);
+
+                        $db->transCommit();
+                    }else{
+                        $db->transRollback();
+                    }
                 }
             }catch(Exception $e){
                 $status     =   false;

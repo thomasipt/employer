@@ -111,7 +111,7 @@
                         throw new Exception('Sektor pekerjaan tidak terdaftar!');
                     }
 
-                    $passwordMitra  =   '123456';
+                    $passwordMitra  =   $mitraModel->passwordDefault;
 
                     $dataMitra  =   [
                         'nama'      =>  $nama,
@@ -140,6 +140,7 @@
                                                 <img src="https://employer.kubu.id/assets/img/icon.png" style="width: 150px; display: block; margin: auto;"
                                                     alt="Employer" />
                                             </center>
+                                            <br />
                                             <p>Anda telah mendaftar sebagai mitra ke dalam website <a href="https://employer.kubu.id">Employer</a>.
                                             Silahkan klik link berikut ini untuk memverifikasi pendaftaran anda <a href="'.$linkVerifikasi.'">'.$linkVerifikasi.'</a></p>
                                             <p>Selanjutnya anda hanya perlu menunggu approvement dari Administrator Employer untuk mengaktifkan akun anda.</p>
@@ -189,7 +190,7 @@
                 }
 
                 helper('CustomDate');
-                
+
                 $idMitra    =   $detailMItra['id'];
                 
                 $dataVerifikasi =   [
