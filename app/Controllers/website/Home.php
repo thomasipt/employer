@@ -178,5 +178,37 @@
 
             return $this->respond($respond);
         }
+        public function verifikasi($encodedIDMitra){
+            $mitra              =   new Mitra();
+            $decodedIdMitra     =   base64_decode($encodedIDMitra);
+
+            try{
+                $detailMItra    =   $mitra->getMitra($decodedIdMitra);
+                if(empty($detailMItra)){
+                    throw new Exception('Gagal memverifikasi email, mitra tidak terdaftar!');
+                }
+
+                helper('CustomDate');
+                
+                $idMitra    =   $detailMItra['id'];
+                
+                $dataVerifikasi =   [
+                    'verified'      =>  $mitra->emailVerification_verified,
+                    'verifiedAt'    =>  rightNow()
+                ];
+                $updateMitra    =   $mitra->saveMitra($idMitra, $dataVerifikasi);
+                if($updateMitra){
+                    echo 'Berhasil verifikasi email!';
+                }else{
+                    echo 'Gagal verifikasi email!';
+                }
+            }catch(Exception $e){
+                $data   =   [
+                    'judul'     =>  'Verifikasi Email',
+                    'deskripsi' =>  $e->getMessage()
+                ];
+                return view(websiteView('error'), $data);
+            }
+        }
     }
 ?>
