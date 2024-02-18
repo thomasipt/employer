@@ -18,6 +18,14 @@
             $this->mail         =   $mail;
             $this->appConfig    =   $appConfig;
         }
+        public function isConfigComplete(){
+            $appConfig              =   $this->appConfig;
+            $emailAccountUsername   =   $appConfig->emailAccountUsername;
+            $emailAccountPassword   =   $appConfig->emailAccountPassword;
+
+            $complete   =   !empty($emailAccountUsername) && !empty($emailAccountPassword);
+            return $complete;
+        }
         public function sendEmail($emailParams = null){
             $statusSend     =   false;
             $message        =   'Email Params not set!';
@@ -29,13 +37,14 @@
                     extract($emailParams);
 
                     try {
+                        $configComplete =   $this->isConfigComplete();
+                        if(!$configComplete){
+                            throw new Exception('Harap lakukan konfigurasi akun email (username dan password)!');
+                        }
+                        
                         $appConfig              =   $this->appConfig;
                         $emailAccountUsername   =   $appConfig->emailAccountUsername;
                         $emailAccountPassword   =   $appConfig->emailAccountPassword;
-
-                        if(empty($emailAccountUsername) || empty($emailAccountPassword)){
-                            throw new Exception('Harap lakukan konfigurasi akun email (username dan password)!');
-                        }
 
                         if(array_key_exists('smtpDebug', $emailParams)){
                             $smtpDebug  =   $emailParams['smtpDebug'];
@@ -49,8 +58,8 @@
                         $mail->SMTPAuth     =   true;                                   
                         $mail->Username     =   $emailAccountUsername;                                 
                         $mail->Password     =   $emailAccountPassword;                                            
-                        $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_SMTPS;            
-                        $mail->Port         =   465;                                    
+                        $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_STARTTLS;            
+                        $mail->Port         =   587;                                    
                     
                         //Recipients
                         $mail->setFrom($emailAccountUsername, $emailAccountUsername);
