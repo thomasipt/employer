@@ -20,6 +20,8 @@
         public $approvement_rejected    =   'rejected';
         public $approvement;
 
+        public $passwordDefault     =   '123456';
+
         public function __construct(){
             parent::__construct();
             
