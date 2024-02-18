@@ -17,8 +17,8 @@
                 <li><a class="nav-link scrollto" href="<?=site_url(websiteController('syarat-dan-ketentuan'))?>">Syarat & Ketentuan</a></li>
                 <li><a class="nav-link scrollto" href="<?=site_url(websiteController('kebijakan-privasi'))?>">Kebijakan Privasi</a></li>
                 <li>
-                    <a href="<?=site_url(websiteController('registrasi'))?>" class='btn-registrasi'>
-                        <button class='btn btn-primary'>Registrasi</button>
+                    <a href="<?=site_url(mitraController())?>" class='btn-registrasi'>
+                        <button class='btn btn-primary'>Login</button>
                     </a>
                 </li>
             </ul>
