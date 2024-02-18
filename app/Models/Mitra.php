@@ -13,6 +13,9 @@
     use Exception;
 
     class Mitra extends BaseModel{
+        public $emailVerification_verified  =   'verified';
+        public $emailVerification;
+
         public $approvement_approved    =   'approved';
         public $approvement_rejected    =   'rejected';
         public $approvement;
@@ -22,6 +25,9 @@
             
             $approvement        =   [$this->approvement_approved, $this->approvement_rejected];
             $this->approvement  =   $approvement;
+
+            $emailVerification          =   [$this->emailVerification_verified];
+            $this->emailVerification    =   $emailVerification;
         }
 
         public function getMitra($id = null, $options = null){
