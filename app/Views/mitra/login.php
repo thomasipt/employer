@@ -54,6 +54,8 @@
                             <button type="submit" class="btn btn-primary btn-block"
                                 id='btnSignIn'>Sign In</button>
                             <p class="text-center mb-0 mt-3">
+                                Belum punya akun <a href="<?=site_url(websiteController('registrasi'))?>">Daftar di sini</a>
+                                <br />
                                 <a href="<?=site_url(mitraController('lupa-password'))?>">Lupa Password</a>
                             </p>
                         </div>
