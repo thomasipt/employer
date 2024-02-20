@@ -56,24 +56,36 @@
             $homepageElement    =   new HomepageElement();
 
             try{
-                $this->sectionChecking($section);
-
-                $options        =   [
-                    'where' =>  [
-                        'parent'    =>  $homepage->heroId
-                    ]
-                ];
-                $heroElement    =   $homepageElement->getHomepageElement(null, $options);
-                $heroElement    =   $homepageElement->convertListELementToKeyValueMap($heroElement);
+                $detailSection  =   $this->sectionChecking($section);
+                $idSection      =   $detailSection['id'];
 
                 $data   =   [
                     'pageTitle' =>  'Hero',
                     'pageDesc'  =>  'Hero Divison',
                     'view'      =>  adminView('website/landing-page/'.$section),
-                    'data'      =>  [
-                        'heroElement'  =>  $heroElement
+                    'data'      =>  []
+                ];
+
+                $elementOptions =   [
+                    'where' =>  [
+                        'parent'    =>  $idSection
                     ]
                 ];
+                $sectionElement    =   $homepageElement->getHomepageElement(null, $elementOptions);
+                $sectionElement    =   $homepageElement->convertListELementToKeyValueMap($sectionElement);
+
+                $sectionName    =   '';
+                if($idSection == $homepage->heroId){
+                    $sectionName    =   'heroElement';
+                }
+                if($idSection == $homepage->aboutUsId){
+                    $sectionName    =   'aboutUsElement';
+                }
+                
+                $data['data']   =   [
+                    $sectionName    =>  $sectionElement
+                ];
+
                 return view(adminView('index'), $data);
             }catch(Exception $e){
                 $data   =   [
@@ -84,7 +96,7 @@
             }
         }
         public function saveLandingPage($section){
-            $homepage           =   new Homepage();
+            $request            =   request();
             $homepageElement    =   new HomepageElement();
 
             $status     =   false;
@@ -92,39 +104,41 @@
             $data       =   null;
 
             try{
-                $this->sectionChecking($section);
+                $detailSection  =   $this->sectionChecking($section);
+                $idSection      =   $detailSection['id'];
 
                 $options        =   [
                     'where' =>  [
-                        'parent'    =>  $homepage->heroId
+                        'parent'    =>  $idSection
                     ]
                 ];
-                $heroElement    =   $homepageElement->getHomepageElement(null, $options);
+                $sectionElement    =   $homepageElement->getHomepageElement(null, $options);
 
-                $message    =   'Hero tidak memiliki elemen, tidak ada data yang diproses!';
-                if(count($heroElement) >= 1){
+                $message    =   'Section tidak memiliki elemen, tidak ada data yang diproses!';
+                if(count($sectionElement) >= 1){
                     $database   =   new Database();
                     $tabel      =   new Tabel();
 
                     $db         =   $database->connect($database->default);
                     $builder    =   $db->table($tabel->homepageElement);
                     
-                    foreach($heroElement as $element){
+                    foreach($sectionElement as $element){
                         $key    =   $element['key'];
 
+                        $newValue   =   $request->getPost($key);
                         if(!empty($newValue)){
                             $newData    =   [
                                 'value' =>  $newValue
                             ];
 
-                            $builder->where('parent', $homepage->heroId);
+                            $builder->where('parent', $idSection);
                             $builder->where('key', $key);
                             $builder->update($newData);
                         }
                     }
 
                     $status     =   true;
-                    $message    =   'Berhasil mengupdate Hero!';
+                    $message    =   'Berhasil mengupdate section!';
                 }
             }catch(Exception $e){
                 $message    =   $e->getMessage();
@@ -138,17 +152,17 @@
         }
         public function saveLandingPageImage($section){
             helper('CustomDate');
-            
-            $request            =   request();
-            $homepage           =   new Homepage();
+
+            $request    =   request();
+            $homepage   =   new Homepage();
             
             $status     =   false;
             $message    =   'Gagal memproses! Silahkan ulangi!';
             $data       =   null;
 
             try{
-
-                $this->sectionChecking($section);
+                $detailSection  =   $this->sectionChecking($section);
+                $idSection      =   $detailSection['id'];
                 
                 $database   =   new Database();
                 $tabel      =   new Tabel();
@@ -156,13 +170,13 @@
                 $db         =   $database->connect($database->default);
                 $builder    =   $db->table($tabel->homepageElement);
                 
-                $builder->where('parent', $homepage->heroId);
+                $builder->where('parent', $idSection);
                 $builder->where('key', '_image');
-                $getHeroImage   =   $builder->get();
-                $oldHeroImage   =   ($getHeroImage->getNumRows() >= 1)? $getHeroImage->getRowArray() : null;      
+                $getOldImage    =   $builder->get();
+                $oldImage       =   ($getOldImage->getNumRows() >= 1)? $getOldImage->getRowArray() : null;      
 
-                if(!empty($oldHeroImage)){
-                    $oldImage       =   $oldHeroImage['value'];
+                if(!empty($oldImage)){
+                    $oldImage       =   $oldImage['value'];
                     if(!empty($oldImage)){
                         $oldImage       =   uploadGambarWebsite('landing-page/'.$oldImage);
                         if(file_exists($oldImage)){
@@ -173,11 +187,19 @@
 
                 $now        =   date('YmdHis', strtotime(rightNow()));
 
-                $heroImage  =   $request->getFile('_image');
-                $extension  =   $heroImage->getClientExtension();
+                $image      =   $request->getFile('_image');
+                $extension  =   $image->getClientExtension();
+
+                $imageName  =   '';
+                if($idSection == $homepage->heroId){
+                    $imageName  =   'HeroImage';
+                }
+                if($idSection == $homepage->aboutUsId){
+                    $imageName  =   'AboutUsImage';
+                }
                 
-                $fileName       =   'HeroImage-'.$now.'.'.$extension;
-                $uploadFile     =    $heroImage->move(uploadGambarWebsite('landing-page'), $fileName);
+                $fileName       =   $imageName.'-'.$now.'.'.$extension;
+                $uploadFile     =   $image->move(uploadGambarWebsite('landing-page'), $fileName);
 
                 $message        =   'Gagal memproses gambar!';
                 if($uploadFile){
@@ -185,7 +207,7 @@
                         'value' =>  $fileName
                     ];
 
-                    $builder->where('parent', $homepage->heroId);
+                    $builder->where('parent', $idSection);
                     $builder->where('key', '_image');
                     $updateData     =   $builder->update($newData);
 

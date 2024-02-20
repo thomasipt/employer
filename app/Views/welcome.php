@@ -11,8 +11,10 @@
     
     $listPaket      =   $data['listPaket'];
     $heroElement    =   $data['heroElement'];
+    $aboutUsElement =   $data['aboutUsElement'];
 
-    $imagePath      =   $heroElement['_image'];
+    $heroImagePath      =   $heroElement['_image'];
+    $aboutUsImagePath   =   $aboutUsElement['_image'];
 ?>
 <html lang="en">
     <?=view(websiteComponents('head'), $headData)?>
@@ -36,7 +38,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-                        <img src="<?=base_url(uploadGambarWebsite('landing-page'))?>/<?=$imagePath?>" alt='Hero Image' class="img-fluid" />
+                        <img src="<?=base_url(uploadGambarWebsite('landing-page'))?>/<?=$heroImagePath?>" alt='Hero Image' class="img-fluid" />
                     </div>
                 </div>
             </div>
@@ -53,21 +55,14 @@
                         <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                             <div class="content">
                                 <h3>Who We Are</h3>
-                                <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2>
-                                <p>
-                                    Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
-                                </p>
-                                <div class="text-center text-lg-start">
-                                    <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
-                                        <span>Read More</span>
-                                        <i class="bi bi-arrow-right"></i>
-                                    </a>
-                                </div>
+                                <h2><?=$aboutUsElement['_title']?></h2>
+                                <p><?=$aboutUsElement['_description']?></p>
                             </div>
                         </div>
-
                         <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-                            <img src="<?=base_url()?>assets/flexstart/assets/img/about.jpg" class="img-fluid" alt="">
+                            <?php if(!empty($aboutUsImagePath)){ ?>
+                                <img src="<?=base_url(uploadGambarWebsite('landing-page'))?>/<?=$aboutUsImagePath?>" class="img-fluid" alt="Anout Us" />
+                            <?php } ?>
                         </div>
 
                     </div>

@@ -128,9 +128,9 @@
                 'filter'    =>  'auth-filter'
             ];
 
-            $websiteRoutes->get('landing-page/(:alpha)', 'Website::landingPage/$1', $additionalOptions);
-            $websiteRoutes->post('landing-page/(:alpha)', 'Website::saveLandingPage/$1', $additionalOptions);
-            $websiteRoutes->post('landing-page-image/(:alpha)', 'Website::saveLandingPageImage/$1', $additionalOptions);
+            $websiteRoutes->get('landing-page/(:any)', 'Website::landingPage/$1', $additionalOptions);
+            $websiteRoutes->post('landing-page/(:any)', 'Website::saveLandingPage/$1', $additionalOptions);
+            $websiteRoutes->post('landing-page-image/(:any)', 'Website::saveLandingPageImage/$1', $additionalOptions);
         });
     });
 
