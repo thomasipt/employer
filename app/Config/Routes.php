@@ -120,6 +120,17 @@
             $lokerRoutes->get('mitra', 'Loker::mitra', $additionalOptions);
             $lokerRoutes->get('mitra/(:num)', 'Loker::mitra/$1', $additionalOptions);
         });
+
+        #Website
+        $adminRoutes->group('website', static function($websiteRoutes){
+            $additionalOptions  =   [
+                'namespace' =>  'App\Controllers\admin',
+                'filter'    =>  'auth-filter'
+            ];
+
+            $websiteRoutes->get('landing-page/(:alpha)', 'Website::landingPage/$1', $additionalOptions);
+            $websiteRoutes->post('landing-page/(:alpha)', 'Website::saveLandingPage/$1', $additionalOptions);
+        });
     });
 
     #Website

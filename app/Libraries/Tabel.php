@@ -20,5 +20,7 @@
         public $education           =   'arif_education';
         public $skill               =   'arif_skill';
         public $experience          =   'arif_experience';
+        public $homepage            =   'employer_homepage';
+        public $homepageElement     =   'employer_homepage_element';
     }
 ?>
