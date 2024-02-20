@@ -69,4 +69,22 @@
             100%{opacity: 1;}
         }
     </style>
+    <script language='Javascript'>
+        async function fileHandler(thisContext){
+            let _el         =   $(thisContext);
+            let imgData     =   _el.prop('files')[0];
+            let _preview    =   _el.data('preview');
+
+            let _previewEl  =   $(_preview);
+
+            let fileReader  =   new FileReader();
+            fileReader.readAsDataURL(imgData);
+            fileReader.onload   =   (e) =>  {
+                let imgResult   =   e.target.result;
+
+                _previewEl.attr('src', imgResult);
+                _previewEl.attr('class', 'w-100 img-thumbnail');
+            }
+        }
+    </script>
 </head>
