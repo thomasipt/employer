@@ -2,12 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Models\Homepage;
 use App\Models\HomepageElement;
 use App\Models\Paket;
 
 class Home extends BaseController{
     public function index(): string{
         $paket              =   new Paket();
+        $homepage           =   new Homepage();
         $homepageElement    =   new HomepageElement();
 
         $options    =   [
@@ -20,7 +22,7 @@ class Home extends BaseController{
 
         $options        =   [
             'where' =>  [
-                'parent'    =>  1 #1 = id hero
+                'parent'    =>  $homepage->heroId
             ]
         ];
         $heroElement    =   $homepageElement->getHomepageElement(null, $options);

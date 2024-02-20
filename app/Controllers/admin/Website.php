@@ -52,14 +52,15 @@
             return $detailSection;   
         }
         public function landingPage($section){
+            $homepage           =   new Homepage();
             $homepageElement    =   new HomepageElement();
 
             try{
-                $detailSection  =   $this->sectionChecking($section);
+                $this->sectionChecking($section);
 
                 $options        =   [
                     'where' =>  [
-                        'parent'    =>  1 #1 = id hero
+                        'parent'    =>  $homepage->heroId
                     ]
                 ];
                 $heroElement    =   $homepageElement->getHomepageElement(null, $options);
@@ -68,8 +69,8 @@
                 $data   =   [
                     'pageTitle' =>  'Hero',
                     'pageDesc'  =>  'Hero Divison',
-                    'view'  =>  adminView('website/landing-page/'.$section),
-                    'data'  =>  [
+                    'view'      =>  adminView('website/landing-page/'.$section),
+                    'data'      =>  [
                         'heroElement'  =>  $heroElement
                     ]
                 ];
@@ -83,7 +84,7 @@
             }
         }
         public function saveLandingPage($section){
-            $request            =   request();
+            $homepage           =   new Homepage();
             $homepageElement    =   new HomepageElement();
 
             $status     =   false;
@@ -95,7 +96,7 @@
 
                 $options        =   [
                     'where' =>  [
-                        'parent'    =>  1
+                        'parent'    =>  $homepage->heroId
                     ]
                 ];
                 $heroElement    =   $homepageElement->getHomepageElement(null, $options);
@@ -111,20 +112,86 @@
                     foreach($heroElement as $element){
                         $key    =   $element['key'];
 
-                        $newValue   =   $request->getPost($key);
-                        if(empty($newValue)){
+                        if(!empty($newValue)){
                             $newData    =   [
                                 'value' =>  $newValue
                             ];
 
-                            $builder->where('parent', '1');
+                            $builder->where('parent', $homepage->heroId);
                             $builder->where('key', $key);
-                            $update     =   $builder->update($newData);
+                            $builder->update($newData);
                         }
                     }
 
                     $status     =   true;
                     $message    =   'Berhasil mengupdate Hero!';
+                }
+            }catch(Exception $e){
+                $message    =   $e->getMessage();
+                $data       =   null;
+            }
+
+            $arf        =   new APIRespondFormat($status, $message, $data);
+            $respond    =   $arf->getRespond();
+
+            return $this->respond($respond);
+        }
+        public function saveLandingPageImage($section){
+            $request            =   request();
+            $homepage           =   new Homepage();
+            
+            $status     =   false;
+            $message    =   'Gagal memproses! Silahkan ulangi!';
+            $data       =   null;
+
+            try{
+                helper('CustomDate');
+
+                $this->sectionChecking($section);
+                
+                $database   =   new Database();
+                $tabel      =   new Tabel();
+
+                $db         =   $database->connect($database->default);
+                $builder    =   $db->table($tabel->homepageElement);
+                
+                $builder->where('parent', $homepage->heroId);
+                $builder->where('key', '_image');
+                $getHeroImage   =   $builder->get();
+                $oldHeroImage   =   ($getHeroImage->getNumRows() >= 1)? $getHeroImage->getRowArray() : null;      
+
+                if(!empty($oldHeroImage)){
+                    $oldImage       =   $oldHeroImage['value'];
+                    $oldImage       =   uploadGambarWebsite('landing-page/'.$oldImage);
+                    if(file_exists($oldImage)){
+                        unlink($oldImage);
+                    }
+                }
+
+                $now        =   date('YmdHis', strtotime(rightNow()));
+
+                $heroImage  =   $request->getFile('_image');
+                $extension  =   $heroImage->getClientExtension();
+                
+                $fileName       =   'HeroImage-'.$now.'.'.$extension;
+                $uploadFile     =    $heroImage->move(uploadGambarWebsite('landing-page'), $fileName);
+
+                $message        =   'Gagal memproses gambar!';
+                if($uploadFile){
+                    $newData    =   [
+                        'value' =>  $fileName
+                    ];
+
+                    $builder->where('parent', $homepage->heroId);
+                    $builder->where('key', '_image');
+                    $updateData     =   $builder->update($newData);
+
+                    $message    =   'Gagal memproses database, gambar berhasil diupload!';
+                    if($updateData){
+                        $status     =   true;
+                        $message    =   'Berhasil memperoses gambar!';
+                        $data       =   null;
+                    }
                 }
             }catch(Exception $e){
                 $message    =   $e->getMessage();

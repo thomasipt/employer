@@ -11,6 +11,8 @@
     
     $listPaket      =   $data['listPaket'];
     $heroElement    =   $data['heroElement'];
+
+    $imagePath      =   $heroElement['_image'];
 ?>
 <html lang="en">
     <?=view(websiteComponents('head'), $headData)?>
@@ -34,7 +36,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-                        <img src="<?=$heroElement['_image']?>" alt='Hero Image' class="img-fluid" />
+                        <img src="<?=base_url(uploadGambarWebsite('landing-page'))?>/<?=$imagePath?>" alt='Hero Image' class="img-fluid" />
                     </div>
                 </div>
             </div>
