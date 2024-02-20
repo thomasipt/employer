@@ -137,6 +137,8 @@
             return $this->respond($respond);
         }
         public function saveLandingPageImage($section){
+            helper('CustomDate');
+            
             $request            =   request();
             $homepage           =   new Homepage();
             
@@ -145,7 +147,6 @@
             $data       =   null;
 
             try{
-                helper('CustomDate');
 
                 $this->sectionChecking($section);
                 
