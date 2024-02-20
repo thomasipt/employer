@@ -125,6 +125,14 @@
 
             return $uploadGambarBuktiBayar;
         }
+        function uploadGambarWebsite($path = null){
+            $uploadGambarWebsite  =   'upload/gambar/website';
+            if(!empty($path)){
+                $uploadGambarWebsite   =   $uploadGambarWebsite.'/'.$path;
+            }
+
+            return $uploadGambarWebsite;
+        }
 
     #Flexstart
     function flexStart($path = null){

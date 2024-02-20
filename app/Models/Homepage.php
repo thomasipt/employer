@@ -10,6 +10,10 @@
     use App\Libraries\Tabel;
 
     class Homepage extends BaseModel{
+        public $heroId      =   1;
+        public $aboutUsId   =   2;
+        public $featuresId  =   3;
+        
         public function getHomepage($id = null, $options = null){
             $d  =   new Database();
             $t  =   new Tabel();
