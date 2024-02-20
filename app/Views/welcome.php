@@ -1,5 +1,6 @@
 <?php
-    $paketModel     =   $models['paket'];
+    $paketModel             =   $models['paket'];
+    $homepageElementModel   =   $models['homepageElement'];
     $pageTitle      =   (isset($pageTitle))? $pageTitle : null;
 
     $headData   =   [
@@ -8,7 +9,8 @@
 
     $view   =   (isset($view))? $view : null;
     
-    $listPaket  =   $data['listPaket'];
+    $listPaket      =   $data['listPaket'];
+    $heroElement    =   $data['heroElement'];
 ?>
 <html lang="en">
     <?=view(websiteComponents('head'), $headData)?>
@@ -20,8 +22,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 d-flex flex-column justify-content-center">
-                        <h1 data-aos="fade-up">We offer modern solutions for growing your business</h1>
-                        <h2 data-aos="fade-up" data-aos-delay="400">We are team of talented designers making websites with Bootstrap</h2>
+                        <h1 data-aos="fade-up"><?=$heroElement['_title']?></h1>
+                        <h2 data-aos="fade-up" data-aos-delay="400"><?=$heroElement['_description']?></h2>
                         <div data-aos="fade-up" data-aos-delay="600">
                             <div class="text-center text-lg-start">
                                 <a href="<?=site_url(websiteController('registrasi'))?>" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
@@ -32,7 +34,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-                        <img src="<?=base_url()?>assets/flexstart/assets/img/hero-img.png" class="img-fluid" alt="">
+                        <img src="<?=$heroElement['_image']?>" alt='Hero Image' class="img-fluid" />
                     </div>
                 </div>
             </div>
@@ -75,141 +77,6 @@
             <section id="features" class="features">
 
                 <div class="container" data-aos="fade-up">
-
-                    <header class="section-header">
-                        <h2>Features</h2>
-                        <p>Laboriosam et omnis fuga quis dolor direda fara</p>
-                    </header>
-
-                    <div class="row">
-
-                        <div class="col-lg-6">
-                            <img src="<?=base_url()?>assets/flexstart/assets/img/features.png" class="img-fluid" alt="">
-                        </div>
-
-                        <div class="col-lg-6 mt-5 mt-lg-0 d-flex">
-                            <div class="row align-self-center gy-4">
-
-                                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="200">
-                                    <div class="feature-box d-flex align-items-center">
-                                        <i class="bi bi-check"></i>
-                                        <h3>Eos aspernatur rem</h3>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="300">
-                                    <div class="feature-box d-flex align-items-center">
-                                        <i class="bi bi-check"></i>
-                                        <h3>Facilis neque ipsa</h3>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="400">
-                                    <div class="feature-box d-flex align-items-center">
-                                        <i class="bi bi-check"></i>
-                                        <h3>Volup amet voluptas</h3>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="500">
-                                    <div class="feature-box d-flex align-items-center">
-                                        <i class="bi bi-check"></i>
-                                        <h3>Rerum omnis sint</h3>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="600">
-                                    <div class="feature-box d-flex align-items-center">
-                                        <i class="bi bi-check"></i>
-                                        <h3>Alias possimus</h3>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="700">
-                                    <div class="feature-box d-flex align-items-center">
-                                        <i class="bi bi-check"></i>
-                                        <h3>Repellendus mollitia</h3>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div> <!-- / row -->
-
-                    <!-- Feature Tabs -->
-                    <div class="row feture-tabs" data-aos="fade-up">
-                        <div class="col-lg-6">
-                            <h3>Neque officiis dolore maiores et exercitationem quae est seda lidera pat claero</h3>
-
-                            <!-- Tabs -->
-                            <ul class="nav nav-pills mb-3">
-                                <li>
-                                    <a class="nav-link active" data-bs-toggle="pill" href="#tab1">Saepe fuga</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" data-bs-toggle="pill" href="#tab2">Voluptates</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" data-bs-toggle="pill" href="#tab3">Corrupti</a>
-                                </li>
-                            </ul><!-- End Tabs -->
-
-                            <!-- Tab Content -->
-                            <div class="tab-content">
-
-                                <div class="tab-pane fade show active" id="tab1">
-                                    <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="bi bi-check2"></i>
-                                        <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
-                                    </div>
-                                    <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="bi bi-check2"></i>
-                                        <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                                    </div>
-                                    <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-                                </div><!-- End Tab 1 Content -->
-
-                                <div class="tab-pane fade show" id="tab2">
-                                    <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="bi bi-check2"></i>
-                                        <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
-                                    </div>
-                                    <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="bi bi-check2"></i>
-                                        <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                                    </div>
-                                    <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-                                </div><!-- End Tab 2 Content -->
-
-                                <div class="tab-pane fade show" id="tab3">
-                                    <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="bi bi-check2"></i>
-                                        <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
-                                    </div>
-                                    <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <i class="bi bi-check2"></i>
-                                        <h4>Incidunt non veritatis illum ea ut nisi</h4>
-                                    </div>
-                                    <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
-                                </div><!-- End Tab 3 Content -->
-
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-6">
-                            <img src="<?=base_url()?>assets/flexstart/assets/img/features-2.png" class="img-fluid" alt="">
-                        </div>
-
-                    </div><!-- End Feature Tabs -->
-
                     <!-- Feature Icons -->
                     <div class="row feature-icons" data-aos="fade-up">
                         <h3>Ratione mollitia eos ab laudantium rerum beatae quo</h3>
