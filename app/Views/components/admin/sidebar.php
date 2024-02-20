@@ -168,6 +168,35 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item <?=($currentController == 'website')? 'menu-is-opening menu-open' : ''?>">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-globe"></i>
+                        <p>
+                            Website
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('website/landing-page/hero'))?>/" class="nav-link text-sm">
+                                <i class="fa fa-layer-group nav-icon text-info"></i>
+                                <p>Hero Slider</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('website/landing-page/about-us'))?>/" class="nav-link text-sm">
+                                <i class="fa fa-layer-group nav-icon text-primary"></i>
+                                <p>About Us</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('website/landing-page/features'))?>/" class="nav-link text-sm">
+                                <i class="fa fa-layer-group nav-icon text-white"></i>
+                                <p>Fitur</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="<?=site_url(adminController('log'))?>" class="nav-link">
                         <i class="nav-icon fas fa-history"></i>
