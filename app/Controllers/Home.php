@@ -35,6 +35,14 @@ class Home extends BaseController{
         ];
         $aboutUsElement    =   $homepageElement->getHomepageElement(null, $options);
         $aboutUsElement    =   $homepageElement->convertListELementToKeyValueMap($aboutUsElement);
+        
+        $options    =   [
+            'where' =>  [
+                'parent'    =>  $homepage->featuresId
+            ]
+        ];
+        $featuresElement    =   $homepageElement->getHomepageElement(null, $options);
+        $featuresElement    =   $homepageElement->convertListELementToKeyValueMap($featuresElement);
 
         $data   =   [
             'models'    =>  [
@@ -44,7 +52,8 @@ class Home extends BaseController{
             'data'  =>  [
                 'listPaket'         =>  $listPaket,
                 'heroElement'       =>  $heroElement,
-                'aboutUsElement'    =>  $aboutUsElement
+                'aboutUsElement'    =>  $aboutUsElement,
+                'featuresElement'   =>  $featuresElement
             ]
         ];
         return view('welcome', $data);

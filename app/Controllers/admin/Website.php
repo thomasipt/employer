@@ -81,6 +81,9 @@
                 if($idSection == $homepage->aboutUsId){
                     $sectionName    =   'aboutUsElement';
                 }
+                if($idSection == $homepage->featuresId){
+                    $sectionName    =   'featuresElement';
+                }
                 
                 $data['data']   =   [
                     $sectionName    =>  $sectionElement
@@ -196,6 +199,9 @@
                 }
                 if($idSection == $homepage->aboutUsId){
                     $imageName  =   'AboutUsImage';
+                }
+                if($idSection == $homepage->featuresId){
+                    $imageName  =   'FeaturesImage';
                 }
                 
                 $fileName       =   $imageName.'-'.$now.'.'.$extension;
