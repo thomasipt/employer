@@ -162,9 +162,11 @@
 
                 if(!empty($oldHeroImage)){
                     $oldImage       =   $oldHeroImage['value'];
-                    $oldImage       =   uploadGambarWebsite('landing-page/'.$oldImage);
-                    if(file_exists($oldImage)){
-                        unlink($oldImage);
+                    if(!empty($oldImage)){
+                        $oldImage       =   uploadGambarWebsite('landing-page/'.$oldImage);
+                        if(file_exists($oldImage)){
+                            unlink($oldImage);
+                        }
                     }
                 }
 
