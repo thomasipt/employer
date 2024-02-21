@@ -178,7 +178,7 @@
 
                     <header class="section-header">
                         <h2>Loker Premium</h2>
-                        <p>Postingan Terakhir Loker Premium</p>
+                        <p>Postingan Loker Premium Terbaru</p>
                     </header>
                         <div class="row">
                             <?php if(count($listLokerPremium) >= 1){ ?>
