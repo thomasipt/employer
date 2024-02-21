@@ -13,6 +13,7 @@
     $heroElement        =   $data['heroElement'];
     $aboutUsElement     =   $data['aboutUsElement'];
     $featuresElement    =   $data['featuresElement'];
+    $listLokerPremium   =   $data['listLokerPremium'];
 
     $heroImagePath      =   $heroElement['_image'];
     $aboutUsImagePath   =   $aboutUsElement['_image'];
@@ -177,40 +178,38 @@
 
                     <header class="section-header">
                         <h2>Loker Premium</h2>
-                        <p>Recent posts form our Loker Premium</p>
+                        <p>Postingan Terakhir Loker Premium</p>
                     </header>
-
-                    <div class="row">
-
-                        <div class="col-lg-4">
-                            <div class="post-box">
-                                <div class="post-img"><img src="<?=base_url()?>assets/flexstart/assets/img/blog/blog-1.jpg" class="img-fluid" alt=""></div>
-                                <span class="post-date">Tue, September 15</span>
-                                <h3 class="post-title">Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit</h3>
-                                <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-                            </div>
+                        <div class="row">
+                            <?php if(count($listLokerPremium) >= 1){ ?>
+                                <?php foreach($listLokerPremium as $lokerPremium){ ?>
+                                    <?php
+                                        $idLoker                =   $lokerPremium['id'];
+                                        $judulLoker             =   $lokerPremium['judul'];
+                                        $deskripsiLoker         =   $lokerPremium['deskripsi'];
+                                        $tanggalPostingLoker    =   $lokerPremium['createdAt'];
+                                    ?>
+                                    <div class="col-lg-4">
+                                        <div class="post-box col">
+                                            <h3 class="post-title"><?=$judulLoker?></h3>
+                                            <?php if(!empty($deskripsiLoker)){ ?>
+                                                <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
+                                            <?php } ?>
+                                            <br />
+                                            <div class="row">
+                                                <span class="qr-code" id='qrCode-<?=$idLoker?>' 
+                                                    style='display:inline-block; width: unset;'
+                                                    data-qr-data='<?=$idLoker?>'></span>
+                                                <div class="col">
+                                                <p class='text-sm text-muted'>Scan untuk melihat detail Lowongan Pekerjaan</p>
+                                                </div>
+                                            </div>
+                                            Diposting pada <?=formattedDate($tanggalPostingLoker)?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } ?>
                         </div>
-
-                        <div class="col-lg-4">
-                            <div class="post-box">
-                                <div class="post-img"><img src="<?=base_url()?>assets/flexstart/assets/img/blog/blog-2.jpg" class="img-fluid" alt=""></div>
-                                <span class="post-date">Fri, August 28</span>
-                                <h3 class="post-title">Et repellendus molestiae qui est sed omnis voluptates magnam</h3>
-                                <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="post-box">
-                                <div class="post-img"><img src="<?=base_url()?>assets/flexstart/assets/img/blog/blog-3.jpg" class="img-fluid" alt=""></div>
-                                <span class="post-date">Mon, July 11</span>
-                                <h3 class="post-title">Quia assumenda est et veritatis aut quae</h3>
-                                <a href="blog-single.html" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-                            </div>
-                        </div>
-
-                    </div>
-
                 </div>
 
             </section><!-- End Recent Blog Posts Section -->
@@ -307,3 +306,18 @@
         <?=view(websiteComponents('footer'))?>
     </body>
 </html>
+<script src='<?=base_url(assetsFolder('plugins/jquery/jquery.min.js'))?>'></script>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<script language='Javascript'>
+    let _qrCode     =   $('.qr-code');
+    _qrCode.each((index, qrCodeElement) => {
+        let _qrCodeItem     =   $(qrCodeElement);
+        let _idLoker        =   _qrCodeItem.data('qrData');
+        
+        new QRCode(document.getElementById(`qrCode-${_idLoker}`), {
+            text: `${_idLoker}`,
+            width: 50.0,
+            height: 50.0
+        });
+    });
+</script>
