@@ -63,7 +63,7 @@
                     <?=$keteranganLoker?>
                     <br />
                 <?php } ?>
-                <h6><b>Deskripsi Pekerjaan</b></h6>
+                <h6 class='mt-3'><b>Deskripsi Pekerjaan</b></h6>
                 <?=$deskripsiLoker?>
                 <br />
                 <h6><b>Kualifikasi Pekerjaan</b></h6>
