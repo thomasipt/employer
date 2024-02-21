@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Homepage;
 use App\Models\HomepageElement;
 use App\Models\Loker;
+use App\Models\LokerFree;
 use App\Models\Paket;
 
 class Home extends BaseController{
@@ -15,6 +16,7 @@ class Home extends BaseController{
         $homepage           =   new Homepage();
         $homepageElement    =   new HomepageElement();
         $loker              =   new Loker();
+        $lokerFree          =   new LokerFree();
 
         $options    =   [
             'order_by'  =>  [
@@ -49,9 +51,11 @@ class Home extends BaseController{
         $featuresElement    =   $homepageElement->convertListELementToKeyValueMap($featuresElement);
 
         $options            =   [
-            'limit' =>  3
+            'limit' =>  6
         ];
         $listLokerPremium   =   $loker->getLoker(null, $options);
+
+        $listLokerFree      =   $lokerFree->getLokerFree(null, $options);
 
         $data   =   [
             'models'    =>  [
@@ -59,6 +63,7 @@ class Home extends BaseController{
                 'homepageElement'   =>  $homepageElement
             ],
             'data'  =>  [
+                'listLokerFree'     =>  $listLokerFree,
                 'listLokerPremium'  =>  $listLokerPremium,
                 'listPaket'         =>  $listPaket,
                 'heroElement'       =>  $heroElement,

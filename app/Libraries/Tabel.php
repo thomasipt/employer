@@ -22,5 +22,6 @@
         public $experience          =   'arif_experience';
         public $homepage            =   'employer_homepage';
         public $homepageElement     =   'employer_homepage_element';
+        public $lokerFree           =   'loker_free';
     }
 ?>

@@ -14,6 +14,7 @@
     $aboutUsElement     =   $data['aboutUsElement'];
     $featuresElement    =   $data['featuresElement'];
     $listLokerPremium   =   $data['listLokerPremium'];
+    $listLokerFree      =   $data['listLokerFree'];
 
     $heroImagePath      =   $heroElement['_image'];
     $aboutUsImagePath   =   $aboutUsElement['_image'];
@@ -171,7 +172,6 @@
                 <!-- End Pricing Section -->
             <?php } ?>
 
-            <!-- ======= Recent Blog Posts Section ======= -->
             <section id="lokerPremium" class="loker-premium recent-blog-posts">
 
                 <div class="container" data-aos="fade-up">
@@ -212,7 +212,50 @@
                         </div>
                 </div>
 
-            </section><!-- End Recent Blog Posts Section -->
+            </section>
+
+            <section id="lokerFree" class="loker-premium recent-blog-posts">
+
+                <div class="container" data-aos="fade-up">
+
+                    <header class="section-header">
+                        <h2>Loker Free</h2>
+                        <p>Postingan Loker Free Terbaru</p>
+                    </header>
+                        <div class="row">
+                            <?php if(count($listLokerFree) >= 1){ ?>
+                                <?php foreach($listLokerFree as $lokerFree){ ?>
+                                    <?php
+                                        $idLoker                =   $lokerFree['id'];
+                                        $judulLoker             =   $lokerFree['judul'];
+                                        $deskripsiLoker         =   $lokerFree['deskripsi'];
+                                        $tanggalPostingLoker    =   $lokerFree['createdAt'];
+                                    ?>
+                                    <div class="col-lg-4">
+                                        <div class="post-box col">
+                                            <h3 class="post-title"><?=$judulLoker?></h3>
+                                            <?php if(!empty($deskripsiLoker)){ ?>
+                                                <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
+                                            <?php } ?>
+                                            <br />
+                                            <div class="row">
+                                                <span class="qr-code" id='qrCode-<?=$idLoker?>' 
+                                                    style='display:inline-block; width: unset;'
+                                                    data-qr-data='<?=$idLoker?>'></span>
+                                                <div class="col">
+                                                <p class='text-sm text-muted'>Scan untuk melihat detail Lowongan Pekerjaan</p>
+                                                </div>
+                                            </div>
+                                            Diposting pada <?=formattedDate($tanggalPostingLoker)?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } ?>
+                        </div>
+                </div>
+
+            </section>
+
 
             <!-- ======= Contact Section ======= -->
             <section id="contact" class="contact">
