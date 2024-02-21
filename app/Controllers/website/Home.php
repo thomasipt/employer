@@ -9,16 +9,17 @@
     use App\Libraries\APIRespondFormat;
     use App\Libraries\EmailSender;
     use App\Libraries\ErrorCode;
-use App\Models\Comopany;
-use App\Models\Company;
-#Models
+
+    #Models
     use App\Models\KategoriLoker;
     use App\Models\Kota;
     use App\Models\Loker;
     use App\Models\Mitra;
     use App\Models\JenisLoker;
-use App\Models\LokerFree;
-use CodeIgniter\API\ResponseTrait;
+    use App\Models\LokerFree;
+    use App\Models\Company;
+
+    use CodeIgniter\API\ResponseTrait;
 
     use Exception;
 
