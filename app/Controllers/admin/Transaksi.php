@@ -150,6 +150,8 @@
         public function mitra($idMitra = null){
             try{
                 $mitra      =   new Mitra();
+                $tabel      =   new Tabel();
+
                 $mitraExist =   !empty($idMitra);
 
                 if($mitraExist){
@@ -167,7 +169,12 @@
 
                 if(!$mitraExist){
                     $options    =   [
-                        'select'    =>  'id, nama'
+                        'select'    =>  'pT.id, pT.nama, count(transaksi.id) as jumlahTransaksi',
+                        'join'      =>  [
+                            ['table' => $tabel->transaksi.' transaksi', 'condition' => 'transaksi.mitra=pT.id']
+                        ],
+                        'having'    =>  ['jumlahTransaksi >=' => 1],
+                        'group_by'  =>  'pT.id'  
                     ];
                     $listMitra  =   $mitra->getMitra(null, $options);
 
