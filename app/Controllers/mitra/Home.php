@@ -2,8 +2,7 @@
     namespace App\Controllers\mitra;
     
     use App\Controllers\BaseController;
-use App\Libraries\APIRespondFormat;
-use CodeIgniter\API\ResponseTrait;
+    use CodeIgniter\API\ResponseTrait;
 
     #Model
     use App\Models\Mitra as MitraModel;
@@ -15,10 +14,13 @@ use CodeIgniter\API\ResponseTrait;
     #Library
     use App\Libraries\FormValidation;
     use App\Libraries\Tabel;
+    use App\Libraries\APIRespondFormat;
 
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
     use Psr\Log\LoggerInterface;
+
+    use Exception;
 
     class Home extends BaseController{
         use ResponseTrait;
@@ -56,14 +58,17 @@ use CodeIgniter\API\ResponseTrait;
             $getJumlahLoker         =   $loker->getLoker(null, $jumlahLokerOptions);
             $jumlahLoker            =   !empty($getJumlahLoker)? $getJumlahLoker['jumlahData'] : 0;
 
-            $paketAktif             =   null;
-            $transaksiAktif         =   $mitra->getPaketAktif($loggedInIDMitra, true);
-            if(!empty($transaksiAktif)){
-                $paketTransaksiAktif    =   $transaksiAktif['paket'];
-                $detailPaket            =   $paket->getPaket($paketTransaksiAktif, ['select' => 'nama']);
-                if(!empty($detailPaket)){
-                    $paketAktif =   $detailPaket['nama'];
+            try{
+                $transaksiAktif         =   $mitra->getPaketAktif($loggedInIDMitra, true);
+                if(!empty($transaksiAktif)){
+                    $paketTransaksiAktif    =   $transaksiAktif['paket'];
+                    $detailPaket            =   $paket->getPaket($paketTransaksiAktif, ['select' => 'nama']);
+                    if(!empty($detailPaket)){
+                        $paketAktif =   $detailPaket['nama'];
+                    }
                 }
+            }catch(Exception $e){
+                $paketAktif =   null;
             }
             
             $transaksiOptions   =   $options;

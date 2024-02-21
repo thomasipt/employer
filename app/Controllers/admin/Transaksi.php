@@ -96,7 +96,11 @@
                 $now        =   rightNow();
                 $isApproved =   $approvement == $transaksi->approvement_approved;
 
-                $transaksiAktifMitra     =   $mitra->getPaketAktif($idMitra, true);
+                try{
+                    $transaksiAktifMitra    =   $mitra->getPaketAktif($idMitra, true);
+                }catch(Exception $e){
+                    $transaksiAktifMitra    =   null;
+                }
 
                 $dataTransaksi  =   [
                     'approvement'   =>  $approvement,

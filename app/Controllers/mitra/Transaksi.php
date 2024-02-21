@@ -153,7 +153,11 @@
                 $tabel              =   new Tabel();
                 $loggedInIDMitra    =   $this->loggedInIDMitra;
 
-                $transaksiAktif     =   $mitra->getPaketAktif($loggedInIDMitra, true);
+                try{
+                    $transaksiAktif     =   $mitra->getPaketAktif($loggedInIDMitra, true);
+                }catch(Exception $e){
+                    $transaksiAktif     =   null;
+                }
 
                 $detailPaket        =   $this->paketChecking($paketCode);
 
