@@ -60,18 +60,14 @@
                     Diposting pada <b><?=formattedDate($tanggalPostingLoker)?></b>
                 </p>
                 <?php if(!empty($keteranganLoker)){ ?>
-                    <?=$keteranganLoker?>
-                    <br />
+                    <div class='d-block'><?=$keteranganLoker?></div>
                 <?php } ?>
                 <h6 class='mt-3'><b>Deskripsi Pekerjaan</b></h6>
-                <?=$deskripsiLoker?>
-                <br />
-                <h6><b>Kualifikasi Pekerjaan</b></h6>
-                <?=$kualifikasiLoker?>
-                <br />
-                <h6><b>Benefit Pekerjaan</b></h6>
-                <?=$benefitLoker?>
-                <br />
+                <div class='d-block'><?=$deskripsiLoker?></div>
+                <h6 class='mt-3'><b>Kualifikasi Pekerjaan</b></h6>
+                <div class='d-block'><?=$kualifikasiLoker?></div>
+                <h6 class='mt-3'><b>Benefit Pekerjaan</b></h6>
+                <div class='d-block'><?=$benefitLoker?></div>
             </div>
         </div>
         <div class="col-4" id='profilePerusahaan'>
