@@ -143,6 +143,7 @@
         $websiteRoutes->get('registrasi', 'Home::registrasi', $options);
         $websiteRoutes->post('process-registrasi', 'Home::prosesRegistrasi', $options);
         $websiteRoutes->get('verifikasi/(:hash)', 'Home::verifikasi/$1', $options);
+        $websiteRoutes->get('loker-premium', 'Home::lokerPremium', $options);
     });
 
     #Mitra Dashboard

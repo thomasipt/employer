@@ -43,29 +43,31 @@
                     $detailJenisPekerjaan   =   $lokerPremium['jenis'];
                     $namaJenisPekerjaan     =   !empty($detailJenisPekerjaan)? $detailJenisPekerjaan['nama'] : '-';
                 ?>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mb-3">
-                    <div class="post-box col">
-                        <div class="row">
-                            <img src="<?=base_url(uploadGambarMitra('compress'))?>/<?=$fotoPerusahaan?>" alt="<?=$namaPerusahaan?>"
-                                class='img-circle img-perusahaan p-0' />
-                            <div class="col ml-5">
-                                <h3 class="post-title mb-0"><?=$judulLoker?></h3>
-                                <span class='text-sm text-muted'><?=$namaPerusahaan?></span>
-                            </div>
-                        </div>
-                        <br />
-                        <label for="lokasi"><b>Lokasi</b></label>
-                        <p class='text-sm text-muted mb-2' id="lokasi"><?=$namaKota?>, <?=$namaProvinsi?></p>
-                        
-                        <label for="gaji"><b>Gaji</b></label>
-                        <p class='text-sm text-muted mb-2' id="gaji">Rp. <?=number_format($gajiMinimumLoker)?> s/d Rp. <?=number_format($gajiMaximumLoker)?></p>
-                        
-                        <label for="jenis"><b>Jenis</b></label>
-                        <p class='text-sm text-muted mb-2' id="jenis"><?=$namaJenisPekerjaan?></p>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mb-3">
+                        <a href="<?=site_url(websiteController('loker-premium'))?>/<?=$idLoker?>" target='_blank'>
+                            <div class="post-box col">
+                                <div class="row">
+                                    <img src="<?=base_url(uploadGambarMitra('compress'))?>/<?=$fotoPerusahaan?>" alt="<?=$namaPerusahaan?>"
+                                        class='img-circle img-perusahaan p-0' />
+                                    <div class="col ml-5">
+                                        <h4 class="post-title mb-0 text-black"><?=$judulLoker?></h4>
+                                        <span class='text-sm text-muted'><?=$namaPerusahaan?></span>
+                                    </div>
+                                </div>
+                                <br />
+                                <label class='text-black' for="lokasi"><b>Lokasi</b></label>
+                                <p class='text-sm text-muted mb-2' id="lokasi"><?=$namaKota?>, <?=$namaProvinsi?></p>
+                                
+                                <label class='text-black' for="gaji"><b>Gaji</b></label>
+                                <p class='text-sm text-muted mb-2' id="gaji">Rp. <?=number_format($gajiMinimumLoker)?> s/d Rp. <?=number_format($gajiMaximumLoker)?></p>
+                                
+                                <label class='text-black' for="jenis"><b>Jenis</b></label>
+                                <p class='text-sm text-muted mb-2' id="jenis"><?=$namaJenisPekerjaan?></p>
 
-                        <p class="text-sm mt-3" style='text-align: right;'>Diposting pada <?=formattedDate($tanggalPostingLoker)?></p>
+                                <p class="text-sm mt-3 text-black" style='text-align: right;'>Diposting pada <?=formattedDate($tanggalPostingLoker)?></p>
+                            </div>
+                        </a>
                     </div>
-                </div>
             <?php } ?>
         <?php }else{ ?>
             <p class="text-sm text-muted text-center">
@@ -97,6 +99,10 @@
         position: relative;
         display: flex;
         flex-direction: column;
+    }
+    .post-box:hover{
+        transform: scale(1.1);
+        box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
     }
     .img-perusahaan{
         width: 85px;
