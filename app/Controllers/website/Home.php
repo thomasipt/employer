@@ -188,64 +188,112 @@
                 return view(websiteView('error'), $data);
             }
         }
-        public function lokerPremium(){
+        public function lokerPremium($encodedIDLoker = null){
             helper('CustomDate');
 
-            $request            =   request();
             $loker              =   new Loker();
             $mitra              =   new Mitra();
-            $kota               =   new Kota();
+            $kategoriLoker      =   new KategoriLoker();
             $tabel              =   new Tabel();
-            $jenis              =   new JenisLoker();
 
-            $search     =   $request->getGet('search');
+            $isDetail   =   !empty($encodedIDLoker);
 
-            $options            =   [
-                'limit' =>  10
-            ];
+            try{
+                if($isDetail){
+                    $idLoker        =   base64_decode($encodedIDLoker);
 
-            if(!empty($search)){
-                unset($options['limit']); #unlimited
-                $options['likeGroup']   =   [
-                    'operator'  =>  $loker->likeGroupOperator_or,
-                    'like'      =>  [
-                        ['judul' => $search],
-                        ['deskripsi' => $search]
-                    ]
+                    $options        =   [
+                        'select'    =>  'pT.*, kota.nama as namaKota, jenis.job_type_name as namaJenis',
+                        'join'      =>  [
+                            ['table' => $tabel->kota.' kota', 'condition' => 'kota.kode=pT.kota'],
+                            ['table' => $tabel->jenis.' jenis', 'condition' => 'jenis.id=pT.jenis']
+                        ]
+                    ];
+                    $detailLoker    =   $loker->getLoker($idLoker, $options);
+                    if(empty($detailLoker)){
+                        throw new Exception('Loker dengan pengenal '.$encodedIDLoker.' tidak ditemukan!');
+                    }
+
+                    $judulLoker         =   $detailLoker['judul'];
+                    $perusahaanLoker    =   $detailLoker['createdBy'];
+
+                    $detailPerusahaan   =   $mitra->getMitra($perusahaanLoker);
+                    
+                    $sektorPerusahaan   =   $detailPerusahaan['sector'];
+                    $detailSektor       =   $kategoriLoker->getKategoriLoker($sektorPerusahaan, ['select' => 'name as nama']);
+
+                    $data   =   [
+                        'pageTitle' =>  $judulLoker,
+                        'view'      =>  websiteView('detail-loker'),
+                        'data'      =>  [
+                            'detailLoker'       =>  $detailLoker,
+                            'detailPerusahaan'  =>  $detailPerusahaan,
+                            'sektorPerusahaan'  =>  $detailSektor
+                        ]
+                    ];
+                    return view(websiteView('index'), $data);
+                }else{
+                    $request            =   request();
+                    $kota               =   new Kota();
+                    $jenis              =   new JenisLoker();
+
+                    $search     =   $request->getGet('search');
+
+                    $options            =   [
+                        'limit' =>  10
+                    ];
+
+                    if(!empty($search)){
+                        unset($options['limit']); #unlimited
+                        $options['likeGroup']   =   [
+                            'operator'  =>  $loker->likeGroupOperator_or,
+                            'like'      =>  [
+                                ['judul' => $search],
+                                ['deskripsi' => $search]
+                            ]
+                        ];
+                    }
+
+                    $listLokerPremium   =   $loker->getLoker(null, $options);
+                    foreach($listLokerPremium as $index => $lokerPremium){
+                        $jenisLoker         =   $lokerPremium['jenis'];
+                        $kotaLoker          =   $lokerPremium['kota'];
+                        $perusahaan         =   $lokerPremium['createdBy'];
+                        $detailPerusahaan   =   $mitra->getMitra($perusahaan, ['select' => 'id, foto, nama']);
+
+                        $options            =   [
+                            'select'    =>  'pT.nama as namaKota, provinsi.nama as namaProvinsi',
+                            'join'      =>  [
+                                ['table' => $tabel->provinsi.' provinsi', 'condition' => 'provinsi.id=pT.province']
+                            ]
+                        ];
+                        $detailKota         =   $kota->getKota($kotaLoker, $options);
+
+                        $detailJenisPekerjaan   =   $jenis->getJenisLoker($jenisLoker, ['select' => 'job_type_name as nama']);
+
+                        $listLokerPremium[$index]['jenis']  =   $detailJenisPekerjaan;
+                        $listLokerPremium[$index]['lokasi'] =   $detailKota;
+                        $listLokerPremium[$index]['mitra']  =   $detailPerusahaan;
+                    }
+
+                    $pageData   =   [
+                        'pageTitle' =>  'Loker Premium',
+                        'view'      =>  websiteView('loker-premium'),
+                        'data'      =>  [
+                            'listLokerPremium'  =>  $listLokerPremium
+                        ]
+                    ];
+                    return view(websiteView('index'), $pageData);
+                }
+            }catch(Exception $e){
+                $data   =   [
+                    'pageTitle' =>  'Lowongan Pekerjaan',
+                    'view'      =>  websiteView('error'),
+                    'title'     =>  'Lowongan Pekerjaan',
+                    'deskripsi' =>  $e->getMessage()
                 ];
+                return view(websiteView('index'), $data);
             }
-
-            $listLokerPremium   =   $loker->getLoker(null, $options);
-            foreach($listLokerPremium as $index => $lokerPremium){
-                $jenisLoker         =   $lokerPremium['jenis'];
-                $kotaLoker          =   $lokerPremium['kota'];
-                $perusahaan         =   $lokerPremium['createdBy'];
-                $detailPerusahaan   =   $mitra->getMitra($perusahaan, ['select' => 'id, foto, nama']);
-
-                $options            =   [
-                    'select'    =>  'pT.nama as namaKota, provinsi.nama as namaProvinsi',
-                    'join'      =>  [
-                        ['table' => $tabel->provinsi.' provinsi', 'condition' => 'provinsi.id=pT.province']
-                    ]
-                ];
-                $detailKota         =   $kota->getKota($kotaLoker, $options);
-
-                $detailJenisPekerjaan   =   $jenis->getJenisLoker($jenisLoker, ['select' => 'job_type_name as nama']);
-
-                $listLokerPremium[$index]['jenis']  =   $detailJenisPekerjaan;
-                $listLokerPremium[$index]['lokasi'] =   $detailKota;
-                $listLokerPremium[$index]['mitra']  =   $detailPerusahaan;
-            }
-
-            $pageData   =   [
-                'pageTitle' =>  'Loker Premium',
-                'view'      =>  websiteView('loker-premium'),
-                'data'      =>  [
-                    'listLokerPremium'  =>  $listLokerPremium
-                ]
-            ];
-            return view(websiteView('index'), $pageData);
-
         }
     }
 ?>
