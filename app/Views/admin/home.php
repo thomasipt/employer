@@ -5,6 +5,11 @@
         'pageTitle' =>  'Home',
         'pageDesc'  =>  'Halaman Awal Administrator'
     ];
+
+    $jumlahMitra                    =   $data['jumlahMitra'];
+    $jumlahLoker                    =   $data['jumlahLoker'];
+    $jumlahKandidat                 =   $data['jumlahKandidat'];
+    $jumlahMitraButuhApprovement    =   $data['jumlahMitraButuhApprovement'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,12 +27,12 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>20</h3>
-                                        <p>Pengajuan</p>
+                                        <h3><?=number_format($jumlahMitra)?></h3>
+                                        <p>Jumlah Mitra Terverifikasi</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-android-playstore"
-                                            title='Jumlah Fasilitas'></i>
+                                            title='Jumlah Mitra (Disetujui)'></i>
                                     </div>
                                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
@@ -35,12 +40,12 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-success">
                                     <div class="inner">
-                                        <h3>3</h3>
-                                        <p>Administrator</p>
+                                        <h3><?=number_format($jumlahLoker)?></h3>
+                                        <p>Lowongan Pekerjaan Premium</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-android-person"
-                                            title='Jumlah Administrator'></i>
+                                            title='Jumlah Loker Premium'></i>
                                     </div>
                                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
@@ -48,8 +53,8 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-warning">
                                     <div class="inner">
-                                        <h3>4</h3>
-                                        <p>Penyuluh</p>
+                                        <h3><?=number_format($jumlahKandidat)?></h3>
+                                        <p>Jumlah Kandidat</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-person-add"
@@ -61,8 +66,8 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-danger">
                                     <div class="inner">
-                                        <h3>6</h3>
-                                        <p>Dinas</p>
+                                        <h3><?=number_format($jumlahMitraButuhApprovement)?></h3>
+                                        <p>Jumlah Mitra (Approvement)</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-android-people"
