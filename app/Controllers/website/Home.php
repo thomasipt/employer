@@ -288,6 +288,9 @@
                         $listLoker[$index]['mitra']  =   $detailPerusahaan;
                     }
 
+                    var_dump($listLoker);
+                    exit;
+
                     $pageData   =   [
                         'pageTitle' =>  ($isPremium)? 'Loker Premium' : 'Loker Free',
                         'view'      =>  ($isPremium)? websiteView('loker-premium') : websiteView('loker-free'),
