@@ -2,8 +2,6 @@
     $listSektor     =   $data['listSektor'];
     $errorLib       =   $library['error'];
     $emailSender    =   $library['emailSender'];
-
-    $configComplete     =   $emailSender->isConfigComplete();
 ?>
 <div class="container">
     <div class="row">
@@ -13,36 +11,30 @@
         <div class="col-lg-7" id='formContainer'>
             <h5><b>Form Registrasi</b></h5>
             <br />
-            <?php if(!$configComplete){ ?>
-                <div class="alert alert-warning">
-                    Harap hubungi administrator untuk melengkapi konfigurasi email, karena konfigurasi tersebut digunakan untuk pengiriman email verifikasi pendaftaran mitra anda
-                </div>
-                <br />
-            <?php } ?>
             <form action="<?=site_url(websiteController('process-registrasi'))?>" id="formMitra">
                 <div class="form-group mb-3">
                     <label for="nama" class='d-block mb-2'>Nama</label>
                     <input type="text" id="nama" class="form-control" name='nama'
-                        placeholder='Nama Lengkap Perusahaan' required <?=(!$configComplete)? 'disabled' : ''?> />
+                        placeholder='Nama Lengkap Perusahaan' required  />
                 </div>
                 <div class="form-group mb-3">
                     <label for="alamat" class='d-block mb-2'>Alamat</label>
                     <textarea id="alamat" class="form-control" name='alamat'
-                        placeholder='Alamat Lengkap Perusahaan' required <?=(!$configComplete)? 'disabled' : ''?>></textarea>
+                        placeholder='Alamat Lengkap Perusahaan' required ></textarea>
                 </div>
                 <div class="form-group mb-3">
                     <label for="telepon" class='d-block mb-2'>Telepon</label>
                     <input type="number" id="telepon" class="form-control" name='telepon'
-                        placeholder='Nomor Telepon' required <?=(!$configComplete)? 'disabled' : ''?> />
+                        placeholder='Nomor Telepon' required  />
                 </div>
                 <div class="form-group mb-3">
                     <label for="email" class='d-block mb-2'>Email</label>
                     <input type="email" id="email" class="form-control" name='email'
-                        placeholder='Alamat Email Resmi' required <?=(!$configComplete)? 'disabled' : ''?> />
+                        placeholder='Alamat Email Resmi' required  />
                 </div>
                 <div class="form-group mb-3">
                     <label for="sektor" class='d-block mb-2'>Sektor</label>
-                    <select name='sektor' class='form-control' id='sektor' required <?=(!$configComplete)? 'disabled' : ''?>>
+                    <select name='sektor' class='form-control' id='sektor' required >
                         <option value="">-- Pilih Sektor --</option>
                         <?php foreach($listSektor as $sektor){ ?>
                             <?php
@@ -56,14 +48,12 @@
                 <div class="form-group mb-3">
                     <label for="pic" class='d-block mb-2'>Nama Penanggung Jawab</label>
                     <input type="text" id="pic" class="form-control" name='pic'
-                        placeholder='Nama Lengkap Penanggung Jawab' required <?=(!$configComplete)? 'disabled' : ''?> />
+                        placeholder='Nama Lengkap Penanggung Jawab' required  />
                 </div>
-                <?php if($configComplete){ ?>
-                    <hr class='mb-4' />
-                    <button class="btn btn-success" type='submit' id='btnSubmit'>
-                        Daftar sebagai Mitra
-                    </button>
-                <?php } ?>
+                <hr class='mb-4' />
+                <button class="btn btn-success" type='submit' id='btnSubmit'>
+                    Daftar sebagai Mitra
+                </button>
             </form>
         </div>
     </div>
