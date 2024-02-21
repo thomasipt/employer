@@ -1,4 +1,8 @@
 <?php
+    $request                =   request();
+    $loggedInDetailMitra    =   (property_exists($request, 'mitra'))? $request->mitra : null;
+    $loggedInIDMitra        =   (!empty($loggedInDetailMitra))? $loggedInDetailMitra['id'] : null;
+
     $transaksiModel =   model('Transaksi');
 
     $mitraToken     =   null;
@@ -8,6 +12,7 @@
         } 
     }
 ?>
+<?php if(!empty($loggedInIDMitra)){ ?>
 <div class="modal fade" id="modalUploadBuktiBayar" tabindex="-1" role="dialog" aria-labelledby="modalUploadBuktiBayarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -39,6 +44,7 @@
         </div>
     </div>
 </div>
+<?php } ?>
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -97,6 +103,9 @@
 
     let _approvementApproved    =   `<?=$transaksiModel->approvement_approved?>`;
     let _approvementRejected    =   `<?=$transaksiModel->approvement_rejected?>`;
+    
+    let _loggedInIDMitra    =   `<?=(!empty($loggedInIDMitra))? $loggedInIDMitra : ''?>`;
+    _loggedInIDMitra        =   (_loggedInIDMitra != '')? _loggedInIDMitra : null;
 
     let _tableLokerOptions = {
         processing: true,
@@ -134,11 +143,14 @@
                     
                     let _buktiBayarHMTL         =   ``;
                     if(_buktiBayar == null){
-                        _buktiBayarHMTL         =   `<span class='badge badge-info blink'>Belum upload bukti bayar</span>
-                                                    <span class='ml-2 fa fa-upload text-info cp'
-                                                        data-id='${_id}'
-                                                        data-nomor='${_nomor}'
-                                                        onClick='_uploadBuktiBayar(this)'></span>`;
+                        _buktiBayarHMTL         =   `<span class='badge badge-info blink'>Belum upload bukti bayar</span>`;
+                        if(_loggedInIDMitra != null){
+                            _buktiBayarHMTL     =   `${_buktiBayarHMTL}
+                                                        <span class='ml-2 fa fa-upload text-info cp'
+                                                            data-id='${_id}'
+                                                            data-nomor='${_nomor}'
+                                                            onClick='_uploadBuktiBayar(this)'></span>`;
+                        }
                     }
                     
                     let _stackedByHTML  =   ``;
@@ -258,38 +270,41 @@
         ]
     };
     let _tabelHistoryTransaksi = _tabelHistoryTransaksiEl.DataTable(_tableLokerOptions);
-
-    async function _uploadBuktiBayar(thisContext){
-        let _el     =   $(thisContext);
-        let _id     =   _el.data('id');
-        let _nomor  =   _el.data('nomor');
-
-        let _nomorTransaksiEl       =   _modalUploadBuktiBayar.find('#nomorTransaksi');
-        let _nomorTransaksiFormEl   =   _modalUploadBuktiBayar.find('.nomorTransaksi');
-
-        _nomorTransaksiEl.text(_nomor);
-        _nomorTransaksiFormEl.val(_nomor);
-        _modalUploadBuktiBayar.modal();
-    } 
-
-    async function _uploadFile(thisContext){
-        await fileHandler(thisContext);
-    }
-
-    _formUploadBuktiBayar.on('submit', async function(e){
-        e.preventDefault();
-        await submitForm(this, async function(responseFromServer){
-            let _status     =   responseFromServer.status;
-            let _message    =   responseFromServer.message;
-
-            let _swalMessage    =   (_message == null)? (_status)? 'Berhasil!' : 'Gagal!' : _message;
-            let _swalType       =   (_status)? 'success' : 'error';
-
-            await notifikasi('Bukti Bayar', _swalMessage, _swalType);
-            if(_status){
-                _tabelHistoryTransaksi.ajax.reload();
-                _modalUploadBuktiBayar.modal('hide');
-            }
-        });
-    });
 </script>
+<?php if(!empty($loggedInIDMitra)){ ?>
+    <script language='Javascript'>
+        async function _uploadBuktiBayar(thisContext){
+            let _el     =   $(thisContext);
+            let _id     =   _el.data('id');
+            let _nomor  =   _el.data('nomor');
+
+            let _nomorTransaksiEl       =   _modalUploadBuktiBayar.find('#nomorTransaksi');
+            let _nomorTransaksiFormEl   =   _modalUploadBuktiBayar.find('.nomorTransaksi');
+
+            _nomorTransaksiEl.text(_nomor);
+            _nomorTransaksiFormEl.val(_nomor);
+            _modalUploadBuktiBayar.modal();
+        } 
+
+        async function _uploadFile(thisContext){
+            await fileHandler(thisContext);
+        }
+
+        _formUploadBuktiBayar.on('submit', async function(e){
+            e.preventDefault();
+            await submitForm(this, async function(responseFromServer){
+                let _status     =   responseFromServer.status;
+                let _message    =   responseFromServer.message;
+
+                let _swalMessage    =   (_message == null)? (_status)? 'Berhasil!' : 'Gagal!' : _message;
+                let _swalType       =   (_status)? 'success' : 'error';
+
+                await notifikasi('Bukti Bayar', _swalMessage, _swalType);
+                if(_status){
+                    _tabelHistoryTransaksi.ajax.reload();
+                    _modalUploadBuktiBayar.modal('hide');
+                }
+            });
+        });
+    </script>
+<?php } ?>
