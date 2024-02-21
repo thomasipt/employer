@@ -195,6 +195,12 @@
                                 <p>Fitur</p>
                             </a>
                         </li>
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('website/landing-page/whatsapp'))?>/" class="nav-link text-sm">
+                                <i class="fab fa-whatsapp nav-icon text-white"></i>
+                                <p>Whatsapp</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">

@@ -13,6 +13,7 @@
         public $heroId      =   1;
         public $aboutUsId   =   2;
         public $featuresId  =   3;
+        public $whatsappId  =   7;
         
         public function getHomepage($id = null, $options = null){
             $d  =   new Database();

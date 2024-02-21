@@ -1,3 +1,15 @@
+<?php
+    $homepageModel          =   model('Homepage');
+    $homepageElementModel   =   model('HomepageElement');
+
+    $options                =   [
+        'where' =>  [
+            'parent'    =>  $homepageModel->whatsappId
+        ]
+    ];
+    $whatsappElement    =   $homepageElementModel->getHomepageElement(null, $options);
+    $whatsappElement    =   $homepageElementModel->convertListELementToKeyValueMap($whatsappElement);
+?>
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="footer-top">
@@ -72,7 +84,7 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
     <i class="bi bi-arrow-up-short"></i>
 </a>
-<a href='https://wa.me/6282362249483' target='_blank' class='chat-whatsapp d-flex align-items-center justify-content-center'>
+<a href='https://wa.me/<?=$whatsappElement['_number']?>?text=<?=$whatsappElement['_template']?>' target='_blank' class='chat-whatsapp d-flex align-items-center justify-content-center'>
     <i class="bi bi-whatsapp"></i>
 </a>
 
