@@ -1,5 +1,6 @@
 <?php
     $featuresElement    =   $data['featuresElement'];
+    $listIcons          =   $data['listIcons'];
 
     $imagePath          =   $featuresElement['_image'];
     $isImageEmpty       =   empty($imagePath);
@@ -45,7 +46,7 @@
                                         name='_title' id='_title' value='<?=(!empty($featuresElement))? $featuresElement['_title'] : '' ?>' required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="features">Features <span class="fa fa-plus-circle cp text-success ml-1" onClick='_addParagraph(this)'></span></label>
+                                    <label for="features">Features <span class="fa fa-plus-circle cp text-success ml-1" onClick='_addFeature(this)'></span></label>
                                     <div id="features">
                                         <p class="text-sm text-muted">Klik + untuk menambahkan konten Info</p>
                                         <?php
@@ -62,8 +63,16 @@
                                                             <div class="col ml-3">
                                                                 <div class='mb-3 row'>
                                                                     <div class="col-4">
-                                                                        <select name="icon[]" class='form-control' required>
+                                                                        <select name="icon[]" class='form-control pilihan-icon' required
+                                                                            onChange='_iconChanged(this)'>
                                                                             <option value="">-- Pilih Icon --</option>
+                                                                            <?php foreach($listIcons as $iconItem){ ?>
+                                                                                <?php
+                                                                                    $isSelected =   $iconItem == $icon;
+                                                                                    $selected   =   ($isSelected)? 'selected' : '';
+                                                                                ?>
+                                                                                <option value="<?=$iconItem?>" <?=$selected?>><?=$iconItem?></option>
+                                                                            <?php } ?>
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-8">
@@ -79,6 +88,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <span class="fa fa-trash text-danger cp ml-3"
+                                                                onClick='_delete(this)'></span>
                                                         </div>
                                                     </div>
                                                 <?php
@@ -108,10 +119,18 @@
 
 <link href="<?= base_url(flexStartAssets('vendor/remixicon/remixicon.css')) ?>" rel="stylesheet">
 
+<?php
+    $listIconOptions    =   '';
+    foreach($listIcons as $iconItem){
+        $listIconOptions    .=  '<option value="'.$iconItem.'">'.$iconItem.'</option>';
+    }
+?>
 <script language='Javascript'>
     let _formFeatures       =   $('#formFeatures');
     let _formFeaturesImage  =   $('#formFeaturesImage');
     let _features           =   $('#features');
+
+    let _listIconsHTML      =   `<?=$listIconOptions?>`;
 
     let _featureHTML        =   `<div class="feature mb-4 pl-3">
                                     <div class="row">
@@ -119,13 +138,15 @@
                                         <div class="col ml-3">
                                             <div class='mb-3 row'>
                                                 <div class="col-4">
-                                                    <select name="icon[]" class='form-control' required>
+                                                    <select name="icon[]" class='form-control pilihan-icon' required
+                                                        onChange='_iconChanged(this)'>
                                                         <option value="">-- Pilih Icon --</option>
+                                                        ${_listIconsHTML}
                                                     </select>
                                                 </div>
                                                 <div class="col-8">
                                                     <input type="text" class="form-control" placeholder='Nama Feature' 
-                                                        name='title[]' required' />
+                                                        name='title[]' required />
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -135,6 +156,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <span class="fa fa-trash text-danger cp ml-3"
+                                            onClick='_delete(this)'></span>
                                     </div>
                                 </div>`;
 
@@ -176,9 +199,32 @@
         await fileHandler(thisContext);
     }
     
-    async function _addParagraph(thisContext){
+    async function _addFeature(thisContext){
         let _el     =   $(thisContext);
-        _features.append(_featureHTML);
+        
+        let _localFeatureHTML   =   _featureHTML;
+        _features.append(_localFeatureHTML);
+    }
+    
+    $('.pilihan-icon').select2({
+        theme: 'bootstrap4'
+    });
+
+    async function _iconChanged(thisContext){
+        let _el         =   $(thisContext);
+        let _parent     =   _el.parents('.feature');
+        let _icon       =   _parent.find('.feature-icon');
+
+        let _selectedIcon   =   _el.val();
+
+        let _iconClass  =   `${_selectedIcon} feature-icon`;
+        _icon.attr('class', _iconClass);
+    }
+    async function _delete(thisContext){
+        let _el         =   $(thisContext);
+        let _parent     =   _el.parents('.feature');
+
+        _parent.remove();
     }
 </script>
 <style type='text/css'>

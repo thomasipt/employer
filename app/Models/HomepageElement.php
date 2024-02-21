@@ -46,5 +46,12 @@
 
             return $keyValueMap;
         }
+        public function getRemixicon(){
+            $fileContent        =   file_get_contents(flexStartAssets('vendor/remixicon/remixicon.json'));
+            $decodedContent     =   json_decode($fileContent);
+            $listIcons          =   $decodedContent->listIcons;
+
+            return $listIcons;
+        }
     }
 ?>

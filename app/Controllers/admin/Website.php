@@ -89,6 +89,11 @@
                     $sectionName    =>  $sectionElement
                 ];
 
+                if($idSection == $homepage->featuresId){                    
+                    $listIcons      =   $homepageElement->getRemixicon();
+                    $data['data']['listIcons']  =   $listIcons;
+                }
+
                 return view(adminView('index'), $data);
             }catch(Exception $e){
                 $data   =   [
@@ -100,6 +105,7 @@
         }
         public function saveLandingPage($section){
             $request            =   request();
+            $homepage           =   new Homepage();
             $homepageElement    =   new HomepageElement();
 
             $status     =   false;
@@ -129,6 +135,26 @@
                         $key    =   $element['key'];
 
                         $newValue   =   $request->getPost($key);
+                        
+                        if($idSection == $homepage->featuresId){
+                            if($key == '_feature'){
+                                $featureIcon            =   $request->getPost('icon');
+                                $featureTitle           =   $request->getPost('title');
+                                $featureDescription     =   $request->getPost('description');
+
+                                $listIconsFeature   =   [];
+                                for($i = 0; $i <= count($featureIcon) - 1; $i++){
+                                    $featureIconItem    =   [
+                                        'icon'          =>  $featureIcon[$i],
+                                        'title'         =>  $featureTitle[$i],
+                                        'description'   =>  $featureDescription[$i]
+                                    ];
+                                    array_push($listIconsFeature, $featureIconItem);
+                                }
+                                $newValue   =   json_encode($listIconsFeature);
+                            }
+                        }
+
                         if(!empty($newValue)){
                             $newData    =   [
                                 'value' =>  $newValue
