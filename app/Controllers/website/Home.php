@@ -9,15 +9,16 @@
     use App\Libraries\APIRespondFormat;
     use App\Libraries\EmailSender;
     use App\Libraries\ErrorCode;
-
-    #Models
+use App\Models\Comopany;
+use App\Models\Company;
+#Models
     use App\Models\KategoriLoker;
     use App\Models\Kota;
     use App\Models\Loker;
     use App\Models\Mitra;
     use App\Models\JenisLoker;
-
-    use CodeIgniter\API\ResponseTrait;
+use App\Models\LokerFree;
+use CodeIgniter\API\ResponseTrait;
 
     use Exception;
 
@@ -188,17 +189,25 @@
                 return view(websiteView('error'), $data);
             }
         }
-        public function lokerPremium($encodedIDLoker = null){
+        public function loker($statusLoker, $encodedIDLoker = null){
             helper('CustomDate');
 
             $loker              =   new Loker();
+            $lokerFree          =   new LokerFree();
             $mitra              =   new Mitra();
+            $company            =   new Company();
             $kategoriLoker      =   new KategoriLoker();
             $tabel              =   new Tabel();
 
             $isDetail   =   !empty($encodedIDLoker);
 
             try{
+                if(!in_array($statusLoker, ['free', 'premium'])){
+                    throw new Exception('Jenis Loker (Premium/Free) tidak valid1');
+                }
+
+                $isPremium  =   $statusLoker == 'premium';
+
                 if($isDetail){
                     $idLoker        =   base64_decode($encodedIDLoker);
 
@@ -209,7 +218,7 @@
                             ['table' => $tabel->jenis.' jenis', 'condition' => 'jenis.id=pT.jenis']
                         ]
                     ];
-                    $detailLoker    =   $loker->getLoker($idLoker, $options);
+                    $detailLoker    =   ($isPremium)? $loker->getLoker($idLoker, $options) : $lokerFree->getLokerFree($idLoker, $options);
                     if(empty($detailLoker)){
                         throw new Exception('Loker dengan pengenal '.$encodedIDLoker.' tidak ditemukan!');
                     }
@@ -217,7 +226,7 @@
                     $judulLoker         =   $detailLoker['judul'];
                     $perusahaanLoker    =   $detailLoker['createdBy'];
 
-                    $detailPerusahaan   =   $mitra->getMitra($perusahaanLoker);
+                    $detailPerusahaan   =   ($isPremium)? $mitra->getMitra($perusahaanLoker) : $company->getCompany($perusahaanLoker);
                     
                     $sektorPerusahaan   =   $detailPerusahaan['sector'];
                     $detailSektor       =   $kategoriLoker->getKategoriLoker($sektorPerusahaan, ['select' => 'name as nama']);
@@ -254,12 +263,14 @@
                         ];
                     }
 
-                    $listLokerPremium   =   $loker->getLoker(null, $options);
-                    foreach($listLokerPremium as $index => $lokerPremium){
+                    $listLoker   =   ($isPremium)? $loker->getLoker(null, $options) : $lokerFree->getLokerFree(null, $options);
+                    foreach($listLoker as $index => $lokerPremium){
                         $jenisLoker         =   $lokerPremium['jenis'];
                         $kotaLoker          =   $lokerPremium['kota'];
                         $perusahaan         =   $lokerPremium['createdBy'];
-                        $detailPerusahaan   =   $mitra->getMitra($perusahaan, ['select' => 'id, foto, nama']);
+
+                        $detailPerusahaanOptions    =   ['select' => 'id, foto, nama'];
+                        $detailPerusahaan           =   ($isPremium)? $mitra->getMitra($perusahaan, $detailPerusahaanOptions) : $company->getCompany($perusahaan, $detailPerusahaanOptions);
 
                         $options            =   [
                             'select'    =>  'pT.nama as namaKota, provinsi.nama as namaProvinsi',
@@ -271,16 +282,16 @@
 
                         $detailJenisPekerjaan   =   $jenis->getJenisLoker($jenisLoker, ['select' => 'job_type_name as nama']);
 
-                        $listLokerPremium[$index]['jenis']  =   $detailJenisPekerjaan;
-                        $listLokerPremium[$index]['lokasi'] =   $detailKota;
-                        $listLokerPremium[$index]['mitra']  =   $detailPerusahaan;
+                        $listLoker[$index]['jenis']  =   $detailJenisPekerjaan;
+                        $listLoker[$index]['lokasi'] =   $detailKota;
+                        $listLoker[$index]['mitra']  =   $detailPerusahaan;
                     }
 
                     $pageData   =   [
-                        'pageTitle' =>  'Loker Premium',
-                        'view'      =>  websiteView('loker-premium'),
+                        'pageTitle' =>  ($isPremium)? 'Loker Premium' : 'Loker Free',
+                        'view'      =>  ($isPremium)? websiteView('loker-premium') : websiteView('loker-free'),
                         'data'      =>  [
-                            'listLokerPremium'  =>  $listLokerPremium
+                            'listLoker'  =>  $listLoker
                         ]
                     ];
                     return view(websiteView('index'), $pageData);

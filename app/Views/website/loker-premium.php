@@ -2,7 +2,7 @@
     $request    =   request();
     $search     =   $request->getGet('search');
 
-    $listLokerPremium   =   $data['listLokerPremium'];
+    $listLokerPremium   =   $data['listLoker'];
 ?>
 <div class="container">
     <div class="row">

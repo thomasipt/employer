@@ -15,7 +15,7 @@
     $namaJenisLoker  =   $detailLoker['namaJenis'];
     $deskripsiLoker =   $detailLoker['deskripsi'];
     $tanggalPostingLoker    =   $detailLoker['createdAt'];
-    $keteranganLoker        =   $detailLoker['keterangan'];
+    $keteranganLoker        =   (array_key_exists('keterangan', $detailLoker))? $detailLoker['keterangan'] : null;
     $kualifikasiLoker        =   $detailLoker['kualifikasi'];
     $benefitLoker           =   $detailLoker['benefit'];
     $gajiMinimumLoker       =   $detailLoker['gajiMinimum'];

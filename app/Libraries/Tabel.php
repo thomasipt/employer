@@ -23,5 +23,6 @@
         public $homepage            =   'employer_homepage';
         public $homepageElement     =   'employer_homepage_element';
         public $lokerFree           =   'loker_free';
+        public $company             =   'company';
     }
 ?>
