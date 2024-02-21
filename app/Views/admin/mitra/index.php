@@ -71,33 +71,14 @@
                     let _approvement    =   data.approvement;   
                     let _approvementAt  =   data.approvementAt;
 
-                    let _approver           =   data.approver;
-                    let _administrator      =   _approver.administrator;
-                    let _namaAdministrator  =   _administrator.nama;
-
-                    let _approvementHTML   =   `<span class='text-sm'><b class='text-info'>Perlu verifikasi persetujuan/penolakan</b></span>`;
-                    if(_approvement == _approvementApproved){
-                        _approvementHTML   =   `<span class='text-sm'>
-                                                    <span class='badge badge-success mr-2'>Disetujui</span>
-                                                    Oleh <b>${_namaAdministrator}</b> pada <b>${convertDateTime(_approvementAt)}</b>
-                                                </span>`;
-                    }
-                    if(_approvement == _approvementRejected){
-                        _approvementHTML   =   `<span class='text-sm'>
-                                                    <span class='badge badge-danger mr-2'>Ditolak</span>
-                                                    Oleh <b>${_namaAdministrator}</b> pada <b>${convertDateTime(_approvementAt)}</b>
-                                                </span>`;
-                    }
-
                     return `<div class='row'>
                                 <a href='<?=base_url(uploadGambarMitra())?>/${_foto}' target='_blank'>
                                     <img src='<?=base_url(uploadGambarMitra('compress'))?>/${_foto}' alt='${_nama}' class='img-50-50 img-circle'
                                         style='object-fit: cover;' />
                                 </a>
                                 <div class='col ml-3'>
-                                    <h6 class='mb-2'>${_nama}</h6>
+                                    <h6 class='mb-1'>${_nama}</h6>
                                     <p class='text-sm text-muted mb-0'>${_alamat}</p>
-                                    ${_approvementHTML}
                                 </div>
                             </div>`;
                 }
