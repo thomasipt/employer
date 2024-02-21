@@ -20,7 +20,10 @@
         public $approvement_rejected    =   'rejected';
         public $approvement;
 
-        public $passwordDefault     =   '123456';
+        public $passwordDefault         =   '123456';
+
+        public $createdFrom_employer    =   'employer';
+        public $createdFrom;
 
         public function __construct(){
             parent::__construct();
@@ -30,6 +33,9 @@
 
             $emailVerification          =   [$this->emailVerification_verified];
             $this->emailVerification    =   $emailVerification;
+
+            $createdFrom        =   [$this->createdFrom_employer];
+            $this->createdFrom  =   $createdFrom;
         }
 
         public function getMitra($id = null, $options = null){
