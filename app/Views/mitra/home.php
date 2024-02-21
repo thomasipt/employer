@@ -5,6 +5,11 @@
         'pageTitle' =>  'Home',
         'pageDesc'  =>  'Halaman Awal Mitra'
     ];
+
+    $jumlahLoker            =   $data['jumlahLoker'];
+    $paketAktif             =   $data['paketAktif'];
+    $jumlahHistoryTransaksi =   $data['jumlahHistoryTransaksi'];
+    $jumlahTransaksiPending =   $data['jumlahTransaksiPending'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +27,8 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h3>20</h3>
-                                        <p>Pengajuan</p>
+                                        <h3><?=number_format($jumlahLoker)?></h3>
+                                        <p>Jumlah Loker</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-android-playstore"
@@ -35,8 +40,8 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-success">
                                     <div class="inner">
-                                        <h3>3</h3>
-                                        <p>Administrator</p>
+                                        <h3><?=$paketAktif?></h3>
+                                        <p>Paket Aktif</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-android-person"
@@ -48,8 +53,8 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-warning">
                                     <div class="inner">
-                                        <h3>4</h3>
-                                        <p>Pelamar</p>
+                                        <h3><?=number_format($jumlahHistoryTransaksi)?></h3>
+                                        <p>Transaksi Berhasil</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-person-add"
@@ -61,8 +66,8 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-danger">
                                     <div class="inner">
-                                        <h3>6</h3>
-                                        <p>Jobs</p>
+                                        <h3><?=($jumlahTransaksiPending >= 1)? number_format($jumlahTransaksiPending) : 'Tidak Ada'?></h3>
+                                        <p>Transaksi Pending</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-android-people"

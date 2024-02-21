@@ -8,11 +8,14 @@ use CodeIgniter\API\ResponseTrait;
     #Model
     use App\Models\Mitra as MitraModel;
     use App\Models\MitraLog;
+    use App\Models\Loker;
+    use App\Models\Paket;
+    use App\Models\Transaksi;
 
     #Library
     use App\Libraries\FormValidation;
     use App\Libraries\Tabel;
-    
+
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
     use Psr\Log\LoggerInterface;
@@ -34,7 +37,57 @@ use CodeIgniter\API\ResponseTrait;
             }
         }
         public function index(){
-           return view(mitraView('home'));
+            $loggedInIDMitra    =   $this->loggedInIDMitra;
+
+            $loker  =   new Loker();
+            $mitra  =   new MitraModel();
+            $paket  =   new Paket();
+            $transaksi  =   new Transaksi();
+            
+            $options    =   [
+                'singleRow' =>  true,
+                'select'    =>  'count(id) as jumlahData'
+            ];
+
+            $jumlahLokerOptions             =   $options;
+            $jumlahLokerOptions['where']    =   [
+                'createdBy' =>  $loggedInIDMitra
+            ];
+            $getJumlahLoker         =   $loker->getLoker(null, $jumlahLokerOptions);
+            $jumlahLoker            =   !empty($getJumlahLoker)? $getJumlahLoker['jumlahData'] : 0;
+
+            $paketAktif             =   null;
+            $transaksiAktif         =   $mitra->getPaketAktif($loggedInIDMitra, true);
+            if(!empty($transaksiAktif)){
+                $paketTransaksiAktif    =   $transaksiAktif['paket'];
+                $detailPaket            =   $paket->getPaket($paketTransaksiAktif, ['select' => 'nama']);
+                if(!empty($detailPaket)){
+                    $paketAktif =   $detailPaket['nama'];
+                }
+            }
+            
+            $transaksiOptions   =   $options;
+            $transaksiOptions['where']  =   [
+                'mitra'         =>  $loggedInIDMitra,
+                'approvement'   =>  $transaksi->approvement_approved
+            ];
+            $getJumlahTransaksi     =   $transaksi->getTransaksi(null, $transaksiOptions);
+            $jumlahHistoryTransaksi =   !empty($getJumlahTransaksi)? $getJumlahTransaksi['jumlahData'] : 0;
+
+            $transaksiPendingOptions    =   $transaksiOptions;
+            $transaksiPendingOptions['where']['approvement']    =   null;
+            $getJumlahTransaksiPending      =   $transaksi->getTransaksi(null, $transaksiPendingOptions);
+            $jumlahTransaksiPending         =   !empty($getJumlahTransaksiPending)? $getJumlahTransaksiPending['jumlahData'] : 0;
+
+            $data   =   [
+                'data'  =>  [
+                    'jumlahLoker'   =>  $jumlahLoker,
+                    'paketAktif'    =>  $paketAktif,
+                    'jumlahHistoryTransaksi'    =>  $jumlahHistoryTransaksi,
+                    'jumlahTransaksiPending'    =>  $jumlahTransaksiPending
+                ]
+            ];   
+            return view(mitraView('home'), $data);
         }
         public function profile(){
             helper('CustomDate');
