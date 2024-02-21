@@ -208,6 +208,11 @@
                                         </div>
                                     </div>
                                 <?php } ?>
+                                <div class="col text-center mt-5">
+                                    <a href="<?=site_url(websiteController('loker-premium'))?>">
+                                        <button class="btn btn-primary">Lihat Loker Premium Lainnya</button>
+                                    </a>
+                                </div>
                             <?php } ?>
                         </div>
                 </div>
@@ -250,6 +255,11 @@
                                         </div>
                                     </div>
                                 <?php } ?>
+                                <div class="col text-center mt-5">
+                                    <a href="<?=site_url(websiteController('loker-free'))?>">
+                                        <button class="btn btn-primary">Lihat Loker Free Lainnya</button>
+                                    </a>
+                                </div>
                             <?php } ?>
                         </div>
                 </div>
