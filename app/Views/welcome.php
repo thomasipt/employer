@@ -162,7 +162,7 @@
                                             <sup>Rp.</sup> <?=number_format($hargaPaket)?><span></span>
                                         </div>
                                             <p class='text-center text-sm'><?=$durasiPaket?> Hari</p>
-                                        <img src="<?=base_url(uploadGambarPaket('compress'))?>/<?=$fotoPaket?>" 
+                                        <img src="<?=base_url(uploadGambarPaket($fotoPaket))?>" 
                                             class="img-fluid" alt="<?=$namaPaket?>" 
                                             onError='this.src="<?=base_url(assetsFolder('img/empty.png'))?>"' />
                                         <div class="d-block"><?=$keteranganPaket?></div>
