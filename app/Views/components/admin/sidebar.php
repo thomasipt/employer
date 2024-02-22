@@ -197,8 +197,14 @@
                         </li>
                         <li class="nav-item ml-3">
                             <a href="<?=site_url(adminController('website/landing-page/whatsapp'))?>/" class="nav-link text-sm">
-                                <i class="fab fa-whatsapp nav-icon text-white"></i>
+                                <i class="fab fa-whatsapp nav-icon text-success"></i>
                                 <p>Whatsapp</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('website/landing-page/paket'))?>/" class="nav-link text-sm">
+                                <i class="fa fa-layer-group nav-icon text-warning"></i>
+                                <p>Paket</p>
                             </a>
                         </li>
                     </ul>

@@ -87,6 +87,9 @@
                 if($idSection == $homepage->whatsappId){
                     $sectionName    =   'whatsappElement';
                 }
+                if($idSection == $homepage->paketId){
+                    $sectionName    =   'paketElement';
+                }
                 
                 $data['data']   =   [
                     $sectionName    =>  $sectionElement

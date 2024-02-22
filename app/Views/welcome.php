@@ -9,13 +9,18 @@
 
     $view   =   (isset($view))? $view : null;
     
-    $listPaket          =   $data['listPaket'];
+    #Element
     $heroElement        =   $data['heroElement'];
     $aboutUsElement     =   $data['aboutUsElement'];
     $featuresElement    =   $data['featuresElement'];
+    $paketElement       =   $data['paketElement'];
+
+    #Data
+    $listPaket          =   $data['listPaket'];
     $listLokerPremium   =   $data['listLokerPremium'];
     $listLokerFree      =   $data['listLokerFree'];
 
+    #Image Element
     $heroImagePath      =   $heroElement['_image'];
     $aboutUsImagePath   =   $aboutUsElement['_image'];
     $featuresImagePath  =   $featuresElement['_image'];
@@ -126,8 +131,8 @@
                 <section id="pricing" class="pricing">
                     <div class="container" data-aos="fade-up">
                         <header class="section-header">
-                            <h2>Paket</h2>
-                            <p>Cek Paket Kami</p>
+                            <h2><?=$paketElement['_title']?></h2>
+                            <p><?=$paketElement['_description']?></p>
                         </header>
                         <div class="row gy-4 d-flex justify-content-center" data-aos="fade-left">
                             <?php foreach($listPaket as $index => $paket){ ?>

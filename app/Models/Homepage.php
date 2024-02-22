@@ -14,6 +14,7 @@
         public $aboutUsId   =   2;
         public $featuresId  =   3;
         public $whatsappId  =   7;
+        public $paketId     =   8;
         
         public function getHomepage($id = null, $options = null){
             $d  =   new Database();
