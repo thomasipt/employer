@@ -163,7 +163,8 @@
                                         </div>
                                             <p class='text-center text-sm'><?=$durasiPaket?> Hari</p>
                                         <img src="<?=base_url(uploadGambarPaket('compress'))?>/<?=$fotoPaket?>" 
-                                            class="img-fluid" alt="<?=$namaPaket?>" />
+                                            class="img-fluid" alt="<?=$namaPaket?>" 
+                                            onError='this.src="<?=base_url(assetsFolder('img/empty.png'))?>"' />
                                         <div class="d-block"><?=$keteranganPaket?></div>
                                         <br />
                                         <br />
