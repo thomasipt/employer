@@ -16,6 +16,8 @@
         public $code;
         public $color;
 
+        public $fotoDefault     =   'paket-default.png';
+
         public $persentasePPN     =   10;
 
         public function __construct(){
