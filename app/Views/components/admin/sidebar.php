@@ -103,6 +103,20 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item <?=($currentController == 'paket')? 'menu-is-opening menu-open' : ''?> ml-3">
+                            <a href="<?=site_url(adminController('paket'))?>" class="nav-link text-sm">
+                                <i class="far fa-circle nav-icon text-success"></i>
+                                <p>Paket</p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item ml-3">
+                                    <a href="<?=site_url(adminController('paket'))?>" class="nav-link text-sm">
+                                        <i class="fa fa-layer-group nav-icon"></i>
+                                        <p>List Paket</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item <?=($currentController == 'mitra')? 'menu-is-opening menu-open' : ''?>">

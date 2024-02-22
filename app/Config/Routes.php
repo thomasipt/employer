@@ -132,6 +132,23 @@
             $websiteRoutes->post('landing-page/(:any)', 'Website::saveLandingPage/$1', $additionalOptions);
             $websiteRoutes->post('landing-page-image/(:any)', 'Website::saveLandingPageImage/$1', $additionalOptions);
         });
+        
+        #Paket
+        $adminRoutes->group('paket', static function($paketRoutes){
+            $additionalOptions  =   [
+                'namespace' =>  'App\Controllers\admin',
+                'filter'    =>  'auth-filter'
+            ];
+
+            $paketRoutes->get('', 'Paket::index', $additionalOptions);
+            $paketRoutes->get('get-list-paket', 'Paket::getListPaket', $additionalOptions);
+
+            // $paketRoutes->get('add', 'JenisLoker::add', $additionalOptions);
+            // $paketRoutes->get('edit/(:num)', 'JenisLoker::add/$1', $additionalOptions);
+            // $paketRoutes->post('save', 'JenisLoker::saveJenisLoker', $additionalOptions);
+            // $paketRoutes->post('save/(:num)', 'JenisLoker::saveJenisLoker/$1', $additionalOptions);
+            // $paketRoutes->post('delete/(:num)', 'JenisLoker::deleteJenisLoker/$1', $additionalOptions);
+        });
     });
 
     #Website
