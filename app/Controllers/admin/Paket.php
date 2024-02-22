@@ -12,6 +12,7 @@
     use App\Libraries\FormValidation;
     use App\Libraries\Tabel;
     use App\Libraries\APIRespondFormat;
+    use App\Libraries\FileUpload;
 
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
@@ -152,6 +153,9 @@
                 $doesUpdate         =   !empty($idPaket);
                 $detailPaket        =   ($doesUpdate)? $this->paketChecking($idPaket) : null;
 
+                $fileFotoPaket          =   $request->getFile('foto');
+                $isFileAttached         =   !empty($fileFotoPaket);
+
                 $validationRules    =   [
                     'nama'      =>  'required',
                     'durasi'    =>  'required|numeric',
@@ -182,6 +186,38 @@
                     if($savePaket){
                         $idPaket    =   $savePaket;
                         
+                        if($isFileAttached){
+                            $fileUpload     =   new FileUpload();
+
+                            $fileExtension  =   $fileFotoPaket->getExtension();
+                            $fileName       =   'Paket-'.$idPaket.'-'.date('YmdHis').'.'.$fileExtension;
+
+                            $uploadOriginalFile     =   $fileFotoPaket->move(uploadGambarPaket(), $fileName);
+                            $fileUpload->resizeImage(uploadGambarPaket($fileName), uploadGambarPaket('compress/'.$fileName));
+                            if($uploadOriginalFile){
+                                $dataFotoPaket  =   [
+                                    'foto'  =>  $fileName
+                                ];
+                                $savePaket  =   $paketModel->savePaket($idPaket, $dataFotoPaket);
+                                if($savePaket){
+                                    if($doesUpdate){
+                                        $oldFoto        =   $detailPaket['foto'];
+                                        if($oldFoto != $paketModel->fotoDefault){
+                                            $oldFotoPaket           =   uploadGambarPaket($oldFoto);
+                                            $oldFotoCompressPaket   =   uploadGambarPaket('compress/'.$oldFoto);
+                                            
+                                            if(file_exists($oldFotoPaket)){
+                                                unlink($oldFotoPaket);
+                                            }
+                                            if(file_exists($oldFotoCompressPaket)){
+                                                unlink($oldFotoCompressPaket);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                         $status     =   true;
                         $message    =   (!$doesUpdate)? 'Berhasil menambahkan paket baru!' : 'Berhasil mengupdate paket!';
                         $data       =   ['id' => $idPaket];

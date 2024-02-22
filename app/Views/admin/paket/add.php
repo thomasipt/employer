@@ -25,10 +25,20 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form id="formPaket" action='<?=$actionURL?>' method='post'
-                            data-id-paket='<?=($doesUpdate)? $dP['id'] : '' ?>'>
+                <form id="formPaket" action='<?=$actionURL?>' method='post'
+                    data-id-paket='<?=($doesUpdate)? $dP['id'] : '' ?>' enctype='multipart/form-data'>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for='uploadButton' class='w-100'>
+                                <input type="file" name="foto" id='uploadButton' style='display:none;'
+                                    onChange='_uploadFile(this)'
+                                    data-preview='#uploadIcon' />
+                                <img src='<?=base_url(($doesUpdate)? uploadGambarPaket($dP['foto']) : assetsFolder('img/upload-icon.png'))?>' alt='<?=($doesUpdate)? $dP['nama'] : 'Upload Icon' ?>' class='w-100 d-block m-auto'
+                                    id='uploadIcon' />
+                            </label>
+                            <p class="text-sm text-muted text-center">Klik gambar untuk memilih gambar</p>
+                        </div>
+                        <div class="col-lg-8">
                             <div class="col col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
@@ -56,9 +66,9 @@
                                     <button class="btn btn-default" type='button'>Back to List Paket</button>
                                 </a>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -91,4 +101,8 @@
             }
         })
     });
+
+    async function _uploadFile(thisContext){
+        await fileHandler(thisContext);
+    }
 </script>

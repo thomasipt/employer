@@ -60,6 +60,7 @@
                 data: null,
                 render: function(data, type, row, meta) {
                     let _code           =   data.code;
+                    let _foto           =   data.foto;
                     let _nama           =   data.nama;
                     let _durasi         =   data.durasi;
                     let _harga          =   data.harga;
@@ -72,9 +73,17 @@
                         _keteranganHTML =   _keterangan;
                     }
 
-                    return `<h6 class='mb-1'>${_nama}</h6>
-                            <p class='text-sm mb-2'>${_hargaHTML} / <b class='text-primary'>${numeral(_durasi).format('0,0')} Hari</b></p>
-                            <p class='text-sm text-muted mb-1'>${_keteranganHTML}</p>`;
+                    let _imgURL =   `<?=base_url(uploadGambarPaket('compress'))?>/${_foto}`;
+
+                    return `<div class='row'>
+                                <img src='${_imgURL}' class='img-circle img-50-50' alt='${_nama}'\
+                                    style='object-fit: cover;' />
+                                <div class='col ml-3'>
+                                    <h6 class='mb-1'>${_nama}</h6>
+                                    <p class='text-sm mb-2'>${_hargaHTML} / <b class='text-primary'>${numeral(_durasi).format('0,0')} Hari</b></p>
+                                    <p class='text-sm text-muted mb-1'>${_keteranganHTML}</p>
+                                </div>
+                            </div>`;
                 }
             },
             {
