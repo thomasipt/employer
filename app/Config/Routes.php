@@ -144,9 +144,9 @@
             $paketRoutes->get('get-list-paket', 'Paket::getListPaket', $additionalOptions);
 
             // $paketRoutes->get('add', 'JenisLoker::add', $additionalOptions);
-            // $paketRoutes->get('edit/(:num)', 'JenisLoker::add/$1', $additionalOptions);
+            $paketRoutes->get('edit/(:num)', 'Paket::add/$1', $additionalOptions);
             // $paketRoutes->post('save', 'JenisLoker::saveJenisLoker', $additionalOptions);
-            // $paketRoutes->post('save/(:num)', 'JenisLoker::saveJenisLoker/$1', $additionalOptions);
+            $paketRoutes->post('save/(:num)', 'Paket::savePaket/$1', $additionalOptions);
             // $paketRoutes->post('delete/(:num)', 'JenisLoker::deleteJenisLoker/$1', $additionalOptions);
         });
     });

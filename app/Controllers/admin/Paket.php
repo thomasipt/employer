@@ -115,18 +115,17 @@
             
             return $this->respond($response);
         }
-        /*
-        public function add($idJenisLoker = null){
+        public function add($idPaket = null){
             try{
-                $doesUpdate         =   !empty($idJenisLoker);
-                $detailJenisLoker   =   ($doesUpdate)? $this->paketChecking($idJenisLoker) : null;
+                $doesUpdate         =   !empty($idPaket);
+                $detailPaket        =   ($doesUpdate)? $this->paketChecking($idPaket) : null;
 
                 $data   =   [
-                    'pageTitle' =>  ($doesUpdate)? 'Update Jenis Loker' : 'Jenis Loker Baru',
-                    'pageDesc'  =>  ($doesUpdate)? $detailJenisLoker['nama'] : null,
+                    'pageTitle' =>  ($doesUpdate)? 'Update Paket' : 'Paket Baru',
+                    'pageDesc'  =>  ($doesUpdate)? $detailPaket['nama'] : null,
                     'view'      =>  adminView('paket/add'),
                     'data'      =>  [
-                        'detailJenisLoker'   =>  $detailJenisLoker
+                        'detailPaket'   =>  $detailPaket
                     ]
                 ];
                 return view(adminView('index'), $data);
@@ -138,9 +137,9 @@
                 return view(adminView('error'), $data);
             }
         }
-        public function saveJenisLoker($idJenisLoker = null){
+        public function savePaket($idPaket = null){
             $status     =   false;
-            $message    =   'Gagal memproses jenis loker! Silahkan ulangi lagi!';
+            $message    =   'Gagal memproses paket! Silahkan ulangi lagi!';
             $data       =   null;
 
             try{
@@ -148,39 +147,50 @@
                 
                 $request            =   request();
                 $formValidation     =   new FormValidation();
-                $paketModel    =   new JenisLokerModel();
+                $paketModel         =   new PaketModel();
 
-                $doesUpdate         =   !empty($idJenisLoker);
-                $detailJenisLoker   =   ($doesUpdate)? $this->paketChecking($idJenisLoker) : null;
+                $doesUpdate         =   !empty($idPaket);
+                $detailPaket        =   ($doesUpdate)? $this->paketChecking($idPaket) : null;
 
                 $validationRules    =   [
-                    'nama' =>  'required'
+                    'nama'      =>  'required',
+                    'durasi'    =>  'required|numeric',
+                    'harga'     =>  'required|numeric'
                 ];
     
                 $validationMessage  =   $formValidation->generateCustomMessageForSingleRule($validationRules);
     
                 if($this->validate($validationRules, $validationMessage)){
                     $nama       =   $request->getPost('nama');
+                    $durasi     =   $request->getPost('durasi');
+                    $harga      =   $request->getPost('harga');
+                    $keterangan =   $request->getPost('keterangan');
 
-                    $dataJenisLoker  =   [
-                        'job_type_name' =>  $nama
+                    $dataPaket  =   [
+                        'nama'      =>  $nama,
+                        'durasi'    =>  $durasi,
+                        'harga'     =>  $harga
                     ];
 
-                    $saveJenisLoker     =   $paketModel->saveJenisLoker($idJenisLoker, $dataJenisLoker);
+                    if(!empty($keterangan)){
+                        $dataPaket['keterangan']    =   $keterangan;
+                    }
 
-                    $message            =   (!$doesUpdate)? 'Gagal menambahkan jenis loker baru!' : 'Gagal mengupdate jenis loker!';
-                    if($saveJenisLoker){
-                        $idJenisLoker    =   $saveJenisLoker;
+                    $savePaket  =   $paketModel->savePaket($idPaket, $dataPaket);
+
+                    $message            =   (!$doesUpdate)? 'Gagal menambahkan paket baru!' : 'Gagal mengupdate paket!';
+                    if($savePaket){
+                        $idPaket    =   $savePaket;
                         
                         $status     =   true;
-                        $message    =   (!$doesUpdate)? 'Berhasil menambahkan jenis loker baru!' : 'Berhasil mengupdate jenis loker!';
-                        $data       =   ['id' => $idJenisLoker];
+                        $message    =   (!$doesUpdate)? 'Berhasil menambahkan paket baru!' : 'Berhasil mengupdate paket!';
+                        $data       =   ['id' => $idPaket];
 
                         $tabel      =   new Tabel();
                         $logModel   =   new LogModel();
 
-                        $title      =   (!$doesUpdate)? 'Menambahkan jenis lowongan pekerjaan baru!' : 'Mengupdate data jenis lowongan pekerjaan!';
-                        $logModel->saveAdministratorLogFromThisModule($tabel->jenis, $idJenisLoker, $title);
+                        $title      =   (!$doesUpdate)? 'Menambahkan paket baru!' : 'Mengupdate data paket!';
+                        $logModel->saveAdministratorLogFromThisModule($tabel->paket, $idPaket, $title);
                     }
                 }else{
                     $message    =   'Data yang dikirim tidak lengkap atau tidak memenuhi validasi!';
@@ -197,6 +207,5 @@
 
             return $this->respond($respond);
         }
-        */
     }
 ?>
