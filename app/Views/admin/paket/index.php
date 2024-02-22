@@ -73,7 +73,7 @@
                         _keteranganHTML =   _keterangan;
                     }
 
-                    let _imgURL =   `<?=base_url(uploadGambarPaket('compress'))?>/${_foto}`;
+                    let _imgURL =   `<?=base_url(uploadGambarPaket())?>/${_foto}`;
 
                     return `<div class='row'>
                                 <img src='${_imgURL}' class='img-circle img-50-50' alt='${_nama}'\
