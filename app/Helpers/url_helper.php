@@ -133,6 +133,14 @@
 
             return $uploadGambarWebsite;
         }
+        function uploadGambarPaket($path = null){
+            $uploadGambarPaket  =   'upload/gambar/paket';
+            if(!empty($path)){
+                $uploadGambarPaket   =   $uploadGambarPaket.'/'.$path;
+            }
+
+            return $uploadGambarPaket;
+        }
 
     #Flexstart
     function flexStart($path = null){

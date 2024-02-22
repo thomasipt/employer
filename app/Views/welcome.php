@@ -139,6 +139,7 @@
                                 <?php
                                     $code   =   $paket['code'];
 
+                                    $fotoPaket          =   $paket['foto'];
                                     $namaPaket          =   $paket['nama'];
                                     $hargaPaket         =   $paket['harga'];
                                     $durasiPaket        =   $paket['durasi'];
@@ -161,9 +162,9 @@
                                             <sup>Rp.</sup> <?=number_format($hargaPaket)?><span></span>
                                         </div>
                                             <p class='text-center text-sm'><?=$durasiPaket?> Hari</p>
-                                        <img src="<?=base_url('assets/flexstart/assets/img/pricing-free.png')?>" 
+                                        <img src="<?=base_url(uploadGambarPaket('compress'))?>/<?=$fotoPaket?>" 
                                             class="img-fluid" alt="<?=$namaPaket?>" />
-                                        <?=$keteranganPaket?>
+                                        <div class="d-block"><?=$keteranganPaket?></div>
                                         <br />
                                         <br />
                                         <a href="<?=site_url(mitraController('transaksi/checkout'))?>/<?=$code?>"
