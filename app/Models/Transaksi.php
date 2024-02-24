@@ -14,6 +14,7 @@
         public $pembayaran_nomorRekening    =   '732301008529534';
         public $pembayaran_namaRekening     =   'Falentino Djoka';
 
+        public $approvement_pending     =   null;
         public $approvement_approved    =   'approved';
         public $approvement_rejected    =   'rejected';
         public $approvement;
@@ -21,7 +22,7 @@
         public function __construct(){
             parent::__construct();
             
-            $approvement        =   [$this->approvement_approved, $this->approvement_rejected];
+            $approvement        =   [$this->approvement_pending, $this->approvement_approved, $this->approvement_rejected];
             $this->approvement  =   $approvement;
         }
         
