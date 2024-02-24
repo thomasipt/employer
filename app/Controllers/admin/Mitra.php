@@ -16,7 +16,8 @@
 
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
-    use Psr\Log\LoggerInterface;
+use Config\Database;
+use Psr\Log\LoggerInterface;
 
     use Exception;
 
@@ -88,7 +89,19 @@
                 }
             }
 
+            $database   =   new Database();
+            $builder    =   $database->connect($database->default);
+            $db     =   $builder->table('mitra');
+            $listMitra  =   $db->get()->getResultArray();
+            var_dump($listMitra);
+            echo '<br />';
+
+
+
             $listMitra     =   $mitraModel->getMitra(null, $options);
+            var_dump($listMitra);
+            exit;
+            
             if(count($listMitra) >= 1){
                 $administrator  =   new Administrator();
 
