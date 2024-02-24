@@ -57,6 +57,8 @@
         public function getListMitra(){
             #Data
             $mitraModel =   new MitraModel();
+            var_dump($mitraModel->getMitra());
+            exit;
             $request    =   $this->request;
             
             $draw       =   $request->getGet('draw');
@@ -92,9 +94,9 @@
             if(count($listMitra) >= 1){
                 $administrator  =   new Administrator();
 
-                foreach($listMitra as $indexData => $mitraModelItem){
+                foreach($listMitra as $indexData => $mitraItem){
                     $nomorUrut      =   $start + $indexData + 1;
-                    $approvementBy  =   $mitraModelItem['approvementBy'];
+                    $approvementBy  =   $mitraItem['approvementBy'];
 
                     $detailAdministrator    =   $administrator->getAdministrator($approvementBy, ['select' => 'id, nama']);
 
@@ -102,7 +104,6 @@
                     $listMitra[$indexData]['approver']      =   [
                         'administrator' =>  $detailAdministrator
                     ];
-                    $listMitra[$indexData]['detail']    =   $mitraModelItem;
                 }
             }
 
