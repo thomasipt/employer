@@ -102,6 +102,7 @@
                     $listMitra[$indexData]['approver']      =   [
                         'administrator' =>  $detailAdministrator
                     ];
+                    $listMitra[$indexData]['detail']    =   $mitraModelItem;
                 }
             }
 
