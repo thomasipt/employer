@@ -57,8 +57,6 @@
         public function getListMitra(){
             #Data
             $mitraModel =   new MitraModel();
-            var_dump(['mitraKu' => $mitraModel->getMitra()]);
-            exit;
             $request    =   $this->request;
             
             $draw       =   $request->getGet('draw');
