@@ -10,18 +10,19 @@
 
     $namaSektorPerusahaan       =   $sektorPerusahaan['nama'];
 
-    $judulLoker =   $detailLoker['judul'];
-    $kotaLoker  =   $detailLoker['namaKota'];
-    $namaJenisLoker  =   $detailLoker['namaJenis'];
-    $deskripsiLoker =   $detailLoker['deskripsi'];
+    $idLoker                =   $detailLoker['id'];
+    $judulLoker             =   $detailLoker['judul'];
+    $kotaLoker              =   $detailLoker['namaKota'];
+    $namaJenisLoker         =   $detailLoker['namaJenis'];
+    $deskripsiLoker         =   $detailLoker['deskripsi'];
     $tanggalPostingLoker    =   $detailLoker['createdAt'];
     $keteranganLoker        =   (array_key_exists('keterangan', $detailLoker))? $detailLoker['keterangan'] : null;
-    $kualifikasiLoker        =   $detailLoker['kualifikasi'];
+    $kualifikasiLoker       =   $detailLoker['kualifikasi'];
     $benefitLoker           =   $detailLoker['benefit'];
     $gajiMinimumLoker       =   $detailLoker['gajiMinimum'];
     $gajiMaximumLoker       =   $detailLoker['gajiMaximum'];
-    $batasAwalPendaftaranLoker       =   $detailLoker['batasAwalPendaftaran'];
-    $batasAkhirPendaftaranLoker       =   $detailLoker['batasAkhirPendaftaran'];
+    $batasAwalPendaftaranLoker      =   $detailLoker['batasAwalPendaftaran'];
+    $batasAkhirPendaftaranLoker     =   $detailLoker['batasAkhirPendaftaran'];
 ?>
 <div class="container">
     <div class="row">
@@ -84,11 +85,27 @@
                     <p class="text-sm text-muted" id='sektor'><?=$namaSektorPerusahaan?> Orang</p>
                     <label for="jumlahKaryawan"><b>Jumlah Karyawan</b></label>
                     <p class="text-sm text-muted" id='jumlahKaryawan'><?=number_format($jumlahKaryawanPerusahaan)?> Orang</p>
+                    <br />
+                    <div class="qr-code d-block m-auto" id='qrCode-<?=$idLoker?>' 
+                        data-qr-data='<?=$idLoker?>'></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src='<?=base_url(assetsFolder('plugins/jquery/jquery.min.js'))?>'></script>
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+<script language='Javascript'>
+    let _qrCode     =   $('.qr-code');
+    _qrCode.each((index, qrCodeElement) => {
+        let _qrCodeItem     =   $(qrCodeElement);
+        let _idLoker        =   _qrCodeItem.data('qrData');
+        
+        new QRCode(document.getElementById(`qrCode-${_idLoker}`), {
+            text: `${_idLoker}`
+        });
+    });
+</script>
 <style tyle='text/css'>
     .post-box{
         box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);

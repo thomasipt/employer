@@ -350,18 +350,3 @@
         <?=view(websiteComponents('footer'))?>
     </body>
 </html>
-<script src='<?=base_url(assetsFolder('plugins/jquery/jquery.min.js'))?>'></script>
-<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
-<script language='Javascript'>
-    let _qrCode     =   $('.qr-code');
-    _qrCode.each((index, qrCodeElement) => {
-        let _qrCodeItem     =   $(qrCodeElement);
-        let _idLoker        =   _qrCodeItem.data('qrData');
-        
-        new QRCode(document.getElementById(`qrCode-${_idLoker}`), {
-            text: `${_idLoker}`,
-            width: 50.0,
-            height: 50.0
-        });
-    });
-</script>
