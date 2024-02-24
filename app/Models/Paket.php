@@ -18,7 +18,7 @@
 
         public $fotoDefault     =   'paket-default.png';
 
-        public $persentasePPN     =   10;
+        public $persentasePPN     =   11;
 
         public function __construct(){
             parent::__construct();
