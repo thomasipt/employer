@@ -1,4 +1,8 @@
 <?php
+    $request                =   request();
+    $loggedInDetailMitra    =   (property_exists($request, 'mitra'))? $request->mitra : null;
+    $loggedInIDMitra        =   (!empty($loggedInDetailMitra))? $loggedInDetailMitra['id'] : null;
+
     $mitraToken     =   null;
     if(isset($data)){
         if(array_key_exists('mitraToken', $data)){
@@ -16,11 +20,13 @@
                         <span class="text-sm text-muted">List Lowongan Pekerjaan</span>
                     </div>
                     <div class="col text-right">
-                        <a href="<?=site_url(mitraController('loker/add'))?>">
-                            <button class="btn btn-success">
-                                Loker Baru
-                            </button>
-                        </a>
+                        <?php if(!empty($loggedInIDMitra)){ ?>
+                            <a href="<?=site_url(mitraController('loker/add'))?>">
+                                <button class="btn btn-success">
+                                    Loker Baru
+                                </button>
+                            </a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -56,6 +62,11 @@
 <script language='Javascript'>
     let _tabelListLokerEl   =   $('#tabelListLoker');
     let _getListLoker         =   `<?=site_url(mitraController('loker/get-list-loker'))?>`;
+    
+    let _loggedInIDMitra    =   `<?=(!empty($loggedInIDMitra))? $loggedInIDMitra : ''?>`;
+    _loggedInIDMitra        =   (_loggedInIDMitra != '')? _loggedInIDMitra : null;
+
+    let _mitraToken         =   `<?=$mitraToken?>`;
 
     let _tableLokerOptions = {
         processing: true,
@@ -64,7 +75,7 @@
             url     :   _getListLoker,
             dataSrc :   'listLoker',
             headers :   {
-                "Authorization" : "Bearer <?=$mitraToken?>"
+                "Authorization" : `Bearer ${_mitraToken}`
             }
         },
         columns: [
@@ -113,7 +124,9 @@
                     let _more           =   data.more;
                     let _jumlahPelamar  =   _more.jumlahPelamar;
 
-                    return `<a href='<?=site_url(mitraController('loker/applier'))?>/${_id}'>
+                    let _url    =   `<?=site_url((!empty($mitraToken))? adminController('loker/applier') : mitraController('loker/applier'))?>/${_id}`;
+
+                    return `<a href='${_url}'>
                                 <div class='text-left cp'>
                                     <span class='far fa-user mr-1 text-muted'></span> 
                                     <b class='text-success'>${numeral(_jumlahPelamar).format('0,0')}</b>
@@ -125,6 +138,10 @@
                 data: null,
                 render: function(data, type, row, meta) {
                     let _id =   data.id;
+
+                    if(_loggedInIDMitra == null){
+                        return  `<div class='text-center'>-</div>`;
+                    }
 
                     return `<div class='text-center'>
                                 <a href='<?=site_url(mitraController('loker/edit'))?>/${_id}'>

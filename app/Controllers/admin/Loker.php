@@ -6,11 +6,15 @@
 
     #Model
     use App\Models\Mitra;
+    use App\Models\Loker as LokerModel;
+    use App\Models\Kandidat;
+    use App\Models\LokerApply;
     
     #Library
     use App\Libraries\MitraJWT;
-use App\Libraries\Tabel;
-use CodeIgniter\HTTP\RequestInterface;
+    use App\Libraries\Tabel;
+
+    use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
     use Psr\Log\LoggerInterface;
 
@@ -33,6 +37,16 @@ use CodeIgniter\HTTP\RequestInterface;
             }
         }
 
+        private function lokerChecking($idLoker){
+            $loker          =   new LokerModel();
+            $detailLoker    =   $loker->getLoker($idLoker);
+
+            if(empty($detailLoker)){
+                throw new Exception('Loker tidak ditemukan dengan pengenal '.$idLoker.'!');
+            }
+
+            return $detailLoker;
+        }
         public function mitra($idMitra = null){
             try{
                 $mitra      =   new Mitra();
@@ -91,6 +105,55 @@ use CodeIgniter\HTTP\RequestInterface;
                     'deskripsi' =>  $e->getMessage()
                 ];
                 echo view(adminView('error'), $data);
+            }
+        }
+        public function applier($idLoker){
+            $mitra      =   new Mitra();
+            $lokerApply =   new LokerApply();
+            $kandidat   =   new Kandidat();
+
+            try{
+                $detailLoker    =   $this->lokerChecking($idLoker);
+                $judulLoker     =   $detailLoker['judul'];
+                
+                $idMitraLoker   =   $detailLoker['createdBy'];
+                $detailMitra    =   $mitra->getMitra($idMitraLoker);
+
+                $listApplierOpptions    =   [
+                    'where' =>  [
+                        'loker' =>  $idLoker
+                    ]
+                ];
+                $listApplier    =   $lokerApply->getLokerApply(null, $listApplierOpptions);
+               
+                foreach($listApplier as $index => $applier){
+                    $applierKandidat    =   $applier['kandidat'];
+
+                    $kandidatOptions    =   [
+                        'select'    =>  'id, foto, nama, tanggalLahir, alamat, email, telepon'
+                    ];
+                    $detailApplier      =   $kandidat->getKandidat($applierKandidat, $kandidatOptions);
+                    $listApplier[$index]['kandidat']    =   $detailApplier;
+                }
+
+                $data           =   [
+                    'pageTitle' =>  'Pelamar Lowongan Pekerjaan',
+                    'pageDesc'  =>  $judulLoker,
+                    'view'      =>  mitraView('loker/applier'),
+                    'data'      =>  [
+                        'detailLoker'   =>  $detailLoker,
+                        'detailMitra'   =>  $detailMitra,
+                        'listApplier'   =>  $listApplier
+                    ]
+                ];
+
+                return view(adminView('index'), $data);
+            }catch(Exception $e){
+                $data   =   [
+                    'judul'     =>  'Terjadi Kesalahan',
+                    'deskripsi' =>  $e->getMessage()
+                ];
+                return view(adminView('error'), $data);
             }
         }
     }

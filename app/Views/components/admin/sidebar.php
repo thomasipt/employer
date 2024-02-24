@@ -1,7 +1,6 @@
 <?php 
     $request                =   request();
     $administratorModel     =   model('Administrator');
-    $mitraModel             =   model('Mitra');
     $transaksiModel         =   model('Transaksi');
     $appConfig              =   config('Config\App');
     
@@ -20,7 +19,6 @@
     $listControllerMasterData   =   ['jenis-loker', 'kategori-loker'];
     $masterData                 =   in_array($currentController, $listControllerMasterData);
     
-    $jumlahMitraButuhVerifikasi     =   $mitraModel->getJumlahMitraButuhVerifikasi();
     $jumlahTransaksiButuhVerifikasi =   $transaksiModel->getJumlahTransaksiPending();
 ?>
 <!-- Main Sidebar Container -->
@@ -132,12 +130,6 @@
                             <a href="<?=site_url(adminController('mitra'))?>" class="nav-link text-sm">
                                 <i class="fa fa-layer-group nav-icon text-info"></i>
                                 <p>List Mitra</p>
-                            </a>
-                        </li>
-                        <li class="nav-item ml-3">
-                            <a href="<?=site_url(adminController('mitra/need-approve'))?>" class="nav-link text-sm">
-                                <i class="fa fa-layer-group nav-icon text-success"></i>
-                                <p>Verifikasi Mitra <span class="badge badge-warning ml-1"><?=number_format($jumlahMitraButuhVerifikasi)?></span></p>
                             </a>
                         </li>
                     </ul>

@@ -92,9 +92,6 @@
 
             $mitraRoutes->get('', 'Mitra::index', $additionalOptions);
             $mitraRoutes->get('get-list-mitra', 'Mitra::getListMitra', $additionalOptions);
-            $mitraRoutes->get('need-approve', 'Mitra::needApprove', $additionalOptions);
-
-            $mitraRoutes->post('approvement/(:num)', 'Mitra::approvement/$1', $additionalOptions);
         });
 
         #Transaksi
@@ -119,6 +116,7 @@
 
             $lokerRoutes->get('mitra', 'Loker::mitra', $additionalOptions);
             $lokerRoutes->get('mitra/(:num)', 'Loker::mitra/$1', $additionalOptions);
+            $lokerRoutes->get('applier/(:num)', 'Loker::applier/$1', $additionalOptions);
         });
 
         #Website
