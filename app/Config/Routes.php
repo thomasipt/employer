@@ -223,6 +223,7 @@
             ];
 
             $transaksiRoutes->get('', 'Transaksi::listTransaksi', $additionalOptions);
+            $transaksiRoutes->get('pending', 'Transaksi::pending', $additionalOptions);
             $transaksiRoutes->get('get-list-transaksi', 'Transaksi::getListTransaksi', $additionalOptions);
             $transaksiRoutes->get('checkout/(:alpha)', 'Transaksi::checkout/$1', $additionalOptions);
             $transaksiRoutes->post('checkout/(:alpha)', 'Transaksi::processCheckout/$1', $additionalOptions);

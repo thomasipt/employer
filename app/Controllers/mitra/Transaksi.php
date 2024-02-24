@@ -408,5 +408,36 @@
             ];
             echo view(mitraView('index'), $data);
         }
+        public function pending(){
+            $loggedInIDMitra    =   $this->loggedInIDMitra;
+
+            $transaksi  =   new TransaksiModel();
+            $paket      =   new Paket();
+
+            $options        =   [
+                'where' =>  [
+                    'approvement'   =>  $transaksi->approvement_pending,
+                    'mitra'         =>  $loggedInIDMitra
+                ]
+            ];
+            $listTransaksiPending  =   $transaksi->getTransaksi(null, $options);
+
+            foreach($listTransaksiPending as $index => $transaksiPending){
+                $paketTransaksi =   $transaksiPending['paket'];
+
+                $detailPaket    =   $paket->getPaket($paketTransaksi, ['select' => 'id, nama, durasi, keterangan']);
+                $listTransaksiPending[$index]['paket']   =   $detailPaket;
+            }
+
+            $data   =   [
+                'pageTitle' =>  'Transaksi Pending',
+                'pageDesc'  =>  'Transaksi yang belum terselesaikan',
+                'view'  =>  mitraView('transaksi/pending'),
+                'data'  =>  [
+                    'listTransaksiPending'  =>  $listTransaksiPending
+                ]
+            ];
+            return view(mitraView('index'), $data);
+        }
     }
 ?>

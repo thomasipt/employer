@@ -5,12 +5,14 @@
     $detailPaket        =   $data['detailPaket'];
     $transaksiAktif     =   $data['transaksiAktif'];
 
+    $persentasePPN      =   $paketModel->persentasePPN;
+
     $codePaket          =   $detailPaket['code'];
     $namaPaket          =   $detailPaket['nama'];
     $keteranganPaket    =   $detailPaket['keterangan'];
-    $hargaPaket     =   $detailPaket['harga'];
-    $ppnPaket       =   ($paketModel->persentasePPN / 100 * $hargaPaket);
-    $durasiPaket    =   $detailPaket['durasi'];
+    $hargaPaket         =   $detailPaket['harga'];
+    $ppnPaket           =   ($persentasePPN / 100 * $hargaPaket);
+    $durasiPaket        =   $detailPaket['durasi'];
 
     $total  =   $hargaPaket + $ppnPaket;
 ?>
@@ -78,7 +80,7 @@
                                 <td class='text-right text-success'>Rp. <?=number_format($hargaPaket)?></td>
                             </tr>
                             <tr>
-                                <td><h6>PPN</h6></td>
+                                <td><h6>PPN <?=number_format($persentasePPN)?>%</h6></td>
                                 <td class='text-right text-info'>Rp. <?=number_format($ppnPaket)?></td>
                             </tr>
                             <tr>
