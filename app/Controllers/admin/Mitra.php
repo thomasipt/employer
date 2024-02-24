@@ -89,7 +89,6 @@
             }
 
             $listMitra     =   $mitraModel->getMitra(null, $options);
-            var_dump($listMitra); exit;
             if(count($listMitra) >= 1){
                 $administrator  =   new Administrator();
 
