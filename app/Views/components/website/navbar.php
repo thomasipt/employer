@@ -3,7 +3,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
         <a href="<?=site_url()?>" class="logo d-flex align-items-center">
-            <img src="<?=base_url('assets/flexstart/assets/img/logo.png')?>" alt="Employer" />
+            <img src="<?=base_url(assetsFolder('img/icon.png'))?>" alt="Employer" />
             <span>Employer</span>
         </a>
 
