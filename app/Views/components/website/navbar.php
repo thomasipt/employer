@@ -12,8 +12,8 @@
                 <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                 <li><a class="nav-link scrollto" href="#about">About</a></li>
                 <li><a class="nav-link scrollto" href="#features">Features</a></li>
-                <li><a class="nav-link scrollto" href='#lokerFree'>Loker Free</a></li>
-                <li><a class="nav-link scrollto" href='#lokerPremium'>Loker Premium</a></li>
+                <li><a class="nav-link scrollto" href='<?=site_url(websiteController('loker-free'))?>'>Loker Free</a></li>
+                <li><a class="nav-link scrollto" href='<?=site_url(websiteController('loker-premium'))?>'>Loker Premium</a></li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                 <li><a class="nav-link scrollto" href="<?=site_url(websiteController('syarat-dan-ketentuan'))?>">Syarat & Ketentuan</a></li>
                 <li><a class="nav-link scrollto" href="<?=site_url(websiteController('kebijakan-privasi'))?>">Kebijakan Privasi</a></li>

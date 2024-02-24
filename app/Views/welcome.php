@@ -203,14 +203,6 @@
                                                 <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
                                             <?php } ?>
                                             <br />
-                                            <div class="row">
-                                                <span class="qr-code" id='qrCode-<?=$idLoker?>' 
-                                                    style='display:inline-block; width: unset;'
-                                                    data-qr-data='<?=$idLoker?>'></span>
-                                                <div class="col">
-                                                <p class='text-sm text-muted'>Scan untuk melihat detail Lowongan Pekerjaan</p>
-                                                </div>
-                                            </div>
                                             Diposting pada <?=formattedDate($tanggalPostingLoker)?>
                                         </div>
                                     </div>
@@ -250,14 +242,6 @@
                                                 <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
                                             <?php } ?>
                                             <br />
-                                            <div class="row">
-                                                <span class="qr-code" id='qrCode-<?=$idLoker?>' 
-                                                    style='display:inline-block; width: unset;'
-                                                    data-qr-data='<?=$idLoker?>'></span>
-                                                <div class="col">
-                                                <p class='text-sm text-muted'>Scan untuk melihat detail Lowongan Pekerjaan</p>
-                                                </div>
-                                            </div>
                                             Diposting pada <?=formattedDate($tanggalPostingLoker)?>
                                         </div>
                                     </div>
