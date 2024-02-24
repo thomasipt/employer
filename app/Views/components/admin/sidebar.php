@@ -194,7 +194,7 @@
                         <li class="nav-item ml-3">
                             <a href="<?=site_url(adminController('website/landing-page/hero'))?>/" class="nav-link text-sm">
                                 <i class="fa fa-layer-group nav-icon text-info"></i>
-                                <p>Hero Slider</p>
+                                <p>Hero</p>
                             </a>
                         </li>
                         <li class="nav-item ml-3">
