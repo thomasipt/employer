@@ -231,6 +231,18 @@
                                 <p>Kontak Perusahaan</p>
                             </a>
                         </li>
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('website/page/syarat-dan-ketentuan'))?>/" class="nav-link text-sm">
+                                <i class="fa fa-layer-group nav-icon text-danger"></i>
+                                <p>Syarat dan Ketentuan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('website/page/kebijakan-privasi'))?>/" class="nav-link text-sm">
+                                <i class="fa fa-layer-group nav-icon text-white"></i>
+                                <p>Kebijakan Privasi</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">

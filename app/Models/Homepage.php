@@ -18,6 +18,8 @@
         public $rekeningPerusahaanId    =   9;
         public $emailPerusahaanId       =   10;
         public $contactUsId             =   11;
+        public $syaratDanKetentuanId    =   12;
+        public $kebijakanPrivasiId      =   13;
         
         public function getHomepage($id = null, $options = null){
             $d  =   new Database();

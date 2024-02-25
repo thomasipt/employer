@@ -51,6 +51,8 @@
 
             return $detailSection;   
         }
+
+        #Landing Page
         public function landingPage($section){
             $homepage           =   new Homepage();
             $homepageElement    =   new HomepageElement();
@@ -194,6 +196,110 @@
 
             return $this->respond($respond);
         }
+        
+        #Page
+        public function page($section){
+            $homepage           =   new Homepage();
+            $homepageElement    =   new HomepageElement();
+
+            try{
+                $detailSection  =   $this->sectionChecking($section);
+                $idSection      =   $detailSection['id'];
+
+                $data   =   [
+                    'pageTitle' =>  'Hero',
+                    'pageDesc'  =>  'Hero Divison',
+                    'view'      =>  adminView('website/page/'.$section),
+                    'data'      =>  []
+                ];
+
+                $elementOptions =   [
+                    'where' =>  [
+                        'parent'    =>  $idSection
+                    ]
+                ];
+                $sectionElement    =   $homepageElement->getHomepageElement(null, $elementOptions);
+                $sectionElement    =   $homepageElement->convertListELementToKeyValueMap($sectionElement);
+
+                $sectionName    =   '';
+                if($idSection == $homepage->syaratDanKetentuanId){
+                    $sectionName    =   'syaratDanKetentuanElement';
+                }
+                if($idSection == $homepage->kebijakanPrivasiId){
+                    $sectionName    =   'kebijakanPrivasiElement';
+                }
+                
+                $data['data']   =   [
+                    $sectionName    =>  $sectionElement
+                ];
+
+                return view(adminView('index'), $data);
+            }catch(Exception $e){
+                $data   =   [
+                    'judul'     =>  'Terjadi Kesalahan',
+                    'deskripsi' =>  $e->getMessage()
+                ];
+                return view(adminView('error'), $data);
+            }
+        }
+        public function savePage($section){
+            $request            =   request();
+            $homepage           =   new Homepage();
+            $homepageElement    =   new HomepageElement();
+
+            $status     =   false;
+            $message    =   'Gagal memproses! Silahkan ulangi!';
+            $data       =   null;
+
+            try{
+                $detailSection  =   $this->sectionChecking($section);
+                $idSection      =   $detailSection['id'];
+
+                $options        =   [
+                    'where' =>  [
+                        'parent'    =>  $idSection
+                    ]
+                ];
+                $sectionElement    =   $homepageElement->getHomepageElement(null, $options);
+
+                $message    =   'Section tidak memiliki elemen, tidak ada data yang diproses!';
+                if(count($sectionElement) >= 1){
+                    $database   =   new Database();
+                    $tabel      =   new Tabel();
+
+                    $db         =   $database->connect($database->default);
+                    $builder    =   $db->table($tabel->homepageElement);
+                    
+                    foreach($sectionElement as $element){
+                        $key    =   $element['key'];
+
+                        $newValue   =   $request->getPost($key);
+
+                        if(!empty($newValue)){
+                            $newData    =   [
+                                'value' =>  $newValue
+                            ];
+
+                            $builder->where('parent', $idSection);
+                            $builder->where('key', $key);
+                            $builder->update($newData);
+                        }
+                    }
+
+                    $status     =   true;
+                    $message    =   'Berhasil mengupdate section!';
+                }
+            }catch(Exception $e){
+                $message    =   $e->getMessage();
+                $data       =   null;
+            }
+
+            $arf        =   new APIRespondFormat($status, $message, $data);
+            $respond    =   $arf->getRespond();
+
+            return $this->respond($respond);
+        }
+
         public function saveLandingPageImage($section){
             helper('CustomDate');
 

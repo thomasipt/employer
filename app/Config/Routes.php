@@ -128,6 +128,10 @@
 
             $websiteRoutes->get('landing-page/(:any)', 'Website::landingPage/$1', $additionalOptions);
             $websiteRoutes->post('landing-page/(:any)', 'Website::saveLandingPage/$1', $additionalOptions);
+
+            $websiteRoutes->get('page/(:any)', 'Website::page/$1', $additionalOptions);
+            $websiteRoutes->post('page/(:any)', 'Website::savePage/$1', $additionalOptions);
+
             $websiteRoutes->post('landing-page-image/(:any)', 'Website::saveLandingPageImage/$1', $additionalOptions);
         });
         
