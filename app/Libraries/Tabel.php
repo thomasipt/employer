@@ -4,7 +4,7 @@
     class Tabel{
         public $administrator       =   'employer_administrator';
         public $administratorLog    =   'employer_administrator_log';
-        public $mitra               =   'mitra';
+        public $mitra               =   'mitra_tino';
         public $mitraLog            =   'employer_mitra_log';
         public $paket               =   'employer_paket';
         public $loker               =   'employer_loker';
