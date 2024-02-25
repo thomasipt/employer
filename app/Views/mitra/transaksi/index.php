@@ -134,12 +134,16 @@
                     let _berlakuMulai   =   data.berlakuMulai;
                     let _berlakuSampai  =   data.berlakuSampai;
 
-                    let _periodeBerlakuHTML     =   `<p class='mb-1 text-sm'>
+                    let _periodeBerlakuHTML     =   ``;
+
+                    if(_berlakuMulai != null && _berlakuSampai){
+                        _periodeBerlakuHTML     =   `<p class='mb-1 text-sm'>
                                                         Periode berlaku <br />
                                                         <span class='text-muted'>
                                                             ${convertDate(_berlakuMulai)} sd ${convertDate(_berlakuSampai)}
                                                         </span>
                                                     </p>`;
+                    }
                     
                     let _buktiBayarHMTL         =   ``;
                     if(_buktiBayar == null){

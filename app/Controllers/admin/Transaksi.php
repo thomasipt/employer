@@ -9,6 +9,7 @@
     use App\Models\MitraLog;
     use App\Models\Mitra;
     use App\Models\Transaksi as TransaksiModel;
+    use App\Models\Paket;
     
     #Library
     use App\Libraries\APIRespondFormat;
@@ -88,6 +89,7 @@
                 $request        =   $this->request;
                 $mitra          =   new Mitra();
                 $tabel          =   new Tabel();
+                $paket          =   new Paket();
 
                 $approvement    =   $request->getPost('approvement');
 
@@ -97,6 +99,15 @@
 
                 $idMitra    =   $detailTransaksi['mitra'];
                 $nomor      =   $detailTransaksi['nomor'];
+                $idPaket    =   $detailTransaksi['paket'];
+
+                $detailPaket    =   $paket->getPaket($idPaket, ['select' => 'nama, durasi']);
+                if(empty($detailPaket)){
+                    throw new Exception('Paket tidak terdaftar pada transaksi ini!');
+                }
+                $namaPaket      =   $detailPaket['nama'];
+                $durasiPaket    =   $detailPaket['durasi'];
+
                 $now        =   rightNow();
                 $isApproved =   $approvement == $transaksi->approvement_approved;
 
@@ -115,6 +126,15 @@
                     'approvementBy' =>  $this->loggedInIDAdministrator,
                     'approvementAt' =>  $now
                 ];
+
+                if($isApproved){
+                    $berlakuMulai   =   $now;
+                    $berlakuSampai  =   date('Y-m-d H:i:s', strtotime($berlakuMulai.' + '.$durasiPaket.' days'));
+                    
+                    $dataTransaksi['berlakuMulai']      =   $berlakuMulai;
+                    $dataTransaksi['berlakuSampai']     =   $berlakuSampai;
+                }
+
                 $saveApprovementTransaksi   =   $transaksi->saveTransaksi($idTransaksi, $dataTransaksi);
 
                 $message    =   ($isApproved)? 'Gagal melakukan penyetujuan pembelian paket!' : 'Gagal melakukan penolakan pembelian paket!';
@@ -126,7 +146,7 @@
                                                     alt="Employer" />
                                             </center>
                                             <br />
-                                            <p>Pembelian paket dengan nomor transaksi <b>'.$nomor.'</b> '.(($isApproved)? '<b class="text-success">disetujui</b>' : '<b class="text-danger">ditolak</b>').'!</p>
+                                            <p>Pembelian paket '.$namaPaket.' dengan nomor transaksi <b>'.$nomor.'</b> '.(($isApproved)? '<b class="text-success">disetujui</b>' : '<b class="text-danger">ditolak</b>').'!</p>
                                         </div>';
 
                     $emailParams    =   [

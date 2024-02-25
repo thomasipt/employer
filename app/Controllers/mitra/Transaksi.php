@@ -223,14 +223,11 @@
                 $durasiPaket    =   $detailPaket['durasi'];
                 $hargaPaket     =   $detailPaket['harga'];
                 $ppnPaket       =   $paket->persentasePPN / 100 * $hargaPaket;
-                $berlakuSampai  =   date('Y-m-d H:i:s', strtotime($currentDate.' + '.$durasiPaket.' days'));
 
                 $dataTransaksi  =   [
                     'nomor' =>  $nomorTransaksi,
                     'mitra' =>  $this->loggedInIDMitra,
                     'paket' =>  $idPaket,
-                    'berlakuMulai'  =>  $currentDate,
-                    'berlakuSampai' =>  $berlakuSampai,
                     'harga'         =>  $hargaPaket,
                     'ppn'           =>  $ppnPaket
                 ];
