@@ -76,7 +76,14 @@
             $emailOrUsername    =   $request->getPost('username');
             
             if(empty($emailOrUsername)){
-                echo view(mitraView('lupa-password'));
+                $emailSender    =   new EmailSender();
+
+                $data   =   [
+                    'library' =>  [
+                        'emailSender'   =>  $emailSender
+                    ]
+                ];
+                echo view(mitraView('lupa-password'), $data);
             }else{
                 $status     =   false;
                 $message    =   'Mitra tidak dikenal dengan username tersebut!';

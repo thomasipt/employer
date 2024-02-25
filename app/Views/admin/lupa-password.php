@@ -1,9 +1,11 @@
 <?php
-$appConfig  =   config('Config\App');
-$appName    =   $appConfig->appName;
+    $appConfig      =   config('Config\App');
+    $emailSender    =   $library['emailSender'];
 
-$emailAccountUsername   =   $appConfig->emailAccountUsername;
-$emailAccountPassword   =   $appConfig->emailAccountPassword;
+    $appName    =   $appConfig->appName;
+
+    $username   =   $emailSender->username;
+    $password   =   $emailSender->password;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,11 +46,14 @@ $emailAccountPassword   =   $appConfig->emailAccountPassword;
                         </div>
                     </div>
                     <div class="row">
+                        <?=$username?>
+                        <br />
+                        <?=$password?>
                         <div class="col">
-                            <?php if (!empty($emailAccountUsername) && !empty($emailAccountPassword)) { ?>
+                            <?php if (!empty($username) && !empty($password)) { ?>
                                 <button type="submit" class="btn btn-primary btn-block" id='btnSignIn'>Proses</button>
                             <?php } ?>
-                            <?php if (empty($emailAccountUsername) || empty($emailAccountPassword)) { ?>
+                            <?php if (empty($username) || empty($password)) { ?>
                                 <div class="alert alert-warning">
                                     <p class="text-center mb-0 text-sm">Harap lakukan konfigurasi email (username, dan password)</p>
                                 </div>

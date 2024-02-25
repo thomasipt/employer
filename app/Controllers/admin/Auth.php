@@ -67,7 +67,14 @@
             $emailOrUsername    =   $request->getPost('username');
             
             if(empty($emailOrUsername)){
-                echo view(adminView('lupa-password'));
+                $emailSender    =   new EmailSender();
+
+                $data   =   [
+                    'library' =>  [
+                        'emailSender'   =>  $emailSender
+                    ]
+                ];
+                echo view(adminView('lupa-password'), $data);
             }else{
                 $status     =   false;
                 $message    =   'Administrator tidak dikenal dengan username tersebut!';

@@ -5,25 +5,44 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
-    use Config\App;
+    use App\Models\Homepage;
+    use App\Models\HomepageElement;
 
     class EmailSender{
         private $mail;
-        private $appConfig;
+
+        public $username;
+        public $password;
         
         public function __construct(){
             $mail       =   new PHPMailer();
-            $appConfig  =   new App();
             
             $this->mail         =   $mail;
-            $this->appConfig    =   $appConfig;
+
+            $homepage           =   new Homepage();
+            $homepageElement    =   new HomepageElement();
+
+            $options    =   [
+                'where' =>  ['parent' => $homepage->emailPerusahaanId]
+            ];
+            $emailPerusahaanElement     =   $homepageElement->getHomepageElement(null, $options);
+            $emailPerusahaanElement     =   $homepageElement->convertListELementToKeyValueMap($emailPerusahaanElement);
+
+            $username =   $emailPerusahaanElement['_email'];
+            $password =   $emailPerusahaanElement['_password'];
+            
+            if(!empty($username)){
+                $this->username =   $username;
+            }
+            if(!empty($password)){
+                $this->password =   $password;
+            }
         }
         public function isConfigComplete(){
-            $appConfig              =   $this->appConfig;
-            $emailAccountUsername   =   $appConfig->emailAccountUsername;
-            $emailAccountPassword   =   $appConfig->emailAccountPassword;
+            $username   =   $this->username;
+            $password   =   $this->password;
 
-            $complete   =   !empty($emailAccountUsername) && !empty($emailAccountPassword);
+            $complete   =   !empty($username) && !empty($password);
             return $complete;
         }
         public function sendEmail($emailParams = null){
@@ -42,9 +61,8 @@
                             throw new Exception('Harap lakukan konfigurasi akun email (username dan password)!');
                         }
                         
-                        $appConfig              =   $this->appConfig;
-                        $emailAccountUsername   =   $appConfig->emailAccountUsername;
-                        $emailAccountPassword   =   $appConfig->emailAccountPassword;
+                        $username   =   $this->username;
+                        $password   =   $this->password;
 
                         if(array_key_exists('smtpDebug', $emailParams)){
                             $smtpDebug  =   $emailParams['smtpDebug'];
@@ -56,13 +74,13 @@
                         $mail->isSMTP();                                            
                         $mail->Host         =   'smtp.gmail.com';               
                         $mail->SMTPAuth     =   true;                                   
-                        $mail->Username     =   $emailAccountUsername;                                 
-                        $mail->Password     =   $emailAccountPassword;                                            
+                        $mail->Username     =   $username;                                 
+                        $mail->Password     =   $password;                                            
                         $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_STARTTLS;            
                         $mail->Port         =   587;                                    
                     
                         //Recipients
-                        $mail->setFrom($emailAccountUsername, $emailAccountUsername);
+                        $mail->setFrom($username, $username);
                         if(array_key_exists('receivers', $emailParams)){
                             extract($emailParams);
 
@@ -77,7 +95,7 @@
                                 }
                             }
                         }              
-                        $mail->addReplyTo($emailAccountUsername, $emailAccountUsername);
+                        $mail->addReplyTo($username, $username);
                     
                         //Content
                         $mail->isHTML(true);                                 
