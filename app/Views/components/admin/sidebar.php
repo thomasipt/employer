@@ -219,6 +219,12 @@
                                 <p>Rekening Perusahaan</p>
                             </a>
                         </li>
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('website/landing-page/email-perusahaan'))?>/" class="nav-link text-sm">
+                                <i class="fa fa-at nav-icon text-white"></i>
+                                <p>Email Perusahaan</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">

@@ -90,6 +90,12 @@
                 if($idSection == $homepage->paketId){
                     $sectionName    =   'paketElement';
                 }
+                if($idSection == $homepage->rekeningPerusahaanId){
+                    $sectionName    =   'rekeningPerusahaanElement';
+                }
+                if($idSection == $homepage->emailPerusahaanId){
+                    $sectionName    =   'emailPerusahaanElement';
+                }
                 
                 $data['data']   =   [
                     $sectionName    =>  $sectionElement

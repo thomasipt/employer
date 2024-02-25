@@ -46,9 +46,6 @@
                         </div>
                     </div>
                     <div class="row">
-                        <?=$username?>
-                        <br />
-                        <?=$password?>
                         <div class="col">
                             <?php if (!empty($username) && !empty($password)) { ?>
                                 <button type="submit" class="btn btn-primary btn-block" id='btnSignIn'>Proses</button>
