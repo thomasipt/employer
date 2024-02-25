@@ -13,11 +13,15 @@
     use App\Libraries\Tabel;
     use App\Libraries\APIRespondFormat;
     use App\Libraries\EmailSender;
-
+    use App\Libraries\MitraJWT;
+    
+    use App\Models\Loker;
+    use App\Models\Paket;
+    use App\Models\Transaksi;
+    
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
-use Config\Database;
-use Psr\Log\LoggerInterface;
+    use Psr\Log\LoggerInterface;
 
     use Exception;
 
@@ -262,6 +266,92 @@ use Psr\Log\LoggerInterface;
                 ]
             ];
             echo view(adminView('index'), $data);
+        }
+        public function detail($idMitra){
+            $loker      =   new Loker();
+            $mitra      =   new MitraModel();
+            $paket      =   new Paket();
+            $transaksi  =   new Transaksi();
+            
+            try{
+                $detailMitra    =   $this->mitraChecking($idMitra);
+
+                $idMitra    =   $detailMitra['id'];
+                $namaMitra  =   $detailMitra['nama'];
+
+                $mitraJWT       =   new MitraJWT();
+
+                $mitraPayload   =   [
+                    'iat'       =>  time(),
+                    'iss'       =>  base_url(),
+                    'mitra'     =>  [
+                        'id'    =>  $idMitra
+                    ]
+                ];
+                $mitraToken     =   $mitraJWT->encode($mitraPayload);
+
+                $options    =   [
+                    'singleRow' =>  true,
+                    'select'    =>  'count(id) as jumlahData'
+                ];
+
+                $jumlahLokerOptions             =   $options;
+                $jumlahLokerOptions['where']    =   [
+                    'createdBy' =>  $idMitra
+                ];
+                $getJumlahLoker         =   $loker->getLoker(null, $jumlahLokerOptions);
+                $jumlahLoker            =   !empty($getJumlahLoker)? $getJumlahLoker['jumlahData'] : 0;
+
+                try{
+                    $transaksiAktif         =   $mitra->getPaketAktif($idMitra, true);
+                    if(!empty($transaksiAktif)){
+                        $paketTransaksiAktif    =   $transaksiAktif['paket'];
+                        $detailPaket            =   $paket->getPaket($paketTransaksiAktif, ['select' => 'nama']);
+                        if(!empty($detailPaket)){
+                            $paketAktif =   $detailPaket['nama'];
+                        }
+                    }
+                }catch(Exception $e){
+                    $paketAktif =   null;
+                }
+                
+                $transaksiOptions   =   $options;
+                $transaksiOptions['where']  =   [
+                    'mitra'         =>  $idMitra,
+                    'approvement'   =>  $transaksi->approvement_approved
+                ];
+                $getJumlahTransaksiBerhasil         =   $transaksi->getTransaksi(null, $transaksiOptions);
+                
+                $transaksiOptions['where']  =   [
+                    'mitra'         =>  $idMitra,
+                    'approvement'   =>  $transaksi->approvement_rejected
+                ];
+                $getJumlahTransaksiGagal            =   $transaksi->getTransaksi(null, $transaksiOptions);
+
+                $jumlahTransaksiBerhasil            =   !empty($getJumlahTransaksiBerhasil)? $getJumlahTransaksiBerhasil['jumlahData'] : 0;
+                $jumlahTransaksiGagal               =   !empty($getJumlahTransaksiGagal)? $getJumlahTransaksiGagal['jumlahData'] : 0;
+
+                $data   =   [
+                    'pageTitle' =>  'Detail Mitra',
+                    'pageDesc'  =>  $namaMitra,
+                    'view'      =>  adminView('mitra/detail'),
+                    'data'      =>  [
+                        'mitraToken'    =>  $mitraToken,
+                        'jumlahTransaksiBerhasil'   =>  $jumlahTransaksiBerhasil,
+                        'jumlahTransaksiGagal'      =>  $jumlahTransaksiGagal,
+                        'jumlahLoker'               =>  $jumlahLoker,
+                        'paketAktif'                =>  $paketAktif
+                    ]
+                ];
+
+                return view(adminView('index'), $data);
+            }catch(Exception $e){
+                $data   =   [
+                    'judul'     =>  'Tejadi Kesalahan',
+                    'deskripsi' =>  $e->getMessage()
+                ];
+                return view(adminView('error'), $data);   
+            }
         }
     }
 ?>

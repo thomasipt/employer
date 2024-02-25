@@ -104,10 +104,12 @@
     let _approvementApproved    =   `<?=$transaksiModel->approvement_approved?>`;
     let _approvementRejected    =   `<?=$transaksiModel->approvement_rejected?>`;
     
-    let _loggedInIDMitra    =   `<?=(!empty($loggedInIDMitra))? $loggedInIDMitra : ''?>`;
+    if(typeof _loggedInIDMitra === 'undefined'){
+        var _loggedInIDMitra    =   `<?=(!empty($loggedInIDMitra))? $loggedInIDMitra : ''?>`;
+    }
     _loggedInIDMitra        =   (_loggedInIDMitra != '')? _loggedInIDMitra : null;
 
-    let _tableLokerOptions = {
+    let _tabelTransaksiOptions = {
         processing: true,
         serverSide: true,
         ajax: {
@@ -273,7 +275,7 @@
             }
         ]
     };
-    let _tabelHistoryTransaksi = _tabelHistoryTransaksiEl.DataTable(_tableLokerOptions);
+    let _tabelHistoryTransaksi = _tabelHistoryTransaksiEl.DataTable(_tabelTransaksiOptions);
 </script>
 <?php if(!empty($loggedInIDMitra)){ ?>
     <script language='Javascript'>

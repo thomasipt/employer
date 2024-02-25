@@ -92,6 +92,7 @@
 
             $mitraRoutes->get('', 'Mitra::index', $additionalOptions);
             $mitraRoutes->get('get-list-mitra', 'Mitra::getListMitra', $additionalOptions);
+            $mitraRoutes->get('detail/(:num)', 'Mitra::detail/$1', $additionalOptions);
         });
 
         #Transaksi

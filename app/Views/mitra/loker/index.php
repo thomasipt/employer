@@ -63,7 +63,9 @@
     let _tabelListLokerEl   =   $('#tabelListLoker');
     let _getListLoker         =   `<?=site_url(mitraController('loker/get-list-loker'))?>`;
     
-    let _loggedInIDMitra    =   `<?=(!empty($loggedInIDMitra))? $loggedInIDMitra : ''?>`;
+    if(typeof _loggedInIDMitra === 'undefined'){
+        var _loggedInIDMitra    =   `<?=(!empty($loggedInIDMitra))? $loggedInIDMitra : ''?>`;
+    }
     _loggedInIDMitra        =   (_loggedInIDMitra != '')? _loggedInIDMitra : null;
 
     let _mitraToken         =   `<?=$mitraToken?>`;
