@@ -17,6 +17,7 @@
         public $paketId     =   8;
         public $rekeningPerusahaanId    =   9;
         public $emailPerusahaanId       =   10;
+        public $contactUsId             =   11;
         
         public function getHomepage($id = null, $options = null){
             $d  =   new Database();

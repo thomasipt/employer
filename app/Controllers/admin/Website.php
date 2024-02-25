@@ -96,12 +96,15 @@
                 if($idSection == $homepage->emailPerusahaanId){
                     $sectionName    =   'emailPerusahaanElement';
                 }
+                if($idSection == $homepage->contactUsId){
+                    $sectionName    =   'contactUsElement';
+                }
                 
                 $data['data']   =   [
                     $sectionName    =>  $sectionElement
                 ];
 
-                if($idSection == $homepage->featuresId){                    
+                if($idSection == $homepage->featuresId || $idSection == $homepage->contactUsId){                    
                     $listIcons      =   $homepageElement->getRemixicon();
                     $data['data']['listIcons']  =   $listIcons;
                 }
@@ -148,8 +151,8 @@
 
                         $newValue   =   $request->getPost($key);
                         
-                        if($idSection == $homepage->featuresId){
-                            if($key == '_feature'){
+                        if($idSection == $homepage->featuresId || $idSection == $homepage->contactUsId){
+                            if($key == '_feature' || $key == '_contact'){
                                 $featureIcon            =   $request->getPost('icon');
                                 $featureTitle           =   $request->getPost('title');
                                 $featureDescription     =   $request->getPost('description');

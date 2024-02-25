@@ -225,6 +225,12 @@
                                 <p>Email Perusahaan</p>
                             </a>
                         </li>
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('website/landing-page/contact-us'))?>/" class="nav-link text-sm">
+                                <i class="fa fa-layer-group nav-icon text-info"></i>
+                                <p>Kontak Perusahaan</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">

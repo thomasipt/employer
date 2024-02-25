@@ -57,6 +57,14 @@ class Home extends BaseController{
         ];
         $paketElement    =   $homepageElement->getHomepageElement(null, $options);
         $paketElement    =   $homepageElement->convertListELementToKeyValueMap($paketElement);
+        
+        $options    =   [
+            'where' =>  [
+                'parent'    =>  $homepage->contactUsId
+            ]
+        ];
+        $contactUsElement    =   $homepageElement->getHomepageElement(null, $options);
+        $contactUsElement    =   $homepageElement->convertListELementToKeyValueMap($contactUsElement);
 
         $options            =   [
             'limit' =>  6
@@ -77,7 +85,8 @@ class Home extends BaseController{
                 'heroElement'       =>  $heroElement,
                 'aboutUsElement'    =>  $aboutUsElement,
                 'featuresElement'   =>  $featuresElement,
-                'paketElement'      =>  $paketElement
+                'paketElement'      =>  $paketElement,
+                'contactUsElement'  =>  $contactUsElement
             ]
         ];
         return view('welcome', $data);

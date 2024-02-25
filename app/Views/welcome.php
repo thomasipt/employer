@@ -14,6 +14,7 @@
     $aboutUsElement     =   $data['aboutUsElement'];
     $featuresElement    =   $data['featuresElement'];
     $paketElement       =   $data['paketElement'];
+    $contactUsElement   =   $data['contactUsElement'];
 
     #Data
     $listPaket          =   $data['listPaket'];
@@ -264,43 +265,32 @@
                 <div class="container" data-aos="fade-up">
 
                     <header class="section-header">
-                        <h2>Contact</h2>
-                        <p>Contact Us</p>
+                        <h2><?=$contactUsElement['_title']?></h2>
+                        <p><?=$contactUsElement['_description']?></p>
                     </header>
 
                     <div class="row gy-4">
-
                         <div class="col-lg-6">
-
                             <div class="row gy-4">
-                                <div class="col-md-6">
-                                    <div class="info-box">
-                                        <i class="bi bi-geo-alt"></i>
-                                        <h3>Address</h3>
-                                        <p>A108 Adam Street,<br>New York, NY 535022</p>
+                                <?php 
+                                    $contactUs      =   $contactUsElement['_contact'];
+                                    $listContact    =   json_decode($contactUs, true);
+                                ?>
+                                <?php foreach($listContact as $index => $contact){ ?>
+                                    <?php
+                                        $delay                  =   $index * 100;
+                                        $contactIcon            =   $contact['icon'];
+                                        $contactTitle           =   $contact['title'];
+                                        $contactDescription     =   $contact['description'];
+                                    ?>
+                                    <div class="col-md-6 pt-4" style='background-color: #fafbff;'>
+                                        <div class="info-box">
+                                            <i class="<?=$contactIcon?>"></i>
+                                            <h3 class='pt-3'><?=$contactTitle?></h3>
+                                            <p><?=$contactDescription?></p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="info-box">
-                                        <i class="bi bi-telephone"></i>
-                                        <h3>Call Us</h3>
-                                        <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="info-box">
-                                        <i class="bi bi-envelope"></i>
-                                        <h3>Email Us</h3>
-                                        <p>info@example.com<br>contact@example.com</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="info-box">
-                                        <i class="bi bi-clock"></i>
-                                        <h3>Open Hours</h3>
-                                        <p>Monday - Friday<br>9:00AM - 05:00PM</p>
-                                    </div>
-                                </div>
+                                <?php } ?>
                             </div>
 
                         </div>
