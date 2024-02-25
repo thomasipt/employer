@@ -248,13 +248,26 @@
                     $jenis              =   new JenisLoker();
 
                     $search     =   $request->getGet('search');
+                    $page       =   $request->getGet('page');
+                    $batas      =   9;
+                    $pageKe     =   !empty($page)? $page : 1;
+                    $firstIndex =   ($pageKe > 1)? ($pageKe * $batas) - $batas : 0;
+
+                    $prevIndex  =   $pageKe - 1;
+                    $nextIndex  =   $pageKe + 1;
 
                     $options            =   [
-                        'limit' =>  10
+                        'limit'             =>  $batas,
+                        'limitStartFrom'    =>  $firstIndex
                     ];
+                    
+                    if(!$isPremium){
+                        $options['where']   =   [
+                            'status'    =>  1
+                        ];
+                    }
 
                     if(!empty($search)){
-                        unset($options['limit']); #unlimited
                         $options['likeGroup']   =   [
                             'operator'  =>  $loker->likeGroupOperator_or,
                             'like'      =>  [
@@ -273,13 +286,13 @@
                         $detailPerusahaanOptions    =   ['select' => 'id, foto, nama'];
                         $detailPerusahaan           =   ($isPremium)? $mitra->getMitra($perusahaan, $detailPerusahaanOptions) : $company->getCompany($perusahaan, $detailPerusahaanOptions);
 
-                        $options            =   [
+                        $kotaOptions    =   [
                             'select'    =>  'pT.nama as namaKota, provinsi.nama as namaProvinsi',
                             'join'      =>  [
                                 ['table' => $tabel->provinsi.' provinsi', 'condition' => 'provinsi.id=pT.province']
                             ]
                         ];
-                        $detailKota         =   $kota->getKota($kotaLoker, $options);
+                        $detailKota         =   $kota->getKota($kotaLoker, $kotaOptions);
 
                         $detailJenisPekerjaan   =   $jenis->getJenisLoker($jenisLoker, ['select' => 'job_type_name as nama']);
 
@@ -288,11 +301,26 @@
                         $listLoker[$index]['mitra']  =   $detailPerusahaan;
                     }
 
+                    $jumlahLokerOptions     =   $options;
+                    $jumlahLokerOptions['singleRow']    =   true;
+                    $jumlahLokerOptions['select']       =   ($isPremium)? 'count(pT.'.$loker->tableId.') as jumlahData' : 'count(pT.'.$lokerFree->tableId.') as jumlahData';
+                    unset($jumlahLokerOptions['limit']);
+                    unset($jumlahLokerOptions['limitStartFrom']);
+                    $getJumlahLoker         =   ($isPremium)? $loker->getLoker(null, $jumlahLokerOptions) : $lokerFree->getLokerFree(null, $jumlahLokerOptions);
+                    $jumlahLoker            =   !empty($getJumlahLoker)? $getJumlahLoker['jumlahData'] : 0;
+                    
+                    $totalPage      =   ceil($jumlahLoker / $batas);
+
                     $pageData   =   [
                         'pageTitle' =>  ($isPremium)? 'Loker Premium' : 'Loker Free',
                         'view'      =>  ($isPremium)? websiteView('loker-premium') : websiteView('loker-free'),
                         'data'      =>  [
-                            'listLoker'  =>  $listLoker
+                            'listLoker'     =>  $listLoker,
+                            'jumlahLoker'   =>  $jumlahLoker,
+                            'totalPage'     =>  $totalPage,
+                            'page'          =>  $pageKe,
+                            'next'          =>  $nextIndex,
+                            'previous'      =>  $prevIndex
                         ]
                     ];
                     return view(websiteView('index'), $pageData);

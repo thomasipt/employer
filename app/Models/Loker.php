@@ -10,12 +10,14 @@
     use App\Libraries\Tabel;
 
     class Loker extends BaseModel{
+        public $tableId     =   'id';
+
         public function getLoker($id = null, $options = null){
             $d  =   new Database();
             $t  =   new Tabel();
 
             $this->connectedDatabase    =   $d->default;
-            $loker                      =   $this->getData($t->loker, $id, $options);
+            $loker                      =   $this->getData($t->loker, $id, $options, $this->tableId);
 
             return $loker;
         }
@@ -26,7 +28,7 @@
             
             $lokerBuilder   =   $db->table($tabel->loker);
             if(!empty($id)){
-                $lokerBuilder->where('id', $id);
+                $lokerBuilder->where($this->tableId, $id);
                 $saveLoker  =   $lokerBuilder->update($dataLoker);
             }else{                
                 $saveLoker  =   $lokerBuilder->insert($dataLoker);
@@ -57,7 +59,7 @@
             
             $lokerBuilder  =   $db->table($tabel->loker);
 
-            $lokerBuilder->where('id', $idLoker);
+            $lokerBuilder->where($this->tableId, $idLoker);
             $deleteLoker   =   $lokerBuilder->delete();
 
             return $deleteLoker;

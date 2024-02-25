@@ -2,7 +2,14 @@
     $request    =   request();
     $search     =   $request->getGet('search');
 
-    $listLokerFree   =   $data['listLoker'];
+    $listLokerFree      =   $data['listLoker'];
+    $jumlahLoker        =   $data['jumlahLoker'];   
+    $totalPage          =   $data['totalPage'];
+    $page               =   $data['page'];
+    $next               =   $data['next'];
+    $previous           =   $data['previous'];   
+
+    $searchQS   =   !empty($search)? '&search='.$search : '';
 ?>
 <div class="container">
     <div class="row">
@@ -75,6 +82,25 @@
                     style='width: 125px; height: 125px;' />
                 <i><?=(!empty($search))? 'Hasil pencarian tidak ada' : 'Belum ada Lowongan Pekerjaan Free'?></i>
             </p>
+        <?php } ?>
+        <?php if($totalPage >= 1){ ?>
+            <nav class='mt-3'>
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" 
+                            <?=($page > 1)? 'href=?page='.$previous : ''?><?=$searchQS?>>Previous</a>
+                    </li>
+                    <?php for($i = 1; $i <= $totalPage; $i++){ ?>
+                        <li class="page-item">
+                            <a class="page-link <?=($i == $page)? 'bg-primary text-white' : ''?>" href="?page=<?=$i?><?=$searchQS?>"><?=$i?></a>
+                        </li>
+                    <?php } ?>
+                    <li class="page-item">
+                        <a class="page-link"
+                            <?=($page < $totalPage)? 'href=?page='.$next : ''?><?=$searchQS?>>Next</a>
+                    </li>
+                </ul>
+            </nav>
         <?php } ?>
     </div>
 </div>
