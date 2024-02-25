@@ -12,6 +12,7 @@
     
     #Library
     use App\Libraries\APIRespondFormat;
+    use App\Libraries\EmailSender;
     use App\Libraries\Tabel;
     use App\Libraries\MitraJWT;
 
@@ -71,6 +72,9 @@
             $message    =   'Gagal menjalankan approvement (penerimaan/penolakan) transaksi!';
             $data       =   null;
 
+            $db     =   $transaksi->db;
+            $db->transBegin();
+
             try{
                 $request            =   request();
 
@@ -102,6 +106,10 @@
                     $transaksiAktifMitra    =   null;
                 }
 
+                $detailMitra    =   $mitra->getMitra($idMitra, ['select' => 'nama, email']);
+                $namaMitra      =   $detailMitra['nama'];
+                $emailMitra     =   $detailMitra['email'];
+
                 $dataTransaksi  =   [
                     'approvement'   =>  $approvement,
                     'approvementBy' =>  $this->loggedInIDAdministrator,
@@ -111,40 +119,68 @@
 
                 $message    =   ($isApproved)? 'Gagal melakukan penyetujuan pembelian paket!' : 'Gagal melakukan penolakan pembelian paket!';
                 if($saveApprovementTransaksi){
-                    $status     =   true;
-                    $message    =   ($isApproved)? 'Berhasil menerima pembelian paket!' : 'Berhasil menolak pembelian paket!';
-                    $data       =   [
-                        'id'    =>  $idTransaksi
+                    $emailSender    =   new EmailSender();
+                    $htmlBody       =   '<div style="width: 100%; border: 1px solid #0D6EFD; border-radius: 10px; padding: 15px;">
+                                            <center>
+                                                <img src="https://employer.kubu.id/assets/img/icon.png" style="width: 150px; display: block; margin: auto;"
+                                                    alt="Employer" />
+                                            </center>
+                                            <br />
+                                            <p>Pembelian paket dengan nomor transaksi <b>'.$nomor.'</b> '.(($isApproved)? '<b class="text-success">disetujui</b>' : '<b class="text-danger">ditolak</b>').'!</p>
+                                        </div>';
+
+                    $emailParams    =   [
+                        'subject'   =>  ($isApproved)? 'Pembelian Paket Disetujui' : 'Pembelian Paket Ditolak',
+                        'body'      =>  $htmlBody,
+                        'receivers' =>  [
+                            ['email' => $emailMitra, 'name' => $namaMitra]
+                        ]
                     ];
+                    $sendEmail          =   $emailSender->sendEmail($emailParams);   
+                    $statusKirimEmail   =   $sendEmail['statusSend'];
 
-                    if($isApproved){
-                        if(!empty($transaksiAktifMitra)){
-                            $idTransaksiLama    =   $transaksiAktifMitra['id'];
-                            $nomorTransaksiLama =   $transaksiAktifMitra['nomor'];
-                            
-                            $idTransaksiBaru    =   $idTransaksi;
-                            $nomorTransaksiBaru =   $nomor;
+                    if($statusKirimEmail){
+                        $status     =   true;
+                        $message    =   ($isApproved)? 'Berhasil menerima pembelian paket!' : 'Berhasil menolak pembelian paket!';
+                        $data       =   [
+                            'id'    =>  $idTransaksi
+                        ];
 
-                            $saveStackedBy  =   $transaksi->saveTransaksi($idTransaksiLama, ['stackedBy' => $idTransaksiBaru]);
-                            if($saveStackedBy){
-                                $mitraLog   =   new MitraLog();
+                        if($isApproved){
+                            if(!empty($transaksiAktifMitra)){
+                                $idTransaksiLama    =   $transaksiAktifMitra['id'];
+                                $nomorTransaksiLama =   $transaksiAktifMitra['nomor'];
                                 
-                                $titleLogMitra  =   'Transaksi '.$nomorTransaksiLama.' ditimpa dengan transaksi '.$nomorTransaksiBaru;
-                                $mitraLog->saveMitraLogFromThisModule($tabel->transaksi, $idTransaksiLama, $titleLogMitra);
+                                $idTransaksiBaru    =   $idTransaksi;
+                                $nomorTransaksiBaru =   $nomor;
+
+                                $saveStackedBy  =   $transaksi->saveTransaksi($idTransaksiLama, ['stackedBy' => $idTransaksiBaru]);
+                                if($saveStackedBy){
+                                    $mitraLog   =   new MitraLog();
+                                    
+                                    $titleLogMitra  =   'Transaksi '.$nomorTransaksiLama.' ditimpa dengan transaksi '.$nomorTransaksiBaru;
+                                    $mitraLog->saveMitraLogFromThisModule($tabel->transaksi, $idTransaksiLama, $titleLogMitra);
+                                }
                             }
                         }
+
+                        $adminLog   =   new LogModel();
+                        $tabel      =   new Tabel();
+
+                        $title      =   ($isApproved)? 'Menyetujui pembelian paket' : 'Menolak pembelian paket';
+                        $adminLog->saveAdministratorLogFromThisModule($tabel->transaksi, $idTransaksi, $title);
                     }
-
-                    $adminLog   =   new LogModel();
-                    $tabel      =   new Tabel();
-
-                    $title      =   ($isApproved)? 'Menyetujui pembelian paket' : 'Menolak pembelian paket';
-                    $adminLog->saveAdministratorLogFromThisModule($tabel->transaksi, $idTransaksi, $title);
                 }
             }catch(Exception $e){
                 $status     =   false;
                 $message    =   $e->getMessage();
                 $data       =   null;
+            }
+
+            if($status){
+                $db->transCommit();
+            }else{
+                $db->transRollback();
             }
 
             $arf        =   new APIRespondFormat($status, $message, $data);

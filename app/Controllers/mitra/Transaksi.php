@@ -425,7 +425,13 @@
         public function pilihanPaket(){
             $paket      =   new Paket();
 
-            $listPaket  =   $paket->getPaket();
+            $paketOptions   =   [
+                'order_by'  =>  [
+                    'column'        =>  'id',
+                    'orientation'   =>  'asc'
+                ]
+            ];
+            $listPaket  =   $paket->getPaket(null, $paketOptions);
 
             $data   =   [
                 'view'      =>  mitraView('transaksi/pilihan-paket'),

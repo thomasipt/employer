@@ -6,6 +6,7 @@
     <?php foreach($listPaket as $paketItem){ ?>
         <?php
             $codePaket          =   $paketItem['code'];
+            $fotoPaket          =   $paketItem['foto'];
             $namaPaket          =   $paketItem['nama'];
             $durasiPaket        =   $paketItem['durasi'];
             $hargaPaket         =   $paketItem['harga'];
@@ -15,9 +16,13 @@
         ?>
         <div class="col-lg-3">
             <div class="card">
-                <div class="card-body">
-                    <h5 class='mb-3'><?=$namaPaket?> <span class="badge badge-info"><?=$codePaket?></span></h5>
-                    <h6><b style='color: <?=$color?>'>Rp. <?=number_format($hargaPaket)?></b> / <small><?=$durasiPaket?> Hari</small></h6>
+                <div class="card-body text-center">
+                    <h5 class='mb-3'><span style='color: <?=$color?>'><b><?=$namaPaket?></b></span> <span class="badge badge-info"><?=$codePaket?></span></h5>
+                    <h4><b style='color: <?=$color?>'>Rp. <?=number_format($hargaPaket)?></b> </h4>
+                    <h5 class="text-muted"><?=$durasiPaket?> Hari</h5>
+                    <img src="<?=base_url(uploadGambarPaket($fotoPaket))?>" 
+                        class="img-fluid my-3" alt="<?=$namaPaket?>" 
+                        onError='this.src="<?=base_url(assetsFolder('img/empty.png'))?>"' />
                     <?php if(!empty($keteranganPaket)){ ?>
                         <p class="text-sm text-muted mb-0 mt-3"><?=$keteranganPaket?></p>
                     <?php } ?>
