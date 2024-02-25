@@ -5,14 +5,16 @@
 
     #Models
     use App\Models\BaseModel;
+    use App\Models\Homepage;
+    use App\Models\HomepageElement;
 
     #Libraries
     use App\Libraries\Tabel;
 
     class Transaksi extends BaseModel{
-        public $pembayaran_bankRekening     =   'BRI';
-        public $pembayaran_nomorRekening    =   '732301008529534';
-        public $pembayaran_namaRekening     =   'Falentino Djoka';
+        public $pembayaran_bankRekening;
+        public $pembayaran_nomorRekening;
+        public $pembayaran_namaRekening ;
 
         public $approvement_pending     =   null;
         public $approvement_approved    =   'approved';
@@ -24,6 +26,19 @@
             
             $approvement        =   [$this->approvement_pending, $this->approvement_approved, $this->approvement_rejected];
             $this->approvement  =   $approvement;
+
+            $homepageModel          =   new Homepage();
+            $homepageElementModel   =   new HomepageElement();
+            
+            $options    =   [
+                'where' =>  ['parent' => $homepageModel->rekeningPerusahaanId]
+            ];
+            $rekeningPerusahaanElement  =   $homepageElementModel->getHomepageElement(null, $options);
+            $rekeningPerusahaanElement  =   $homepageElementModel->convertListELementToKeyValueMap($rekeningPerusahaanElement);
+
+            $this->pembayaran_bankRekening  =   $rekeningPerusahaanElement['_bank'];
+            $this->pembayaran_namaRekening  =   $rekeningPerusahaanElement['_pemilik'];
+            $this->pembayaran_nomorRekening =   $rekeningPerusahaanElement['_nomor'];
         }
         
         public function getTransaksi($id = null, $options = null){

@@ -1,6 +1,6 @@
 <?php
-    $paketModel     =   model('Paket');
-    $transaksiModel =   model('Transaksi');
+    $paketModel             =   model('Paket');
+    $transaksiModel         =   model('Transaksi');
 
     $detailPaket        =   $data['detailPaket'];
     $transaksiAktif     =   $data['transaksiAktif'];

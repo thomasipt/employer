@@ -213,6 +213,12 @@
                                 <p>Paket</p>
                             </a>
                         </li>
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('website/landing-page/rekening-perusahaan'))?>/" class="nav-link text-sm">
+                                <i class="fa fa-dollar-sign nav-icon text-success"></i>
+                                <p>Rekening Perusahaan</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
