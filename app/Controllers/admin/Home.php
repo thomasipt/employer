@@ -5,11 +5,10 @@
     use CodeIgniter\API\ResponseTrait;
 
     #Model
-    use App\Models\Administrator;
-use App\Models\Kandidat;
-use App\Models\Loker;
-use App\Models\Mitra;
-use Dompdf\Options;
+    use App\Models\Kandidat;
+    use App\Models\Loker;
+    use App\Models\Mitra;
+    use App\Models\Transaksi;
 
     class Home extends BaseController{
         use ResponseTrait;
@@ -17,6 +16,7 @@ use Dompdf\Options;
             $mitra      =   new Mitra();
             $loker      =   new Loker();
             $kandidat   =   new Kandidat();
+            $transaksi  =   new Transaksi();
 
             $options    =   [
                 'singleRow' =>  true,
@@ -30,12 +30,12 @@ use Dompdf\Options;
             $getJumlahMitra         =   $mitra->getMitra(null, $jumlahMitraOptions);
             $jumlahMitra            =   (!empty($getJumlahMitra))? $getJumlahMitra['jumlahData'] : 0;
 
-            $jumlahMitraButuhApprovementOptions     =   $options;
-            $jumlahMitraButuhApprovementOptions['where']    =   [
+            $jumlahPembelianPaketOptions     =   $options;
+            $jumlahPembelianPaketOptions['where']    =   [
                 'approvement'   =>  null
             ];
-            $getJumlahMitraButuhApprovement     =   $mitra->getMitra(null, $jumlahMitraButuhApprovementOptions);
-            $jumlahMitraButuhApprovement        =   (!empty($getJumlahMitraButuhApprovement))? $getJumlahMitraButuhApprovement['jumlahData'] : 0;
+            $getJumlahPembelianPaket     =   $transaksi->getTransaksi(null, $jumlahPembelianPaketOptions);
+            $jumlahPembelianPaket        =   (!empty($getJumlahPembelianPaket))? $getJumlahPembelianPaket['jumlahData'] : 0;
 
             $lokerOptions       =   $options;
             $getJumlahLoker     =   $loker->getLoker(null, $lokerOptions);
@@ -47,10 +47,10 @@ use Dompdf\Options;
 
             $data   =   [
                 'data'  =>  [
-                    'jumlahMitra'       =>  $jumlahMitra,
-                    'jumlahLoker'       =>  $jumlahLoker,
-                    'jumlahKandidat'    =>  $jumlahKandidat,
-                    'jumlahMitraButuhApprovement'   =>  $jumlahMitraButuhApprovement
+                    'jumlahMitra'           =>  $jumlahMitra,
+                    'jumlahLoker'           =>  $jumlahLoker,
+                    'jumlahKandidat'        =>  $jumlahKandidat,
+                    'jumlahPembelianPaket'  =>  $jumlahPembelianPaket
                 ]
             ];
            return view(adminView('home'), $data);

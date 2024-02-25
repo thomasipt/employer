@@ -9,7 +9,7 @@
     $jumlahMitra                    =   $data['jumlahMitra'];
     $jumlahLoker                    =   $data['jumlahLoker'];
     $jumlahKandidat                 =   $data['jumlahKandidat'];
-    $jumlahMitraButuhApprovement    =   $data['jumlahMitraButuhApprovement'];
+    $jumlahPembelianPaket           =   $data['jumlahPembelianPaket'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,11 +28,11 @@
                                 <div class="small-box bg-info">
                                     <div class="inner">
                                         <h3><?=number_format($jumlahMitra)?></h3>
-                                        <p>Jumlah Mitra Terverifikasi</p>
+                                        <p>Jumlah Mitra</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-android-playstore"
-                                            title='Jumlah Mitra (Disetujui)'></i>
+                                            title='Jumlah Mitra'></i>
                                     </div>
                                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
@@ -66,8 +66,8 @@
                             <div class="col-lg-3 col-6">
                                 <div class="small-box bg-danger">
                                     <div class="inner">
-                                        <h3><?=number_format($jumlahMitraButuhApprovement)?></h3>
-                                        <p>Jumlah Mitra (Approvement)</p>
+                                        <h3><?=number_format($jumlahPembelianPaket)?></h3>
+                                        <p>Jumlah Pembelian Paket</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-android-people"
