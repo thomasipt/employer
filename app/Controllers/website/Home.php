@@ -18,6 +18,7 @@
     use App\Models\JenisLoker;
     use App\Models\LokerFree;
     use App\Models\Company;
+    use App\Models\Transaksi;
 
     use CodeIgniter\API\ResponseTrait;
 
@@ -246,6 +247,7 @@
                     $request            =   request();
                     $kota               =   new Kota();
                     $jenis              =   new JenisLoker();
+                    $transaksi          =   new Transaksi();
 
                     $search     =   $request->getGet('search');
                     $page       =   $request->getGet('page');
@@ -264,6 +266,17 @@
                     if(!$isPremium){
                         $options['where']   =   [
                             'status'    =>  1
+                        ];
+                    }else{
+                        $dateNow            =   date('Y-m-d', strtotime(rightNow()));
+                        $options['join']    =   [
+                            ['table' => $tabel->transaksi.' transaksi', 'condition' => 'transaksi.mitra=pT.createdBy'],
+                        ];
+                        $options['where']   =   [
+                            'transaksi.approvement'         =>  $transaksi->approvement_approved,
+                            'transaksi.stackedBy'           =>  null,
+                            'transaksi.berlakuMulai <='     =>  $dateNow,
+                            'transaksi.berlakuSampai >='    =>  $dateNow
                         ];
                     }
 
