@@ -9,6 +9,11 @@
     ];
     $whatsappElement    =   $homepageElementModel->getHomepageElement(null, $options);
     $whatsappElement    =   $homepageElementModel->convertListELementToKeyValueMap($whatsappElement);
+
+    $emailOptions       =   $options;
+    $emailOptions['where']['parent']    =   $homepageModel->emailPerusahaanId;
+    $emailPerusahaanElement    =   $homepageElementModel->getHomepageElement(null, $emailOptions);
+    $emailPerusahaanElement    =   $homepageElementModel->convertListELementToKeyValueMap($emailPerusahaanElement);
 ?>
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
@@ -33,7 +38,7 @@
                         A108 Adam Street <br>
                         New York, NY 535022<br>
                         United States <br><br>
-                        <strong>Email:</strong> admin@employer.kubu.id<br>
+                        <strong>Email:</strong> <?=$emailPerusahaanElement['_email']?><br>
                     </p>
 
                 </div>
