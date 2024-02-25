@@ -76,7 +76,6 @@
 
             $formValidation     =   new FormValidation();
             $tabel              =   new Tabel();
-            $emailSender        =   new EmailSender();
             $mitraModel         =   new Mitra();
 
             $db     =   $mitraModel->db;
@@ -84,11 +83,6 @@
             $db->transBegin();
 
             try{
-                $configComplete     =   $emailSender->isConfigComplete();
-                if(!$configComplete){
-                    throw new Exception('Harap hubungi administrator untuk menyelesaikan konfigurasi email');
-                }
-
                 $dataMitra          =   [];
                 $validationRules    =   [
                     'nama'      =>  $formValidation->rule_required,

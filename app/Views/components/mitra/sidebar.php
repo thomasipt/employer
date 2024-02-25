@@ -90,7 +90,7 @@
                         <li class="nav-item ml-3">
                             <a href="<?=site_url(mitraController('transaksi/pilihan-paket'))?>" class="nav-link text-sm">
                                 <i class="fa fa-layer-group nav-icon"></i>
-                                <p>Pilihan Paket</p>
+                                <p>Pembelian Paket</p>
                             </a>
                         </li>
                     </ul>

@@ -12,6 +12,7 @@
     
     #Library
     use App\Libraries\APIRespondFormat;
+    use App\Libraries\EmailSender;
     use App\Libraries\PDF;
     use App\Libraries\Tabel;
 
@@ -206,7 +207,7 @@
             try{
                 helper('CustomDate');
                 
-                $mitra          =   new Mitra();
+                $emailSender    =   new EmailSender();
                 $paket          =   new Paket();
                 
                 $tabel          =   new Tabel();
@@ -241,6 +242,35 @@
                     $mitraLog           =   new MitraLog();
 
                     $idTransaksiBaru    =   $saveTransaksi;
+
+                    $detailMitra    =   $this->loggedInDetailMitra;
+                    $emailMitra     =   $detailMitra['email'];
+                    $namaMitra      =   $detailMitra['nama'];
+
+                    $linkUploadBuktiBayar   =   site_url(mitraController('transaksi'));
+
+                    $htmlBody   =   '<div style="width: 100%; border: 1px solid #0D6EFD; border-radius: 10px; padding: 15px;">
+                                        <center>
+                                            <img src="https://employer.kubu.id/assets/img/icon.png" style="width: 150px; display: block; margin: auto;"
+                                                alt="Employer" />
+                                        </center>
+                                        <br />
+                                        <p>Pembelian paket <b>'.$namaPaket.'</b> dengan durasi <b>'.number_format($durasiPaket).' hari</b> berhasil!</p>
+                                        <p>Selanjutnya anda harus melakukan pembayaran dan mengupload bukti pembayaran anda pada halaman <a href="'.$linkUploadBuktiBayar.'">ini</a> dan menunggu admin untuk memvalidasi pembayaran anda</p>
+                                    </div>';
+
+                    $emailParams    =   [
+                        'subject'   =>  'Pembelian Paket',
+                        'body'      =>  $htmlBody,
+                        'receivers' =>  [
+                            ['email' => $emailMitra, 'name' => $namaMitra]
+                        ]
+                    ];
+                    $sendEmail          =   $emailSender->sendEmail($emailParams);   
+                    $statusKirimEmail   =   $sendEmail['statusSend'];
+                    if(!$statusKirimEmail){
+                        $db->transRollback();
+                    }
 
                     $status     =   true;
                     $message    =   'Berhasil checkout!';

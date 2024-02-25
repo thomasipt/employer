@@ -132,19 +132,22 @@
         _btnCheckout.prop('disabled', true).text('Processing ..');
 
         if(_punyaTransaksiAktif){
-            let _konfirmasi =   await konfirmasi('Checkout', 'Apakah anda yakin akan menganti paket aktif anda dengan paket yang baru?');
+            let _konfirmasi =   await konfirmasi('Checkout', 'Apakah anda yakin akan menganti paket aktif anda dengan paket yang baru?'); 
             _btnCheckout.prop('disabled', false).text(_btnCheckoutText);
             
-            if(!_konfirmasi){
-                
+            if(!_konfirmasi){    
                 return false;
             }
         }
 
+        
+        _btnCheckout.prop('disabled', true).text('Processing ..');
         $.ajax({
             url     :   `<?=site_url(mitraController('transaksi/checkout'))?>/${_codePaket}`,
             type    :   'POST',
             success :   async (responseFromServer) => {
+                _btnCheckout.prop('disabled', false).text(_btnCheckoutText);
+
                 let _status     =   responseFromServer.status;
                 let _message    =   responseFromServer.message;
 
@@ -157,7 +160,5 @@
                 }
             }
         });
-
-        _btnCheckout.prop('disabled', false).text(_btnCheckoutText);
     });
 </script>
