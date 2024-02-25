@@ -14,6 +14,11 @@
     $emailOptions['where']['parent']    =   $homepageModel->emailPerusahaanId;
     $emailPerusahaanElement    =   $homepageElementModel->getHomepageElement(null, $emailOptions);
     $emailPerusahaanElement    =   $homepageElementModel->convertListELementToKeyValueMap($emailPerusahaanElement);
+
+    $contactUsOptions       =   $options;
+    $contactUsOptions['where']['parent']    =   $homepageModel->contactUsId;
+    $contactUsElement    =   $homepageElementModel->getHomepageElement(null, $contactUsOptions);
+    $contactUsElement    =   $homepageElementModel->convertListELementToKeyValueMap($contactUsElement);
 ?>
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
@@ -34,11 +39,19 @@
                 </div>
                 <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
                     <h4>Contact Us</h4>
-                    <p>
-                        A108 Adam Street <br>
-                        New York, NY 535022<br>
-                        United States <br><br>
-                        <strong>Email:</strong> <?=$emailPerusahaanElement['_email']?><br>
+                    <?=$contactUsElement['_description']?>
+                    <p class='mt-3'>
+                        <?php
+                            $contact        =   $contactUsElement['_contact'];
+                            $listContact    =   json_decode($contact, true);
+                        ?>
+                        <?php foreach($listContact as $contact){ ?>
+                            <?php
+                                $contactTitle           =   $contact['title'];
+                                $contactDescription     =   $contact['description'];
+                            ?>
+                            <strong><?=$contactTitle?>:</strong> <?=$contactDescription?><br>
+                        <?php } ?>
                     </p>
 
                 </div>

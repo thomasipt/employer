@@ -20,6 +20,11 @@
                                         name='_title' id='_title' value='<?=(!empty($contactUsElement))? $contactUsElement['_title'] : '' ?>' required />
                                 </div>
                                 <div class="form-group">
+                                    <label for="_subTitle">Sub Judul</label>
+                                    <input type='text' class='form-control' placeholder='Sub Judul Contact Us'
+                                        name='_subTitle' id='_subTitle' value='<?=(!empty($contactUsElement))? $contactUsElement['_subTitle'] : '' ?>' required />
+                                </div>
+                                <div class="form-group">
                                     <label for="_description">Deskripsi</label>
                                     <input type='text' class='form-control' placeholder='Deskripsi Contact Us'
                                         name='_description' id='_description' value='<?=(!empty($contactUsElement))? $contactUsElement['_description'] : '' ?>' required />

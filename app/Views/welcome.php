@@ -266,7 +266,7 @@
 
                     <header class="section-header">
                         <h2><?=$contactUsElement['_title']?></h2>
-                        <p><?=$contactUsElement['_description']?></p>
+                        <p><?=$contactUsElement['_subTitle']?></p>
                     </header>
 
                     <div class="row gy-4">
