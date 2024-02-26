@@ -20,8 +20,8 @@
                     <h5 class='mb-3'><span style='color: <?=$color?>'><b><?=$namaPaket?></b></span> <span class="badge badge-info"><?=$codePaket?></span></h5>
                     <h4><b style='color: <?=$color?>'>Rp. <?=number_format($hargaPaket)?></b> </h4>
                     <h5 class="text-muted"><?=$durasiPaket?> Hari</h5>
-                    <img src="<?=base_url(uploadGambarPaket($fotoPaket))?>" 
-                        class="img-fluid my-3" alt="<?=$namaPaket?>" 
+                    <img src="<?=base_url(uploadGambarPaket($fotoPaket))?>"
+                        class="img-fluid my-3" alt="<?=$namaPaket?>"
                         onError='this.src="<?=base_url(assetsFolder('img/empty.png'))?>"' />
                     <?php if(!empty($keteranganPaket)){ ?>
                         <p class="text-sm text-muted mb-0 mt-3"><?=$keteranganPaket?></p>
@@ -29,7 +29,7 @@
                     <hr />
                     <a href='<?=site_url(mitraController('transaksi/checkout'))?>/<?=$codePaket?>' target='_blank'>
                         <button class="btn btn-success btn-block">
-                            <span class="fa fa-dollar-sign mr-1"></span> Beli
+                            Beli
                         </button>
                     </a>
                 </div>
