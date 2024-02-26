@@ -9,7 +9,7 @@
 
         public array $default = [
             'DSN'          => '',
-            'hostname'     => '202.52.146.249',
+            'hostname'     => '103.30.145.71',
             'username'     => 'kubuid_employer',
             'password'     => 'LS5U_%_xs%Q8',
             'database'     => 'kubuid_kubu_prod',
