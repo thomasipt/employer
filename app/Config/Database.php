@@ -11,7 +11,7 @@
             'DSN'          => '',
             'hostname'     => 'localhost',
             'username'     => 'kubuid_prod',
-            'password'     => 'kubuid_prod',
+            'password'     => '@rifandi97',
             'database'     => 'kubuid_kubu_prod',
             'DBDriver'     => 'MySQLi',
             'DBPrefix'     => '',
