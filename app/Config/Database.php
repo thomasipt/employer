@@ -9,9 +9,9 @@
 
         public array $default = [
             'DSN'          => '',
-            'hostname'     => '103.30.145.71',
-            'username'     => 'kubuid_employer',
-            'password'     => 'LS5U_%_xs%Q8',
+            'hostname'     => 'localhost',
+            'username'     => 'kubuid_prod',
+            'password'     => 'kubuid_prod',
             'database'     => 'kubuid_kubu_prod',
             'DBDriver'     => 'MySQLi',
             'DBPrefix'     => '',
