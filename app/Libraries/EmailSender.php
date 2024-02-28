@@ -77,7 +77,7 @@
                         $mail->Username     =   'root';                                 
                         $mail->Password     =   '@Kubu_Indo24!';                                            
                         $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_STARTTLS;            
-                        $mail->Port         =   587;                                    
+                        $mail->Port         =   25;                                    
                     
                         //Recipients
                         $mail->setFrom($username, $username);
