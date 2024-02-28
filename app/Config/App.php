@@ -12,7 +12,7 @@ class App extends BaseConfig
     public $appNickName     =   'employer';
     public $emailAccountUsername; #email address
     public $emailAccountPassword; #sandi aplikasi (bukan sandi email)
-    public string $baseURL = 'https://employer.kubu.id/';
+    public string $baseURL = 'http://localhost/employer/';
     public array $allowedHostnames = [];
     public string $indexPage = '';
     public string $uriProtocol = 'REQUEST_URI';
