@@ -12,7 +12,23 @@
     $currentController      =   $uri->getSegment(2);
     $currentControllerLC    =   strtolower($currentController);
 
-    $appName    =   $appConfig->appName;
+    $appName        =   $appConfig->appName;
+
+    $mitraModel     =   model('Mitra');
+    $paketModel     =   model('Paket');
+
+    try{
+        $transaksiAktif         =   $mitraModel->getPaketAktif($id, true);
+        if(!empty($transaksiAktif)){
+            $paketTransaksiAktif    =   $transaksiAktif['paket'];
+            $detailPaket            =   $paketModel->getPaket($paketTransaksiAktif, ['select' => 'nama']);
+            if(!empty($detailPaket)){
+                $paketAktif =   $detailPaket['nama'];
+            }
+        }
+    }catch(Exception $e){
+        $paketAktif =   null;
+    }
 ?>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -35,7 +51,16 @@
                 <a href="#" class="d-block">
                     <h5 class='mb-0 text-white'><?=$nama?></h5>
                 </a>
-                <p class="text-sm mb-1" style='color:#c8c8c8'><?=$username?></p>
+                <?php if(!empty($paketAktif)){ ?>
+                    <?php
+                        $berlakuMulai   =   $transaksiAktif['berlakuMulai'];
+                        $berlakuSampai  =   $transaksiAktif['berlakuSampai'];
+                    ?>
+                    <p class="text-sm mb-1" style='color:#c8c8c8'><?=$paketAktif?></p>
+                    <p class="text-sm mb-1" style='color:#c8c8c8'><?=formattedDate($berlakuMulai)?> sd <?=formattedDate($berlakuSampai)?></p>
+                <?php }else{ ?>  
+                    <p class="text-sm mb-2" style='color:#c8c8c8'><?=$username?></p>
+                <?php } ?>
             </div>
         </div>
 

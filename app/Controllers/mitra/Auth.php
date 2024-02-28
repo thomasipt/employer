@@ -119,6 +119,7 @@
                     $body       =   'Password anda sudah direset menjadi '.$passwordBaru.'. Silahkan login kembali dengan password baru anda.';
 
                     $emailParameters    =   [
+                        'smtpDebug' =>  true,
                         'subject'   =>  $subject,
                         'body'      =>  $body,
                         'receivers' =>  [
@@ -152,9 +153,9 @@
                     $db->transRollback();
                 }
 
-                $arf        =   new APIRespondFormat($status, $message, null);
-                $respond    =   $arf->getRespond();
-                return $this->respond($respond);
+                // $arf        =   new APIRespondFormat($status, $message, null);
+                // $respond    =   $arf->getRespond();
+                // return $this->respond($respond);
             }
         }
     }

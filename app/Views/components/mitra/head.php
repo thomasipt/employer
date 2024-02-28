@@ -94,5 +94,18 @@
                 _previewEl.attr('class', 'w-100 img-thumbnail');
             }
         }
+
+        $("[data-type='currency']").on({
+            keyup: function(){
+                formatNumber($(this));
+            },
+            blur: function(){ 
+                formatNumber($(this));
+            }
+        });
+
+        function formatNumber(jQueryElement) {
+            
+        }
     </script>
 </head>

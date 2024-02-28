@@ -34,7 +34,7 @@
                                         <i class="ion ion-android-playstore"
                                             title='Jumlah Mitra'></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="<?=site_url(adminController('mitra'))?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6">
@@ -47,7 +47,7 @@
                                         <i class="ion ion-android-person"
                                             title='Jumlah Loker Premium'></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="#" class='small-box-footer' style='background-color: transparent;'>&nbsp;</a>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6">
@@ -60,7 +60,7 @@
                                         <i class="ion ion-person-add"
                                             title='Jumlah Penyuluh Terdaftar'></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="#" class='small-box-footer' style='background-color: transparent;'>&nbsp;</a>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6">
@@ -73,7 +73,7 @@
                                         <i class="ion ion-android-people"
                                             title='Jumlah Dinas Terdaftar'></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="<?=site_url(adminController('transaksi/pending'))?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>

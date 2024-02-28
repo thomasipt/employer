@@ -1,4 +1,4 @@
-async function hirarki(thisContext){
+async function hirarki(thisContext, callback = null){
     let _el         =   $(thisContext);
     let _tingkat    =   _el.data('tingkat');
 
@@ -8,6 +8,8 @@ async function hirarki(thisContext){
     let _listElementDibawahnya  =   $('.hirarki').filter(function(){
         return $(this).data('tingkat') > _tingkat;
     });
+
+    let _listData   =   [];
 
     if(_listElementDibawahnya.length >= 1){
         _listElementDibawahnya.each((index, element) => {
@@ -28,7 +30,6 @@ async function hirarki(thisContext){
             _optionTextSrc          =   (_optionTextSrc == undefined)? 'text' : _optionTextSrc;
 
             if(_elementTingkat == _nextTingkat){
-                let _listData   =   [];
 
                 $.ajax({
                     async   :   false,
@@ -48,5 +49,9 @@ async function hirarki(thisContext){
             
             _jQueryElement.html(_optionsTagHTML);
         });
+    }
+    
+    if(callback != null){
+        callback(_listData);
     }
 }

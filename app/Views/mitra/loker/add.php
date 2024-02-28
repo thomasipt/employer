@@ -145,11 +145,13 @@
                                 <div class="form-group">
                                     <label for="rentangGaji">Gaji</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" placeholder='Gaji Minimum'
+                                        <input type="text" class="form-control" placeholder='Gaji Minimum'
+                                            data-type='currency' pattern="^\d{1,3}(,\d{3})*(\.\d+)?$"
                                             id='gajiMinimum' name='gajiMinimum'
                                             value='<?=($doesUpdate)? $dL['gajiMinimum'] : 0?>'
                                             required />
-                                        <input type="number" class="form-control" placeholder='Gaji Maximum'
+                                        <input type="text" class="form-control" placeholder='Gaji Maximum'
+                                            data-type='currency' pattern="^\d{1,3}(,\d{3})*(\.\d+)?$"
                                             id='gajiMaximum' name='gajiMaximum'
                                             value='<?=($doesUpdate)? $dL['gajiMaximum'] : 0?>'
                                             required />
@@ -208,6 +210,7 @@
         </div>
     </div>
 </div>
+<script src='<?=base_url(assetsFolder('plugins/jquery/jquery.min.js'))?>'></script>
 <script src='<?= base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.js')) ?>'></script>
 <link rel="stylesheet" href="<?=base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.css'))?>" />
 
@@ -223,6 +226,7 @@
 
 <script language='Javascript'>
     let _formLoker  =   $('#formLoker');
+    let _kota       =   $('#kota');
 
     ClassicEditor
 		.create(document.querySelector('#deskripsi'), {})
@@ -261,21 +265,29 @@
     });
 
     $('.hirarki').on('change', function(){
-        hirarki(this);
+        hirarki(this, (dataFromCallback) => { 
+            let _isNotEmpty    =   dataFromCallback.length >= 1;
+            _kota.prop('disabled', !_isNotEmpty)
+        });
     });
 </script>
 <?php if($doesUpdate){ ?>
     <script language='Javascript'>
-        let _kota       =   $('#kota');
         let _kotaLoker  =   `<?=$dL['kota']?>`;
 
         hirarki('#provinsi');
         let _listKota   =   _kota.children();
-        _listKota.each((index, optionElement) => {
-            let _optionValue    =   optionElement.value;
-            if(_optionValue == _kotaLoker){
-                optionElement.setAttribute('selected', true);
-            }
-        });
+        if(!_listKota.empty){
+            _kota.prop('disabled', false);
+
+            _listKota.each((index, optionElement) => {
+                let _optionValue    =   optionElement.value;
+                if(_optionValue == _kotaLoker){
+                    optionElement.setAttribute('selected', true);
+                }
+            });
+        }else{
+            _kota.prop('disabled', true);
+        }
     </script>
 <?php } ?>
