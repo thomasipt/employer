@@ -72,7 +72,7 @@
                             }    
                         }                 
                         $mail->isSMTP();                                            
-                        $mail->Host         =   'smtp.gmail.com';               
+                        $mail->Host         =   '103.30.145.71:2005';               
                         $mail->SMTPAuth     =   true;                                   
                         $mail->Username     =   'admin@employer.kubu.id';                                 
                         $mail->Password     =   '@Kubu_Indo24!';                                            
