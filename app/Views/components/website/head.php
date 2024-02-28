@@ -15,8 +15,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="<?= base_url(flexStartAssets('flexstart/assets/img/favicon.png')) ?>" rel="icon">
-    <link href="<?= base_url(flexStartAssets('flexstart/assets/img/apple-touch-icon.png')) ?>" rel="apple-touch-icon">
+    <link href="<?= base_url(flexStartAssets('img/favicon.png')) ?>" rel="icon">
+    <link href="<?= base_url(flexStartAssets('img/apple-touch-icon.png')) ?>" rel="apple-touch-icon">
 
     <!-- Vendor CSS Files -->
     <link href="<?= base_url(flexStartAssets('vendor/aos/aos.css')) ?>" rel="stylesheet">
@@ -28,7 +28,7 @@
 
     <!-- Template Main CSS File -->
     <link href="<?= base_url('assets/flexstart/assets/css/style.css') ?>" rel="stylesheet" />
-    
+
     <!-- =======================================================
         * Template Name: FlexStart
         * Updated: Jan 09 2024 with Bootstrap v5.3.2

@@ -13,7 +13,7 @@ $searchQS   =   !empty($search) ? '&search=' . $search : '';
 ?>
 <?php
     function showPagination($totalPages, $currentPage){
-        echo '<nav  class="mt-3" aria-label="Page navigation example"><ul class="pagination">';
+        echo '<nav  class="mt-3" aria-label="Page navigation example"><ul class="pagination justify-content-center">';
 
         if ($totalPages > 7) {
             if ($currentPage == 1) {
@@ -85,21 +85,21 @@ $searchQS   =   !empty($search) ? '&search=' . $search : '';
     }
     function getURL($pageNo) {
         $actuallink =   "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-      
+
         $parsed_url =   parse_url($actuallink);
-    
+
         if(isset($parsed_url["query"])) parse_str($parsed_url["query"], $query); else $query = array();
-    
+
         if($pageNo == 1) {
             unset($query["page"]);
         } else {
             $query["page"]  =    $pageNo;
         }
-        
+
         $query  =    htmlentities(http_build_query($query));
 
         return ($query) ? $parsed_url["path"] . "?" . $query : $parsed_url["path"];
-    
+
       }
 ?>
 <div class="container">
