@@ -74,10 +74,10 @@
                         $mail->isSMTP();                                            
                         $mail->Host         =   'smtp.gmail.com';               
                         $mail->SMTPAuth     =   true;                                   
-                        $mail->Username     =   'root';                                 
+                        $mail->Username     =   'admin@employer.kubu.id';                                 
                         $mail->Password     =   '@Kubu_Indo24!';                                            
-                        $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_SMTPS;            
-                        $mail->Port         =   465;                                    
+                        $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_STARTTLS;            
+                        $mail->Port         =   587;                                    
                     
                         //Recipients
                         $mail->setFrom($username, $username);
