@@ -72,10 +72,10 @@
                             }    
                         }                 
                         $mail->isSMTP();                                            
-                        $mail->Host         =   'smtp.zoho.com';               
+                        $mail->Host         =   'smtp.gmail.com';               
                         $mail->SMTPAuth     =   true;                                   
-                        $mail->Username     =   'root';                                 
-                        $mail->Password     =   '@Kubu_Indo24!';                                            
+                        $mail->Username     =   $username;                                 
+                        $mail->Password     =   $password;                                            
                         $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_STARTTLS;            
                         $mail->Port         =   587;                                    
                     
