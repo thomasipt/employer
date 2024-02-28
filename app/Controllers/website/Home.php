@@ -183,32 +183,83 @@
             return $this->respond($respond);
         }
         public function verifikasi($encodedIDMitra){
+            helper('CustomDate');
+
             $mitra              =   new Mitra();
             $decodedIdMitra     =   base64_decode($encodedIDMitra);
 
             try{
-                $detailMItra    =   $mitra->getMitra($decodedIdMitra);
-                if(empty($detailMItra)){
+                $detailMitra    =   $mitra->getMitra($decodedIdMitra);
+                if(empty($detailMitra)){
                     throw new Exception('Gagal memverifikasi email, mitra tidak terdaftar!');
                 }
 
-                helper('CustomDate');
+                $emailSender    =   new EmailSender();
+                    
+                $idMitra        =   $detailMitra['id'];
+                $namaMitra      =   $detailMitra['nama'];
+                $emailMitra     =   $detailMitra['email'];
+                $verifiedMitra  =   $detailMitra['verified'];
 
-                $idMitra    =   $detailMItra['id'];
+                $message        =   'Anda sudah terverifikasi!';
+
+                $isVerified     =   $verifiedMitra == $mitra->emailVerification_verified;
+                if(!$isVerified){
+                    $passwordDefault    =   $mitra->passwordDefault;
+
+                    $subject    =   'Verifikasi Pendaftaran Mitra '.$namaMitra;
+                    $body       =   '<div>
+                                        <p>
+                                        Selamat, pendaftaran anda berhasil! Silahkan login ke halaman  
+                                        <a href="'.site_url(mitraController('login')).'">Login Mitra</a> untuk mulai memposting lowongan pekerjaan dan mendapatkan kandidat perusahaan anda
+                                        </p>
+                                        <p><b>Akun Mitra</b></p>
+                                        <p>Username: '.$emailMitra.'</p>
+                                        <p>Password: '.$passwordDefault.'</p>
+                                        <br />
+                                        <p>
+                                            Anda tentunya bisa mengganti username dan password anda dengan dengan yang baru di halaman 
+                                            <a href="'.site_url(mitraController('profile')).'">ini</a>
+                                        </p>
+                                    </div>';
+
+
+                    $emailParams    =   [
+                        'subject'   =>  $subject,
+                        'body'      =>  $body,
+                        'receivers' =>  [
+                            ['email' => $emailMitra, 'name' => $namaMitra]
+                        ]
+                    ];
+                    $sendEmail      =   $emailSender->sendEmail($emailParams);
+                    $statusSend     =   $sendEmail['statusSend'];
                 
-                $dataVerifikasi =   [
-                    'verified'      =>  $mitra->emailVerification_verified,
-                    'verifiedAt'    =>  rightNow()
-                ];
-                $updateMitra    =   $mitra->saveMitra($idMitra, $dataVerifikasi);
-                if($updateMitra){
-                    echo 'Berhasil verifikasi email!';
-                }else{
-                    echo 'Gagal verifikasi email!';
+                    $message    =   'Verifikasi email gagal, silahkan coba lagi!';
+                    if($statusSend){
+                        $dataVerifikasi =   [
+                            'verified'      =>  $mitra->emailVerification_verified,
+                            'verifiedAt'    =>  rightNow()
+                        ];
+                        $updateMitra    =   $mitra->saveMitra($idMitra, $dataVerifikasi);
+                        if($updateMitra){
+                            $message    =   'Berhasil verifikasi email!';
+                        }else{
+                            $message    =   'Gagal verifikasi email!';
+                        }
+                    }
                 }
+
+                $pageData   =   [
+                    'pageTitle' =>  'Verifikasi Pendaftaran',
+                    'view'      =>  websiteView('verifikasi-pendaftaran'),
+                    'data'      =>  [
+                        'message'   =>  $message
+                    ]
+                ];
+                return view(websiteView('index'), $pageData);
             }catch(Exception $e){
                 $data   =   [
-                    'judul'     =>  'Verifikasi Email',
+                    'title'     =>  'Verifikasi Email',
                     'deskripsi' =>  $e->getMessage()
                 ];
                 return view(websiteView('error'), $data);
