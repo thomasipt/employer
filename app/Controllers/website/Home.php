@@ -77,6 +77,7 @@
             $formValidation     =   new FormValidation();
             $tabel              =   new Tabel();
             $mitraModel         =   new Mitra();
+            $emailSender        =   new EmailSender();
 
             $db     =   $mitraModel->db;
 
@@ -130,11 +131,39 @@
                     if($saveMitra){
                         $idMitraBaru    =   $saveMitra;
 
+                        $encodedIDMitra =   base64_encode($idMitraBaru);
+                        $linkVerifikasi =   site_url(websiteController('verifikasi/'.$encodedIDMitra));
+
                         $status     =   true;
                         $message    =   'Pendaftaran berhasil!';
                         $data       =   ['id' => $idMitraBaru];
 
-                        $db->transCommit();
+                        $htmlBody   =   '<div style="width: 100%; border: 1px solid #0D6EFD; border-radius: 10px; padding: 15px;">
+                                            <center>
+                                                <img src="https://employer.kubu.id/assets/img/icon.png" style="width: 150px; display: block; margin: auto;"
+                                                    alt="Employer" />
+                                            </center>
+                                            <br />
+                                            <p>Anda telah mendaftar sebagai mitra ke dalam website <a href="https://employer.kubu.id">Employer</a>.
+                                            Silahkan klik link berikut ini untuk memverifikasi pendaftaran anda <a href="'.$linkVerifikasi.'">'.$linkVerifikasi.'</a></p>
+                                            <p>Selanjutnya anda hanya perlu menunggu approvement dari Administrator Employer untuk mengaktifkan akun anda.</p>
+                                            <p style="color: red;">Jika anda tidak melakukan pendaftaran, silahkan abaikan pesan ini</p>
+                                        </div>';
+
+                        $emailParams    =   [
+                            'subject'   =>  'Pendaftaran Mitra Employer',
+                            'body'      =>  $htmlBody,
+                            'receivers' =>  [
+                                ['email' => $email, 'name' => $nama]
+                            ]
+                        ];
+                        $sendEmail          =   $emailSender->sendEmail($emailParams);   
+                        $statusKirimEmail   =   $sendEmail['statusSend'];
+                        if($statusKirimEmail){
+                            $db->transCommit();
+                        }else{
+                            $db->transRollback();
+                        }
                     }
                 }else{
                     $error  =   new ErrorCode();
