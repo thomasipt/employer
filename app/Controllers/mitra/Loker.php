@@ -235,6 +235,8 @@
                 $validationMessage  =   $formValidation->generateCustomMessageForSingleRule($validationRules);
     
                 if($this->validate($validationRules, $validationMessage)){
+                    helper('CustomNumber');
+
                     $judul                  =   $request->getPost('judul');
                     $kategori               =   $request->getPost('kategori');
                     $deskripsi              =   $request->getPost('deskripsi');
@@ -250,6 +252,10 @@
                     $jenis                  =   $request->getPost('jenis');
                     $benefit                =   $request->getPost('benefit');
                     $keterangan             =   $request->getPost('keterangan');
+
+                    #Reassignment
+                    $gajiMinimum    =   convertToInt($gajiMinimum);
+                    $gajiMaximum    =   convertToInt($gajiMaximum);
 
                     $currentActivePaket     =   $mitra->getPaketAktif($this->loggedInIDMitra);
                     $detailPaket            =   $paket->getPaket($currentActivePaket, ['select' => 'durasi']);

@@ -149,11 +149,13 @@
                                             data-type='currency' pattern="^\d{1,3}(,\d{3})*(\.\d+)?$"
                                             id='gajiMinimum' name='gajiMinimum'
                                             value='<?=($doesUpdate)? $dL['gajiMinimum'] : 0?>'
+                                            onKeyup='formatCurrency(this)'
                                             required />
                                         <input type="text" class="form-control" placeholder='Gaji Maximum'
                                             data-type='currency' pattern="^\d{1,3}(,\d{3})*(\.\d+)?$"
                                             id='gajiMaximum' name='gajiMaximum'
                                             value='<?=($doesUpdate)? $dL['gajiMaximum'] : 0?>'
+                                            onKeyup='formatCurrency(this)'
                                             required />
                                     </div>
                                 </div>
