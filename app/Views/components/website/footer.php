@@ -31,10 +31,10 @@
                         <span>Employer</span>
                     </a>
                     <div class="social-links mt-3">
-                        <a href="https://x.com/Kubu_ID?s=20" class="twitter" target="_blank"><i class="bi bi-twitter"></i></a>
-                        <a href="https://facebook.com/kubuindonesia" class="facebook" target='_blank'><i class="bi bi-facebook"></i></a>
-                        <a href="https://instagram.com/kubu.app" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
-                        <a href="https://youtube.com/@aplikasikubu/featured" class="youtube" target='_blank'><i class="bi bi-youtube"></i></a>
+                        <a href="https://twitter.com/Kubu_ID" class="twitter" target="_blank"><i class="bi bi-twitter"></i></a>
+                        <a href="https://www.facebook.com/kubuindonesia" class="facebook" target='_blank'><i class="bi bi-facebook"></i></a>
+                        <a href="https://www.instagram.com/kubu.app" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/@aplikasikubu" class="youtube" target='_blank'><i class="bi bi-youtube"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
