@@ -11,6 +11,97 @@
 
     $searchQS   =   !empty($search)? '&search='.$search : '';
 ?>
+<?php
+    function showPagination($totalPages, $currentPage){
+        echo '<nav  class="mt-3" aria-label="Page navigation example"><ul class="pagination">';
+
+        if ($totalPages > 7) {
+            if ($currentPage == 1) {
+                echo '<li class="page-item disabled"><span class="page-link">Previous</span></li>';
+                echo '<li class="page-item active" aria-current="page"><span class="page-link">1</span></li>';
+            } else {
+                echo '<li class="page-item"><a class="page-link" href="' . getURL($currentPage - 1) . '">Previous</a></li>';
+                echo '<li class="page-item"><a class="page-link" href="' . getURL(1) . '">1</a></li>';
+            }
+
+            if ($totalPages - $currentPage > 3) {
+                if ($currentPage > 4) {
+                    echo '<li class="page-item"><span class="page-link">...</span></li>';
+                    echo '<li class="page-item"><a class="page-link" href="' . getURL($currentPage - 1) . '">' . ($currentPage - 1) . '</a></li>';
+                    echo '<li class="page-item active" aria-current="page"><span class="page-link">' . ($currentPage) . '</span></li>';
+                    echo '<li class="page-item"><a class="page-link" href="' . getURL($currentPage + 1) . '">' . ($currentPage + 1) . '</a></li>';
+                } else {
+                    for ($pageNo = 2; $pageNo <= 5; $pageNo++) {
+                        if ($currentPage == $pageNo) {
+                            echo '<li class="page-item active" aria-current="page"><span class="page-link">' . ($pageNo) . '</span></li>';
+                        } else {
+                            echo '<li class="page-item"><a class="page-link" href="' . getURL($pageNo) . '">' . ($pageNo) . '</a></li>';
+                        }
+                    }
+                }
+            }
+
+            if ($totalPages - $currentPage < 4) {
+                echo '<li class="page-item"><span class="page-link">...</span></li>';
+                for ($pageNo = $totalPages - 4; $pageNo <= $totalPages - 1; $pageNo++) {
+                    if ($currentPage == $pageNo) {
+                        echo '<li class="page-item active" aria-current="page"><span class="page-link">' . ($pageNo) . '</span></li>';
+                    } else {
+                        echo '<li class="page-item"><a class="page-link" href="' . getURL($pageNo) . '">' . ($pageNo) . '</a></li>';
+                    }
+                }
+            } else {
+                echo '<li class="page-item"><span class="page-link">...</span></li>';
+            }
+
+            if ($currentPage == $totalPages) {
+                echo '<li class="page-item active" aria-current="page"><span class="page-link">' . ($totalPages) . '</span></li>';
+                echo '<li class="page-item disabled"><span class="page-link">Next</span></li>';
+            } else {
+                echo '<li class="page-item"><a class="page-link" href="' . getURL($totalPages) . '">' . ($totalPages) . '</a></li>';
+                echo '<li class="page-item"><a class="page-link" href="' . getURL($currentPage + 1) . '">Next</a></li>';
+            }
+        } else {
+            if ($currentPage == 1) {
+                echo '<li class="page-item disabled"><span class="page-link">Previous</span></li>';
+            } else {
+                echo '<li class="page-item"><a class="page-link" href="' . getURL($currentPage - 1) . '">Previous</a></li>';
+            }
+            for ($pageNo = 1; $pageNo <= $totalPages; $pageNo++) {
+                if ($currentPage == $pageNo) {
+                    echo '<li class="page-item active" aria-current="page"><span class="page-link">' . ($pageNo) . '</span></li>';
+                } else {
+                    echo '<li class="page-item"><a class="page-link" href="' . getURL($pageNo) . '">' . ($pageNo) . '</a></li>';
+                }
+            }
+            if ($currentPage == $totalPages) {
+                echo '<li class="page-item disabled"><span class="page-link">Next</span></li>';
+            } else {
+                echo '<li class="page-item"><a class="page-link" href="' . getURL($currentPage + 1) . '">Next</a></li>';
+            }
+        }
+
+        echo '</ul></nav>';
+    }
+    function getURL($pageNo) {
+        $actuallink =   "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+      
+        $parsed_url =   parse_url($actuallink);
+    
+        if(isset($parsed_url["query"])) parse_str($parsed_url["query"], $query); else $query = array();
+    
+        if($pageNo == 1) {
+            unset($query["page"]);
+        } else {
+            $query["page"]  =    $pageNo;
+        }
+        
+        $query  =    htmlentities(http_build_query($query));
+
+        return ($query) ? $parsed_url["path"] . "?" . $query : $parsed_url["path"];
+    
+      }
+?>
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -83,24 +174,8 @@
                 <i><?=(!empty($search))? 'Hasil pencarian tidak ada' : 'Belum ada Lowongan Pekerjaan Premium'?></i>
             </p>
         <?php } ?>
-        <?php if($totalPage >= 1){ ?>
-            <nav class='mt-3'>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" 
-                            <?=($page > 1)? 'href=?page='.$previous : ''?><?=$searchQS?>>Previous</a>
-                    </li>
-                    <?php for($i = 1; $i <= $totalPage; $i++){ ?>
-                        <li class="page-item">
-                            <a class="page-link <?=($i == $page)? 'bg-primary text-white' : ''?>" href="?page=<?=$i?><?=$searchQS?>"><?=$i?></a>
-                        </li>
-                    <?php } ?>
-                    <li class="page-item">
-                        <a class="page-link"
-                            <?=($page < $totalPage)? 'href=?page='.$next : ''?><?=$searchQS?>>Next</a>
-                    </li>
-                </ul>
-            </nav>
+        <?php if ($totalPage >= 1) { ?>
+            <?php showPagination($totalPage, $page); ?>
         <?php } ?>
     </div>
 </div>
