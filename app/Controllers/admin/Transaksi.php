@@ -19,6 +19,8 @@
 
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
+
+    use Config\Database;
     use Psr\Log\LoggerInterface;
 
     use Exception;
@@ -73,7 +75,8 @@
             $message    =   'Gagal menjalankan approvement (penerimaan/penolakan) transaksi!';
             $data       =   null;
 
-            $db     =   $transaksi->db;
+            $db     =   new Database();
+            $db     =   $db->connect($db->default);
             $db->transBegin();
 
             try{
