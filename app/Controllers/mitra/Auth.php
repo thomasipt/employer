@@ -147,11 +147,11 @@
                     }
                 }
 
-                if($status){
-                    $db->transCommit();
-                }else{
-                    $db->transRollback();
-                }
+                // if($status){
+                //     $db->transCommit();
+                // }else{
+                //     $db->transRollback();
+                // }
 
                 // $arf        =   new APIRespondFormat($status, $message, null);
                 // $respond    =   $arf->getRespond();
