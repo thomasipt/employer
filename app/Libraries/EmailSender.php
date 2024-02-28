@@ -76,8 +76,8 @@
                         $mail->SMTPAuth     =   true;                                   
                         $mail->Username     =   'root';                                 
                         $mail->Password     =   '@Kubu_Indo24!';                                            
-                        $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_STARTTLS;            
-                        $mail->Port         =   587;                                    
+                        $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_SMTPS;            
+                        $mail->Port         =   465;                                    
                     
                         //Recipients
                         $mail->setFrom($username, $username);
