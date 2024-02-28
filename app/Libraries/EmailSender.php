@@ -74,10 +74,10 @@
                         $mail->isSMTP();                                            
                         $mail->Host         =   '103.30.145.71:2005';               
                         $mail->SMTPAuth     =   true;                                   
-                        $mail->Username     =   'admin@employer.kubu.id';                                 
+                        $mail->Username     =   'root';                                 
                         $mail->Password     =   '@Kubu_Indo24!';                                            
                         $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_STARTTLS;            
-                        $mail->Port         =   587;                                    
+                        $mail->Port         =   25;                                    
                     
                         //Recipients
                         $mail->setFrom($username, $username);
