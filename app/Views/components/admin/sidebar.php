@@ -1,9 +1,9 @@
-<?php 
+<?php
     $request                =   request();
     $administratorModel     =   model('Administrator');
     $transaksiModel         =   model('Transaksi');
     $appConfig              =   config('Config\App');
-    
+
     $detailAdministrator    =   $request->administrator;
     $foto       =   $detailAdministrator['foto'];
     $nama       =   $detailAdministrator['nama'];
@@ -18,7 +18,7 @@
 
     $listControllerMasterData   =   ['jenis-loker', 'kategori-loker'];
     $masterData                 =   in_array($currentController, $listControllerMasterData);
-    
+
     $jumlahTransaksiButuhVerifikasi =   $transaksiModel->getJumlahTransaksiPending();
 ?>
 <!-- Main Sidebar Container -->
@@ -34,8 +34,8 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image pt-1">
-                <img src="<?= base_url(uploadGambarAdmin('compress/'.$foto)) ?>" 
-                    class="img-circle elevation-2" alt="User Image" 
+                <img src="<?= base_url(uploadGambarAdmin('compress/'.$foto)) ?>"
+                    class="img-circle elevation-2" alt="User Image"
                     style='width:2.85rem;' />
             </div>
             <div class="info">

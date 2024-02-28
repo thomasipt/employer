@@ -3,17 +3,17 @@
     $search     =   $request->getGet('search');
 
     $listLokerPremium   =   $data['listLoker'];
-    $jumlahLoker        =   $data['jumlahLoker'];   
+    $jumlahLoker        =   $data['jumlahLoker'];
     $totalPage          =   $data['totalPage'];
     $page               =   $data['page'];
     $next               =   $data['next'];
-    $previous           =   $data['previous'];   
+    $previous           =   $data['previous'];
 
     $searchQS   =   !empty($search)? '&search='.$search : '';
 ?>
 <?php
     function showPagination($totalPages, $currentPage){
-        echo '<nav  class="mt-3" aria-label="Page navigation example"><ul class="pagination">';
+        echo '<nav  class="mt-3" aria-label="Page navigation example"><ul class="pagination justify-content-center">';
 
         if ($totalPages > 7) {
             if ($currentPage == 1) {
@@ -85,21 +85,21 @@
     }
     function getURL($pageNo) {
         $actuallink =   "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-      
+
         $parsed_url =   parse_url($actuallink);
-    
+
         if(isset($parsed_url["query"])) parse_str($parsed_url["query"], $query); else $query = array();
-    
+
         if($pageNo == 1) {
             unset($query["page"]);
         } else {
             $query["page"]  =    $pageNo;
         }
-        
+
         $query  =    htmlentities(http_build_query($query));
 
         return ($query) ? $parsed_url["path"] . "?" . $query : $parsed_url["path"];
-    
+
       }
 ?>
 <div class="container">
@@ -135,7 +135,7 @@
                     $detailLokasi       =   $lokerPremium['lokasi'];
                     if(!empty($detailLokasi)){
                         $namaKota       =   $detailLokasi['namaKota'];
-                        $namaProvinsi   =   $detailLokasi['namaProvinsi'];   
+                        $namaProvinsi   =   $detailLokasi['namaProvinsi'];
                     }
 
                     $detailJenisPekerjaan   =   $lokerPremium['jenis'];
@@ -155,10 +155,10 @@
                                 <br />
                                 <label class='text-black' for="lokasi"><b>Lokasi</b></label>
                                 <p class='text-sm text-muted mb-2' id="lokasi"><?=$namaKota?>, <?=$namaProvinsi?></p>
-                                
+
                                 <label class='text-black' for="gaji"><b>Gaji</b></label>
                                 <p class='text-sm text-muted mb-2' id="gaji">Rp. <?=number_format($gajiMinimumLoker)?> s/d Rp. <?=number_format($gajiMaximumLoker)?></p>
-                                
+
                                 <label class='text-black' for="jenis"><b>Jenis</b></label>
                                 <p class='text-sm text-muted mb-2' id="jenis"><?=$namaJenisPekerjaan?></p>
 
@@ -208,7 +208,7 @@
     .img-perusahaan{
         width: 85px;
         height: 85px;
-        object-fit: cover; 
+        object-fit: cover;
         border-radius: 50%;
     }
 </style>

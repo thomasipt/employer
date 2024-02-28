@@ -2,3 +2,5 @@
 /app/Config/Database.php
 /writable/
 /vendor
+app/Config/App.php
+app/Config/Database.php

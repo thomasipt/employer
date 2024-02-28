@@ -9,7 +9,7 @@
     if(isset($data)){
         if(array_key_exists('mitraToken', $data)){
             $mitraToken =   $data['mitraToken'];
-        } 
+        }
     }
 ?>
 <?php if(!empty($loggedInIDMitra)){ ?>
@@ -24,7 +24,7 @@
             </div>
             <div class="modal-body pb-4">
                 <form id='formUploadBuktiBayar' type='post' action='<?=site_url(mitraController('transaksi/upload-bukti-bayar'))?>'
-                    enctype="multipart/form-data"> 
+                    enctype="multipart/form-data">
                     <h6>Nomor Transaksi <b id='nomorTransaksi'></b></h6>
                     <label for='uploadButton' class='w-100'>
                         <input type="text" name='nomorTransaksi' style='display:none;' class='nomorTransaksi' />
@@ -55,7 +55,7 @@
                         <span class="text-sm text-muted">History Transaksi Anda</span>
                     </div>
                     <div class="col text-right">
-                        
+
                     </div>
                 </div>
             </div>
@@ -97,13 +97,13 @@
     let _uploadIcon                 =   $('#uploadIcon');
     let _formUploadBuktiBayar       =   $('#formUploadBuktiBayar');
     let _getListTransaksi           =   `<?=site_url(mitraController('transaksi/get-list-transaksi'))?>`;
-    
+
     let _imgPreview    =   null;
     let _imgData       =   null;
 
     let _approvementApproved    =   `<?=$transaksiModel->approvement_approved?>`;
     let _approvementRejected    =   `<?=$transaksiModel->approvement_rejected?>`;
-    
+
     if(typeof _loggedInIDMitra === 'undefined'){
         var _loggedInIDMitra    =   `<?=(!empty($loggedInIDMitra))? $loggedInIDMitra : ''?>`;
     }
@@ -146,7 +146,7 @@
                                                         </span>
                                                     </p>`;
                     }
-                    
+
                     let _buktiBayarHMTL         =   ``;
                     if(_buktiBayar == null){
                         _buktiBayarHMTL         =   `<span class='badge badge-info blink'>Belum upload bukti bayar</span>`;
@@ -158,7 +158,7 @@
                                                             onClick='_uploadBuktiBayar(this)'></span>`;
                         }
                     }
-                    
+
                     let _stackedByHTML  =   ``;
                     if(_stackedBy != null){
                         let _nomorTransaksiPenimpa  =   _stackedBy.nomor;
@@ -172,12 +172,12 @@
                     if(_buktiBayar != null){
                         _buktiBayarImgHTML  =   `<a href='<?=base_url(uploadGambarBuktiBayar())?>/${_buktiBayar}' target='_blank'>
                                                     <span class='text-sm mr-1'>Bukti bayar</span> <span class='fa fa-image'></span>
-                                                </a>`; 
+                                                </a>`;
                     }
 
                     return `<div class='text-left'>
                                 ${_stackedByHTML}
-                                <h6 class='mb-1'>${_nomor} <span class='fa fa-copy cp text-muted cp ml-1' style='font-size: 12px;' 
+                                <h6 class='mb-1'>${_nomor} <span class='fa fa-copy cp text-muted cp ml-1' style='font-size: 12px;'
                                         onClick='copy("${_nomor}")'></span></h6>
                                 ${_periodeBerlakuHTML}
                                 ${_buktiBayarHMTL}
@@ -189,7 +189,7 @@
                 data: null,
                 render: function(data, type, row, meta) {
                     let _paket      =   data.paket;
-                    let _createdAt  =   data.createdAt;   
+                    let _createdAt  =   data.createdAt;
 
                     let _namaPaket          =   _paket.nama;
                     let _keteranganPaket    =   _paket.keterangan;
@@ -290,7 +290,7 @@
             _nomorTransaksiEl.text(_nomor);
             _nomorTransaksiFormEl.val(_nomor);
             _modalUploadBuktiBayar.modal();
-        } 
+        }
 
         async function _uploadFile(thisContext){
             await fileHandler(thisContext);

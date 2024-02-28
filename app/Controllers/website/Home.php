@@ -1,8 +1,8 @@
 <?php
     namespace App\Controllers\website;
-    
+
     use App\Controllers\BaseController;
-    
+
     #Library
     use App\Libraries\FormValidation;
     use App\Libraries\Tabel;
@@ -126,7 +126,7 @@
                         'createdFrom'  =>  $mitraModel->createdFrom_employer
                     ];
                     $saveMitra  =   $mitraModel->saveMitra(null, $dataMitra);
-                    
+
                     $message    =   'Gagal memproses pendaftaran mitra! Silahkan ulangi!';
                     if($saveMitra){
                         $idMitraBaru    =   $saveMitra;
@@ -135,7 +135,7 @@
                         $linkVerifikasi =   site_url(websiteController('verifikasi/'.$encodedIDMitra));
 
                         $status     =   true;
-                        $message    =   'Pendaftaran berhasil!';
+                        $message    =   'Pendaftaran Berhasil, Cek Email Untuk Verifikasi!';
                         $data       =   ['id' => $idMitraBaru];
 
                         $htmlBody   =   '<div style="width: 100%; border: 1px solid #0D6EFD; border-radius: 10px; padding: 15px;">
@@ -157,7 +157,7 @@
                                 ['email' => $email, 'name' => $nama]
                             ]
                         ];
-                        $sendEmail          =   $emailSender->sendEmail($emailParams);   
+                        $sendEmail          =   $emailSender->sendEmail($emailParams);
                         $statusKirimEmail   =   $sendEmail['statusSend'];
                         if($statusKirimEmail){
                             $db->transCommit();
@@ -195,7 +195,7 @@
                 }
 
                 $emailSender    =   new EmailSender();
-                    
+
                 $idMitra        =   $detailMitra['id'];
                 $namaMitra      =   $detailMitra['nama'];
                 $emailMitra     =   $detailMitra['email'];
@@ -210,7 +210,7 @@
                     $subject    =   'Verifikasi Pendaftaran Mitra '.$namaMitra;
                     $body       =   '<div>
                                         <p>
-                                        Selamat, pendaftaran anda berhasil! Silahkan login ke halaman  
+                                        Selamat, pendaftaran anda berhasil! Silahkan login ke halaman
                                         <a href="'.site_url(mitraController('login')).'">Login Mitra</a> untuk mulai memposting lowongan pekerjaan dan mendapatkan kandidat perusahaan anda
                                         </p>
                                         <p><b>Akun Mitra</b></p>
@@ -218,7 +218,7 @@
                                         <p>Password: '.$passwordDefault.'</p>
                                         <br />
                                         <p>
-                                            Anda tentunya bisa mengganti username dan password anda dengan dengan yang baru di halaman 
+                                            Anda tentunya bisa mengganti username dan password anda dengan dengan yang baru di halaman
                                             <a href="'.site_url(mitraController('profile')).'">ini</a>
                                         </p>
                                     </div>';
@@ -233,7 +233,7 @@
                     ];
                     $sendEmail      =   $emailSender->sendEmail($emailParams);
                     $statusSend     =   $sendEmail['statusSend'];
-                
+
                     $message    =   'Verifikasi email gagal, silahkan coba lagi!';
                     if($statusSend){
                         $dataVerifikasi =   [
@@ -303,7 +303,7 @@
                     $perusahaanLoker    =   $detailLoker['createdBy'];
 
                     $detailPerusahaan   =   ($isPremium)? $mitra->getMitra($perusahaanLoker) : $company->getCompany($perusahaanLoker);
-                    
+
                     $sektorPerusahaan   =   $detailPerusahaan['sector'];
                     $detailSektor       =   $kategoriLoker->getKategoriLoker($sektorPerusahaan, ['select' => 'name as nama']);
 
@@ -336,7 +336,7 @@
                         'limit'             =>  $batas,
                         'limitStartFrom'    =>  $firstIndex
                     ];
-                    
+
                     if(!$isPremium){
                         $options['where']   =   [
                             'status'    =>  1
@@ -395,7 +395,7 @@
                     unset($jumlahLokerOptions['limitStartFrom']);
                     $getJumlahLoker         =   ($isPremium)? $loker->getLoker(null, $jumlahLokerOptions) : $lokerFree->getLokerFree(null, $jumlahLokerOptions);
                     $jumlahLoker            =   !empty($getJumlahLoker)? $getJumlahLoker['jumlahData'] : 0;
-                    
+
                     $totalPage      =   ceil($jumlahLoker / $batas);
 
                     $pageData   =   [

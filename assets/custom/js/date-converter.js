@@ -3,10 +3,16 @@ function convertDate(date = null, separator='/', stringMonth = false){
 		let _dateObject 	=	new Date(date);
 
 		let _date 	=	_dateObject.getDate();
-		
+		if(_date <= 9){
+			_date 	=	`0${_date}`;
+		}
 		let _month 	=	_dateObject.getMonth() + 1;
 		if(stringMonth){
 			_month 	=	getMonthName(_month);
+		}else{
+			if(_month <= 9){
+				_month 	=	`0${_month}`;
+			}
 		}
 
 		let _year 	=	_dateObject.getFullYear();
