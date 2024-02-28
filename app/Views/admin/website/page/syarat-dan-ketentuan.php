@@ -5,7 +5,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h5 class='mb-0'>Whatsapp Division</h5>
+                <h5 class='mb-0'>Syarat dan Ketentuan</h5>
             </div>
             <div class="card-body">
                 <form id="formSyaratDanKetentuan" action='<?=base_url(adminController('website/page/syarat-dan-ketentuan'))?>' method='post'

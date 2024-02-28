@@ -62,8 +62,6 @@
                 $idSection      =   $detailSection['id'];
 
                 $data   =   [
-                    'pageTitle' =>  'Hero',
-                    'pageDesc'  =>  'Hero Divison',
                     'view'      =>  adminView('website/landing-page/'.$section),
                     'data'      =>  []
                 ];
@@ -76,32 +74,44 @@
                 $sectionElement    =   $homepageElement->getHomepageElement(null, $elementOptions);
                 $sectionElement    =   $homepageElement->convertListELementToKeyValueMap($sectionElement);
 
+                $pageTitle      =   'Home';
+                $pageDesc       =   '';
                 $sectionName    =   '';
                 if($idSection == $homepage->heroId){
+                    $pageDesc       =   'Hero Division';
                     $sectionName    =   'heroElement';
                 }
                 if($idSection == $homepage->aboutUsId){
+                    $pageDesc       =   'About Us Division';
                     $sectionName    =   'aboutUsElement';
                 }
                 if($idSection == $homepage->featuresId){
+                    $pageDesc       =   'Features Division';
                     $sectionName    =   'featuresElement';
                 }
                 if($idSection == $homepage->whatsappId){
+                    $pageDesc       =   'Whatsapp Division';
                     $sectionName    =   'whatsappElement';
                 }
                 if($idSection == $homepage->paketId){
+                    $pageDesc       =   'Paket Division';
                     $sectionName    =   'paketElement';
                 }
                 if($idSection == $homepage->rekeningPerusahaanId){
+                    $pageDesc       =   'Rekening Perusahaan Division';
                     $sectionName    =   'rekeningPerusahaanElement';
                 }
                 if($idSection == $homepage->emailPerusahaanId){
+                    $pageDesc       =   'Email Perusahaan Division';
                     $sectionName    =   'emailPerusahaanElement';
                 }
                 if($idSection == $homepage->contactUsId){
+                    $pageDesc       =   'Contact Us Division';
                     $sectionName    =   'contactUsElement';
                 }
                 
+                $data['pageTitle']  =   $pageTitle;
+                $data['pageDesc']   =   $pageDesc;
                 $data['data']   =   [
                     $sectionName    =>  $sectionElement
                 ];
@@ -206,13 +216,6 @@
                 $detailSection  =   $this->sectionChecking($section);
                 $idSection      =   $detailSection['id'];
 
-                $data   =   [
-                    'pageTitle' =>  'Hero',
-                    'pageDesc'  =>  'Hero Divison',
-                    'view'      =>  adminView('website/page/'.$section),
-                    'data'      =>  []
-                ];
-
                 $elementOptions =   [
                     'where' =>  [
                         'parent'    =>  $idSection
@@ -221,16 +224,25 @@
                 $sectionElement    =   $homepageElement->getHomepageElement(null, $elementOptions);
                 $sectionElement    =   $homepageElement->convertListELementToKeyValueMap($sectionElement);
 
+                $pageTitle      =   'Home';
+                $pageDesc       =   '';
                 $sectionName    =   '';
                 if($idSection == $homepage->syaratDanKetentuanId){
+                    $pageDesc       =   'Syarat dan Ketentuan';
                     $sectionName    =   'syaratDanKetentuanElement';
                 }
                 if($idSection == $homepage->kebijakanPrivasiId){
+                    $pageDesc       =   'Kebijakan Privasi';
                     $sectionName    =   'kebijakanPrivasiElement';
                 }
-                
-                $data['data']   =   [
-                    $sectionName    =>  $sectionElement
+
+                $data   =   [
+                    'pageTitle' =>  $pageTitle,
+                    'pageDesc'  =>  $pageDesc,
+                    'view'      =>  adminView('website/page/'.$section),
+                    'data'      =>  [
+                        $sectionName    =>  $sectionElement
+                    ]
                 ];
 
                 return view(adminView('index'), $data);

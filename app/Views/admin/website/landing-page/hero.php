@@ -8,7 +8,7 @@
     <div class="col-lg-4">
         <div class="card">
             <div class="card-header">
-                <h5>Hero Image</h5>
+                <h5>Home Image</h5>
             </div>
             <div class="card-body">
                 <form id='formHeroImage' action="<?=base_url(adminController('website/landing-page-image/hero'))?>"
@@ -30,7 +30,7 @@
     <div class="col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h5 class='mb-0'>Hero Division</h5>
+                <h5 class='mb-0'>Home Division</h5>
             </div>
             <div class="card-body">
                 <form id="formHero" action='<?=base_url(adminController('website/landing-page/hero'))?>' method='post'
