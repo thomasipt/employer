@@ -13,6 +13,8 @@
     use Exception;
 
     class Mitra extends BaseModel{
+        public $tableId     =   'id';
+
         public $emailVerification_verified  =   'verified';
         public $emailVerification;
 
@@ -43,14 +45,13 @@
             $t  =   new Tabel();
 
             $this->connectedDatabase    =   $d->default;
-            $mitra                      =   $this->getData($t->mitra, $id, $options);
+            $mitra                      =   $this->getData($t->mitra, $id, $options, $this->tableId);
 
             return $mitra;
         }
         public function authenticationProcess($username, $password){
             $options    =   [
                 'singleRow'     =>  true,
-                'select'        =>  'id, nama, username',
                 'whereGroup'    =>  [
                     'operator'  =>  $this->whereGroupOperator_or,
                     'where'     =>  [
@@ -74,7 +75,7 @@
             
             $mitraBuilder   =   $db->table($tabel->mitra);
             if(!empty($id)){
-                $mitraBuilder->where('id', $id);
+                $mitraBuilder->where($this->tableId, $id);
                 $saveMitra  =   $mitraBuilder->update($dataMitra);
             }else{                
                 $saveMitra  =   $mitraBuilder->insert($dataMitra);
@@ -86,7 +87,7 @@
         public function getPaketAktif($idMitra, $returnTransaksi = false){
             $paketAktif     =   null;
 
-            $detailMitra    =   $this->getMitra($idMitra, ['select' => 'id']);
+            $detailMitra    =   $this->getMitra($idMitra, ['select' => $this->tableId]);
             if(empty($detailMitra)){
                 throw new Exception('Tidak ditemukan mitra dengan pengenal '.$idMitra.'!');
             }
@@ -139,7 +140,7 @@
         public function getJumlahMitraButuhVerifikasi(){
             $options    =   [
                 'singleRow' =>  true,
-                'select'    =>  'count(id) as jumlah',
+                'select'    =>  'count('.$this->tableId.') as jumlah',
             ];
             $getJumlahMitra     =   $this->getMitraNeedApprove($options);
 
