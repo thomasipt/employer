@@ -142,7 +142,8 @@
                     $namaJenisPekerjaan     =   !empty($detailJenisPekerjaan)? $detailJenisPekerjaan['nama'] : '-';
                 ?>
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mb-3">
-                        <a href="<?=site_url(websiteController('loker-premium'))?>/<?=base64_encode($idLoker)?>" target='_blank'>
+                        <a href="<?=site_url(websiteController('loker-premium'))?>/<?=base64_encode($idLoker)?>" target='_blank'
+                            data-id='<?=$idLoker?>'>
                             <div class="post-box col">
                                 <div class="row">
                                     <img src="<?=base_url(uploadGambarMitra('compress'))?>/<?=$fotoPerusahaan?>" alt="<?=$namaPerusahaan?>"
