@@ -118,7 +118,6 @@
                     $body       =   'Password anda sudah direset menjadi '.$passwordBaru.'. Silahkan login kembali dengan password baru anda.';
 
                     $emailParameters    =   [
-                        'smtpDebug' =>  true,
                         'subject'   =>  $subject,
                         'body'      =>  $body,
                         'receivers' =>  [
