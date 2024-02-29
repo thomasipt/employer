@@ -353,15 +353,15 @@
                             'status'    =>  1
                         ];
                     }else{
-                        $dateNow            =   date('Y-m-d', strtotime(rightNow()));
+                        $rightNow           =   date('Y-m-d H:i:s', strtotime(rightNow()));
                         $options['join']    =   [
                             ['table' => $tabel->transaksi.' transaksi', 'condition' => 'transaksi.mitra=pT.createdBy'],
                         ];
                         $options['where']   =   [
                             'transaksi.approvement'         =>  $transaksi->approvement_approved,
                             'transaksi.stackedBy'           =>  null,
-                            'transaksi.berlakuMulai <='     =>  $dateNow,
-                            'transaksi.berlakuSampai >='    =>  $dateNow
+                            'transaksi.berlakuMulai <='     =>  $rightNow,
+                            'transaksi.berlakuSampai >='    =>  $rightNow
                         ];
                     }
 
