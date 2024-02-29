@@ -208,13 +208,17 @@
                                         </div>
                                     </div>
                                 <?php } ?>
+                            <?php } ?>
+                        </div>
+                        <?php if(count($listLokerPremium) >= 1){ ?>
+                            <div class="row">
                                 <div class="col text-center mt-5">
                                     <a href="<?=site_url(websiteController('loker-premium'))?>">
                                         <button class="btn btn-primary">Lihat Loker Premium Lainnya</button>
                                     </a>
                                 </div>
-                            <?php } ?>
-                        </div>
+                            </div>
+                        <?php } ?>
                 </div>
 
             </section>
@@ -227,33 +231,37 @@
                         <h2>Loker Free</h2>
                         <p>Postingan Loker Free Terbaru</p>
                     </header>
-                        <div class="row">
-                            <?php if(count($listLokerFree) >= 1){ ?>
-                                <?php foreach($listLokerFree as $lokerFree){ ?>
-                                    <?php
-                                        $idLoker                =   $lokerFree['id'];
-                                        $judulLoker             =   $lokerFree['judul'];
-                                        $deskripsiLoker         =   $lokerFree['deskripsi'];
-                                        $tanggalPostingLoker    =   $lokerFree['createdAt'];
-                                    ?>
-                                    <div class="col-lg-4">
-                                        <div class="post-box col">
-                                            <h3 class="post-title"><?=$judulLoker?></h3>
-                                            <?php if(!empty($deskripsiLoker)){ ?>
-                                                <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
-                                            <?php } ?>
-                                            <br />
-                                            Diposting pada <?=formattedDate($tanggalPostingLoker)?>
-                                        </div>
+                    <div class="row">
+                        <?php if(count($listLokerFree) >= 1){ ?>
+                            <?php foreach($listLokerFree as $lokerFree){ ?>
+                                <?php
+                                    $idLoker                =   $lokerFree['id'];
+                                    $judulLoker             =   $lokerFree['judul'];
+                                    $deskripsiLoker         =   $lokerFree['deskripsi'];
+                                    $tanggalPostingLoker    =   $lokerFree['createdAt'];
+                                ?>
+                                <div class="col-lg-4">
+                                    <div class="post-box col">
+                                        <h3 class="post-title"><?=$judulLoker?></h3>
+                                        <?php if(!empty($deskripsiLoker)){ ?>
+                                            <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
+                                        <?php } ?>
+                                        <br />
+                                        Diposting pada <?=formattedDate($tanggalPostingLoker)?>
                                     </div>
-                                <?php } ?>
-                                <div class="col text-center mt-5">
-                                    <a href="<?=site_url(websiteController('loker-free'))?>">
-                                        <button class="btn btn-primary">Lihat Loker Free Lainnya</button>
-                                    </a>
                                 </div>
                             <?php } ?>
+                        <?php } ?>
+                    </div>
+                    <?php if(count($listLokerFree) >= 1){ ?>
+                        <div class="row">
+                            <div class="col text-center mt-5">
+                                <a href="<?=site_url(websiteController('loker-free'))?>">
+                                    <button class="btn btn-primary">Lihat Loker Free Lainnya</button>
+                                </a>
+                            </div>
                         </div>
+                    <?php } ?>
                 </div>
 
             </section>
