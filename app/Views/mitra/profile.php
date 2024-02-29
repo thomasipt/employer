@@ -1,18 +1,22 @@
 <?php
-$detailMitra    =   $data['detailMitra'];
+    #Library
+    $errorCode      =   $library['errorCode'];
 
-$idMitra                =   $detailMitra['id'];
-$fotoMitra              =   $detailMitra['foto'];
-$namaMitra              =   $detailMitra['nama'];
-$alamatMitra            =   $detailMitra['alamat'];
-$teleponMitra           =   $detailMitra['telepon'];
-$emailMitra             =   $detailMitra['email'];
-$tanggalDaftarMitra     =   $detailMitra['createdAt'];
+    #Data
+    $detailMitra    =   $data['detailMitra'];
 
-$headData   =   [
-    'pageTitle' =>  'Profile',
-    'pageDesc'  =>  $namaMitra
-];
+    $idMitra                =   $detailMitra['id'];
+    $fotoMitra              =   $detailMitra['foto'];
+    $namaMitra              =   $detailMitra['nama'];
+    $alamatMitra            =   $detailMitra['alamat'];
+    $teleponMitra           =   $detailMitra['telepon'];
+    $emailMitra             =   $detailMitra['email'];
+    $tanggalDaftarMitra     =   $detailMitra['createdAt'];
+
+    $headData   =   [
+        'pageTitle' =>  'Profile',
+        'pageDesc'  =>  $namaMitra
+    ];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,7 +97,7 @@ $headData   =   [
                                                     <textarea class="form-control" id="alamat" placeholder='Alamat Lengkap Mitra' name='alamat'><?= $alamatMitra ?></textarea>
                                                 </div>
                                                 <hr />
-                                                <button class="btn btn-success" id='btnSubmit' type='submit'>Update Profile</button>
+                                                <button class="btn btn-success" id='btnSubmitFormProfile' type='submit'>Update Profile</button>
                                             </form>
                                         </div>
                                         <div class="tab-pane fade" id="form-ganti-password" role="tabpanel" aria-labelledby="form-ganti-password-tab">
@@ -115,7 +119,7 @@ $headData   =   [
                                                         placeholder='Konfirmasi Password Baru' name='konfirmasiPasswordBaru' />
                                                 </div>
                                                 <hr />
-                                                <button class="btn btn-success" id='btnSubmit' type='submit'>Update Password</button>
+                                                <button class="btn btn-success" id='btnSubmitFormGantiPassword' type='submit'>Update Password</button>
                                             </form>
                                         </div>
                                     </div>
@@ -141,6 +145,8 @@ $headData   =   [
     let _formMitra          =   $('#formMitra');
     let _formGantiPassword  =   $('#formGantiPassword');
 
+    let _formValidationErrorCode    =   `<?=$errorCode->formValidationError?>`;
+
     _formMitra.on('submit', async function(e) {
         e.preventDefault();
         await submitForm(this, async (responseFromServer) => {
@@ -161,8 +167,10 @@ $headData   =   [
     _formGantiPassword.on('submit', async function(e) {
         e.preventDefault();
         await submitForm(this, async (responseFromServer) => {
-            let _status = responseFromServer.status;
-            let _message = responseFromServer.message;
+            let _status     =   responseFromServer.status;
+            let _message    =   responseFromServer.message;
+            let _data       =   responseFromServer.data;
+            let _code       =   responseFromServer.code;
 
             let _swalTitle = `Password`;
             let _swalMessage = (_message == null) ? (_status) ? 'Berhasil!' : 'Gagal!' : _message;
@@ -171,6 +179,27 @@ $headData   =   [
             await notifikasi(_swalTitle, _swalMessage, _swalType);
             if (_status) {
                 location.reload();
+            }else{
+                //Reset Form Validation
+                let _formControlElement     =   _formGantiPassword.find('.form-control');
+                _formControlElement.removeClass('border-danger');
+                _formControlElement.next().remove();
+
+                if(_code == _formValidationErrorCode){
+                    //Memunculkan error
+                    $.each(_data, function(formName, formError){
+                        let _formElement    =   `[name=${formName}]`;
+                        
+                        // $(_formElement).removeClass('border-danger');
+                        $(_formElement).addClass('border-danger');
+
+                        let _nextElement    =   $(_formElement).next();
+                        if(_nextElement.length >= 1){
+                            _nextElement.remove();
+                        }
+                        $(_formElement).after(`<p class='text-sm mt-2 text-danger'>${formError}</p>`);
+                    });
+                }
             }
         });
     });

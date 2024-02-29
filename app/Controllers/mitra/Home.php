@@ -15,6 +15,7 @@
     use App\Libraries\FormValidation;
     use App\Libraries\Tabel;
     use App\Libraries\APIRespondFormat;
+    use App\Libraries\ErrorCode;
 
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
@@ -97,9 +98,15 @@
         public function profile(){
             helper('CustomDate');
 
+            $errorCode          =   new ErrorCode();
+            $detailMitra        =   $this->loggedInDetailMitra;
+
             $data   =   [
+                'library'   =>  [
+                    'errorCode'     =>  $errorCode
+                ],
                 'data' =>   [
-                    'detailMitra'   =>  $this->loggedInDetailMitra
+                    'detailMitra'   =>  $detailMitra
                 ]  
             ];
             return view(mitraView('profile'), $data);
@@ -171,14 +178,16 @@
             $status     =   false;
             $message    =   'Tidak dapat memproses update password mitra!';
             $data       =   null;
+            $code       =   null;
 
             $request            =   request();
             $formValidation     =   new FormValidation();
+            $errorCode          =   new ErrorCode();
 
             $validationRules        =   [
                 'password'                  =>  $formValidation->rule_required,
-                'passwordBaru'              =>  $formValidation->rule_required,
-                'konfirmasiPasswordBaru'    =>  $formValidation->rule_required
+                'passwordBaru'              =>  $formValidation->rule_required.'|min_length[8]|matches[konfirmasiPasswordBaru]',
+                'konfirmasiPasswordBaru'    =>  $formValidation->rule_required.'|min_length[8]|matches[passwordBaru]'
             ];
             
             $validationMessages     =   $formValidation->generateCustomMessageForSingleRule($validationRules);
@@ -221,9 +230,10 @@
             }else{
                 $message    =   'Validasi tidak terpenuhi!';
                 $data       =   $this->validator->getErrors();
+                $code       =   $errorCode->formValidationError;
             }
 
-            $arf        =   new APIRespondFormat($status, $message, $data);
+            $arf        =   new APIRespondFormat($status, $message, $data, $code);
             $respond    =   $arf->getRespond();
 
             return $this->respond($respond);
