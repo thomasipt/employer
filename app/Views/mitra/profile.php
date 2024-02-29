@@ -68,6 +68,12 @@
                                                 aria-controls="form-ganti-password" 
                                                 aria-selected="false">Password</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="form-ganti-foto-tab" data-toggle="pill"
+                                                href="#form-ganti-foto" role="tab" 
+                                                aria-controls="form-ganti-foto" 
+                                                aria-selected="false">Foto</a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
@@ -129,6 +135,22 @@
                                                 <button class="btn btn-success" id='btnSubmitFormGantiPassword' type='submit'>Update Password</button>
                                             </form>
                                         </div>
+                                        <div class="tab-pane fade" id="form-ganti-foto" role="tabpanel" aria-labelledby="form-ganti-foto-tab">
+                                            <h5 class='mb-3'>Form Ganti Foto</h5>
+                                            <form action="<?= site_url(mitraController('ganti-foto')) ?>" id="formGantiFoto"
+                                                enctype="multipart/form-data">
+                                                <label for='uploadFoto' class='w-100'>
+                                                    <input type="file" name="foto" id='uploadFoto' style='display:none;'
+                                                        onChange='_uploadFile(this)'
+                                                        data-preview='#uploadIcon' />
+                                                    <img src='<?=base_url(uploadGambarMitra($fotoMitra))?>' alt='<?=$namaMitra?>' class='d-block m-auto'
+                                                        id='uploadIcon' style='width: 350px;' />
+                                                </label>
+                                                <p class="text-sm text-muted text-center">Klik gambar untuk memilih gambar</p>
+                                                <hr />
+                                                <button class="btn btn-success" id='btnSubmitFormGantiFoto' type='submit'>Ganti Foto</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -151,6 +173,7 @@
 <script language='Javascript'>
     let _formMitra          =   $('#formMitra');
     let _formGantiPassword  =   $('#formGantiPassword');
+    let _formGantiFoto      =   $('#formGantiFoto');
 
     let _formValidationErrorCode    =   `<?=$errorCode->formValidationError?>`;
 
@@ -233,4 +256,27 @@
             }
         });
     });
+
+    _formGantiFoto.on('submit', async function(e){
+        e.preventDefault();
+        await submitForm(this, async (responseFromServer) => {
+            let _status     =   responseFromServer.status;
+            let _message    =   responseFromServer.message;
+            let _data       =   responseFromServer.data;
+            let _code       =   responseFromServer.code;
+
+            let _swalTitle = `Foto Mitra`;
+            let _swalMessage = (_message == null) ? (_status) ? 'Berhasil!' : 'Gagal!' : _message;
+            let _swalType = (_status) ? 'success' : 'error';
+
+            await notifikasi(_swalTitle, _swalMessage, _swalType);
+            if (_status) {
+                location.reload();
+            }
+        });
+    });
+    
+    async function _uploadFile(thisContext){
+        await fileHandler(thisContext);
+    }
 </script>
