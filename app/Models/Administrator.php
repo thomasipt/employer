@@ -6,19 +6,20 @@
     use App\Libraries\Tabel;
 
     class Administrator extends BaseModel{
+        public $tableId     =   'id';
+
         public function getAdministrator($id = null, $options = null){
             $d  =   new Database();
             $t  =   new Tabel();
 
             $this->connectedDatabase    =   $d->default;
-            $administrator              =   $this->getData($t->administrator, $id, $options);
+            $administrator              =   $this->getData($t->administrator, $id, $options, $this->tableId);
 
             return $administrator;
         }
         public function authenticationProcess($username, $password){
             $options    =   [
                 'singleRow'     =>  true,
-                'select'        =>  'id, nama, username',
                 'whereGroup'    =>  [
                     'operator'  =>  $this->whereGroupOperator_or,
                     'where'     =>  [
@@ -44,7 +45,7 @@
             
             $administratorBuilder   =   $db->table($tabel->administratorLog);
             if(!empty($id)){
-                $administratorBuilder->where('id', $id);
+                $administratorBuilder->where($this->tableId, $id);
                 $saveAdministrator  =   $administratorBuilder->update($dataAdministrator);
             }else{
                 $dataAdministrator['createdAt']   =   rightNow();
