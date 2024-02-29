@@ -344,6 +344,7 @@
                     $nextIndex  =   $pageKe + 1;
 
                     $options            =   [
+                        'select'            =>  'pT.*',
                         'limit'             =>  $batas,
                         'limitStartFrom'    =>  $firstIndex
                     ];
