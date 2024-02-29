@@ -15,6 +15,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="<?=site_url(adminController('profile'))?>">
+                <i class="far fa-user"></i>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link"
                 href='<?=site_url(adminController('logout'))?>'>
                 <i class="fas text-danger fa-power-off"></i>
