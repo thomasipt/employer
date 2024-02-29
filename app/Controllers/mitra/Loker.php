@@ -139,56 +139,68 @@
             return $this->respond($response);
         }
         public function addLoker($idLoker = null){
+            $mitra          =   new Mitra();
+            
             try{
                 $doesUpdate     =   !empty($idLoker);
                 $detailLoker    =   ($doesUpdate)? $this->lokerChecking($idLoker) : null;
-
-                $mitra          =   new Mitra();
-                $provinsi       =   new Provinsi();
-                $kategori       =   new KategoriLoker();
-                $jenis          =   new JenisLoker();
-
-                $kategoriOptions    =   [
-                    'select'    =>  'sektor_id as id, name as nama',
-                    'order_by'  =>  [
-                        'column'        =>  'nama',
-                        'orientation'   =>  'asc'
-                    ]  
-                ];
-
-                $jenisOptions   =   [
-                    'select'    =>  'id, job_type_name as nama',
-                    'order_by'  =>  [
-                        'column'        =>  'nama',
-                        'orientation'   =>  'asc'
-                    ]  
-                ];
-
-                $provinsiOptions    =   [
-                    'select'    =>  'id, nama',
-                    'order_by'  =>  [
-                        'column'        =>  'nama',
-                        'orientation'   =>  'asc'
-                    ]
-                ];
-
                 $detailMitra    =   $mitra->getMitra($this->loggedInIDMitra);
-                $listProvinsi   =   $provinsi->getProvinsi(null, $provinsiOptions);
-                $listKategori   =   $kategori->getKategoriLoker(null, $kategoriOptions);
-                $listJenis      =   $jenis->getJenisLoker(null, $jenisOptions);
+
+                try{
+                    $currentActivePaket     =   $mitra->getPaketAktif($this->loggedInIDMitra);
+                }catch(Exception $e){
+                    $currentActivePaket =   null;
+                }
 
                 $data   =   [
                     'pageTitle' =>  ($doesUpdate)? 'Update Loker' : 'Loker Baru',
                     'pageDesc'  =>  ($doesUpdate)? $detailLoker['judul'] : null,
                     'view'      =>  mitraView('loker/add'),
                     'data'      =>  [
+                        'paketAktif'    =>  $currentActivePaket,
                         'detailLoker'   =>  $detailLoker,
-                        'detailMitra'   =>  $detailMitra,
-                        'listProvinsi'  =>  $listProvinsi,
-                        'listKategori'  =>  $listKategori,
-                        'listJenis'     =>  $listJenis
+                        'detailMitra'   =>  $detailMitra
                     ]
                 ];
+
+                if(!empty($currentActivePaket)){
+                    $provinsi       =   new Provinsi();
+                    $kategori       =   new KategoriLoker();
+                    $jenis          =   new JenisLoker();
+
+                    $kategoriOptions    =   [
+                        'select'    =>  'sektor_id as id, name as nama',
+                        'order_by'  =>  [
+                            'column'        =>  'nama',
+                            'orientation'   =>  'asc'
+                        ]  
+                    ];
+
+                    $jenisOptions   =   [
+                        'select'    =>  'id, job_type_name as nama',
+                        'order_by'  =>  [
+                            'column'        =>  'nama',
+                            'orientation'   =>  'asc'
+                        ]  
+                    ];
+
+                    $provinsiOptions    =   [
+                        'select'    =>  'id, nama',
+                        'order_by'  =>  [
+                            'column'        =>  'nama',
+                            'orientation'   =>  'asc'
+                        ]
+                    ];
+
+                    $listProvinsi   =   $provinsi->getProvinsi(null, $provinsiOptions);
+                    $listKategori   =   $kategori->getKategoriLoker(null, $kategoriOptions);
+                    $listJenis      =   $jenis->getJenisLoker(null, $jenisOptions);
+
+                    $data['data']['listProvinsi']  =  $listProvinsi;
+                    $data['data']['listKategori']  =  $listKategori;
+                    $data['data']['listJenis']     =  $listJenis;                
+                }
+
                 return view(mitraView('index'), $data);
             }catch(Exception $e){
                 $data   =   [
