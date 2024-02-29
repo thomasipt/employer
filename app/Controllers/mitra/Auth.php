@@ -38,20 +38,19 @@
                 $mitra                  =   new Mitra();
                 $mitraCheckingProcess   =   $mitra->authenticationProcess($username, $password);
                 if(!empty($mitraCheckingProcess)){
-                    $idMitra    =   $mitraCheckingProcess['id'];
-                    $isActive   =   $mitra->isApproved($idMitra);
-                    if(!$isActive){
-                        throw new Exception('Maaf, pendaftaran anda tidak disetujui!');
+                    $verified   =   $mitraCheckingProcess['verified'];
+
+                    $message    =   'Harap verifikasi pendaftaran terlebih dahulu melalui link yang dikirimkan dalam email yang didaftarkan!';
+                    if($verified == $mitra->emailVerification_verified){
+                        $status     =   true;
+                        $message    =   null;
+                        $data   =   [
+                            'mitra' =>  $mitraCheckingProcess
+                        ];
+
+                        $session    =   session();
+                        $session->set('mitra', $mitraCheckingProcess);
                     }
-
-                    $status     =   true;
-                    $message    =   null;
-                    $data   =   [
-                        'mitra' =>  $mitraCheckingProcess
-                    ];
-
-                    $session    =   session();
-                    $session->set('mitra', $mitraCheckingProcess);
                 }
             }catch(Exception $e){
                 $message    =   $e->getMessage();
@@ -147,15 +146,15 @@
                     }
                 }
 
-                // if($status){
-                //     $db->transCommit();
-                // }else{
-                //     $db->transRollback();
-                // }
+                if($status){
+                    $db->transCommit();
+                }else{
+                    $db->transRollback();
+                }
 
-                // $arf        =   new APIRespondFormat($status, $message, null);
-                // $respond    =   $arf->getRespond();
-                // return $this->respond($respond);
+                $arf        =   new APIRespondFormat($status, $message, null);
+                $respond    =   $arf->getRespond();
+                return $this->respond($respond);
             }
         }
     }
