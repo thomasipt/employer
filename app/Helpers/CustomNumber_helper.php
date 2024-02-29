@@ -4,7 +4,7 @@
         return $replacement;
     }
     function convertToString($number){
-        $replacement    =   number_format($number, 0, ',');
+        $replacement    =   number_format($number, 0, ',', ',');
         return $replacement;
     }
 ?>
