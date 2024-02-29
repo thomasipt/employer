@@ -16,6 +16,7 @@
     use App\Libraries\Tabel;
     use App\Libraries\APIRespondFormat;
     use App\Libraries\ErrorCode;
+    use App\Libraries\FileUpload;
 
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
@@ -242,6 +243,66 @@
             }
 
             $arf        =   new APIRespondFormat($status, $message, $data, $code);
+            $respond    =   $arf->getRespond();
+
+            return $this->respond($respond);
+        }
+        public function gantiFoto(){
+            $request                =   request();
+            $fileFoto               =   $request->getFile('foto');
+            $isFileAttached         =   !empty($fileFoto);
+
+            $status     =   false;
+            $message    =   'Foto harus disematkan!';
+            $data       =   null;
+
+            if($isFileAttached){
+                $detailMitra    =   $this->loggedInDetailMitra;
+                $idMitra        =   $detailMitra['id'];
+                $fotoMitra      =   $detailMitra['foto'];
+
+                $fileUpload     =   new FileUpload();
+                $mitraModel     =   new MitraModel();
+
+                $fileExtension  =   $fileFoto->getExtension();
+                $fileName       =   'Mitra-'.$idMitra.'-'.date('YmdHis').'.'.$fileExtension;
+
+                $uploadOriginalFile     =   $fileFoto->move(uploadGambarMitra(), $fileName);
+                $fileUpload->resizeImage(uploadGambarMitra($fileName), uploadGambarMitra('compress/'.$fileName));
+
+                $message    =   'Gagal mengupload foto baru!';
+                if($uploadOriginalFile){
+                    $message    =   'Gagal menyimpan foto baru, file berhasil diupload!';
+
+                    $dataFotoMitra  =   [
+                        'foto'  =>  $fileName
+                    ];
+                    $saveMitra  =   $mitraModel->saveMitra($idMitra, $dataFotoMitra);
+                    if($saveMitra){
+                        $tabel      =   new Tabel();
+
+                        $status     =   true;
+                        $message    =   'Berhasil mengupload foto baru mitra!';
+
+                        if($fotoMitra != $mitraModel->fotoDefault){
+                            $oldFotoMitra           =   uploadGambarMitra($fotoMitra);
+                            $oldFotoCompressMitra   =   uploadGambarMitra('compress/'.$fotoMitra);
+                            
+                            if(file_exists($oldFotoMitra)){
+                                unlink($oldFotoMitra);
+                            }
+                            if(file_exists($oldFotoCompressMitra)){
+                                unlink($oldFotoCompressMitra);
+                            }
+                        }
+
+                        $mitraLog   =   new MitraLog();
+                        $mitraLog->saveMitraLogFromThisModule($tabel->mitra, $idMitra, 'Ganti Foto Mitra');
+                    }
+                }
+            }
+
+            $arf        =   new APIRespondFormat($status, $message, $data);
             $respond    =   $arf->getRespond();
 
             return $this->respond($respond);
