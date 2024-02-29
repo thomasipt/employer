@@ -22,6 +22,7 @@
         public $approvement_rejected    =   'rejected';
         public $approvement;
 
+        public $fotoDefault             =   'mitra-default.png';
         public $passwordDefault         =   '123456';
 
         public $createdFrom_employer    =   'employer';
