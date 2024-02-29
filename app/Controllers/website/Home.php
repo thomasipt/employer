@@ -18,6 +18,7 @@
     use App\Models\JenisLoker;
     use App\Models\LokerFree;
     use App\Models\Company;
+    use App\Models\MitraLog;
     use App\Models\Transaksi;
 
     use CodeIgniter\API\ResponseTrait;
@@ -240,10 +241,21 @@
                             'verifiedAt'    =>  rightNow()
                         ];
                         $updateMitra    =   $mitra->saveMitra($idMitra, $dataVerifikasi);
+                        
+                        $message    =   'Gagal verifikasi email!';
                         if($updateMitra){
                             $message    =   'Berhasil verifikasi email!';
-                        }else{
-                            $message    =   'Gagal verifikasi email!';
+
+                            $mitraLog   =   new MitraLog();
+                            $tabel      =   new Tabel();
+
+                            $dataMitraLog   =   [
+                                'title'     =>  'Verifikasi Pendaftaran',
+                                'module'    =>  $tabel->mitra,
+                                'idModule'  =>  $idMitra,
+                                'createdBy' =>  $idMitra
+                            ];
+                            $mitraLog->saveMitraLog(null, $dataMitraLog);
                         }
                     }
                 }

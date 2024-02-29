@@ -7,6 +7,7 @@
 
     $idMitra                =   $detailMitra['id'];
     $fotoMitra              =   $detailMitra['foto'];
+    $usernameMitra          =   $detailMitra['username'];
     $namaMitra              =   $detailMitra['nama'];
     $alamatMitra            =   $detailMitra['alamat'];
     $teleponMitra           =   $detailMitra['telepon'];
@@ -76,7 +77,13 @@
                                             <form action="<?= site_url(mitraController('update-profile')) ?>" id="formMitra">
                                                 <div class="form-group">
                                                     <label for="nama">Nama</label>
-                                                    <input type="text" class="form-control" id="nama" placeholder='Nama Lengkap Mitra' value='<?= $namaMitra ?>' name='nama' />
+                                                    <input type="text" class="form-control" id="nama" placeholder='Nama Lengkap Mitra'
+                                                        value='<?= $namaMitra ?>' name='nama' />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="username">Username</label>
+                                                    <input type="text" class="form-control" id="username" placeholder='Username Mitra'
+                                                        value='<?= $usernameMitra ?>' name='username' />
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">

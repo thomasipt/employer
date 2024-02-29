@@ -116,10 +116,15 @@
             $message    =   'Tidak dapat memproses update data mitra!';
             $data       =   null;
 
+            $idMitra            =   $this->loggedInIDMitra;
+
             $request            =   request();
             $formValidation     =   new FormValidation();
+            $tabel              =   new Tabel();
+            $mitra              =   new MitraModel();
 
             $namaMitra      =   $request->getPost('nama');
+            $usernameMitra  =   $request->getPost('username');
             $alamatMitra    =   $request->getPost('alamat');
             $emailMitra     =   $request->getPost('email');
             $teleponMitra   =   $request->getPost('telepon');
@@ -128,27 +133,27 @@
             $validationRules        =   [];
 
             if(!empty($namaMitra)){
-                $dataUpdateMitra['nama']    =   $namaMitra;
+                $dataUpdateMitra['nama']        =   $namaMitra;
+            }
+            if(!empty($usernameMitra)){
+                $validationRules['username']    =   'is_unique['.$tabel->mitra.','.$mitra->tableId.','.$idMitra.']';
+                $dataUpdateMitra['username']    =   $usernameMitra;
             }
             if(!empty($alamatMitra)){
-                $dataUpdateMitra['alamat']  =   $alamatMitra;
+                $dataUpdateMitra['alamat']      =   $alamatMitra;
             }
 
             if(!empty($emailMitra)){
-                $validationRules['email']   =   $formValidation->rule_validEmail;
+                $validationRules['email']   =   $formValidation->rule_validEmail.'|is_unique['.$tabel->mitra.','.$mitra->tableId.','.$idMitra.']';
                 $dataUpdateMitra['email']   =   $emailMitra;
             }
             if(!empty($teleponMitra)){
-                $validationRules['telepon'] =   $formValidation->rule_numeric;
+                $validationRules['telepon'] =   $formValidation->rule_numeric.'|is_unique['.$tabel->mitra.','.$mitra->tableId.','.$idMitra.']';
                 $dataUpdateMitra['telepon'] =   $teleponMitra;
             }
             
             $validationMessages     =   $formValidation->generateCustomMessageForSingleRule($validationRules);
             if($this->validate($validationRules, $validationMessages)){
-                $mitra  =   new MitraModel();
-
-                $idMitra        =   $this->loggedInIDMitra;
-
                 $updateMitra    =   $mitra->saveMitra($idMitra, $dataUpdateMitra);
 
                 $message    =   'Gagal mengupdate data mitra!';
