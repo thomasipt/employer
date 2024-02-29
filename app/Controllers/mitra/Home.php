@@ -167,5 +167,66 @@
 
             return $this->respond($respond);
         }
+        public function gantiPassword(){
+            $status     =   false;
+            $message    =   'Tidak dapat memproses update password mitra!';
+            $data       =   null;
+
+            $request            =   request();
+            $formValidation     =   new FormValidation();
+
+            $validationRules        =   [
+                'password'                  =>  $formValidation->rule_required,
+                'passwordBaru'              =>  $formValidation->rule_required,
+                'konfirmasiPasswordBaru'    =>  $formValidation->rule_required
+            ];
+            
+            $validationMessages     =   $formValidation->generateCustomMessageForSingleRule($validationRules);
+            if($this->validate($validationRules, $validationMessages)){
+                $password                   =   $request->getPost('password');
+                $passwordBaru               =   $request->getPost('passwordBaru');
+                $konfirmasiPasswordBaru     =   $request->getPost('konfirmasiPasswordBaru');
+
+
+                $loggedInDetailMitra    =   $this->loggedInDetailMitra;
+                $idMitra                =   $loggedInDetailMitra['id'];
+                $passwordMitra          =   $loggedInDetailMitra['password'];
+
+                $message    =   'Password tidak sesuai dengan password aktif saat ini!';
+                if(md5($password) === $passwordMitra){
+                    $message    =   'Password baru dan Konfirmasi password baru harus sama!';
+                    if(md5($passwordBaru) === md5($konfirmasiPasswordBaru)){
+                        $mitra  =   new MitraModel();
+
+                        $dataPasswordMitra  =   [
+                            'password'  =>  md5($konfirmasiPasswordBaru)
+                        ];
+                        $updateMitra    =   $mitra->saveMitra($idMitra, $dataPasswordMitra);
+
+                        $message    =   'Gagal mengupdate data password mitra!';
+                        if($updateMitra){
+                            $status     =   true;
+                            $message    =   'Berhasil mengupdate data password mitra!';
+                            $data       =   [
+                                'id'    =>  $idMitra
+                            ];
+        
+                            $mitraLog   =   new MitraLog();
+                            $tabel      =   new Tabel();
+        
+                            $mitraLog->saveMitraLogFromThisModule($tabel->mitra, $idMitra, 'Update Password');
+                        }
+                    }
+                }
+            }else{
+                $message    =   'Validasi tidak terpenuhi!';
+                $data       =   $this->validator->getErrors();
+            }
+
+            $arf        =   new APIRespondFormat($status, $message, $data);
+            $respond    =   $arf->getRespond();
+
+            return $this->respond($respond);
+        }
     }
 ?>

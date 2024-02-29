@@ -184,6 +184,7 @@
 
         $mitraRoutes->get('profile', 'Home::profile', $additionalOptions);
         $mitraRoutes->post('update-profile', 'Home::updateProfile', $additionalOptions);
+        $mitraRoutes->post('ganti-password', 'Home::gantiPassword', $additionalOptions);
 
         #log
         $mitraRoutes->group('log', static function($logRoutes){
