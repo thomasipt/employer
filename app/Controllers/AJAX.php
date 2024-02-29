@@ -49,7 +49,8 @@ class AJAX extends BaseController{
         $data       =   null;
 
         try{
-            $this->provinsiChecking($idProvinsi);
+            $detailProvinsi =   $this->provinsiChecking($idProvinsi);
+            $kodeProvinsi   =   $detailProvinsi['kode'];
             
             $kota       =   new Kota();
 
@@ -60,7 +61,7 @@ class AJAX extends BaseController{
                     'orientation'   =>  'asc'
                 ]
             ];
-            $listKota       =   $kota->getKotaPerProvinsi($idProvinsi, $kotaOptions);
+            $listKota       =   $kota->getKotaPerProvinsi($kodeProvinsi, $kotaOptions);
             
             $status     =   true;
             $message    =   null;

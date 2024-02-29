@@ -19,10 +19,10 @@
 
             return $kota;
         }
-        public function getKotaPerProvinsi($idProvinsi, $kotaOptions = null){
+        public function getKotaPerProvinsi($kodeProvinsi, $kotaOptions = null){
             $options            =   [
                 'where' =>  [
-                    'province'    =>  $idProvinsi
+                    'province'    =>  $kodeProvinsi
                 ]
             ];
 
@@ -31,7 +31,6 @@
                     $options    =   array_merge($options, $kotaOptions);
                 }
             }
-
 
             $kotaPerProvinsi    =   $this->getKota(null, $options);
             return $kotaPerProvinsi;
