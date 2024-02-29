@@ -75,8 +75,10 @@
 </html>
 <script src='<?= base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.js')) ?>'></script>
 <link rel="stylesheet" href="<?= base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.css')) ?>" />
+
 <script src='<?= base_url(assetsFolder('custom/js/custom-alert.js')) ?>'></script>
 <script src='<?= base_url(assetsFolder('custom/js/form-submission.js')) ?>'></script>
+
 <script language='Javascript'>
     let _formLupaPassword = $('#formLupaPassword');
 
@@ -84,8 +86,17 @@
         e.preventDefault();
 
         let _formData = _formLupaPassword.serialize();
-        await submitForm(thisContext, async function(responseFromServer) {
-            console.log(responseFromServer);
+        await submitForm(thisContext, async function(decodedRFS) {
+            let _status     =   decodedRFS.status;
+            let _message    =   decodedRFS.message;
+
+            let _title  =   'Lupa Password';
+            let _type   =   (_status)? 'success' : 'error';
+
+            await notifikasi(_title, _message, _type);
+            if(_status){
+                location.reload();
+            }
         });
     }
 </script>
