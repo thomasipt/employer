@@ -107,12 +107,12 @@
             if(_status){
                 location.href   =   `<?=site_url()?>`;
             }else{
-                if(_code == _formValidationErrorCode){
-                    //Reset Form Validation
-                    let _formControlElement     =   _formMitra.find('.form-control');
-                    _formControlElement.removeClass('border-danger');
-                    _formControlElement.next().remove();
+                //Reset Form Validation
+                let _formControlElement     =   _formMitra.find('.form-control');
+                _formControlElement.removeClass('border-danger');
+                _formControlElement.next().remove();
 
+                if(_code == _formValidationErrorCode){
                     //Memunculkan error
                     $.each(_data, function(formName, formError){
                         let _formElement    =   `[name=${formName}]`;
