@@ -281,9 +281,15 @@
         });
 
         $('.hirarki').on('change', function(){
+            let _el                 =   $(this);
+            let _tingkat            =   _el.data('tingkat');
+            let _tingkatProvinsi    = $('#provinsi').data('tingkat');
+
             hirarki(this, (dataFromCallback) => { 
-                let _isNotEmpty    =   dataFromCallback.length >= 1;
-                _kota.prop('disabled', !_isNotEmpty)
+                if(_tingkat <= _tingkatProvinsi){
+                    let _isNotEmpty    =   dataFromCallback.length >= 1;
+                    _kota.prop('disabled', !_isNotEmpty)
+                }
             });
         });
     </script>
