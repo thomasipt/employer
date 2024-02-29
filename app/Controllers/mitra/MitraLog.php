@@ -7,10 +7,27 @@
     #Model
     use App\Models\MitraLog as LogModel;
     use App\Models\Mitra;
+    
+    use CodeIgniter\HTTP\RequestInterface;
+    use CodeIgniter\HTTP\ResponseInterface;
+    use Psr\Log\LoggerInterface;
 
     class MitraLog extends BaseController{
         use ResponseTrait;
 
+        private $loggedInDetailMitra;
+        private $loggedInIDMitra;
+        public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger){
+            parent::initController($request, $response, $logger);
+            
+            if(property_exists($request, 'mitra')){
+                $detailMitraFromFilter  =   $request->mitra;
+                $idMitra                =   $detailMitraFromFilter['id'];
+
+                $this->loggedInDetailMitra  =   $detailMitraFromFilter;
+                $this->loggedInIDMitra      =   $idMitra;
+            }
+        }
         public function listLog(){
             $data   =   [
                 'view'      =>  mitraView('mitra-log/index'),
@@ -36,7 +53,10 @@
 
             $options    =   [
                 'limit'             =>  $length,
-                'limitStartFrom'    =>  $start
+                'limitStartFrom'    =>  $start,
+                'where'             =>  [
+                    'createdBy' =>  $this->loggedInIDMitra
+                ]
             ];
 
             if(!empty($search)){
@@ -64,7 +84,7 @@
                     $detailMitra    =   $mitra->getMitra($createdBy, ['select' => 'id, nama']);
 
                     $listLog[$indexData]['nomorUrut']       =   $nomorUrut;
-                    $listLog[$indexData]['mitra']   =   $detailMitra;
+                    $listLog[$indexData]['mitra']           =   $detailMitra;
                 }
             }
 
