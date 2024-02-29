@@ -36,6 +36,11 @@
 
         $adminRoutes->get('lupa-password', 'Auth::lupaPassword', ['namespace' => 'App\Controllers\admin']);
         $adminRoutes->post('lupa-password', 'Auth::lupaPassword', ['namespace' => 'App\Controllers\admin']);
+        
+        $adminRoutes->get('profile', 'Home::profile', $additionalOptions);
+        $adminRoutes->post('update-profile', 'Home::updateProfile', $additionalOptions);
+        $adminRoutes->post('ganti-password', 'Home::gantiPassword', $additionalOptions);
+        $adminRoutes->post('ganti-foto', 'Home::gantiFoto', $additionalOptions);
 
         #Log
         $adminRoutes->group('log', static function($logRoutes){

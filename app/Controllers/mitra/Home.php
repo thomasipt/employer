@@ -168,8 +168,6 @@
                     ];
 
                     $mitraLog   =   new MitraLog();
-                    $tabel      =   new Tabel();
-
                     $mitraLog->saveMitraLogFromThisModule($tabel->mitra, $idMitra, 'Update Data Profile');
                 }
             }else{
