@@ -43,7 +43,7 @@
             $tabel      =   new Tabel();
             $db         =   $database->connect($database->default);
             
-            $administratorBuilder   =   $db->table($tabel->administratorLog);
+            $administratorBuilder   =   $db->table($tabel->administrator);
             if(!empty($id)){
                 $administratorBuilder->where($this->tableId, $id);
                 $saveAdministrator  =   $administratorBuilder->update($dataAdministrator);
