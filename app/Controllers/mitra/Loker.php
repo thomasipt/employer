@@ -14,12 +14,13 @@
     use App\Models\MitraLog;
     use App\Models\LokerApply;
     use App\Models\Kandidat;
+    use App\Models\Kota;
     
     #Library
     use App\Libraries\APIRespondFormat;
     use App\Libraries\FormValidation;
     use App\Libraries\Tabel;
-
+    
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
     use Psr\Log\LoggerInterface;
@@ -165,6 +166,7 @@
 
                 if(!empty($currentActivePaket)){
                     $provinsi       =   new Provinsi();
+                    $kota           =   new Kota();
                     $kategori       =   new KategoriLoker();
                     $jenis          =   new JenisLoker();
 
@@ -193,12 +195,14 @@
                     ];
 
                     $listProvinsi   =   $provinsi->getProvinsi(null, $provinsiOptions);
+                    $listKota       =   ($doesUpdate)? $kota->getKotaPerProvinsi($detailLoker['provinsi'], ['select' => 'kode, nama']) : [];
                     $listKategori   =   $kategori->getKategoriLoker(null, $kategoriOptions);
                     $listJenis      =   $jenis->getJenisLoker(null, $jenisOptions);
 
-                    $data['data']['listProvinsi']  =  $listProvinsi;
-                    $data['data']['listKategori']  =  $listKategori;
-                    $data['data']['listJenis']     =  $listJenis;                
+                    $data['data']['listProvinsi']   =  $listProvinsi;  
+                    $data['data']['listKota']       =  $listKota;            
+                    $data['data']['listKategori']   =  $listKategori;
+                    $data['data']['listJenis']      =  $listJenis;   
                 }
 
                 return view(mitraView('index'), $data);

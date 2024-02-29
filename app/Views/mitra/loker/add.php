@@ -1,4 +1,6 @@
 <?php
+    helper('CustomNumber');
+
     $paketAktif     =   $data['paketAktif'];
 
     $detailLoker    =   $data['detailLoker'];    
@@ -20,8 +22,9 @@
     }
 
     if(!empty($paketAktif)){
-        $listKategori   =   $data['listKategori'];
         $listProvinsi   =   $data['listProvinsi'];
+        $listKota       =   $data['listKota'];
+        $listKategori   =   $data['listKategori'];
         $listJenis      =   $data['listJenis'];
     }
 ?>
@@ -144,6 +147,21 @@
                                                     data-option-text-src='nama'
                                                     required>
                                                     <option value=''>-- Pilih Kota/Kabupaten --</option>
+                                                    <?php
+                                                        $kotaLoker  =   ($doesUpdate)? $dL['kota'] : null;
+                                                        if($doesUpdate){
+                                                            foreach($listKota as $kotaItem){
+                                                                $kodeKota   =   $kotaItem['kode'];
+                                                                $namaKota   =   $kotaItem['nama'];
+    
+                                                                $isSelected =   $kotaLoker == $kodeKota;
+                                                                $selected   =   ($isSelected)? 'selected' : '';
+                                                                ?>
+                                                                    <option value="<?=$kodeKota?>" <?=$selected?>><?=$namaKota?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -154,13 +172,13 @@
                                             <input type="text" class="form-control" placeholder='Gaji Minimum'
                                                 data-type='currency' pattern="^\d{1,3}(,\d{3})*(\.\d+)?$"
                                                 id='gajiMinimum' name='gajiMinimum'
-                                                value='<?=($doesUpdate)? $dL['gajiMinimum'] : 0?>'
+                                                value='<?=($doesUpdate)? convertToString($dL['gajiMinimum']) : ""?>'
                                                 onKeyup='formatCurrency(this)'
                                                 required />
                                             <input type="text" class="form-control" placeholder='Gaji Maximum'
                                                 data-type='currency' pattern="^\d{1,3}(,\d{3})*(\.\d+)?$"
                                                 id='gajiMaximum' name='gajiMaximum'
-                                                value='<?=($doesUpdate)? $dL['gajiMaximum'] : 0?>'
+                                                value='<?=($doesUpdate)? convertToString($dL['gajiMaximum']) : ""?>'
                                                 onKeyup='formatCurrency(this)'
                                                 required />
                                         </div>
@@ -299,7 +317,9 @@
 
             hirarki('#provinsi');
             let _listKota   =   _kota.children();
-            if(!_listKota.empty){
+            console.log(_kotaLoker);
+            
+            if(_listKota.length >= 1){
                 _kota.prop('disabled', false);
 
                 _listKota.each((index, optionElement) => {
