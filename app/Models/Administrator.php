@@ -7,6 +7,7 @@
 
     class Administrator extends BaseModel{
         public $tableId     =   'id';
+        public $fotoDefault =   'admin-default.png';
 
         public function getAdministrator($id = null, $options = null){
             $d  =   new Database();
