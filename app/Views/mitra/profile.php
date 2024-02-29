@@ -157,8 +157,10 @@
     _formMitra.on('submit', async function(e) {
         e.preventDefault();
         await submitForm(this, async (responseFromServer) => {
-            let _status = responseFromServer.status;
-            let _message = responseFromServer.message;
+            let _status     =   responseFromServer.status;
+            let _message    =   responseFromServer.message;
+            let _code       =   responseFromServer.code;
+            let _data       =   responseFromServer.data;
 
             let _swalTitle = `Update Profile`;
             let _swalMessage = (_message == null) ? (_status) ? 'Berhasil!' : 'Gagal!' : _message;
@@ -167,6 +169,27 @@
             await notifikasi(_swalTitle, _swalMessage, _swalType);
             if (_status) {
                 location.reload();
+            }else{
+                //Reset Form Validation
+                let _formControlElement     =   _formMitra.find('.form-control');
+                _formControlElement.removeClass('border-danger');
+                _formControlElement.next().remove();
+
+                if(_code == _formValidationErrorCode){
+                    //Memunculkan error
+                    $.each(_data, function(formName, formError){
+                        let _formElement    =   `[name=${formName}]`;
+                        
+                        // $(_formElement).removeClass('border-danger');
+                        $(_formElement).addClass('border-danger');
+
+                        let _nextElement    =   $(_formElement).next();
+                        if(_nextElement.length >= 1){
+                            _nextElement.remove();
+                        }
+                        $(_formElement).after(`<p class='text-sm mt-2 text-danger'>${formError}</p>`);
+                    });
+                }
             }
         });
     });

@@ -115,6 +115,7 @@
             $status     =   false;
             $message    =   'Tidak dapat memproses update data mitra!';
             $data       =   null;
+            $code       =   null;
 
             $idMitra            =   $this->loggedInIDMitra;
 
@@ -122,6 +123,7 @@
             $formValidation     =   new FormValidation();
             $tabel              =   new Tabel();
             $mitra              =   new MitraModel();
+            $errorCode          =   new ErrorCode();
 
             $namaMitra      =   $request->getPost('nama');
             $usernameMitra  =   $request->getPost('username');
@@ -136,7 +138,7 @@
                 $dataUpdateMitra['nama']        =   $namaMitra;
             }
             if(!empty($usernameMitra)){
-                $validationRules['username']    =   'is_unique['.$tabel->mitra.','.$mitra->tableId.','.$idMitra.']';
+                $validationRules['username']    =   'is_unique['.$tabel->mitra.'.username,'.$mitra->tableId.','.$idMitra.']';
                 $dataUpdateMitra['username']    =   $usernameMitra;
             }
             if(!empty($alamatMitra)){
@@ -144,11 +146,11 @@
             }
 
             if(!empty($emailMitra)){
-                $validationRules['email']   =   $formValidation->rule_validEmail.'|is_unique['.$tabel->mitra.','.$mitra->tableId.','.$idMitra.']';
+                $validationRules['email']   =   $formValidation->rule_validEmail.'|is_unique['.$tabel->mitra.'.email,'.$mitra->tableId.','.$idMitra.']';
                 $dataUpdateMitra['email']   =   $emailMitra;
             }
             if(!empty($teleponMitra)){
-                $validationRules['telepon'] =   $formValidation->rule_numeric.'|is_unique['.$tabel->mitra.','.$mitra->tableId.','.$idMitra.']';
+                $validationRules['telepon'] =   $formValidation->rule_numeric.'|is_unique['.$tabel->mitra.'.telepon,'.$mitra->tableId.','.$idMitra.']';
                 $dataUpdateMitra['telepon'] =   $teleponMitra;
             }
             
@@ -172,9 +174,10 @@
             }else{
                 $message    =   'Validasi tidak terpenuhi!';
                 $data       =   $this->validator->getErrors();
+                $code       =   $errorCode->formValidationError;
             }
 
-            $arf        =   new APIRespondFormat($status, $message, $data);
+            $arf        =   new APIRespondFormat($status, $message, $data, $code);
             $respond    =   $arf->getRespond();
 
             return $this->respond($respond);
