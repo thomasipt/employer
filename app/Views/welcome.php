@@ -304,31 +304,30 @@
                         </div>
 
                         <div class="col-lg-6">
-                            <form action="forms/contact.php" method="post" class="php-email-form">
+                            <form action="<?=site_url(websiteController('contact-us'))?>" method="post" class="php-email-form"
+                                id='formContactUs'>
                                 <div class="row gy-4">
-
                                     <div class="col-md-6">
-                                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                                        <input type="text" name="nama" class="form-control"
+                                            placeholder="Nama Lengkap Anda" required>
                                     </div>
 
                                     <div class="col-md-6 ">
-                                        <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                                        <input type="email" class="form-control" name="email"
+                                            placeholder="Email Anda" required>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                                        <input type="text" class="form-control" name="subject"
+                                            placeholder="Subject" required>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                                        <textarea class="form-control" name="message"
+                                            placeholder="Pesan yang akan disampaikan" required></textarea>
                                     </div>
-
                                     <div class="col-md-12 text-center">
-                                        <div class="loading">Loading</div>
-                                        <div class="error-message"></div>
-                                        <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                        <button type="submit">Send Message</button>
+                                        <button type="submit" id='btnSubmit'>Send Message</button>
                                     </div>
 
                                 </div>
@@ -348,3 +347,28 @@
         <?=view(websiteComponents('footer'))?>
     </body>
 </html>
+<script src='<?=base_url(assetsFolder('plugins/jquery/jquery.min.js'))?>'></script>
+<script src='<?= base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.js')) ?>'></script>
+<link rel="stylesheet" href="<?=base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.css'))?>" />
+
+<script src='<?=base_url(assetsFolder('custom/js/custom-alert.js'))?>'></script>
+<script src='<?=base_url(assetsFolder('custom/js/form-submission.js'))?>'></script>
+<script language='Javascript'>
+    let _formContactUs  =   $('#formContactUs');
+
+    _formContactUs.on('submit', async function(e){
+        e.preventDefault();
+        await submitForm(this, async (decodedRFS) => {
+            let _status     =   decodedRFS.status;
+            let _message    =   decodedRFS.message;
+
+            let _title  =   'Contact Us';
+            let _type   =   (_status)? 'success' : 'error';
+
+            await notifikasi(_title, _message, _type);
+            if(_status){
+                location.reload();
+            }
+        })
+    });
+</script>

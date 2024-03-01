@@ -18,7 +18,9 @@
     use App\Models\JenisLoker;
     use App\Models\LokerFree;
     use App\Models\Company;
-    use App\Models\MitraLog;
+use App\Models\Homepage;
+use App\Models\HomepageElement;
+use App\Models\MitraLog;
     use App\Models\Transaksi;
 
     use CodeIgniter\API\ResponseTrait;
@@ -433,6 +435,88 @@
                 ];
                 return view(websiteView('index'), $data);
             }
+        }
+        public function contact(){
+            $status     =   false;
+            $message    =   'Gagal memproses! Silahkan ulangi!';
+            $data       =   null;
+            $code       =   null;
+
+            $request        =   request();
+            $formValidation =   new FormValidation();
+
+            try{
+                $validationRules    =   [
+                    'nama'      =>  'required',
+                    'email'     =>  'required|valid_email',
+                    'subject'   =>  'required',
+                    'message'   =>  'required'
+                ];
+                $validationMessages =   $formValidation->generateCustomMessageForSingleRule($validationRules);
+                $validationStatus   =   $this->validate($validationRules, $validationMessages);
+                if($validationStatus){
+                    $homepage           =   new Homepage();
+                    $homepageElement    =   new HomepageElement();
+
+                    $nama       =   $request->getPost('nama');
+                    $email      =   $request->getPost('email');
+                    $subject    =   $request->getPost('subject');
+                    $pesan      =   $request->getPost('message');
+
+                    $options            =   [
+                        'where' =>  [
+                            'parent'    =>  $homepage->emailPerusahaanId
+                        ]
+                    ];
+                    $emailPerusahaanElements  =   $homepageElement->getHomepageElement(null, $options);
+                    $emailPerusahaanElements  =   $homepageElement->convertListELementToKeyValueMap($emailPerusahaanElements);
+
+                    $companyEmail   =   $emailPerusahaanElements['_email'];
+
+                    $message    =   'Ini email perusahaan kami, tidak dapat digunakan!';
+                    if($email != $companyEmail){
+                        $emailSender    =   new EmailSender();
+
+                        #reassign
+                        $pesan  =   '<div>
+                                        <p>Hai, seseorang dengan nama <b>'.$nama.'</b> dan email '.$email.' menghubungi anda melalui website (form contact us):</p>
+                                        <p><b>Berikut pesan yang dikirimkan:</b></p>
+                                        '.$pesan.'
+                                    </div>';
+
+                        $emailParams    =   [
+                            'subject'   =>  $subject,
+                            'body'      =>  $pesan,
+                            'receivers' =>  [
+                                ['email' => $companyEmail]
+                            ]
+                        ];
+                        $sendEmail          =   $emailSender->sendEmail($emailParams);
+                        $statusSendEmail    =   $sendEmail['statusSend'];
+                        $messageSendEmail   =   $sendEmail['message'];
+
+                        $message    =   'Gagal mengirim email! '.$messageSendEmail;
+                        if($statusSendEmail){
+                            $status     =   true;
+                            $message    =   'Berhasil mengirim email!';
+                            $data       =   null;
+                        }
+                    }
+                }else{
+                    $errorCode  =   new ErrorCode();
+
+                    $code       =   $errorCode->formValidationError;
+                    $message    =   $this->validator->getErrors();
+                }
+            }catch(Exception $e){
+                $message    =   $e->getMessage();
+            }
+
+            
+            $arf        =   new APIRespondFormat($status, $message, $data, $code);
+            $respond    =   $arf->getRespond();
+
+            return $this->respond($respond);
         }
     }
 ?>

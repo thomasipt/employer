@@ -76,7 +76,6 @@
 <script src="<?=base_url(flexStartAssets('vendor/glightbox/js/glightbox.min.js'))?>"></script>
 <script src="<?=base_url(flexStartAssets('vendor/isotope-layout/isotope.pkgd.min.js'))?>"></script>
 <script src="<?=base_url(flexStartAssets('vendor/swiper/swiper-bundle.min.js'))?>"></script>
-<script src="<?=base_url(flexStartAssets('vendor/php-email-form/validate.js'))?>"></script>
 
 <!-- Template Main JS File -->
 <script src="<?=base_url(flexStartAssets('js/main.js'))?>"></script>

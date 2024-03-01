@@ -169,6 +169,8 @@
         $websiteRoutes->get('loker-premium/(:hash)', 'Home::loker/premium/$1', $options);
         $websiteRoutes->get('loker-free', 'Home::loker/free', $options);
         $websiteRoutes->get('loker-free/(:hash)', 'Home::loker/free/$1', $options);
+
+        $websiteRoutes->post('contact-us', 'Home::contact', $options);
     });
 
     #Mitra Dashboard
