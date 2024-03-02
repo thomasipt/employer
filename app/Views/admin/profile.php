@@ -117,18 +117,39 @@
                                             <form action="<?= site_url(adminController('ganti-password')) ?>" id="formGantiPassword">
                                                 <div class="form-group">
                                                     <label for="password">Password Saat Ini</label>
-                                                    <input type="password" class="form-control" id="password"
-                                                        placeholder='Password anda saat ini' name='password' />
+                                                    <div class="input-group" id='passwordInputGroup'>
+                                                        <input type="password" class="form-control password" id="password"
+                                                            placeholder='Password anda saat ini' name='password' />
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text cp" onClick='togglePassword(this, "#passwordInputGroup")'>
+                                                                <span class="fa fa-eye password-icon"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="passwordBaru">Password Baru</label>
-                                                    <input type="password" class="form-control" id="passwordBaru"
-                                                        placeholder='Password Baru' name='passwordBaru' />
+                                                    <div class="input-group" id='passwordBaruInputGroup'>
+                                                        <input type="password" class="form-control password" id="passwordBaru"
+                                                            placeholder='Password Baru' name='passwordBaru' />
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text cp" onClick='togglePassword(this, "#passwordBaruInputGroup")'>
+                                                                <span class="fa fa-eye password-icon"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="konfirmasiPasswordBaru">Konfirmasi Password Baru</label>
-                                                    <input type="password" class="form-control" id="konfirmasiPasswordBaru"
-                                                        placeholder='Konfirmasi Password Baru' name='konfirmasiPasswordBaru' />
+                                                    <div class="input-group" id='konfirmasiPasswordBaruInputGroup'>
+                                                        <input type="password" class="form-control password" id="konfirmasiPasswordBaru"
+                                                            placeholder='Konfirmasi Password Baru' name='konfirmasiPasswordBaru' />
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text cp" onClick='togglePassword(this, "#konfirmasiPasswordBaruInputGroup")'>
+                                                                <span class="fa fa-eye password-icon"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>                                                        
                                                 </div>
                                                 <hr />
                                                 <button class="btn btn-success" id='btnSubmitFormGantiPassword' type='submit'>Update Password</button>
