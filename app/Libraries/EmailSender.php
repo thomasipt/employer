@@ -13,10 +13,10 @@
 
         public $username;
         public $password;
-        
+
         public function __construct(){
             $mail       =   new PHPMailer();
-            
+
             $this->mail         =   $mail;
 
             $homepage           =   new Homepage();
@@ -30,7 +30,7 @@
 
             $username =   $emailPerusahaanElement['_email'];
             $password =   $emailPerusahaanElement['_password'];
-            
+
             if(!empty($username)){
                 $this->username =   $username;
             }
@@ -60,7 +60,7 @@
                         if(!$configComplete){
                             throw new Exception('Harap lakukan konfigurasi akun email (username dan password)!');
                         }
-                        
+
                         $username   =   $this->username;
                         $password   =   $this->password;
 
@@ -68,17 +68,17 @@
                             $smtpDebug  =   $emailParams['smtpDebug'];
 
                             if($smtpDebug){
-                                $mail->SMTPDebug    =   SMTP::DEBUG_SERVER; 
-                            }    
-                        }                 
-                        $mail->isSMTP();                                            
-                        $mail->Host         =   'smtp.gmail.com';               
-                        $mail->SMTPAuth     =   true;                                   
-                        $mail->Username     =   $username;                                 
-                        $mail->Password     =   $password;                                            
-                        $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_STARTTLS;            
-                        $mail->Port         =   587;                                    
-                    
+                                $mail->SMTPDebug    =   SMTP::DEBUG_SERVER;
+                            }
+                        }
+                        $mail->isSMTP();
+                        $mail->Host         =   'smtp.gmail.com';
+                        $mail->SMTPAuth     =   true;
+                        $mail->Username     =   $username;
+                        $mail->Password     =   $password;
+                        $mail->SMTPSecure   =   PHPMailer::ENCRYPTION_STARTTLS;
+                        $mail->Port         =   587;
+
                         //Recipients
                         $mail->setFrom($username, $username);
                         if(array_key_exists('receivers', $emailParams)){
@@ -89,24 +89,24 @@
                                     foreach($receivers as $penerima){
                                         if(array_key_exists('email', $penerima)){
                                             $withName   =   (array_key_exists('name', $penerima));
-                                            $mail->addAddress($penerima['email'], ($withName)? $penerima['name'] : ''); 
+                                            $mail->addAddress($penerima['email'], ($withName)? $penerima['name'] : '');
                                         }
                                     }
                                 }
                             }
-                        }              
+                        }
                         $mail->addReplyTo($username, $username);
-                    
+
                         //Content
-                        $mail->isHTML(true);                                 
+                        $mail->isHTML(true);
                         $mail->Subject =    $subject;
                         $mail->Body    =    $body;
-                    
+
                         if($mail->send()){
                             $statusSend     =   true;
                             $message        =   null;
                         }else{
-                            $message        =   'Could not send email! Please contact the developer on whatsapp 082362249483 or email falentinodjoka2801@gmail.com!';
+                            $message        =   'Gagal mengirim email. Mohon hubungi kami pada nomor WA +62 856-4700-0377';
                         }
                     } catch (Exception $e) {
                         $message    =   $mail->ErrorInfo;
