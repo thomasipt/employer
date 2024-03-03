@@ -38,6 +38,10 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+                    <h4><a href="<?=site_url(websiteController('syarat-dan-ketentuan'))?>">Syarat & Ketentuan</a></h4>
+                    <h4><a href="<?=site_url(websiteController('kebijakan-privasi'))?>">Kebijakan Privasi</a></h4>
+                </div>
+                <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
                     <h4>Contact Us</h4>
                     <?=$contactUsElement['_description']?>
                     <p class='mt-3'>
