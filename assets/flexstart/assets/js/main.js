@@ -32,7 +32,7 @@
   }
 
   /**
-   * Easy on scroll event listener 
+   * Easy on scroll event listener
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
@@ -222,7 +222,7 @@
   });
 
   /**
-   * Initiate portfolio lightbox 
+   * Initiate portfolio lightbox
    */
   const portfolioLightbox = GLightbox({
     selector: '.portfokio-lightbox'
@@ -277,7 +277,7 @@
    */
   function aos_init() {
     AOS.init({
-      duration: 1000,
+      duration: 500,
       easing: "ease-in-out",
       once: true,
       mirror: false
@@ -288,7 +288,7 @@
   });
 
   /**
-   * Initiate Pure Counter 
+   * Initiate Pure Counter
    */
   new PureCounter();
 
