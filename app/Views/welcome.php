@@ -242,12 +242,12 @@
                                 ?>
                                 <div class="col-lg-3">
                                     <div class="post-box col">
-                                        <h3 class="post-title"><?=$judulLoker?></h3>
+                                        <h3 class="post-title" style='font-size: 20px;'><?=$judulLoker?></h3>
                                         <?php if(!empty($deskripsiLoker)){ ?>
-                                            <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
+                                            <p class="text-sm text-muted" style='font-size: 17px;'><?=$deskripsiLoker?></p>
                                         <?php } ?>
                                         <br />
-                                        Diposting pada <?=formattedDate($tanggalPostingLoker)?>
+                                        <p class='mb-0' style='font-size:16px;'>Diposting pada <?=formattedDate($tanggalPostingLoker)?></p>
                                     </div>
                                 </div>
                             <?php } ?>
