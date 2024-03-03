@@ -120,7 +120,8 @@
                                                     <label for="password">Password Saat Ini</label>
                                                     <div class="input-group" id="passwordInputGroup">
                                                         <input type="password" class="form-control password" id="password"
-                                                            placeholder='Password anda saat ini' name='password' />
+                                                            placeholder='Password anda saat ini' name='password'
+                                                            data-show-error-after='#passwordInputGroup' />
                                                         <div class="input-group-append">
                                                             <span class="input-group-text cp" onClick='togglePassword(this, "#passwordInputGroup")'>
                                                                 <span class="fa fa-eye password-icon"></span>
@@ -132,7 +133,8 @@
                                                     <label for="passwordBaru">Password Baru</label>
                                                     <div class="input-group" id="passwordBaruInputGroup">
                                                         <input type="password" class="form-control password" id="passwordBaru"
-                                                            placeholder='Password Baru' name='passwordBaru' />
+                                                            placeholder='Password Baru' name='passwordBaru'
+                                                            data-show-error-after='#passwordBaruInputGroup' />
                                                         <div class="input-group-append">
                                                             <span class="input-group-text cp" onClick='togglePassword(this, "#passwordBaruInputGroup")'>
                                                                 <span class="fa fa-eye password-icon"></span>
@@ -144,7 +146,8 @@
                                                     <label for="konfirmasiPasswordBaru">Konfirmasi Password Baru</label>
                                                     <div class="input-group" id='konfirmasiPasswordInputGroup'>
                                                         <input type="password" class="form-control password" id="konfirmasiPasswordBaru"
-                                                            placeholder='Konfirmasi Password Baru' name='konfirmasiPasswordBaru' />
+                                                            placeholder='Konfirmasi Password Baru' name='konfirmasiPasswordBaru'
+                                                            data-show-error-after='#konfirmasiPasswordInputGroup' />
                                                         <div class="input-group-append">
                                                             <span class="input-group-text cp" onClick='togglePassword(this, "#konfirmasiPasswordInputGroup")'>
                                                                 <span class="fa fa-eye password-icon"></span>
@@ -256,22 +259,39 @@
             }else{
                 //Reset Form Validation
                 let _formControlElement     =   _formGantiPassword.find('.form-control');
-                _formControlElement.removeClass('border-danger');
-                _formControlElement.next().remove();
+                _formControlElement.each((index, formControl) => {
+                    formControl =   $(formControl);
+
+                    let _parentIdentifier   =   formControl.data('showErrorAfter');
+                    let _parentOfThis       =   formControl.parents(_parentIdentifier);
+
+                    formControl.removeClass('border-danger');
+                    _parentOfThis.next().remove();
+                });
 
                 if(_code == _formValidationErrorCode){
                     //Memunculkan error
                     $.each(_data, function(formName, formError){
                         let _formElement    =   `[name=${formName}]`;
+                        _formElement        =   $(_formElement);
                         
-                        // $(_formElement).removeClass('border-danger');
-                        $(_formElement).addClass('border-danger');
+                        let _showErrorAfter  =   _formElement.data('showErrorAfter');
+                        _showErrorAfter      =   (_showErrorAfter == undefined)? null : _showErrorAfter;
 
-                        let _nextElement    =   $(_formElement).next();
+                        let _parent =   $(_showErrorAfter);
+                        
+                        _formElement.addClass('border-danger');
+
+                        let _nextElement    =   _parent.next();
                         if(_nextElement.length >= 1){
                             _nextElement.remove();
                         }
-                        $(_formElement).after(`<p class='text-sm mt-2 text-danger'>${formError}</p>`);
+
+                        if(_showErrorAfter != null){
+                            $(_showErrorAfter).after(`<p class='text-sm mt-2 text-danger'>${formError}</p>`);
+                        }else{
+                            $(_formElement).after(`<p class='text-sm mt-2 text-danger'>${formError}</p>`);
+                        }
                     });
                 }
             }
