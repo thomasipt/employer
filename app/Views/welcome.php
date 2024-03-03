@@ -246,7 +246,6 @@
                                         <?php if(!empty($deskripsiLoker)){ ?>
                                             <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
                                         <?php } ?>
-                                        <br />
                                         <p class='mb-0' style='font-size:12px;'>Diposting pada <?=formattedDate($tanggalPostingLoker)?></p>
                                     </div>
                                 </div>
