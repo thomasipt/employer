@@ -34,18 +34,23 @@
 
                 <form id='formLogin'>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Email or Username" name='username' />
-                        <div class="input-group-append">
+                        <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="fas fa-at"></span>
                             </div>
                         </div>
+                        <input type="text" class="form-control" placeholder="Email or Username" name='username' />
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password" name='password' />
-                        <div class="input-group-append">
+                    <div class="input-group mb-3" id='passwordInputGroup'>
+                        <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        <input type="password" class="form-control password" placeholder="Password" name='password' />
+                        <div class="input-group-append">
+                            <div class="input-group-text cp" onClick='togglePassword(this, "#passwordInputGroup")'>
+                                <span class="fas fa-eye password-icon"></span>
                             </div>
                         </div>
                     </div>
@@ -76,7 +81,10 @@
 </html>
 <script src='<?=base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.js'))?>'></script>
 <link rel="stylesheet" href="<?=base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.css'))?>" /> 
+
 <script src='<?=base_url(assetsFolder('custom/js/custom-alert.js'))?>'></script>
+<script src='<?=base_url(assetsFolder('custom/js/toggle-password.js'))?>'></script>
+
 <script language='Javascript'>
     let _formLogin      =   $('#formLogin');
     let _buttonSignIn   =   $('#btnSignIn');
@@ -123,5 +131,8 @@
     .w-250{
         width: 250px;
         height: 250px;
+    }
+    .cp{
+        cursor: pointer;
     }
 </style>
