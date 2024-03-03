@@ -52,7 +52,7 @@
             let _status     =   decodedRFS.status;
             let _message    =   decodedRFS.message;
 
-            let _title  =   'Email Perusahaan';
+            let _title  =   'PPN Transaksi';
             let _type   =   (_status)? 'success' : 'error';
 
             await notifikasi(_title, _message, _type);
