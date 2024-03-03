@@ -33,6 +33,8 @@
     <script src='<?=base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.js'))?>'></script>
     <link rel="stylesheet" href='<?=base_url(assetsFolder('plugins/sweetalert2/sweetalert2.min.css'))?>' />
     
+    <script src='<?=base_url(assetsFolder('custom/js/toggle-password.js'))?>'></script>
+    
     <style type='text/css'>
         .cp{
             cursor:pointer;
@@ -89,22 +91,6 @@
                 _previewEl.attr('src', imgResult);
                 _previewEl.attr('class', 'w-100 img-thumbnail');
             }
-        }
-        async function togglePassword(thisContext, parentElement){
-            let _el     =   $(thisContext);
-            let _parent =   $(parentElement);
-
-            let _passwordElements   =   _parent.find('.password');
-            _passwordElements.each((_, passwordElement) => {
-                let _element                =   $(passwordElement);
-                let _passwordIconElement    =   _parent.find('.password-icon');
-
-                let _type               =   _element.attr('type');
-                let _isTypePassword     =   _type == 'password';
-
-                _element.attr('type', (_isTypePassword)? 'text' : 'password');
-                _passwordIconElement.attr('class', (_isTypePassword)? 'fa fa-eye-slash password-icon' : 'fa fa-eye password-icon');
-            });
         }
     </script>
 </head>
