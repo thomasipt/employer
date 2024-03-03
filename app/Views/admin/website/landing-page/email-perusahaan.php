@@ -21,13 +21,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="_password">Password</label>
-                                    <div class="input-group">
+                                    <div class="input-group" id='passwordEmailInputGroup'>
                                         <input type='password' class='form-control password' placeholder='Password'
                                             name='_password' id='_password' value='<?=(!empty($emailPerusahaanElement))? $emailPerusahaanElement['_password'] : '' ?>'
                                                 required />
                                         <div class="input-group-append cp">
                                             <span class="input-group-text">
-                                                <span class="fa fa-eye" onClick='_togglePassword(this)'></span>
+                                                <span class="fa fa-eye password-icon" onClick='togglePassword(this, "#passwordEmailInputGroup")'></span>
                                             </span>
                                         </div>
                                     </div>
@@ -67,20 +67,4 @@
             }
         })
     });
-
-    let _isPasswordState    =   true;
-
-    async function _togglePassword(thisContext){
-        let _el         =   $(thisContext);
-        let _parent     =   _el.parents('.input-group');
-        let _password   =   _parent.find('.password');
-
-        if(_isPasswordState){
-            _password.attr('type', 'text');
-        }else{
-            _password.attr('type', 'password');
-        }
-
-        _isPasswordState    =   !_isPasswordState;
-    }
 </script>
