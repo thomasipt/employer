@@ -391,7 +391,7 @@ use App\Models\MitraLog;
                         $kotaOptions    =   [
                             'select'    =>  'pT.nama as namaKota, provinsi.nama as namaProvinsi',
                             'join'      =>  [
-                                ['table' => $tabel->provinsi.' provinsi', 'condition' => 'provinsi.id=pT.province']
+                                ['table' => $tabel->provinsi.' provinsi', 'condition' => 'provinsi.kode=pT.province']
                             ]
                         ];
                         $detailKota         =   $kota->getKota($kotaLoker, $kotaOptions);
