@@ -15,7 +15,7 @@ class Email extends BaseConfig
     public string $SMTPHost = '';
     public string $SMTPUser = '';
     public string $SMTPPass = '';
-    public int $SMTPPort = 465;
+    public int $SMTPPort = 587;
     public int $SMTPTimeout = 5;
     public bool $SMTPKeepAlive = false;
     public string $SMTPCrypto = 'tls';
