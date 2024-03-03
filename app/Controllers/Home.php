@@ -71,6 +71,9 @@ class Home extends BaseController{
         ];
         $listLokerPremium   =   $loker->getLoker(null, $options);
 
+        $options            =   [
+            'limit' =>  4
+        ];
         $listLokerFree      =   $lokerFree->getLokerFree(null, $options);
 
         $data   =   [

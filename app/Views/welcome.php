@@ -240,7 +240,7 @@
                                     $deskripsiLoker         =   $lokerFree['deskripsi'];
                                     $tanggalPostingLoker    =   $lokerFree['createdAt'];
                                 ?>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="post-box col">
                                         <h3 class="post-title"><?=$judulLoker?></h3>
                                         <?php if(!empty($deskripsiLoker)){ ?>

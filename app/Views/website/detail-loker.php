@@ -4,6 +4,7 @@
     $sektorPerusahaan   =   $data['sektorPerusahaan'];
     $isPremium          =   $data['isPremium'];
 
+    $coverPerusahaan    =   $detailPerusahaan['cover'];
     $fotoPerusahaan     =   $detailPerusahaan['foto'];
     $namaPerusahaan     =   $detailPerusahaan['nama'];
     $alamatPerusahaan   =   $detailPerusahaan['alamat'];
@@ -84,7 +85,7 @@
             <div class="post-box">
                 <h5 class='text-left'>Profile Perusahaan</h5>
                 <div class="post-body">
-                    <img src="<?=base_url(uploadGambarMitra($fotoPerusahaan))?>" alt="<?=$namaPerusahaan?>"
+                    <img src="<?=($isPremium)? base_url(uploadGambarMitra($fotoPerusahaan)) : $coverPerusahaan?>" alt="<?=$namaPerusahaan?>"
                         class='img-perusahaan img-100-100 d-block my-4 m-auto' />
                     <br />
                     <h5><b><?=$namaPerusahaan?></b></h5>

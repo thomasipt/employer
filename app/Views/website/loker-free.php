@@ -126,7 +126,7 @@ $searchQS   =   !empty($search) ? '&search=' . $search : '';
 
                 $detailPerusahaan   =   $lokerFree['mitra'];
                 $namaPerusahaan     =   $detailPerusahaan['nama'];
-                $fotoPerusahaan     =   $detailPerusahaan['foto'];
+                $fotoPerusahaan     =   $detailPerusahaan['cover'];
 
                 $namaKota       =   '-';
                 $namaProvinsi   =   '-';
@@ -144,7 +144,7 @@ $searchQS   =   !empty($search) ? '&search=' . $search : '';
                     <a href="<?= site_url(websiteController('loker-free')) ?>/<?= base64_encode($idLoker) ?>" target='_blank'>
                         <div class="post-box col">
                             <div class="row">
-                                <img src="<?= base_url(uploadGambarMitra('compress')) ?>/<?= $fotoPerusahaan ?>" alt="<?= $namaPerusahaan ?>" class='img-circle img-perusahaan p-0' />
+                                <img src="<?= $fotoPerusahaan ?>" alt="<?= $namaPerusahaan ?>" class='img-circle img-perusahaan p-0' />
                                 <div class="col">
                                     <h5 class="post-title mb-0 text-black"><?= $judulLoker ?></h5>
                                     <span class='text-sm text-muted'><?= $namaPerusahaan ?></span>

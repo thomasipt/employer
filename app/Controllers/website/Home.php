@@ -324,6 +324,7 @@ use App\Models\MitraLog;
                         'pageTitle' =>  $judulLoker,
                         'view'      =>  websiteView('detail-loker'),
                         'data'      =>  [
+                            'isPremium'         =>  $isPremium,
                             'detailLoker'       =>  $detailLoker,
                             'detailPerusahaan'  =>  $detailPerusahaan,
                             'sektorPerusahaan'  =>  $detailSektor
@@ -384,7 +385,7 @@ use App\Models\MitraLog;
                         $kotaLoker          =   $lokerPremium['kota'];
                         $perusahaan         =   $lokerPremium['createdBy'];
 
-                        $detailPerusahaanOptions    =   ['select' => 'id, foto, nama'];
+                        $detailPerusahaanOptions    =   ['select' => 'id, foto, cover, nama'];
                         $detailPerusahaan           =   ($isPremium)? $mitra->getMitra($perusahaan, $detailPerusahaanOptions) : $company->getCompany($perusahaan, $detailPerusahaanOptions);
 
                         $kotaOptions    =   [
