@@ -30,6 +30,7 @@
     <?=view(websiteComponents('head'), $headData)?>
     <body>
         <?=view(websiteComponents('navbar'))?>
+        </br></br>
 
         <!-- ======= Hero Section ======= -->
         <section id="hero" class="hero d-flex align-items-center">
@@ -37,14 +38,29 @@
                 <div class="row">
                     <div class="col-lg-6 d-flex flex-column justify-content-center">
                         <h1 data-aos="fade-up"><?=$heroElement['_title']?></h1>
-                        <h2 data-aos="fade-up" data-aos-delay="400"><?=$heroElement['_description']?></h2>
+                        <h4 data-aos="fade-up" data-aos-delay="400"><?=$heroElement['_description']?></h4>
                         <div data-aos="fade-up" data-aos-delay="600">
-                            <div class="text-center text-lg-start">
-                                <a href="<?=site_url(websiteController('registrasi'))?>" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                                    <span>Registrasi</span>
-                                    <i class="bi bi-arrow-right"></i>
-                                </a>
-                            </div>
+                          <div class="container">
+                              <div class="row">
+                                  <div class="col-md-5">
+                                      <div class="text-center text-lg-start">
+                                          <a href="<?=site_url(websiteController('registrasi'))?>" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                                              <span>Registrasi</span>
+                                              <i class="bi bi-arrow-right"></i>
+                                          </a>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-7">
+                                      <div class="text-center text-lg-start">
+                                          <a href="https://play.google.com/store/apps/details?id=com.kubu.id&pli=1" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                                              <span>KUBU ID Playstore</span>
+                                              <i class="bi bi-arrow-right"></i>
+                                          </a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
                         </div>
                     </div>
                     <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
@@ -187,7 +203,14 @@
                     <header class="section-header">
                         <h2>Loker Premium</h2>
                         <p>Postingan Loker Premium Terbaru</p>
+                      </br>
+                      <div class="col text-center">
+                          <a href="<?=site_url(websiteController('loker-premium'))?>">
+                              <button class="btn btn-primary">Loker premium Anda juga tersedia di Aplikasi Kubu.id </button>
+                          </a>
+                      </div>
                     </header>
+
                         <div class="row">
                             <?php if(count($listLokerPremium) >= 1){ ?>
                                 <?php foreach($listLokerPremium as $lokerPremium){ ?>
