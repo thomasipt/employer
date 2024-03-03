@@ -2,6 +2,7 @@
     $detailLoker        =   $data['detailLoker'];
     $detailPerusahaan   =   $data['detailPerusahaan'];
     $sektorPerusahaan   =   $data['sektorPerusahaan'];
+    $isPremium          =   $data['isPremium'];
 
     $fotoPerusahaan     =   $detailPerusahaan['foto'];
     $namaPerusahaan     =   $detailPerusahaan['nama'];
@@ -57,6 +58,14 @@
                 </div>
             </div>
             <div class="post-box">
+                <?php if($isPremium){ ?>
+                    <img src="<?=base_url(assetsFolder('img/premium-quality.png'))?>" alt="Premium"
+                        class='img-loker-premium' />
+                <?php } ?>
+                
+                <?php if($isPremium){ ?>
+                    <span class="badge bg-success" style='width: fit-content;'>Premium</span>
+                <?php } ?>
                 <p class='text-sm text-muted'>
                     Diposting pada <b><?=formattedDate($tanggalPostingLoker)?></b>
                 </p>
@@ -125,5 +134,15 @@
     }
     .mr-2{
         margin-right: 10px;
+    }
+    
+    .img-loker-premium{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        opacity: .25;
     }
 </style>
