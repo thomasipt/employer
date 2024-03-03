@@ -141,15 +141,18 @@
                     $detailJenisPekerjaan   =   $lokerPremium['jenis'];
                     $namaJenisPekerjaan     =   !empty($detailJenisPekerjaan)? $detailJenisPekerjaan['nama'] : '-';
                 ?>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mb-3">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mb-3" style='position: relative;'>
                         <a href="<?=site_url(websiteController('loker-premium'))?>/<?=base64_encode($idLoker)?>" target='_blank'
                             data-id='<?=$idLoker?>'>
+                            <img src="<?=base_url(assetsFolder('img/premium-quality.png'))?>" alt="Premium"
+                                class='img-loker-premium' />
                             <div class="post-box col">
                                 <div class="row">
                                     <img src="<?=base_url(uploadGambarMitra('compress'))?>/<?=$fotoPerusahaan?>" alt="<?=$namaPerusahaan?>"
                                         class='img-circle img-perusahaan p-0' />
                                     <div class="col ml-5">
-                                        <h4 class="post-title mb-0 text-black"><?=$judulLoker?></h4>
+                                        <span class='badge bg-success'>Premium</span>
+                                        <h4 class="post-title mb-0 text-black mt-2"><?=$judulLoker?></h4>
                                         <span class='text-sm text-muted'><?=$namaPerusahaan?></span>
                                     </div>
                                 </div>
@@ -211,5 +214,14 @@
         height: 85px;
         object-fit: cover;
         border-radius: 50%;
+    }
+    .img-loker-premium{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        opacity: .25;
     }
 </style>

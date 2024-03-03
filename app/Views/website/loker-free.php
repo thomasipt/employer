@@ -140,13 +140,13 @@ $searchQS   =   !empty($search) ? '&search=' . $search : '';
                 $detailJenisPekerjaan   =   $lokerFree['jenis'];
                 $namaJenisPekerjaan     =   !empty($detailJenisPekerjaan) ? $detailJenisPekerjaan['nama'] : '-';
                 ?>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mb-3">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-3">
                     <a href="<?= site_url(websiteController('loker-free')) ?>/<?= base64_encode($idLoker) ?>" target='_blank'>
                         <div class="post-box col">
                             <div class="row">
                                 <img src="<?= base_url(uploadGambarMitra('compress')) ?>/<?= $fotoPerusahaan ?>" alt="<?= $namaPerusahaan ?>" class='img-circle img-perusahaan p-0' />
-                                <div class="col ml-5">
-                                    <h4 class="post-title mb-0 text-black"><?= $judulLoker ?></h4>
+                                <div class="col">
+                                    <h5 class="post-title mb-0 text-black"><?= $judulLoker ?></h5>
                                     <span class='text-sm text-muted'><?= $namaPerusahaan ?></span>
                                 </div>
                             </div>
@@ -205,8 +205,8 @@ $searchQS   =   !empty($search) ? '&search=' . $search : '';
     }
 
     .img-perusahaan {
-        width: 85px;
-        height: 85px;
+        width: 65px;
+        height: 65px;
         object-fit: cover;
         border-radius: 50%;
     }
