@@ -8,7 +8,7 @@
     ];
 
     $view   =   (isset($view))? $view : null;
-    
+
     #Element
     $heroElement        =   $data['heroElement'];
     $aboutUsElement     =   $data['aboutUsElement'];
@@ -97,7 +97,7 @@
 
                             <div class="col-xl-8 d-flex content">
                                 <div class="row align-self-center gy-4">
-                                    <?php 
+                                    <?php
                                         $features       =   $featuresElement['_feature'];
                                         $listFeatures   =   json_decode($features, true);
                                     ?>
@@ -163,8 +163,8 @@
                                             <sup>Rp.</sup> <?=number_format($hargaPaket)?><span></span>
                                         </div>
                                             <p class='text-center text-sm'><?=$durasiPaket?> Hari</p>
-                                        <img src="<?=base_url(uploadGambarPaket($fotoPaket))?>" 
-                                            class="img-fluid" alt="<?=$namaPaket?>" 
+                                        <img src="<?=base_url(uploadGambarPaket($fotoPaket))?>"
+                                            class="img-fluid" alt="<?=$namaPaket?>"
                                             onError='this.src="<?=base_url(assetsFolder('img/empty.png'))?>"' />
                                         <div class="d-block"><?=$keteranganPaket?></div>
                                         <br />
@@ -172,7 +172,7 @@
                                         <a href="<?=site_url(mitraController('transaksi/checkout'))?>/<?=$code?>"
                                             class="btn-buy" target='_blank'>Buy Now</a>
                                     </div>
-                                </div>                        
+                                </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -242,12 +242,12 @@
                                 ?>
                                 <div class="col-lg-3">
                                     <div class="post-box col">
-                                        <h3 class="post-title" style='font-size: 20px;'><?=$judulLoker?></h3>
+                                        <h3 class="post-title" style='font-size: 14px;'><?=$judulLoker?></h3>
                                         <?php if(!empty($deskripsiLoker)){ ?>
-                                            <p class="text-sm text-muted" style='font-size: 17px;'><?=$deskripsiLoker?></p>
+                                            <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
                                         <?php } ?>
                                         <br />
-                                        <p class='mb-0' style='font-size:16px;'>Diposting pada <?=formattedDate($tanggalPostingLoker)?></p>
+                                        <p class='mb-0' style='font-size:14px;'>Diposting pada <?=formattedDate($tanggalPostingLoker)?></p>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -280,7 +280,7 @@
                     <div class="row gy-4">
                         <div class="col-lg-6">
                             <div class="row gy-4">
-                                <?php 
+                                <?php
                                     $contactUs      =   $contactUsElement['_contact'];
                                     $listContact    =   json_decode($contactUs, true);
                                 ?>
