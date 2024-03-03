@@ -5,6 +5,8 @@
 
     #Models
     use App\Models\BaseModel;
+    use App\Models\Homepage;
+    use App\Models\HomepageElement;
 
     #Libraries
     use App\Libraries\Tabel;
@@ -18,7 +20,7 @@
 
         public $fotoDefault     =   'paket-default.png';
 
-        public $persentasePPN     =   11;
+        public $persentasePPN;
 
         public function __construct(){
             parent::__construct();
@@ -40,6 +42,20 @@
 
             $this->color    =   $color;
             $this->code     =   $code;
+
+            $homepage           =   new Homepage();
+            $homepageElement    =   new HomepageElement();
+
+            $options            =   [
+                'where' =>  ['parent' => $homepage->ppn]
+            ];
+            $ppnElements        =   $homepageElement->getHomepageElement(null, $options);
+            $ppnElements        =   $homepageElement->convertListELementToKeyValueMap($ppnElements);
+            
+            $ppnActive  =   $ppnElements['_active'];
+            $ppn        =   ($ppnActive == 'true')? $ppnElements['_value'] : null;
+
+            $this->persentasePPN    =   $ppn;
         }
         public function getPaket($id = null, $options = null){
             $d  =   new Database();

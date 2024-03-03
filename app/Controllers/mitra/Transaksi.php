@@ -207,10 +207,9 @@
             try{
                 helper('CustomDate');
                 
-                $emailSender    =   new EmailSender();
-                $paket          =   new Paket();
-                
-                $tabel          =   new Tabel();
+                $emailSender        =   new EmailSender();
+                $paket              =   new Paket();
+                $tabel              =   new Tabel();
 
                 $detailPaket    =   $this->paketChecking($paketCode);
                 
@@ -222,14 +221,16 @@
                 $namaPaket      =   $detailPaket['nama'];
                 $durasiPaket    =   $detailPaket['durasi'];
                 $hargaPaket     =   $detailPaket['harga'];
-                $ppnPaket       =   $paket->persentasePPN / 100 * $hargaPaket;
+
+                $persentasePPN  =   $paket->persentasePPN;
+                $ppnPaket       =   (!empty($persentasePPN))? $persentasePPN / 100 * $hargaPaket : 0;
 
                 $dataTransaksi  =   [
                     'nomor' =>  $nomorTransaksi,
                     'mitra' =>  $this->loggedInIDMitra,
                     'paket' =>  $idPaket,
-                    'harga'         =>  $hargaPaket,
-                    'ppn'           =>  $ppnPaket
+                    'harga' =>  $hargaPaket,
+                    'ppn'   =>  $ppnPaket
                 ];
 
                 $saveTransaksi  =   $transaksi->saveTransaksi(null, $dataTransaksi);

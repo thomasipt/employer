@@ -11,10 +11,13 @@
     $namaPaket          =   $detailPaket['nama'];
     $keteranganPaket    =   $detailPaket['keterangan'];
     $hargaPaket         =   $detailPaket['harga'];
-    $ppnPaket           =   ($persentasePPN / 100 * $hargaPaket);
     $durasiPaket        =   $detailPaket['durasi'];
 
-    $total  =   $hargaPaket + $ppnPaket;
+    $total  =   $hargaPaket;
+    if(!empty($persentasePPN)){
+        $ppnPaket           =   ($persentasePPN / 100 * $hargaPaket);
+        $total              =   $hargaPaket + $ppnPaket;
+    }
 ?>
 <div class="row">
     <div class="col-lg-8">
@@ -79,10 +82,12 @@
                                 <td><h6>Harga</h6></td>
                                 <td class='text-right text-success'>Rp. <?=number_format($hargaPaket)?></td>
                             </tr>
-                            <tr>
-                                <td><h6>PPN <?=number_format($persentasePPN)?>%</h6></td>
-                                <td class='text-right text-info'>Rp. <?=number_format($ppnPaket)?></td>
-                            </tr>
+                            <?php if(!empty($persentasePPN)){ ?>
+                                <tr>
+                                    <td><h6>PPN <?=number_format($persentasePPN)?>%</h6></td>
+                                    <td class='text-right text-info'>Rp. <?=number_format($ppnPaket)?></td>
+                                </tr>
+                            <?php } ?>
                             <tr>
                                 <td><h6>Durasi</h6></td>
                                 <td class='text-right'><?=$durasiPaket?> Hari</td>

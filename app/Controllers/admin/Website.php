@@ -109,6 +109,10 @@
                     $pageDesc       =   'Contact Us Division';
                     $sectionName    =   'contactUsElement';
                 }
+                if($idSection == $homepage->ppn){
+                    $pageDesc       =   'PPN Division';
+                    $sectionName    =   'ppnElement';
+                }
                 
                 $data['pageTitle']  =   $pageTitle;
                 $data['pageDesc']   =   $pageDesc;

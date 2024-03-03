@@ -243,6 +243,12 @@
                                 <p>Kebijakan Privasi</p>
                             </a>
                         </li>
+                        <li class="nav-item ml-3">
+                            <a href="<?=site_url(adminController('website/landing-page/ppn'))?>/" class="nav-link text-sm">
+                                <i class="fa fa-layer-group nav-icon text-danger"></i>
+                                <p>PPN</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">

@@ -20,6 +20,7 @@
         public $contactUsId             =   11;
         public $syaratDanKetentuanId    =   12;
         public $kebijakanPrivasiId      =   13;
+        public $ppn                     =   14;
         
         public function getHomepage($id = null, $options = null){
             $d  =   new Database();
