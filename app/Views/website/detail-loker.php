@@ -63,7 +63,7 @@
                     <img src="<?=base_url(assetsFolder('img/premium-quality.png'))?>" alt="Premium"
                         class='img-loker-premium' />
                 <?php } ?>
-                
+
                 <?php if($isPremium){ ?>
                     <span class="badge bg-success" style='width: fit-content;'>Premium</span>
                 <?php } ?>
@@ -96,9 +96,11 @@
                     <label for="jumlahKaryawan"><b>Jumlah Karyawan</b></label>
                     <p class="text-sm text-muted" id='jumlahKaryawan'><?=number_format($jumlahKaryawanPerusahaan)?> Orang</p>
                     <br />
-                    <div class="qr-code d-block m-auto" id='qrCode-<?=$idLoker?>' 
-                        data-qr-data='<?=$idLoker?>'
-                        data-url='<?=($isPremium)? 'https://app.kubu.id/index.php/applink/loker_premium/'.$idLoker : 'https://app.kubu.id/index.php/applink/loker/'.$idLoker ?>'></div>
+                    <div class="qr-code d-block m-auto" id='qrCode-<?=$idLoker?>'
+                      data-qr-data='<?=$idLoker?>'
+                      data-url='<?=($isPremium)? 'https://app.kubu.id/index.php/applink/loker_premium/'.$idLoker : 'https://app.kubu.id/index.php/applink/loker/'.$idLoker ?>'>
+                      <label><b>Scan Untuk Melamar</b> (App KUBU ID)</label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -112,7 +114,7 @@
         let _qrCodeItem     =   $(qrCodeElement);
         let _idLoker        =   _qrCodeItem.data('qrData');
         let _url            =   _qrCodeItem.data('url');
-        
+
         new QRCode(document.getElementById(`qrCode-${_idLoker}`), {
             text: `${_url}`
         });
@@ -132,13 +134,13 @@
     .img-perusahaan{
         width: 125px;
         height: 125px;
-        object-fit: cover; 
+        object-fit: cover;
         border-radius: 50%;
     }
     .mr-2{
         margin-right: 10px;
     }
-    
+
     .img-loker-premium{
         position: absolute;
         top: 50%;
