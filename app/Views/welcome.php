@@ -74,10 +74,8 @@
         <main id="main">
             <!-- ======= About Section ======= -->
             <section id="about" class="about">
-
                 <div class="container" data-aos="fade-up">
                     <div class="row gx-0">
-
                         <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                             <div class="content">
                                 <h3>Who We Are</h3>
@@ -93,24 +91,106 @@
 
                     </div>
                 </div>
-
             </section><!-- End About Section -->
+
+            <!-- ======= Daftar Loker ======= -->
+            <section id="lokerPremium" class="loker-premium recent-blog-posts">
+                <div class="container" data-aos="fade-up">
+                    <header class="section-header">
+                        <h2>Loker Premium</h2>
+                        <p>Postingan Loker Premium Terbaru</p>
+                      </br>
+                      <div class="col text-center">
+                          <a href="<?=site_url(websiteController('loker-premium'))?>">
+                              <button class="btn btn-primary">Loker premium Anda juga tersedia di Aplikasi Kubu.id </button>
+                          </a>
+                      </div>
+                    </header>
+                        <div class="row">
+                            <?php if(count($listLokerPremium) >= 1){ ?>
+                                <?php foreach($listLokerPremium as $lokerPremium){ ?>
+                                    <?php
+                                        $idLoker                =   $lokerPremium['id'];
+                                        $judulLoker             =   $lokerPremium['judul'];
+                                        $deskripsiLoker         =   $lokerPremium['deskripsi'];
+                                        $tanggalPostingLoker    =   $lokerPremium['createdAt'];
+                                    ?>
+                                    <div class="col-lg-4">
+                                        <div class="post-box col">
+                                            <h3 class="post-title"><?=$judulLoker?></h3>
+                                            <?php if(!empty($deskripsiLoker)){ ?>
+                                                <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
+                                            <?php } ?>
+                                            <br />
+                                            Diposting pada <?=formattedDate($tanggalPostingLoker)?>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } ?>
+                        </div>
+                        <?php if(count($listLokerPremium) >= 1){ ?>
+                            <div class="row">
+                                <div class="col text-center mt-1">
+                                    <a href="<?=site_url(websiteController('loker-premium'))?>">
+                                        <button class="btn btn-primary">Lihat Loker Premium Lainnya</button>
+                                    </a>
+                                </div>
+                            </div>
+                        <?php } ?>
+                </div>
+            </section>
+            <section id="lokerFree" class="loker-premium recent-blog-posts">
+                <div class="container" data-aos="fade-up">
+                    <header class="section-header">
+                        <h2>Loker Free</h2>
+                        <p>Postingan Loker Free Terbaru</p>
+                    </header>
+                    <div class="row">
+                        <?php if(count($listLokerFree) >= 1){ ?>
+                            <?php foreach($listLokerFree as $lokerFree){ ?>
+                                <?php
+                                    $idLoker                =   $lokerFree['id'];
+                                    $judulLoker             =   $lokerFree['judul'];
+                                    $deskripsiLoker         =   $lokerFree['deskripsi'];
+                                    $tanggalPostingLoker    =   $lokerFree['createdAt'];
+                                ?>
+                                <div class="col-lg-3">
+                                    <div class="post-box col">
+                                        <h3 class="post-title" style='font-size: 14px;'><?=$judulLoker?></h3>
+                                        <?php if(!empty($deskripsiLoker)){ ?>
+                                            <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
+                                        <?php } ?>
+                                        <p class='mb-0' style='font-size:12px;'>Diposting pada <?=formattedDate($tanggalPostingLoker)?></p>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
+                    </div>
+                    <?php if(count($listLokerFree) >= 1){ ?>
+                        <div class="row">
+                            <div class="col text-center mt-1">
+                                <a href="<?=site_url(websiteController('loker-free'))?>">
+                                    <button class="btn btn-primary">Lihat Loker Free Lainnya</button>
+                                </a>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            </section>
+            <!-- End Daftar Loker -->
 
             <!-- ======= Features Section ======= -->
             <section id="features" class="features">
-
                 <div class="container" data-aos="fade-up">
                     <!-- Feature Icons -->
                     <div class="row feature-icons" data-aos="fade-up">
                         <h3><?=$featuresElement['_title']?></h3>
-
                         <div class="row">
                             <div class="col-xl-4 text-center" data-aos="fade-right" data-aos-delay="100">
                                 <?php if(!empty($featuresImagePath)){ ?>
                                     <img src="<?=base_url(uploadGambarWebsite('landing-page'))?>/<?=$featuresImagePath?>" class="img-fluid p-4" alt="Features" />
                                 <?php } ?>
                             </div>
-
                             <div class="col-xl-8 d-flex content">
                                 <div class="row align-self-center gy-4">
                                     <?php
@@ -134,14 +214,11 @@
                                     <?php } ?>
                                 </div>
                             </div>
-
                         </div>
-
                     </div><!-- End Feature Icons -->
-
                 </div>
-
             </section><!-- End Features Section -->
+
 
             <?php if(count($listPaket) >= 1){ ?>
                 <!-- ======= Pricing Section ======= -->
@@ -196,112 +273,20 @@
                 <!-- End Pricing Section -->
             <?php } ?>
 
-            <section id="lokerPremium" class="loker-premium recent-blog-posts">
 
-                <div class="container" data-aos="fade-up">
 
-                    <header class="section-header">
-                        <h2>Loker Premium</h2>
-                        <p>Postingan Loker Premium Terbaru</p>
-                      </br>
-                      <div class="col text-center">
-                          <a href="<?=site_url(websiteController('loker-premium'))?>">
-                              <button class="btn btn-primary">Loker premium Anda juga tersedia di Aplikasi Kubu.id </button>
-                          </a>
-                      </div>
-                    </header>
-
-                        <div class="row">
-                            <?php if(count($listLokerPremium) >= 1){ ?>
-                                <?php foreach($listLokerPremium as $lokerPremium){ ?>
-                                    <?php
-                                        $idLoker                =   $lokerPremium['id'];
-                                        $judulLoker             =   $lokerPremium['judul'];
-                                        $deskripsiLoker         =   $lokerPremium['deskripsi'];
-                                        $tanggalPostingLoker    =   $lokerPremium['createdAt'];
-                                    ?>
-                                    <div class="col-lg-4">
-                                        <div class="post-box col">
-                                            <h3 class="post-title"><?=$judulLoker?></h3>
-                                            <?php if(!empty($deskripsiLoker)){ ?>
-                                                <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
-                                            <?php } ?>
-                                            <br />
-                                            Diposting pada <?=formattedDate($tanggalPostingLoker)?>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-                            <?php } ?>
-                        </div>
-                        <?php if(count($listLokerPremium) >= 1){ ?>
-                            <div class="row">
-                                <div class="col text-center mt-5">
-                                    <a href="<?=site_url(websiteController('loker-premium'))?>">
-                                        <button class="btn btn-primary">Lihat Loker Premium Lainnya</button>
-                                    </a>
-                                </div>
-                            </div>
-                        <?php } ?>
-                </div>
-
-            </section>
-
-            <section id="lokerFree" class="loker-premium recent-blog-posts">
-
-                <div class="container" data-aos="fade-up">
-
-                    <header class="section-header">
-                        <h2>Loker Free</h2>
-                        <p>Postingan Loker Free Terbaru</p>
-                    </header>
-                    <div class="row">
-                        <?php if(count($listLokerFree) >= 1){ ?>
-                            <?php foreach($listLokerFree as $lokerFree){ ?>
-                                <?php
-                                    $idLoker                =   $lokerFree['id'];
-                                    $judulLoker             =   $lokerFree['judul'];
-                                    $deskripsiLoker         =   $lokerFree['deskripsi'];
-                                    $tanggalPostingLoker    =   $lokerFree['createdAt'];
-                                ?>
-                                <div class="col-lg-3">
-                                    <div class="post-box col">
-                                        <h3 class="post-title" style='font-size: 14px;'><?=$judulLoker?></h3>
-                                        <?php if(!empty($deskripsiLoker)){ ?>
-                                            <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
-                                        <?php } ?>
-                                        <p class='mb-0' style='font-size:12px;'>Diposting pada <?=formattedDate($tanggalPostingLoker)?></p>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        <?php } ?>
-                    </div>
-                    <?php if(count($listLokerFree) >= 1){ ?>
-                        <div class="row">
-                            <div class="col text-center mt-5">
-                                <a href="<?=site_url(websiteController('loker-free'))?>">
-                                    <button class="btn btn-primary">Lihat Loker Free Lainnya</button>
-                                </a>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-
-            </section>
 
 
             <!-- ======= Contact Section ======= -->
             <section id="contact" class="contact">
-
                 <div class="container" data-aos="fade-up">
-
                     <header class="section-header">
                         <h2><?=$contactUsElement['_title']?></h2>
                         <p><?=$contactUsElement['_subTitle']?></p>
                     </header>
-
                     <div class="row gy-4">
                         <div class="col-lg-6">
-                            <div class="row gy-4">
+                            <div class="row gy-0">
                                 <?php
                                     $contactUs      =   $contactUsElement['_contact'];
                                     $listContact    =   json_decode($contactUs, true);
@@ -313,7 +298,7 @@
                                         $contactTitle           =   $contact['title'];
                                         $contactDescription     =   $contact['description'];
                                     ?>
-                                    <div class="col-md-6 pt-4" style='background-color: #fafbff;'>
+                                    <div class="col-md-6 pt-0" style='background-color: #fafbff;'>
                                         <div class="info-box">
                                             <i class="<?=$contactIcon?>"></i>
                                             <h3 class='pt-3'><?=$contactTitle?></h3>
@@ -324,7 +309,6 @@
                             </div>
 
                         </div>
-
                         <div class="col-lg-6">
                             <form action="<?=site_url(websiteController('contact-us'))?>" method="post" class="php-email-form"
                                 id='formContactUs'>
@@ -333,17 +317,14 @@
                                         <input type="text" name="nama" class="form-control"
                                             placeholder="Nama Lengkap Anda" required>
                                     </div>
-
                                     <div class="col-md-6 ">
                                         <input type="email" class="form-control" name="email"
                                             placeholder="Email Anda" required>
                                     </div>
-
                                     <div class="col-md-12">
                                         <input type="text" class="form-control" name="subject"
                                             placeholder="Subject" required>
                                     </div>
-
                                     <div class="col-md-12">
                                         <textarea class="form-control" name="message"
                                             placeholder="Pesan yang akan disampaikan" required></textarea>
@@ -351,16 +332,11 @@
                                     <div class="col-md-12 text-center">
                                         <button type="submit" id='btnSubmit'>Send Message</button>
                                     </div>
-
                                 </div>
                             </form>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </section><!-- End Contact Section -->
 
         </main>
