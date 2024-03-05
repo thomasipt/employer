@@ -97,7 +97,8 @@
                     <p class="text-sm text-muted" id='jumlahKaryawan'><?=number_format($jumlahKaryawanPerusahaan)?> Orang</p>
                     <br />
                     <div class="qr-code d-block m-auto" id='qrCode-<?=$idLoker?>' 
-                        data-qr-data='<?=$idLoker?>'></div>
+                        data-qr-data='<?=$idLoker?>'
+                        data-url='<?=($isPremium)? 'https://app.kubu.id/index.php/applink/loker_premium/'.$idLoker : 'https://app.kubu.id/index.php/applink/loker/'.$idLoker ?>'></div>
                 </div>
             </div>
         </div>
@@ -110,9 +111,10 @@
     _qrCode.each((index, qrCodeElement) => {
         let _qrCodeItem     =   $(qrCodeElement);
         let _idLoker        =   _qrCodeItem.data('qrData');
+        let _url            =   _qrCodeItem.data('url');
         
         new QRCode(document.getElementById(`qrCode-${_idLoker}`), {
-            text: `${_idLoker}`
+            text: `${_url}`
         });
     });
 </script>
