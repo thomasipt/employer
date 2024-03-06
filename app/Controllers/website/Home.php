@@ -246,7 +246,7 @@ use App\Models\MitraLog;
                         
                         $message    =   'Gagal verifikasi email!';
                         if($updateMitra){
-                            $message    =   'Berhasil verifikasi email!';
+                            $message    =   'Berhasil verifikasi email. Silakan cek email kembali, Kami telah mengirimkan username & password Login Mitra';
 
                             $mitraLog   =   new MitraLog();
                             $tabel      =   new Tabel();
