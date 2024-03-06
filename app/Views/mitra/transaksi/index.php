@@ -64,13 +64,13 @@
                     <table id='tabelHistoryTransaksi' class='table table-sm'>
                         <thead>
                             <tr>
-                                <th class='text-center' width='75'>No.</th>
-                                <th>Nomor Transaksi</th>
-                                <th style='max-width: 350px;'>Paket</th>
-                                <th>Status</th>
-                                <th class='text-right'>Harga</th>
-                                <th class='text-right'>Total</th>
-                                <th class='text-center'>Act</th>
+                                <th class='text-center' width='7%'>No.</th>
+                                <th class='text-center' width='20%'>Nomor Transaksi</th>
+                                <th>Paket</th>
+                                <th class='text-center' width='10%'>Status</th>
+                                <th class='text-center' width='10%'>Harga</th>
+                                <th class='text-center' width='10%'>Total</th>
+                                <th class='text-center' width='7%'>Act</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
