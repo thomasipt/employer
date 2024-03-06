@@ -1,7 +1,7 @@
-<?php 
+<?php
     $request                =   request();
     $appConfig              =   config('Config\App');
-    
+
     $detailMitra    =   $request->mitra;
     $foto           =   $detailMitra['foto'];
     $nama           =   $detailMitra['nama'];
@@ -43,8 +43,8 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image pt-1">
-                <img src="<?= base_url(uploadGambarMitra('compress/'.$foto)) ?>" 
-                    class="img-circle elevation-2" alt="User Image" 
+                <img src="<?= base_url(uploadGambarMitra('compress/'.$foto)) ?>"
+                    class="img-circle elevation-2" alt="User Image"
                     style='width:2.85rem; height: 2.85rem; object-fit: cover;' />
             </div>
             <div class="info">
@@ -57,8 +57,9 @@
                         $berlakuSampai  =   $transaksiAktif['berlakuSampai'];
                     ?>
                     <p class="text-sm mb-1" style='color:#c8c8c8'><?=$paketAktif?></p>
+                    <span class="badge badge-success">Durasi Loker</span>
                     <p class="text-sm mb-1" style='color:#c8c8c8'><?=formattedDate($berlakuMulai)?> sd <?=formattedDate($berlakuSampai)?></p>
-                <?php }else{ ?>  
+                <?php }else{ ?>
                     <p class="text-sm mb-2" style='color:#c8c8c8'><?=$username?></p>
                 <?php } ?>
             </div>
