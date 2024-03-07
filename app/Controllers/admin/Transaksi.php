@@ -1,6 +1,6 @@
 <?php
     namespace App\Controllers\admin;
-    
+
     use App\Controllers\BaseController;
     use CodeIgniter\API\ResponseTrait;
 
@@ -10,7 +10,7 @@
     use App\Models\Mitra;
     use App\Models\Transaksi as TransaksiModel;
     use App\Models\Paket;
-    
+
     #Library
     use App\Libraries\APIRespondFormat;
     use App\Libraries\EmailSender;
@@ -32,7 +32,7 @@
         private $loggedInIDAdministrator;
         public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger){
             parent::initController($request, $response, $logger);
-            
+
             if(property_exists($request, 'administrator')){
                 $detailAdministratorFromFilter  =   $request->administrator;
                 $idAdministrator                =   $detailAdministratorFromFilter['id'];
@@ -47,7 +47,7 @@
 
             $transaksiModel =   new TransaksiModel();
             $mitraModel     =   new Mitra();
-            
+
             $listPembelian      =   $transaksiModel->getTransaksiPending();
             foreach($listPembelian as $index => $transaksiItem){
                 $transaksiMitra =   $transaksiItem['mitra'];
@@ -133,7 +133,7 @@
                 if($isApproved){
                     $berlakuMulai   =   $now;
                     $berlakuSampai  =   date('Y-m-d H:i:s', strtotime($berlakuMulai.' + '.$durasiPaket.' days'));
-                    
+
                     $dataTransaksi['berlakuMulai']      =   $berlakuMulai;
                     $dataTransaksi['berlakuSampai']     =   $berlakuSampai;
                 }
@@ -144,10 +144,8 @@
                 if($saveApprovementTransaksi){
                     $emailSender    =   new EmailSender();
                     $htmlBody       =   '<div style="width: 100%; border: 1px solid #0D6EFD; border-radius: 10px; padding: 15px;">
-                                            <center>
-                                                <img src="https://employer.kubu.id/assets/img/icon.png" style="width: 150px; display: block; margin: auto;"
-                                                    alt="Employer" />
-                                            </center>
+                                          <img src="https://employer.kubu.id/assets/img/icon.png" style="float: left; width: 50px;" alt="Employer">
+                                          <p><span style="font-size: 30px; color: rgb(44, 130, 201);">Kubu Employer</span></p>
                                             <br />
                                             <p>Pembelian paket '.$namaPaket.' dengan nomor transaksi <b>'.$nomor.'</b> '.(($isApproved)? '<b class="text-success">disetujui</b>' : '<b class="text-danger">ditolak</b>').'!</p>
                                         </div>';
@@ -159,7 +157,7 @@
                             ['email' => $emailMitra, 'name' => $namaMitra]
                         ]
                     ];
-                    $sendEmail          =   $emailSender->sendEmail($emailParams);   
+                    $sendEmail          =   $emailSender->sendEmail($emailParams);
                     $statusKirimEmail   =   $sendEmail['statusSend'];
 
                     if($statusKirimEmail){
@@ -173,14 +171,14 @@
                             if(!empty($transaksiAktifMitra)){
                                 $idTransaksiLama    =   $transaksiAktifMitra['id'];
                                 $nomorTransaksiLama =   $transaksiAktifMitra['nomor'];
-                                
+
                                 $idTransaksiBaru    =   $idTransaksi;
                                 $nomorTransaksiBaru =   $nomor;
 
                                 $saveStackedBy  =   $transaksi->saveTransaksi($idTransaksiLama, ['stackedBy' => $idTransaksiBaru]);
                                 if($saveStackedBy){
                                     $mitraLog   =   new MitraLog();
-                                    
+
                                     $titleLogMitra  =   'Transaksi '.$nomorTransaksiLama.' ditimpa dengan transaksi '.$nomorTransaksiBaru;
                                     $mitraLog->saveMitraLogFromThisModule($tabel->transaksi, $idTransaksiLama, $titleLogMitra);
                                 }
@@ -237,7 +235,7 @@
                             ['table' => $tabel->transaksi.' transaksi', 'condition' => 'transaksi.mitra=pT.id']
                         ],
                         'having'    =>  ['jumlahTransaksi >=' => 1],
-                        'group_by'  =>  'pT.id'  
+                        'group_by'  =>  'pT.id'
                     ];
                     $listMitra  =   $mitra->getMitra(null, $options);
 

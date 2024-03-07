@@ -1,6 +1,6 @@
 <?php
     namespace App\Controllers\mitra;
-    
+
     use App\Controllers\BaseController;
     use CodeIgniter\API\ResponseTrait;
 
@@ -9,7 +9,7 @@
     use App\Models\Transaksi as TransaksiModel;
     use App\Models\Paket;
     use App\Models\MitraLog;
-    
+
     #Library
     use App\Libraries\APIRespondFormat;
     use App\Libraries\EmailSender;
@@ -31,7 +31,7 @@
         private $loggedInIDMitra;
         public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger){
             parent::initController($request, $response, $logger);
-            
+
             if(property_exists($request, 'mitra')){
                 $detailMitraFromFilter  =   $request->mitra;
                 $idMitra                =   $detailMitraFromFilter['id'];
@@ -69,15 +69,15 @@
             #Data
             $transaksi  =   new TransaksiModel();
             $request    =   $this->request;
-            
+
             $draw       =   $request->getGet('draw');
 
             $start      =   $request->getGet('start');
             $start      =   (!is_null($start))? $start : 0;
-    
+
             $length     =   $request->getGet('length');
             $length     =   (!is_null($length))? $length : 10;
-            
+
             $search     =   $request->getGet('search');
 
             $options    =   [
@@ -101,7 +101,7 @@
                     }
                 }
             }
-            
+
 
             $listTransaksi    =   $transaksi->getTransaksi(null, $options);
             if(count($listTransaksi) >= 1){
@@ -120,7 +120,7 @@
                     $listTransaksi[$indexData]['nomorUrut']     =   $nomorUrut;
                     $listTransaksi[$indexData]['mitra']         =   $detailMitra;
                     $listTransaksi[$indexData]['paket']         =   $detailPaket;
-                    
+
                     if(!empty($transaksiStackedBy)){
                         $detailTransaksiPenimpa =   $transaksi->getTransaksi($transaksiStackedBy, ['select' => 'id, nomor']);
                         $listTransaksi[$indexData]['stackedBy']     =   $detailTransaksiPenimpa;
@@ -144,7 +144,7 @@
                 'recordsFiltered'   =>  $recordsTotal,
                 'recordsTotal'      =>  $recordsTotal
             ];
-            
+
             return $this->respond($response);
         }
         public function checkout($paketCode = null){
@@ -206,13 +206,13 @@
 
             try{
                 helper('CustomDate');
-                
+
                 $emailSender        =   new EmailSender();
                 $paket              =   new Paket();
                 $tabel              =   new Tabel();
 
                 $detailPaket    =   $this->paketChecking($paketCode);
-                
+
                 $currentDate    =   currentDate();
 
                 $nomorTransaksi =   strtoupper(uniqid($paketCode));
@@ -248,10 +248,8 @@
                     $linkUploadBuktiBayar   =   site_url(mitraController('transaksi'));
 
                     $htmlBody   =   '<div style="width: 100%; border: 1px solid #0D6EFD; border-radius: 10px; padding: 15px;">
-                                        <center>
-                                            <img src="https://employer.kubu.id/assets/img/icon.png" style="width: 150px; display: block; margin: auto;"
-                                                alt="Employer" />
-                                        </center>
+                                      <img src="https://employer.kubu.id/assets/img/icon.png" style="float: left; width: 50px;" alt="Employer">
+                                      <p><span style="font-size: 30px; color: rgb(44, 130, 201);">Kubu Employer</span></p>
                                         <br />
                                         <p>Pembelian paket <b>'.$namaPaket.'</b> dengan durasi <b>'.number_format($durasiPaket).' hari</b> berhasil!</p>
                                         <p>Selanjutnya anda harus melakukan pembayaran dan mengupload bukti pembayaran anda pada halaman <a href="'.$linkUploadBuktiBayar.'">ini</a> dan menunggu admin untuk memvalidasi pembayaran anda</p>
@@ -264,7 +262,7 @@
                             ['email' => $emailMitra, 'name' => $namaMitra]
                         ]
                     ];
-                    $sendEmail          =   $emailSender->sendEmail($emailParams);   
+                    $sendEmail          =   $emailSender->sendEmail($emailParams);
                     $statusKirimEmail   =   $sendEmail['statusSend'];
                     if(!$statusKirimEmail){
                         $db->transRollback();
@@ -329,11 +327,11 @@
                 if($mitraTransaksi != $loggedInIDMitra){
                     throw new Exception('Maaf, transaksi ini '.$nomorTransaksi.' bukan transaksi anda!');
                 }
-                
+
                 $fileExtension  =   $fileBuktiBayar->getClientExtension();
                 $fileName       =   'BuktiBayar-'.$idTransaksi.'-'.date('YmdHis').'.'.$fileExtension;
                 $fileBuktiBayar->move(uploadGambarBuktiBayar(), $fileName);
-                
+
                 $isSuccessUploadFile    =   file_exists(uploadGambarBuktiBayar($fileName));
 
                 $message    =   'Gagal mengupload bukti bayar!';
@@ -342,7 +340,7 @@
                         'buktiBayar'    =>  $fileName
                     ];
                     $saveBuktiBayarTransaksi     =   $transaksi->saveTransaksi($idTransaksi, $dataTransaksi);
-                    
+
                     $message    =   'Gagal mengupload bukti bayar!';
                     if($saveBuktiBayarTransaksi){
                         $status     =   true;
