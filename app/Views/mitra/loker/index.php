@@ -35,11 +35,11 @@
                     <table id='tabelListLoker' class='table table-sm'>
                         <thead>
                             <tr>
-                                <th class='text-center' width='75'>No.</th>
-                                <th style='max-width: 600px;'>Loker</th>
-                                <th>PIC</th>
-                                <th>Pelamar</th>
-                                <th class='text-center'>Act</th>
+                                <th class='text-center' width='7%'>No.</th>
+                                <th>Loker</th>
+                                <th class='text-center' width='20%'>PIC</th>
+                                <th class='text-center' width='10%'>Pelamar</th>
+                                <th class='text-center' width='7%'>Act</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
