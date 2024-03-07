@@ -142,10 +142,8 @@ use App\Models\MitraLog;
                         $data       =   ['id' => $idMitraBaru];
 
                         $htmlBody   =   '<div style="width: 100%; border: 1px solid #0D6EFD; border-radius: 10px; padding: 15px;">
-                                            <center>
-                                                <img src="https://employer.kubu.id/assets/img/icon.png" style="width: 150px; display: block; margin: auto;"
-                                                    alt="Employer" />
-                                            </center>
+                                            <img src="https://employer.kubu.id/assets/img/icon.png" style="float: left; width: 50px;" alt="Employer">
+                                            <p><span style="font-size: 30px; color: rgb(44, 130, 201);">Kubu Employer</span></p>
                                             <br />
                                             <p>Anda telah mendaftar sebagai mitra ke dalam website <a href="https://employer.kubu.id">Employer</a>.
                                             Silahkan klik link berikut ini untuk memverifikasi pendaftaran anda <a href="'.$linkVerifikasi.'">'.$linkVerifikasi.'</a></p>
