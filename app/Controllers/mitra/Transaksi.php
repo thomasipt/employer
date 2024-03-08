@@ -448,6 +448,7 @@ use CodeIgniter\HTTP\RequestInterface;
                 $pdf->setOptions($options);
                 $pdf->setPaper('A4', 'portrait');
                 $pdf->loadView(mitraView('transaksi/invoice'), $data);
+                $pdf->render();
                 $pdf->stream($nomorTransaksi.'.pdf', ['Attachment' => false]);
             }catch(Exception $e){
                 $data   =   [
