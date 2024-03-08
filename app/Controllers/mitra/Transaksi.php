@@ -446,12 +446,14 @@ use CodeIgniter\HTTP\RequestInterface;
 
                 // return view(mitraView('transaksi/invoice'), $data);
 
-                $pdf->fileName  =   'invoice_'.$nomorTransaksi.'_'.date('YmdHis').'.pdf';
+                $fileName   =   'invoice_'.$nomorTransaksi.'_'.date('YmdHis').'.pdf';
+
+                $pdf->fileName  =   $fileName;
                 $pdf->setOptions($options);
                 $pdf->setPaper('A4', 'portrait');
                 $pdf->loadHtml(view(mitraView('transaksi/invoice'), $data));
                 $pdf->render();
-                $pdf->output();
+                $pdf->stream($fileName, ['Attachment' => false]);
             }catch(Exception $e){
                 $data   =   [
                     'judul'     =>  'Terjadi kesalahan',
