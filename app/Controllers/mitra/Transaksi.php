@@ -454,6 +454,7 @@ use CodeIgniter\HTTP\RequestInterface;
                 $pdf->loadHtml(view(mitraView('transaksi/invoice'), $data));
                 $pdf->render();
                 $pdf->stream($fileName, ['Attachment' => false]);
+                exit();
             }catch(Exception $e){
                 $data   =   [
                     'judul'     =>  'Terjadi kesalahan',
