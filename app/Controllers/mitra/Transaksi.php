@@ -444,6 +444,8 @@ use CodeIgniter\HTTP\RequestInterface;
                     ]
                 ];
 
+                return view(mitraView('transaksi/invoice'), $data);
+
                 $pdf->fileName  =   'invoice_'.$nomorTransaksi.'_'.date('YmdHis').'.pdf';
                 $pdf->setOptions($options);
                 $pdf->setPaper('A4', 'portrait');
