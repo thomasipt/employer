@@ -26,33 +26,16 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-3 col-12">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="small-box bg-info">
-                                            <div class="inner">
-                                                <h3><?=number_format($jumlahLoker)?></h3>
-                                                <p>Jumlah Loker</p>
-                                            </div>
-                                            <div class="icon">
-                                                <i class="ion ion-android-playstore"
-                                                    title='Jumlah Fasilitas'></i>
-                                            </div>
-                                            <a href="<?=site_url(mitraController('loker'))?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                                        </div>
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3><?=number_format($jumlahLoker)?></h3>
+                                        <p>Jumlah Loker</p>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="small-box bg-primary">
-                                            <div class="inner">
-                                                <h3><?=number_format($jumlahKandidat)?></h3>
-                                                <p>Jumlah Kandidat</p>
-                                            </div>
-                                            <div class="icon">
-                                                <i class="ion ion-android-people"
-                                                    title='Jumlah Kandiat'></i>
-                                            </div>
-                                            <a href="#" class='small-box-footer' style='background-color: transparent;'>&nbsp;</a>
-                                        </div>
+                                    <div class="icon">
+                                        <i class="ion ion-android-playstore"
+                                            title='Jumlah Fasilitas'></i>
                                     </div>
+                                    <a href="<?=site_url(mitraController('loker'))?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-12">
@@ -92,6 +75,19 @@
                                             title='Jumlah Dinas Terdaftar'></i>
                                     </div>
                                     <a href="<?=site_url(mitraController('transaksi/pending'))?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <div class="small-box bg-primary">
+                                    <div class="inner">
+                                        <h3><?=number_format($jumlahKandidat)?></h3>
+                                        <p>Jumlah Kandidat</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-android-people"
+                                            title='Jumlah Kandiat'></i>
+                                    </div>
+                                    <a href="#" class='small-box-footer' style='background-color: transparent;'>&nbsp;</a>
                                 </div>
                             </div>
                         </div>
