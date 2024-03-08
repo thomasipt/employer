@@ -16,7 +16,7 @@
 <html lang="en">
     <?=view(mitraComponents('head'), $headData)?>
     <body class="hold-transition sidebar-mini layout-fixed">
-        <div class="wrapper"> 
+        <div class="wrapper">
             <?=view(mitraComponents('navbar'))?>
             <?=view(mitraComponents('sidebar'))?>
 
@@ -25,7 +25,7 @@
                 <section class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-lg-3 col-12">
+                            <div class="col-lg-2 col-6">
                                 <div class="small-box bg-info">
                                     <div class="inner">
                                         <h3><?=number_format($jumlahLoker)?></h3>
@@ -38,7 +38,7 @@
                                     <a href="<?=site_url(mitraController('loker'))?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-12">
+                            <div class="col-lg-2 col-6">
                                 <div class="small-box bg-success">
                                     <div class="inner">
                                         <h3><?=(!empty($paketAktif))? $paketAktif : 'Belum Ada'?></h3>
@@ -51,7 +51,7 @@
                                     <a href="#" class='small-box-footer' style='background-color: transparent;'>&nbsp;</a>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-6">
+                            <div class="col-lg-2 col-6">
                                 <div class="small-box bg-warning">
                                     <div class="inner">
                                         <h3><?=number_format($jumlahHistoryTransaksi)?></h3>
@@ -64,7 +64,7 @@
                                     <a href="#" class='small-box-footer' style='background-color: transparent;'>&nbsp;</a>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-6">
+                            <div class="col-lg-2 col-6">
                                 <div class="small-box bg-danger">
                                     <div class="inner">
                                         <h3><?=($jumlahTransaksiPending >= 1)? number_format($jumlahTransaksiPending) : 'Tidak Ada'?></h3>
@@ -77,7 +77,7 @@
                                     <a href="<?=site_url(mitraController('transaksi/pending'))?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-6">
+                            <div class="col-lg-2 col-6">
                                 <div class="small-box bg-primary">
                                     <div class="inner">
                                         <h3><?=number_format($jumlahKandidat)?></h3>
