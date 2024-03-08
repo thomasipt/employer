@@ -15,10 +15,11 @@
     use App\Libraries\EmailSender;
     use App\Libraries\PDF;
     use App\Libraries\Tabel;
-
-    use CodeIgniter\HTTP\RequestInterface;
+use App\Models\Homepage;
+use App\Models\HomepageElement;
+use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
-
+    use Config\Database;
     use Dompdf\Options;
     use Psr\Log\LoggerInterface;
 
@@ -294,7 +295,8 @@
         }
         public function uploadBuktiBayar(){
             $transaksi      =   new TransaksiModel();
-            $db             =   $transaksi->db;
+            $database       =   new Database();
+            $db             =   $database->connect($database->default);
 
             $db->transBegin();
 
@@ -320,9 +322,10 @@
                     throw new Exception('Maaf, tidak ada transaksi dengan nomor transaksi '.$nomorTransaksi.'!');
                 }
 
-                $idTransaksi        =   $detailTransaksi['id'];
-                $mitraTransaksi     =   $detailTransaksi['mitra'];
-                $loggedInIDMitra    =   $this->loggedInIDMitra;
+                $idTransaksi            =   $detailTransaksi['id'];
+                $mitraTransaksi         =   $detailTransaksi['mitra'];
+                $loggedInIDMitra        =   $this->loggedInIDMitra;
+                $loggedInDetailMitra    =   $this->loggedInDetailMitra;
 
                 if($mitraTransaksi != $loggedInIDMitra){
                     throw new Exception('Maaf, transaksi ini '.$nomorTransaksi.' bukan transaksi anda!');
@@ -343,12 +346,47 @@
 
                     $message    =   'Gagal mengupload bukti bayar!';
                     if($saveBuktiBayarTransaksi){
-                        $status     =   true;
-                        $message    =   'Berhasil upload bukti bayar!';
-                        $data       =   null;
+                        $namaMitra      =   $loggedInDetailMitra['nama'];
+                        $emailSender    =   new EmailSender();
 
-                        $mitraLog   =   new MitraLog();
-                        $mitraLog->saveMitraLogFromThisModule($tabel->transaksi, $idTransaksi, 'Upload bukti bayar transaksi '.$nomorTransaksi);
+                        $homepage           =   new Homepage();
+                        $homepageElement    =   new HomepageElement();
+
+                        $homepageElementOptions     =   [
+                            'where' =>  ['parent' => $homepage->emailPerusahaanId]
+                        ];
+                        $emailPerusahaanElements    =   $homepageElement->getHomepageElement(null, $homepageElementOptions);
+                        $emailPerusahaanElements    =   $homepageElement->convertListELementToKeyValueMap($emailPerusahaanElements);
+                        
+                        $emailPerusahaan    =   $emailPerusahaanElements['email'];
+
+                        $htmlBody   =   '<div style="width: 100%; border: 1px solid #0D6EFD; border-radius: 10px; padding: 15px;">
+                                            <img src="https://employer.kubu.id/assets/img/icon.png" style="float: left; width: 50px;" alt="Employer">
+                                            <p><span style="font-size: 30px; color: rgb(44, 130, 201);">Kubu Employer</span></p>
+                                            <br />
+                                            <p>
+                                                Mitra <b>'.$namaMitra.'</b> telah melakukan pembayaran transaksi <b>'.$nomorTransaksi.'</b>. 
+                                                Bukti bayar bisa dilihat pada halaman berikut <a href="'.site_url(uploadGambarBuktiBayar($fileName)).'" target="_blank">ini</a>
+                                            </p>
+                                        </div>';
+                        $emailParams    =   [
+                            'subject'   =>  'Bukti Pembayaran Transaksi '.$nomorTransaksi,
+                            'body'      =>  $htmlBody,
+                            'receivers' =>  [
+                                ['email' => $emailPerusahaan]
+                            ]
+                        ];
+                        $sendEmail      =   $emailSender->sendEmail($emailParams);
+
+                        $message    =   $sendEmail['message'];
+                        if($sendEmail['statusSend']){
+                            $status     =   true;
+                            $message    =   'Berhasil upload bukti bayar!';
+                            $data       =   null;
+
+                            $mitraLog   =   new MitraLog();
+                            $mitraLog->saveMitraLogFromThisModule($tabel->transaksi, $idTransaksi, 'Upload bukti bayar transaksi '.$nomorTransaksi);
+                        }
                     }
                 }
             }catch(Exception $e){
@@ -357,7 +395,7 @@
                 $data       =   null;
             }
 
-            if($db->transStatus()){
+            if($status){
                 $db->transCommit();
             }else{
                 $db->transRollback();
