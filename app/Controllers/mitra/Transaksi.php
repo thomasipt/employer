@@ -9,15 +9,16 @@
     use App\Models\Transaksi as TransaksiModel;
     use App\Models\Paket;
     use App\Models\MitraLog;
+    use App\Models\Homepage;
+    use App\Models\HomepageElement;
 
     #Library
     use App\Libraries\APIRespondFormat;
     use App\Libraries\EmailSender;
     use App\Libraries\PDF;
     use App\Libraries\Tabel;
-use App\Models\Homepage;
-use App\Models\HomepageElement;
-use CodeIgniter\HTTP\RequestInterface;
+    
+    use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
     use Config\Database;
     use Dompdf\Options;
@@ -410,6 +411,7 @@ use CodeIgniter\HTTP\RequestInterface;
                 helper('CustomDate');
 
                 $transaksi          =   new TransaksiModel();
+                $mitra              =   new Mitra();
 
                 $detailTransaksi    =   $transaksi->getTransaksi($idTransaksi);
                 if(empty($detailTransaksi)){
@@ -421,10 +423,13 @@ use CodeIgniter\HTTP\RequestInterface;
                 $paketTransaksi     =   $detailTransaksi['paket'];
 
                 $loggedInIDMitra    =   $this->loggedInIDMitra;
-
-                if($mitraTransaksi != $loggedInIDMitra){
-                    throw new Exception('Maaf, transaksi '.$nomorTransaksi.' bukan transaksi anda!');
+                if(!empty($loggedInIDMitra)){
+                    if($mitraTransaksi != $loggedInIDMitra){
+                        throw new Exception('Maaf, transaksi '.$nomorTransaksi.' bukan transaksi anda!');
+                    }
                 }
+
+                $detailMitra    =   $mitra->getMitra($mitraTransaksi);
 
                 $paket          =   new Paket();
                 $detailPaket    =   $paket->getPaket($paketTransaksi);
@@ -439,12 +444,10 @@ use CodeIgniter\HTTP\RequestInterface;
                     ],
                     'data'  =>  [
                         'detailTransaksi'   =>  $detailTransaksi,
-                        'detailMitra'       =>  $this->loggedInDetailMitra,
+                        'detailMitra'       =>  $detailMitra,
                         'detailPaket'       =>  $detailPaket
                     ]
                 ];
-
-                // return view(mitraView('transaksi/invoice'), $data);
 
                 $fileName   =   'invoice_'.$nomorTransaksi.'_'.date('YmdHis').'.pdf';
 
