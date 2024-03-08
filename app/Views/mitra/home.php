@@ -32,7 +32,7 @@
                                         <p>Jumlah Loker</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="ion ion-android-playstore"
+                                        <i class="ion ion-clipboard"
                                             title='Jumlah Fasilitas'></i>
                                     </div>
                                     <a href="<?=site_url(mitraController('loker'))?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
@@ -45,7 +45,7 @@
                                         <p>Paket Aktif</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="ion ion-android-person"
+                                        <i class="ion ion-android-calendar"
                                             title='Jumlah Administrator'></i>
                                     </div>
                                     <a href="#" class='small-box-footer' style='background-color: transparent;'>&nbsp;</a>
@@ -58,7 +58,7 @@
                                         <p>Transaksi Berhasil</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="ion ion-person-add"
+                                        <i class="ion ion-android-checkbox"
                                             title='Jumlah Penyuluh Terdaftar'></i>
                                     </div>
                                     <a href="#" class='small-box-footer' style='background-color: transparent;'>&nbsp;</a>
@@ -71,7 +71,7 @@
                                         <p>Transaksi Pending</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="ion ion-android-people"
+                                        <i class="ion ion-android-alert"
                                             title='Jumlah Dinas Terdaftar'></i>
                                     </div>
                                     <a href="<?=site_url(mitraController('transaksi/pending'))?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
@@ -84,7 +84,7 @@
                                         <p>Jumlah Kandidat</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="ion ion-android-people"
+                                        <i class="ion ion-person-stalker"
                                             title='Jumlah Kandiat'></i>
                                     </div>
                                     <a href="#" class='small-box-footer' style='background-color: transparent;'>&nbsp;</a>

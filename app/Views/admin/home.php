@@ -31,7 +31,7 @@
                                         <p>Jumlah Mitra</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="ion ion-android-playstore"
+                                        <i class="ion ion-ios-world"
                                             title='Jumlah Mitra'></i>
                                     </div>
                                     <a href="<?=site_url(adminController('mitra'))?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
@@ -44,7 +44,7 @@
                                         <p>Lowongan Pekerjaan Premium</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="ion ion-android-person"
+                                        <i class="ion ion-network"
                                             title='Jumlah Loker Premium'></i>
                                     </div>
                                     <a href="#" class='small-box-footer' style='background-color: transparent;'>&nbsp;</a>
@@ -57,7 +57,7 @@
                                         <p>Jumlah Kandidat</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="ion ion-person-add"
+                                        <i class="ion ion-person-stalker"
                                             title='Jumlah Penyuluh Terdaftar'></i>
                                     </div>
                                     <a href="#" class='small-box-footer' style='background-color: transparent;'>&nbsp;</a>
@@ -70,7 +70,7 @@
                                         <p>Jumlah Pembelian Paket</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="ion ion-android-people"
+                                        <i class="ion ion-ios-cart"
                                             title='Jumlah Dinas Terdaftar'></i>
                                     </div>
                                     <a href="<?=site_url(adminController('transaksi/pending'))?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
