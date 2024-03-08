@@ -20,6 +20,8 @@
 
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
+    
+    use Config\Database;
     use Psr\Log\LoggerInterface;
 
     use Exception;
@@ -86,12 +88,27 @@
             $getJumlahTransaksiPending      =   $transaksi->getTransaksi(null, $transaksiPendingOptions);
             $jumlahTransaksiPending         =   !empty($getJumlahTransaksiPending)? $getJumlahTransaksiPending['jumlahData'] : 0;
 
+            $database   =   new Database();
+            $tabel      =   new Tabel();
+            $db         =   $database->connect($database->default);
+            
+            $getJumlahKandidat  =   $db->query('
+                SELECT 
+                    COUNT(*) AS total_users
+                FROM 
+                    '.$tabel->skill.' s
+                    INNER JOIN '.$tabel->experience.' e ON s.user_id = e.user_id
+                    INNER JOIN '.$tabel->education.' ed ON s.user_id = ed.user_id');
+            $jumlahKandidatRowArray     =   ($getJumlahKandidat->getNumRows() >= 1)? $getJumlahKandidat->getRowArray() : null;
+            $jumlahKandidat             =   !empty($jumlahKandidatRowArray)? $jumlahKandidatRowArray['total_users'] : 0;
+
             $data   =   [
                 'data'  =>  [
                     'jumlahLoker'   =>  $jumlahLoker,
                     'paketAktif'    =>  $paketAktif,
                     'jumlahHistoryTransaksi'    =>  $jumlahHistoryTransaksi,
-                    'jumlahTransaksiPending'    =>  $jumlahTransaksiPending
+                    'jumlahTransaksiPending'    =>  $jumlahTransaksiPending,
+                    'jumlahKandidat'            =>  $jumlahKandidat
                 ]
             ];   
             return view(mitraView('home'), $data);
