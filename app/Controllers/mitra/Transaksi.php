@@ -449,7 +449,7 @@ use CodeIgniter\HTTP\RequestInterface;
                 $pdf->fileName  =   'invoice_'.$nomorTransaksi.'_'.date('YmdHis').'.pdf';
                 $pdf->setOptions($options);
                 $pdf->setPaper('A4', 'portrait');
-                $pdf->loadHtml(view(mitraView('transaksi/invoice')), $data);
+                $pdf->loadHtml(view(mitraView('transaksi/invoice'), $data));
                 $pdf->render();
                 $pdf->output();
             }catch(Exception $e){
