@@ -148,6 +148,6 @@
         transform: translate(-50%, -50%);
         width: 200px;
         height: 200px;
-        opacity: .25;
+        opacity: .10;
     }
 </style>
