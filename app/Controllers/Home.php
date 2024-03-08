@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Libraries\Tabel;
+
 use App\Models\Homepage;
 use App\Models\HomepageElement;
 use App\Models\Loker;
@@ -17,6 +19,7 @@ class Home extends BaseController{
         $homepageElement    =   new HomepageElement();
         $loker              =   new Loker();
         $lokerFree          =   new LokerFree();
+        $tabel              =   new Tabel();
 
         $options    =   [
             'order_by'  =>  [
@@ -67,7 +70,11 @@ class Home extends BaseController{
         $contactUsElement    =   $homepageElement->convertListELementToKeyValueMap($contactUsElement);
 
         $options            =   [
-            'limit' =>  6
+            'limit'     =>  6,
+            'select'    =>  'pT.*, mitra.nama as namaPerusahaan',
+            'join'      =>  [
+                ['table' => $tabel->mitra.' mitra', 'condition' => 'mitra.id=pT.createdBy']
+            ]
         ];
         $listLokerPremium   =   $loker->getLoker(null, $options);
 

@@ -114,10 +114,12 @@
                                         $judulLoker             =   $lokerPremium['judul'];
                                         $deskripsiLoker         =   $lokerPremium['deskripsi'];
                                         $tanggalPostingLoker    =   $lokerPremium['createdAt'];
+
+                                        $namaPerusahaan         =   $lokerPremium['namaPerusahaan'];
                                     ?>
                                     <div class="col-lg-4">
                                         <div class="post-box col">
-                                            <h3 class="post-title"><?=$judulLoker?></h3>
+                                            <h3 class="post-title"><?=$judulLoker?> <span class='badge bg-info' style='font-size: .873rem;'><?=$namaPerusahaan?></span></h3>
                                             <?php if(!empty($deskripsiLoker)){ ?>
                                                 <p class="text-sm text-muted"><?=$deskripsiLoker?></p>
                                             <?php } ?>
