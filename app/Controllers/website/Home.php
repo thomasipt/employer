@@ -241,7 +241,7 @@ use App\Models\MitraLog;
                             'verifiedAt'    =>  rightNow()
                         ];
                         $updateMitra    =   $mitra->saveMitra($idMitra, $dataVerifikasi);
-                        
+
                         $message    =   'Gagal verifikasi email!';
                         if($updateMitra){
                             $message    =   'Berhasil verifikasi email. Silakan cek email kembali, Kami telah mengirimkan username & password Login Mitra';
@@ -337,7 +337,7 @@ use App\Models\MitraLog;
 
                     $search     =   $request->getGet('search');
                     $page       =   $request->getGet('page');
-                    $batas      =   9;
+                    $batas      =   12;
                     $pageKe     =   !empty($page)? $page : 1;
                     $firstIndex =   ($pageKe > 1)? ($pageKe * $batas) - $batas : 0;
 
@@ -511,7 +511,7 @@ use App\Models\MitraLog;
                 $message    =   $e->getMessage();
             }
 
-            
+
             $arf        =   new APIRespondFormat($status, $message, $data, $code);
             $respond    =   $arf->getRespond();
 
