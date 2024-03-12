@@ -160,7 +160,7 @@ $searchQS   =   !empty($search) ? '&search=' . $search : '';
                             <label class='text-black' for="jenis"><b>Jenis</b></label>
                             <p class='text-sm text-muted mb-2' id="jenis"><?= $namaJenisPekerjaan ?></p>
 
-                            <p class="text-sm mt-3 text-black" style='text-align: right;'>Diposting pada <?= formattedDate($tanggalPostingLoker) ?></p>
+                            <p class="text-sm mt-3 text-black" style='text-align: right;font-size:12px;'>Diposting pada <?= formattedDate($tanggalPostingLoker) ?></p>
                         </div>
                     </a>
                 </div>
