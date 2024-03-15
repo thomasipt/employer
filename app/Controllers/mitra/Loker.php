@@ -1,6 +1,6 @@
 <?php
     namespace App\Controllers\mitra;
-    
+
     use App\Controllers\BaseController;
     use CodeIgniter\API\ResponseTrait;
 
@@ -15,12 +15,12 @@
     use App\Models\LokerApply;
     use App\Models\Kandidat;
     use App\Models\Kota;
-    
+
     #Library
     use App\Libraries\APIRespondFormat;
     use App\Libraries\FormValidation;
     use App\Libraries\Tabel;
-    
+
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
     use Psr\Log\LoggerInterface;
@@ -34,7 +34,7 @@
         private $loggedInIDMitra;
         public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger){
             parent::initController($request, $response, $logger);
-            
+
             if(property_exists($request, 'mitra')){
                 $detailMitraFromFilter  =   $request->mitra;
                 $idMitra                =   $detailMitraFromFilter['id'];
@@ -65,15 +65,15 @@
             #Data
             $loker      =   new LokerModel();
             $request    =   $this->request;
-            
+
             $draw       =   $request->getGet('draw');
 
             $start      =   $request->getGet('start');
             $start      =   (!is_null($start))? $start : 0;
-    
+
             $length     =   $request->getGet('length');
             $length     =   (!is_null($length))? $length : 10;
-            
+
             $search     =   $request->getGet('search');
 
             $options    =   [
@@ -98,7 +98,7 @@
                     }
                 }
             }
-            
+
 
             $listLoker    =   $loker->getLoker(null, $options);
             if(count($listLoker) >= 1){
@@ -109,7 +109,7 @@
                     $idLoker    =   $lokerItem['id'];
                     $createdBy  =   $lokerItem['createdBy'];
 
-                    $detailMitra    =   $mitra->getMitra($createdBy, ['select' => 'id, nama']);
+                    $detailMitra    =   $mitra->getMitra($createdBy, ['select' => 'id, nama, email']);
                     $jumlahApplier  =   $loker->getJumlahApply($idLoker);
 
                     $listLoker[$indexData]['nomorUrut']     =   $nomorUrut;
@@ -136,12 +136,12 @@
                 'recordsFiltered'   =>  $recordsTotal,
                 'recordsTotal'      =>  $recordsTotal
             ];
-            
+
             return $this->respond($response);
         }
         public function addLoker($idLoker = null){
             $mitra          =   new Mitra();
-            
+
             try{
                 $doesUpdate     =   !empty($idLoker);
                 $detailLoker    =   ($doesUpdate)? $this->lokerChecking($idLoker) : null;
@@ -175,7 +175,7 @@
                         'order_by'  =>  [
                             'column'        =>  'nama',
                             'orientation'   =>  'asc'
-                        ]  
+                        ]
                     ];
 
                     $jenisOptions   =   [
@@ -183,7 +183,7 @@
                         'order_by'  =>  [
                             'column'        =>  'nama',
                             'orientation'   =>  'asc'
-                        ]  
+                        ]
                     ];
 
                     $provinsiOptions    =   [
@@ -199,10 +199,10 @@
                     $listKategori   =   $kategori->getKategoriLoker(null, $kategoriOptions);
                     $listJenis      =   $jenis->getJenisLoker(null, $jenisOptions);
 
-                    $data['data']['listProvinsi']   =  $listProvinsi;  
-                    $data['data']['listKota']       =  $listKota;            
+                    $data['data']['listProvinsi']   =  $listProvinsi;
+                    $data['data']['listKota']       =  $listKota;
                     $data['data']['listKategori']   =  $listKategori;
-                    $data['data']['listJenis']      =  $listJenis;   
+                    $data['data']['listJenis']      =  $listJenis;
                 }
 
                 return view(mitraView('index'), $data);
@@ -221,7 +221,7 @@
 
             try{
                 helper('CustomDate');
-                
+
                 $request        =   request();
                 $formValidation =   new FormValidation();
                 $mitra          =   new Mitra();
@@ -247,9 +247,9 @@
                     'jenis'                     =>  'required',
                     'benefit'                   =>  'required'
                 ];
-    
+
                 $validationMessage  =   $formValidation->generateCustomMessageForSingleRule($validationRules);
-    
+
                 if($this->validate($validationRules, $validationMessage)){
                     helper('CustomNumber');
 
@@ -304,7 +304,7 @@
                     $message    =   (!$doesUpdate)? 'Gagal menambahkan loker baru!' : 'Gagal mengupdate loker!';
                     if($saveLoker){
                         $idLoker    =   $saveLoker;
-                        
+
                         $status     =   true;
                         $message    =   (!$doesUpdate)? 'Berhasil menambahkan loker baru!' : 'Berhasil mengupdate loker!';
                         $data       =   ['id' => $idLoker];
@@ -339,7 +339,7 @@
                 $this->lokerChecking($idLoker);
 
                 $loker          =   new LokerModel();
-                
+
                 //TODO Seharusnya ada pengecekan terlebih dahulu, apakah loker sudah ada yang apply atau belum. Jika sudah maka tolak action hapus, jika belum ada yang apply lanjutkan action hapus
                 $jumlahApplier  =   $loker->getJumlahApply($idLoker);
 

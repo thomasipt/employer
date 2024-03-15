@@ -12,10 +12,9 @@
                 <p>Jumlah Loker</p>
             </div>
             <div class="icon">
-                <i class="ion ion-android-playstore"
+                <i class="ion ion-network"
                     title='Jumlah Fasilitas'></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -25,10 +24,9 @@
                 <p>Paket Aktif</p>
             </div>
             <div class="icon">
-                <i class="ion ion-android-person"
+                <i class="ion ion-ios-cart"
                     title='Jumlah Administrator'></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -38,10 +36,9 @@
                 <p>Transaksi Berhasil</p>
             </div>
             <div class="icon">
-                <i class="ion ion-android-people"
+                <i class="ion ion-ios-checkmark"
                     title='Jumlah Transaksi Berhasil'></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -51,10 +48,9 @@
                 <p>Transaksi Gagal</p>
             </div>
             <div class="icon">
-                <i class="ion ion-android-people"
+                <i class="ion ion-ios-checkmark-empty"
                     title='Jumlah Transaksi Gagal'></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
 </div>

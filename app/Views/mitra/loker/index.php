@@ -7,7 +7,7 @@
     if(isset($data)){
         if(array_key_exists('mitraToken', $data)){
             $mitraToken =   $data['mitraToken'];
-        } 
+        }
     }
 ?>
 <div class="row">
@@ -37,6 +37,7 @@
                             <tr>
                                 <th class='text-center' width='7%'>No.</th>
                                 <th>Loker</th>
+                                <th class='text-center' width='20%'>EMAIL</th>
                                 <th class='text-center' width='20%'>PIC</th>
                                 <th class='text-center' width='10%'>Pelamar</th>
                                 <th class='text-center' width='7%'>Act</th>
@@ -62,7 +63,7 @@
 <script language='Javascript'>
     let _tabelListLokerEl   =   $('#tabelListLoker');
     let _getListLoker         =   `<?=site_url(mitraController('loker/get-list-loker'))?>`;
-    
+
     if(typeof _loggedInIDMitra === 'undefined'){
         var _loggedInIDMitra    =   `<?=(!empty($loggedInIDMitra))? $loggedInIDMitra : ''?>`;
     }
@@ -91,7 +92,7 @@
                 data: null,
                 render: function(data, type, row, meta) {
                     let _judul      =   data.judul;
-                    let _createdAt  =   data.createdAt; 
+                    let _createdAt  =   data.createdAt;
 
                     let _batasAwalPendaftaran   =   data.batasAwalPendaftaran;
                     let _batasAkhirPendaftaran  =   data.batasAkhirPendaftaran;
@@ -102,8 +103,18 @@
                     return `<h6 class='mb-1'>${_judul}</h6>
                             <p class='text-sm mb-1'>Oleh <b>${_namaMitra}</b> pada <b>${convertDateTime(_createdAt)}</b></p>
                             <p class='text-sm mb-2'>
-                                Periode <span class='badge badge-success'>${convertDateTime(_batasAwalPendaftaran)}</span> s/d 
+                                Periode <span class='badge badge-success'>${convertDateTime(_batasAwalPendaftaran)}</span> s/d
                                 <span class='badge badge-warning'>${convertDateTime(_batasAkhirPendaftaran)}</span>
+                            </p>`;
+                }
+            },
+            {
+                data: null,
+                render: function(data, type, row, meta) {
+                    let _mitra      =   data.mitra;
+                    let _emailMitra =   _mitra.email;
+                    return `<p class='text-sm text-muted mb-1'>
+                                <a href='mailto:${_emailMitra}'>${_emailMitra}</a>
                             </p>`;
                 }
             },
@@ -130,7 +141,7 @@
 
                     return `<a href='${_url}'>
                                 <div class='text-left cp'>
-                                    <span class='far fa-user mr-1 text-muted'></span> 
+                                    <span class='far fa-user mr-1 text-muted'></span>
                                     <b class='text-success'>${numeral(_jumlahPelamar).format('0,0')}</b>
                                 </div>
                             </a>`;
@@ -158,7 +169,7 @@
         ]
     };
     let _tabelListLoker = _tabelListLokerEl.DataTable(_tableLokerOptions);
-    
+
     async function _delete(thisContext){
         let _el     =   $(thisContext);
 
@@ -182,7 +193,7 @@
                     if(_status){
                         _swalType   =   'success';
                     }
-                    
+
                     await notifikasi(_swalTitle, _swalMessage, _swalType);
                     if(_status){
                         _tabelListLoker.ajax.reload();

@@ -1,6 +1,6 @@
 <?php
     namespace App\Controllers\admin;
-    
+
     use App\Controllers\BaseController;
     use CodeIgniter\API\ResponseTrait;
 
@@ -14,11 +14,11 @@
     use App\Libraries\APIRespondFormat;
     use App\Libraries\EmailSender;
     use App\Libraries\MitraJWT;
-    
+
     use App\Models\Loker;
     use App\Models\Paket;
     use App\Models\Transaksi;
-    
+
     use CodeIgniter\HTTP\RequestInterface;
     use CodeIgniter\HTTP\ResponseInterface;
     use Psr\Log\LoggerInterface;
@@ -32,7 +32,7 @@
         private $loggedInIDAdministrator;
         public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger){
             parent::initController($request, $response, $logger);
-            
+
             if(property_exists($request, 'administrator')){
                 $detailAdministratorFromFilter  =   $request->administrator;
                 $idAdministrator                =   $detailAdministratorFromFilter['id'];
@@ -63,15 +63,15 @@
             #Data
             $mitraModel =   new MitraModel();
             $request    =   $this->request;
-            
+
             $draw       =   $request->getGet('draw');
 
             $start      =   $request->getGet('start');
             $start      =   (!is_null($start))? $start : 0;
-    
+
             $length     =   $request->getGet('length');
             $length     =   (!is_null($length))? $length : 10;
-            
+
             $search     =   $request->getGet('search');
 
             $options    =   [
@@ -126,7 +126,7 @@
                 'recordsFiltered'   =>  $recordsTotal,
                 'recordsTotal'      =>  $recordsTotal
             ];
-            
+
             return $this->respond($response);
         }
         public function detail($idMitra){
@@ -134,7 +134,7 @@
             $mitra      =   new MitraModel();
             $paket      =   new Paket();
             $transaksi  =   new Transaksi();
-            
+
             try{
                 $detailMitra    =   $this->mitraChecking($idMitra);
 
@@ -176,14 +176,14 @@
                 }catch(Exception $e){
                     $paketAktif =   null;
                 }
-                
+
                 $transaksiOptions   =   $options;
                 $transaksiOptions['where']  =   [
                     'mitra'         =>  $idMitra,
                     'approvement'   =>  $transaksi->approvement_approved
                 ];
                 $getJumlahTransaksiBerhasil         =   $transaksi->getTransaksi(null, $transaksiOptions);
-                
+
                 $transaksiOptions['where']  =   [
                     'mitra'         =>  $idMitra,
                     'approvement'   =>  $transaksi->approvement_rejected
@@ -212,7 +212,7 @@
                     'judul'     =>  'Tejadi Kesalahan',
                     'deskripsi' =>  $e->getMessage()
                 ];
-                return view(adminView('error'), $data);   
+                return view(adminView('error'), $data);
             }
         }
     }
