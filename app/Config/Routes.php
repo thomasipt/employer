@@ -250,7 +250,7 @@
                 'filter'    =>  'mitra-filter'
             ];
 
-            $kandidatRoutes->get('cv/(:num)', 'Kandidat::cv/$1', $additionalOptions);
+            $kandidatRoutes->get('cv/(:num)', 'Kandidat::cv/$1', ['namespace' =>  'App\Controllers\mitra']);
         });
     });
 
