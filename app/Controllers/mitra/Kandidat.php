@@ -78,10 +78,15 @@
                     'listExperience'    =>  $listExperience  
                 ];
 
+                $fileName   =   'CV '.$namaKandidat.'.pdf';
+
                 $pdf->setPaper('A4');
                 $pdf->setOptions($options);
-                $pdf->fileName  =   'CV '.$namaKandidat.'.pdf';
-                $pdf->loadView(mitraView('kandidat/cv'), $data);
+                $pdf->fileName  =   $fileName;
+                $pdf->loadHTML(view(mitraView('kandidat/cv'), $data));
+                $pdf->render();
+                $pdf->stream($fileName, ['Attachment' => false]);
+                exit();
                 
                 // echo view(mitraView('kandidat/cv'), $data);
             }catch(Exception $e){
