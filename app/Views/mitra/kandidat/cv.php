@@ -2,7 +2,10 @@
     helper('CustomDate');
 
     $namaKandidat           =   $detailKandidat['nama'];
+    
     $fotoKandidat           =   $detailKandidat['foto'];
+    $fotoKandidat           =   base64_encode(file_get_contents($fotoKandidat));
+
     $alamatKandidat         =   $detailKandidat['alamat'];
     $nomorTeleponKandidat   =   $detailKandidat['telepon'];
     $emailKandidat          =   $detailKandidat['email'];
@@ -149,7 +152,7 @@
             <table class="table-borderless m-0 p-0 w-100">
                 <tr>
                     <td id='leftSide' class='vat' style='padding-right:10px;'>
-                        <img src="<?=$fotoKandidat?>" alt="<?=$namaKandidat?>"
+                        <img src="data:image/png;base64,<?=$fotoKandidat?>" alt="<?=$namaKandidat?>"
                             class='foto-kandidat' onError='this.src="<?=base_url(assetsFolder('img/empty.png'))?>"' />
                         <br />
                         <p class="title mb-0" style='margin-bottom: 5px;'><?=$namaKandidat?></p>
