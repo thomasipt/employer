@@ -79,6 +79,11 @@
                 ];
 
                 $fileName   =   'CV '.$namaKandidat.'.pdf';
+                
+                if(isset($_GET['debug'])){
+                    echo view(mitraView('kandidat/cv'), $data);
+                    exit;
+                }
 
                 $pdf->setPaper('A4');
                 $pdf->setOptions($options);
@@ -87,8 +92,6 @@
                 $pdf->render();
                 $pdf->stream($fileName, ['Attachment' => false]);
                 exit();
-                
-                // echo view(mitraView('kandidat/cv'), $data);
             }catch(Exception $e){
                 $data   =   [
                     'judul'     =>  'Terjadi Kesalahan',
