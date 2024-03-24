@@ -77,7 +77,7 @@
                                         </div>
                                     </td>
                                     <td class='text-center'>
-                                        <a href="https://dev.kubu.id/index.php/cv/download/<?=$idKandidat?>" target="_blank">
+                                        <a href="https://dev.kubu.id/cv/download/<?=$idKandidat?>" target="_blank">
                                             <img src="<?=base_url(assetsFolder('icon/download.svg'))?>" alt="<?=$namaKandidat?>"
                                                 title='Downlad CV <?=$namaKandidat?>' class='img-icon cp' />
                                         </a>
